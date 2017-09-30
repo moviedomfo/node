@@ -1,0 +1,24 @@
+ [
+      {
+        "PatientId": 100,
+        "IdPersona": 1,
+        "Apellido": "Oviedo",
+        "Nombre": "Marcelo",
+        "FechaAlta":  "2017/05/08",
+        "LastAccessTime": "2017/05/08",
+        "LastAccessUserId": "",
+        "LastHealthInstId": ""
+
+      },
+      {
+         "PatientId": 123,
+        "IdPersona": 1,
+        "Apellido": "Oviedo22",
+        "Nombre": "Marcelo3",
+        "FechaAlta":  "2017/05/08",
+        "LastAccessTime": "2017/05/08",
+        "LastAccessUserId": "",
+        "LastHealthInstId": ""
+      }
+
+    ]

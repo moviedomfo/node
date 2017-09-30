@@ -1,0 +1,20 @@
+<p>
+ Pacientes 
+</p>
+
+<app-person-card
+  [currentPerson] = "currentPatient.Persona" >
+</app-person-card>
+
+<section>
+  <div class="col-lg-10">
+    <form class="form-horizontal">
+      <div class="form-group ">
+        <label for="Nombre" class="col-lg-2 control-label">Nombre </label>
+        <div class="col-lg-5">
+           <input type="text" class="form-control" name="txtNombre" placeholder="Nombre" [(ngModel)]="currentPatient.Nombre">
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
