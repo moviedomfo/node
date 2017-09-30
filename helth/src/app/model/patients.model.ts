@@ -22,6 +22,24 @@ export class PatientBE {//implements IPatient {
  
 }
 
+export class MutualBE{
+    
+    public IdMutual: number;
+    public Nombre: string;
+    public ExigeCoseguro: boolean;
+    public CUIT: string;
+    public LastAccessTime: Date;
+    public LastAccessUserId: string;
+    public LastHealthInstId: string;
+}
+export class MutualPorPacienteBE{
+    public Id: number;
+    public IdMutual: number;
+    public PatientId: number;
+    public PlanId: number;
+    public NroAfiliadoMutual: string;
+    public IsActive: boolean;
+}
 export class PatientAllergy {
 
      AllergyId: number;

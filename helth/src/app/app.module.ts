@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 
 
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
-import {CommonService,PatientsService,PersonsService} from './service/index';
+import {CommonService,PatientsService,PersonsService,MedicalInsuranceService} from './service/index';
 import { rutesModule }        from './app.routing';
 import {AuthGuard} from './commonComponents/routingGuard/AuthGuard';
 import { PersonsComponent } from './persons/persons.component' ;
@@ -36,40 +36,7 @@ import { PersonCardComponent } from './persons/person-card/person-card.component
 import { LoginComponent } from './commonComponents/login/login.component';
 
 import {TestModule} from './prueba/test/test.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MdAutocompleteModule,
-  MdButtonModule,
-  MdButtonToggleModule,
-  MdCardModule,
-  MdCheckboxModule,
-  MdChipsModule,
-  MdDatepickerModule,
-  MdDialogModule,
-  MdExpansionModule,
-  MdGridListModule,
-  MdIconModule,
-  MdInputModule,
-  MdListModule,
-  MdMenuModule,
-  MdNativeDateModule,
-  MdPaginatorModule,
-  MdProgressBarModule,
-  MdProgressSpinnerModule,
-  MdRadioModule,
-  MdRippleModule,
-  MdSelectModule,
-  MdSidenavModule,
-  MdSliderModule,
-  MdSlideToggleModule,
-  MdSnackBarModule,
-  MdSortModule,
-  MdTableModule,
-  MdTabsModule,
-  MdToolbarModule,
-  MdTooltipModule,
-  MdStepperModule,
-} from '@angular/material';
+
 import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
 
 @NgModule({
@@ -98,16 +65,11 @@ import { PatientMangerComponent } from './patient/patient-manger/patient-manger.
     FormsModule,ReactiveFormsModule,
     HttpModule,
     rutesModule,
-    BrowserAnimationsModule,
-    MdAutocompleteModule,    MdButtonModule,    MdButtonToggleModule,    MdCardModule,    MdCheckboxModule,    MdChipsModule,    MdDatepickerModule,    MdDialogModule,    MdExpansionModule,    MdGridListModule,    MdIconModule,    MdInputModule,
-    MdListModule,    MdMenuModule,    MdNativeDateModule,    MdPaginatorModule,    MdProgressBarModule,    MdProgressSpinnerModule,    MdRadioModule,    MdRippleModule,
-    MdSelectModule,    MdSidenavModule,    MdSliderModule,    MdSlideToggleModule,    MdSnackBarModule,    MdSortModule,    MdTableModule,
-    MdTabsModule,    MdToolbarModule,    MdTooltipModule,    MdStepperModule,
-        TestModule
+    TestModule
   ],entryComponents: [
     ModalDialogComponent
   ],
-  providers: [PersonsService,PatientsService,CommonService,AuthGuard],
+  providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
-import { PatientBE } from '../model/patients.model';
+import { PatientBE,MutualPorPacienteBE,PersonBE } from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
-import { PersonBE } from '../model/persons.model';
+
 //permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
 //permite observar
@@ -112,21 +112,55 @@ export class PatientsService {
   }
 
 
-  createPatients(patient: PatientBE) {
+  createPatientsService$(patient: PatientBE,mutuales: MutualPorPacienteBE[]): Observable<PatientBE>  {
+      
+    var bussinesData = {
+      Patient: patient,
+      Mutuales: mutuales
+    
+    };
+    HealtConstants.httpOptions.search = this.commonService.generete_get_searchParams("CrearPatientService", bussinesData);;
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    .map(function (res: Response) {
 
-    //Clona Patients por parametro
-    //var patientClone: IPatient = Object.assign({}, patient);
-    var patientClone: PatientBE = Object.assign({}, patient);
-    this.patientList.push(patientClone);
-    //esto es lo siguiente q envio o notifico. lo que le envio es algo q coincida con la declaracion
-    //Subject<IPatients[]>
-    //Emito un evento.
-    this.patientList$.next(this.patientList);
+      let result: Result = JSON.parse(res.json());
 
+      if (result.Error) {
+        this.commonService.handleErrorService(result.Error.Message);
+      }
+      patient.IdPersona =  result.BusinessData["IdPersona"] as number;
+      patient.PatientId =  result.BusinessData["PatientId"] as number;
+
+      return patient;
+    });
 
   }
 
+  //AnteriorFechaNacimiento Vacunas
+  updatePatientsService$(patient: PatientBE,mutuales: MutualPorPacienteBE[],AnteriorFechaNacimiento:Date): Observable<any>  {
+    
+  var bussinesData = {
+    Patient: patient,
+    Mutuales: mutuales,
+    AnteriorFechaNacimiento :Date
   
+  };
+  HealtConstants.httpOptions.search = this.commonService.generete_get_searchParams("UpdatePatientService", bussinesData);;
+  return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+  .map(function (res: Response) {
+
+    let result: Result = JSON.parse(res.json());
+
+    if (result.Error) {
+      this.commonService.handleErrorService(result.Error.Message);
+    }
+    
+
+    return "the patient was updated";
+  });
+
+}
+
 
 
   // getPatientById(patintId: number): IPatient {
