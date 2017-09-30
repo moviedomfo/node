@@ -71,6 +71,7 @@ import {
   MdStepperModule,
 } from '@angular/material';
 import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
+import { PersonAddressComponent } from './person/persons/person-address/person-address.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { PatientMangerComponent } from './patient/patient-manger/patient-manger.
     PatientGridComponent,
     PersonCardComponent,
     LoginComponent,
-    PatientMangerComponent
+    PatientMangerComponent,
+    PersonAddressComponent
   ],
   imports: [
     AlertModule.forRoot(),
