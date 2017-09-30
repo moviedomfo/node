@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AlertModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -12,8 +12,8 @@ import { AppComponent } from './app.component';
 
 
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
-import {CommonService, PatientsService, PersonsService} from './service/index';
-import { rutesModule } from './app.routing';
+import {CommonService,PatientsService,PersonsService,MedicalInsuranceService} from './service/index';
+import { rutesModule }        from './app.routing';
 import {AuthGuard} from './commonComponents/routingGuard/AuthGuard';
 import { PersonsComponent } from './persons/persons.component' ;
 import { PatientComponent } from './patient/patient.component';
@@ -27,7 +27,7 @@ import { PatientGridComponent } from './patient/patient-grid/patient-grid.compon
 import {DateComponent} from "./commonComponents/ag-grid/date.component";
 import {HeaderComponent} from "./commonComponents/ag-grid/header.component";
 import {HeaderGroupComponent} from "./commonComponents/ag-grid/header-group.component";
-// commonComponents
+//commonComponents
 import { PageNotFoundComponent } from './commonComponents/page-not-found/page-not-found.component';
 import { ModalDialogComponent } from './commonComponents/modal-dialog/modal-dialog.component';
 import { FontAgComponent } from './commonComponents/font-ag/font-ag.component';
@@ -36,42 +36,8 @@ import { PersonCardComponent } from './persons/person-card/person-card.component
 import { LoginComponent } from './commonComponents/login/login.component';
 
 import {TestModule} from './prueba/test/test.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  MdAutocompleteModule,
-  MdButtonModule,
-  MdButtonToggleModule,
-  MdCardModule,
-  MdCheckboxModule,
-  MdChipsModule,
-  MdDatepickerModule,
-  MdDialogModule,
-  MdExpansionModule,
-  MdGridListModule,
-  MdIconModule,
-  MdInputModule,
-  MdListModule,
-  MdMenuModule,
-  MdNativeDateModule,
-  MdPaginatorModule,
-  MdProgressBarModule,
-  MdProgressSpinnerModule,
-  MdRadioModule,
-  MdRippleModule,
-  MdSelectModule,
-  MdSidenavModule,
-  MdSliderModule,
-  MdSlideToggleModule,
-  MdSnackBarModule,
-  MdSortModule,
-  MdTableModule,
-  MdTabsModule,
-  MdToolbarModule,
-  MdTooltipModule,
-  MdStepperModule,
-} from '@angular/material';
+
 import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
-import { PersonAddressComponent } from './persons/person-address/person-address.component';
 
 @NgModule({
   declarations: [
@@ -83,8 +49,7 @@ import { PersonAddressComponent } from './persons/person-address/person-address.
     PatientGridComponent,
     PersonCardComponent,
     LoginComponent,
-    PatientMangerComponent,
-    PersonAddressComponent
+    PatientMangerComponent
   ],
   imports: [
     AlertModule.forRoot(),
@@ -100,16 +65,11 @@ import { PersonAddressComponent } from './persons/person-address/person-address.
     FormsModule,ReactiveFormsModule,
     HttpModule,
     rutesModule,
-    BrowserAnimationsModule,
-    MdAutocompleteModule,    MdButtonModule,    MdButtonToggleModule,    MdCardModule,    MdCheckboxModule,    MdChipsModule,    MdDatepickerModule,    MdDialogModule,    MdExpansionModule,    MdGridListModule,    MdIconModule,    MdInputModule,
-    MdListModule,    MdMenuModule,    MdNativeDateModule,    MdPaginatorModule,    MdProgressBarModule,    MdProgressSpinnerModule,    MdRadioModule,    MdRippleModule,
-    MdSelectModule,    MdSidenavModule,    MdSliderModule,    MdSlideToggleModule,    MdSnackBarModule,    MdSortModule,    MdTableModule,
-    MdTabsModule,    MdToolbarModule,    MdTooltipModule,    MdStepperModule,
-        TestModule
+    TestModule
   ],entryComponents: [
     ModalDialogComponent
   ],
-  providers: [PersonsService,PatientsService,CommonService,AuthGuard],
+  providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

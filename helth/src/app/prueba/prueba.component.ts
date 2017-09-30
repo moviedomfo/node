@@ -7,7 +7,7 @@ import { PatientsService, CommonService } from '../service/index';
 import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {  MdDatepicker,MdDatepickerInput }  from '@angular/material';
+
 interface Friend {
     id: number;
     name: string;
