@@ -38,6 +38,8 @@ import { LoginComponent } from './commonComponents/login/login.component';
 import {TestModule} from './prueba/test/test.module';
 
 import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
+import { GoogleSearchComponent } from './google-search/google-search.component';
+import { GooglePlaceComponent } from './service/google-place.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { PatientMangerComponent } from './patient/patient-manger/patient-manger.
     PatientGridComponent,
     PersonCardComponent,
     LoginComponent,
-    PatientMangerComponent
+    PatientMangerComponent,
+    GoogleSearchComponent,
+    GooglePlaceComponent
   ],
   imports: [
     AlertModule.forRoot(),

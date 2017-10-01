@@ -83,7 +83,7 @@ export class TestControlesComponent implements OnInit {
       //   alert(element);
       // });
       //alert(str);
-      this.patientService.createPatients(this.currentPatient);
+      //this.patientService.createPatients(this.currentPatient);
     }
   
     reriveAllPatientList() {

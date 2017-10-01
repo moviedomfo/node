@@ -18,8 +18,7 @@ export class PersonCardComponent implements AfterContentInit {
   private selectedPais: Param;
   private selectedEstadoCivil: number;
   private selectedTipoDoc: number;
-  paises$: Observable<Param[]>;
-  paises: Param[];
+
   estadoCivilList$: Observable<Param[]>;
   estadoCivilList: Param[];
   tipoDocumentoList$: Observable<Param[]>;
@@ -60,12 +59,7 @@ export class PersonCardComponent implements AfterContentInit {
     
 
    
-    this.paises$ = this.commonService.searchParametroByParams$(TipoParametroEnum.Paises, null);
-    this.paises$.subscribe(
-      res => {
-        this.paises = res;
-      }
-    );
+  
     this.estadoCivilList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.EstadoCivil, null);
     this.estadoCivilList$.subscribe(
       res => {

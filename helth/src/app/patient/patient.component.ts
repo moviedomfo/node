@@ -75,7 +75,7 @@ export class PatientComponent implements OnInit {
     //   alert(element);
     // });
     //alert(str);
-    this.patientService.createPatients(this.currentPatient);
+    //this.patientService.createPatientsService$(this.currentPatient,);
   }
 
   reriveAllPatientList() {
