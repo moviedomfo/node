@@ -4,9 +4,9 @@ import { Param, IParam, IContextInformation, IRequest, IResponse, Result } from 
 import { HealtConstants, contextInfo } from "../model/common.constants";
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
-//permmite cambiar la variable obsevada
+// permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
-//permite observar
+// permite observar
 import { Observable } from 'rxjs/Observable';
 import { CommonService } from '../service/common.service';
 import 'rxjs/add/operator/map';
