@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.1",
     "@angular/cdk": "^2.0.0-beta.11",
     "@angular/common": "^4.4.3",
     "@angular/compiler": "^4.4.3",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@angular/cli": "^1.4.3",
     "@angular/compiler-cli": "^4.4.3",
+    "@types/googlemaps": "^3.29.0",
     "@types/jasmine": "2.5.54",
     "@types/node": "~8.0.26",
     "angular2-fontawesome": "~0.9.3",

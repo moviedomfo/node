@@ -38,8 +38,9 @@ import { LoginComponent } from './commonComponents/login/login.component';
 import {TestModule} from './prueba/test/test.module';
 
 import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
-import { GoogleSearchComponent } from './google-search/google-search.component';
-import { GooglePlaceComponent } from './service/google-place.component';
+import { AgmCoreModule } from '@agm/core';
+import { GooglePlaceComponent } from './commonComponents/google-place/google-place.component';
+
 
 @NgModule({
   declarations: [
@@ -52,10 +53,14 @@ import { GooglePlaceComponent } from './service/google-place.component';
     PersonCardComponent,
     LoginComponent,
     PatientMangerComponent,
-    GoogleSearchComponent,
     GooglePlaceComponent
+    
+
   ],
-  imports: [
+  imports: [AgmCoreModule.forRoot({
+    apiKey: "AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA",
+    libraries: ["places"]
+  }),
     AlertModule.forRoot(),
     BsDropdownModule.forRoot(),
     BrowserModule,
