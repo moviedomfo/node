@@ -40,9 +40,10 @@ import {TestModule} from './prueba/test/test.module';
 import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
 import { GoogleSearchComponent } from './google-search/google-search.component';
 import { GooglePlaceComponent } from './service/google-place.component';
-
+import { AgmCoreModule } from '@agm/core';
 @NgModule({
   declarations: [
+    
     AppComponent,
     PatientComponent,
     FontAgComponent,
@@ -55,7 +56,10 @@ import { GooglePlaceComponent } from './service/google-place.component';
     GoogleSearchComponent,
     GooglePlaceComponent
   ],
-  imports: [
+  imports: [ AgmCoreModule.forRoot({
+    apiKey: "AIzaSyAJ7xl_5mHusJXg3Jom76GijCR9HLXjl_w",
+    libraries: ["places"]
+  }),
     AlertModule.forRoot(),
     BsDropdownModule.forRoot(),
     BrowserModule,

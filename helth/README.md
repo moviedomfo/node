@@ -36,3 +36,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     npm install ag-grid-angular
 3- Reinstalar Angular2 Bootstrap Modal Service
     npm install ng2-bootstrap-modal
+
+
+Google Place API Angular 2
+http://brianflove.com/2016/10/18/angular-2-google-maps-places-autocomplete/
