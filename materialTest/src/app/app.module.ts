@@ -5,21 +5,25 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DatepickerModule} from 'ngx-date-picker';
+import { TablaComponent } from './tabla/tabla.component';
+import { ParentComponent } from './parent/parent.component';
 
-import {A2Edatetimepicker} from 'ng2-eonasdan-datetimepicker';
+
+
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TablaComponent,
+    ParentComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    FormsModule,
-    DatepickerModule,A2Edatetimepicker
+    FormsModule
+    
     
     
  

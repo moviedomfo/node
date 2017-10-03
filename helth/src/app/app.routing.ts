@@ -7,6 +7,8 @@ import { PruebaComponent } from './prueba/prueba.component';
 
 import { AuthGuard } from './commonComponents/routingGuard/AuthGuard';
 import { PageNotFoundComponent }from './commonComponents/page-not-found/page-not-found.component';
+import { TestControlesComponent } from './prueba/testcontroles.component';
+
 const appRoutes: Routes = [
    { path: 'login', component: LoginComponent },
    //  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -14,6 +16,7 @@ const appRoutes: Routes = [
    { path: 'persons/:id', component: PersonsComponent },
    { path: 'patient', component: PatientComponent },
    { path: 'prueba', component: PruebaComponent },
+   { path: 'test', component: TestControlesComponent },
    
    { path: '**', component: PageNotFoundComponent }
 ];

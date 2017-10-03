@@ -11,7 +11,24 @@ import { Observable } from 'rxjs/Observable';
 export class CommonService {
   public paramList: Param[] = [];
   public paramList$: Subject<Param[]> = new Subject<Param[]>();
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    
+   }
+
+
+  serarPlaces_google_place_api(input :string ){
+    console.log('Ejecutando serarPlaces_google_place_api()');
+    var api_url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=[input]&types=geocode&key=AIzaSyAEBn6XjDRlouhZP-nQHSU4equHUeR2wEc';
+    
+    api_url = api_url.replace('[input]',input);
+    api_url = api_url.replace('[input]',input);
+    
+    return this.http.get(`${api_url}`, HealtConstants.httpOptions)
+    .map(function (res: Response) {
+      let places = JSON.parse(res.json());
+      console.log(places);
+    });
+  }
   /**
    * @idTipoParametro : Nombre de tabla
    * @idParametroRef : Subnombre , subcategoria
