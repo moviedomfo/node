@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './commonComponents/login/login.component';
 //import { HomeComponent } from './commonComponents/login/login.component';
 import { PatientComponent } from './patient/patient.component';
+import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
 import { PersonsComponent } from './persons/persons.component';
 import { PruebaComponent } from './prueba/prueba.component';
 
@@ -13,8 +14,10 @@ const appRoutes: Routes = [
    { path: 'login', component: LoginComponent },
    //  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
    { path: 'persons', component: PersonsComponent },
+   
    { path: 'persons/:id', component: PersonsComponent },
    { path: 'patient', component: PatientComponent },
+   { path: 'patientCreate', component: PatientMangerComponent },
    { path: 'prueba', component: PruebaComponent },
    { path: 'test', component: TestControlesComponent },
    

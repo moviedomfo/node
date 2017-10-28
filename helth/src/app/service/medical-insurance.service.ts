@@ -21,15 +21,15 @@ export class MedicalInsuranceService {
     this.commonService = commonService;
   }
 
-  retriveAllObraSocialService$(status:string,startDate: Date): Observable<MutualBE[]> {
+  retriveAllObraSocialService$(status:string): Observable<MutualBE[]> {
     
         var bussinesData = {
           Status: status,
-          StartDate: startDate
+          StartDate: new Date()
           
         };
     
-    
+       
         let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetriveAllObraSocialService", bussinesData);
         
         HealtConstants.httpOptions.search = searchParams;
@@ -39,7 +39,7 @@ export class MedicalInsuranceService {
           .map(function (res: Response) {
     
             let result: Result = JSON.parse(res.json());
-    
+            alert(JSON.stringify(res.json()));
             if (result.Error) {
               this.commonService.handleErrorService(result.Error.Message);
             }

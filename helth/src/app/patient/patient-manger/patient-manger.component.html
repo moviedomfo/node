@@ -1,21 +1,46 @@
-<p>
- Pacientes 
-</p>
+<h3>
+ Alpta de paciente
+</h3>
 
-<app-person-card
-  [currentPerson] = "currentPatient.Persona" >
-</app-person-card>
 
-<section>
-  <div class="col-lg-10">
-    <form class="form-horizontal">
-      <div class="form-group ">
-        <label for="Nombre" class="col-lg-2 control-label">Nombre </label>
-        <div class="col-lg-5">
-           <input type="text" class="form-control" name="txtNombre" placeholder="Nombre"
-            [(ngModel)]="currentPatient.Nombre">
-        </div>
-      </div>
-    </form>
+
+<button class="btn btn-default" (click)=createPatient()>Crear paciente</button>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Datos principales</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#medicalInsuranceTab" role="tab" data-toggle="tab">Obra social</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Medio de contacto</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="profile">
+    <app-person-card
+    [currentPerson] = "currentPatient.Persona" >
+  </app-person-card>
   </div>
-</section>
+  <div role="tabpanel" class="tab-pane fade" id="medicalInsuranceTab">
+    <app-medical-insurance-grid></app-medical-insurance-grid>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="medioContacto">
+    <section>
+      <div class="col-lg-10">
+        <form class="form-horizontal">
+          <div class="form-group ">
+            <label for="Nombre" class="col-lg-2 control-label">Nombre </label>
+            <div class="col-lg-5">
+               <input type="text" class="form-control" name="txtNombre" placeholder="Nombre"
+                [(ngModel)]="currentPatient.Nombre">
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,13 +1,13 @@
 
 
 export class PersonBE {
-
-     constructor(idPersona : number ,nombre:string){
+   
+     constructor(idPersona? : number ,nombre?:string){
 
         this.Nombre= nombre;
         this.IdPersona= idPersona;
     }
-
+    
 
      IdPersona: number;
      UserId: string;

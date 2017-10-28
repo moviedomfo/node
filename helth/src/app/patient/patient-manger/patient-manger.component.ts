@@ -3,7 +3,7 @@ import { Component, OnInit ,Input} from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { PatientsService, CommonService,MedicalInsuranceService } from '../../service/index';
-import {PatientBE, PersonBE,MutualPorPacienteBE, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants } from '../../model/index';
+import {PatientBE, PersonBE,MutualPorPacienteBE,MutualPlanGridView, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants } from '../../model/index';
 import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
 
@@ -15,7 +15,9 @@ import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/cor
 })
 export class PatientMangerComponent implements OnInit {
   currentPatient: PatientBE;
+  currentMutual :MutualPlanGridView;
   mutualPorPacienteList:MutualPorPacienteBE[];
+
   constructor( private patientService: PatientsService,
     private commonService: CommonService,
     private medicalInsuranceService: MedicalInsuranceService,
@@ -25,15 +27,20 @@ export class PatientMangerComponent implements OnInit {
     this.preInitializePatient();
   } 
 
+ private createPatient()
+ {
+  this.patientService.createPatientsService$(this.currentPatient,null);
 
+ }
   private  preInitializePatient()
   {
     
      this.currentPatient = new PatientBE();
+    //  this.currentPatient.Persona = new PersonBE();
      //this.currentPerson.TipoDocumento=613;
      this.currentPatient.FechaAlta= new Date();
      this.mutualPorPacienteList= [];
-     
+     //this.patientService.RetriveAllObraSocial()
      
   }
 

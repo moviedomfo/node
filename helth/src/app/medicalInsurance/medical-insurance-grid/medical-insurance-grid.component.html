@@ -1,0 +1,21 @@
+
+<div class="container">
+  <div class="col-lg-10">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Listado de obras sociales</h3>
+
+      </div>
+      <div class="panel-body">
+        <div style="clear: both;"></div>
+        <ag-grid-angular style="width: 900px; height: 515px;" class="ag-fresh" [rowData]="mutualList" [columnDefs]="columnDefs"
+      (cellClicked)="onObraSocialGridCellClick($event)" 
+          (rowDoubleClicked)="onGridRowDoubleClick($event)">
+        </ag-grid-angular>
+        
+
+      </div>
+    </div>
+  </div>
+</div>

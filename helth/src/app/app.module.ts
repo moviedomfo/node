@@ -17,7 +17,7 @@ import { rutesModule }        from './app.routing';
 import {AuthGuard} from './commonComponents/routingGuard/AuthGuard';
 import { PersonsComponent } from './persons/persons.component' ;
 import { PatientComponent } from './patient/patient.component';
-
+import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
 import { PatientBE } from './model/patients.model';
 import {IContextInformation,  ContextInformation,IRequest,Request,IResponse,Result,ServiceError } from './model/common.model';
 
@@ -37,9 +37,11 @@ import { LoginComponent } from './commonComponents/login/login.component';
 
 import {TestModule} from './prueba/test/test.module';
 
-import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
+
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceComponent } from './commonComponents/google-place/google-place.component';
+import { GComponent } from './g/g.component';
+import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
 
 
 @NgModule({
@@ -53,7 +55,9 @@ import { GooglePlaceComponent } from './commonComponents/google-place/google-pla
     PersonCardComponent,
     LoginComponent,
     PatientMangerComponent,
-    GooglePlaceComponent
+    GooglePlaceComponent,
+    GComponent,
+    MedicalInsuranceGridComponent
     
 
   ],

@@ -12,6 +12,7 @@ export interface IPatient  {
 }
 
 export class PatientBE {//implements IPatient {
+    constructor(){}
     public PatientId: number;
     public IdPersona: number;
     public FechaAlta: Date;
@@ -39,6 +40,16 @@ export class MutualPorPacienteBE{
     public PlanId: number;
     public NroAfiliadoMutual: string;
     public IsActive: boolean;
+}
+
+export class MutualPlanGridView
+{
+    public MutualId : number;
+    public Nombre : string;
+    public  PlanId : number;
+    public ComercialCode : string;
+    //public int NroAfiliadoMutual { get; set; }
+
 }
 export class PatientAllergy {
 

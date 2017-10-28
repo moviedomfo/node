@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientBE } from '../../model/index';
 import { PatientsService,CommonService } from '../../service/index';
-
-
 //permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
 //permite observar
