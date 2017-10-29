@@ -10,6 +10,7 @@ import { DateComponent } from "../../commonComponents/ag-grid/date.component";
 import { HeaderComponent } from "../../commonComponents/ag-grid/header.component";
 import { HeaderGroupComponent } from "../../commonComponents/ag-grid/header-group.component";
 import { GridOptions } from "ag-grid/main";
+import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
 
 @Component({
     selector: 'app-medical-insurance-grid',
@@ -19,7 +20,7 @@ import { GridOptions } from "ag-grid/main";
 export class MedicalInsuranceGridComponent implements OnInit {
     private columnDefs: any[];
     private gridOptions: GridOptions;
-
+    public currentMutual:MutualBE;
     private mutualList: MutualBE[];
     private mutualList$: Observable<MutualBE[]>;
 
@@ -65,14 +66,31 @@ export class MedicalInsuranceGridComponent implements OnInit {
         this.mutualList$ = this.medicalInsuranceService.retriveAllObraSocialService$("");
         this.mutualList$.subscribe(
             res => {
-                alert(JSON.stringify(res));
+                
                 this.mutualList = res;
             }
         );
 
     }
 
-    onObraSocialGridCellClick(event) {
-        alert(event);
+    onObraSocialGridCellClick($event) {
+        //console.log('onCellClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
+        //document.querySelector('#selectedRows').innerHTML = $event;
+        //item : RowNode;
+        this.currentMutual =$event.node.data;
+        //alert(JSON.stringify(this.currentMutual)); 
+        document.querySelector('#selectedRows').innerHTML = this.currentMutual.Nombre;
+        
+    }
+     onObraSocialSelectionChanged() {
+        var selectedRows = this.gridOptions.api.getSelectedRows();
+        var selectedRowsString = '';
+        selectedRows.forEach( function(selectedRow, index) {
+            if (index!==0) {
+                selectedRowsString += ', ';
+            }
+            selectedRowsString += selectedRow.Nombre;
+        });
+        document.querySelector('#selectedRows').innerHTML = selectedRowsString;
     }
 }
