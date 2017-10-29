@@ -40,6 +40,11 @@ export class MutualPorPacienteBE{
     public PlanId: number;
     public NroAfiliadoMutual: string;
     public IsActive: boolean;
+
+    //Extensiones de la clase
+    public  EntityState :string;
+    public  NombreMutual :string;
+    public  NombrePlan : string;
 }
 
 export class MutualPlanGridView

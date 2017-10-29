@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter, Input } from '@angular/core';
 //permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
 //permite observar
@@ -20,7 +20,9 @@ import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
 export class MedicalInsuranceGridComponent implements OnInit {
     private columnDefs: any[];
     private gridOptions: GridOptions;
-    public currentMutual:MutualBE;
+    @Output() onMedicalInsuranceChanged = new EventEmitter<MutualBE>();
+    public currentMedicalInsurance:MutualBE;
+
     private mutualList: MutualBE[];
     private mutualList$: Observable<MutualBE[]>;
 
@@ -72,17 +74,22 @@ export class MedicalInsuranceGridComponent implements OnInit {
         );
 
     }
+    onMedicalInsurance_rowDoubleClicked($event) {
 
-    onObraSocialGridCellClick($event) {
+    }
+    onMedicalInsurance_cellClicked($event) {
         //console.log('onCellClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
         //document.querySelector('#selectedRows').innerHTML = $event;
         //item : RowNode;
-        this.currentMutual =$event.node.data;
+        this.currentMedicalInsurance = $event.node.data;
         //alert(JSON.stringify(this.currentMutual)); 
-        document.querySelector('#selectedRows').innerHTML = this.currentMutual.Nombre;
+        document.querySelector('#selectedRows').innerHTML = this.currentMedicalInsurance.Nombre;
+        this.onMedicalInsuranceChanged.emit(this.currentMedicalInsurance);
         
     }
-     onObraSocialSelectionChanged() {
+
+    //por el momento no se utiliza
+    onMedicalInsurance_SelectionChanged() {
         var selectedRows = this.gridOptions.api.getSelectedRows();
         var selectedRowsString = '';
         selectedRows.forEach( function(selectedRow, index) {

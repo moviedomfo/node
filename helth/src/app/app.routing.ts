@@ -17,6 +17,7 @@ const appRoutes: Routes = [
    
    { path: 'persons/:id', component: PersonsComponent },
    { path: 'patient', component: PatientComponent },
+   { path: 'patientEdit/:id', component: PatientMangerComponent },
    { path: 'patientCreate', component: PatientMangerComponent },
    { path: 'prueba', component: PruebaComponent },
    { path: 'test', component: TestControlesComponent },

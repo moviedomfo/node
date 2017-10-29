@@ -26,7 +26,18 @@
   </app-person-card>
   </div>
   <div role="tabpanel" class="tab-pane fade" id="medicalInsuranceTab">
-    <app-medical-insurance-grid></app-medical-insurance-grid>
+  <div class="col-lg-6">
+    <app-medical-insurance-grid
+      (onMedicalInsuranceChanged)="onMedicalInsuranceChanged($event)">
+    </app-medical-insurance-grid>
+  </div>
+    <div class="col-lg-6">
+        <app-patien-medical-insurance-grid
+        [medicalInsuranceByPatientList]="mutualPorPacienteList"
+        (onMedicalInsuranceChanged)="onMedicalInsuranceByPatientChanged($event)">
+
+        </app-patien-medical-insurance-grid>
+    </div>
   </div>
   <div role="tabpanel" class="tab-pane fade" id="medioContacto">
     <section>

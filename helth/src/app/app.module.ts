@@ -42,6 +42,7 @@ import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceComponent } from './commonComponents/google-place/google-place.component';
 
 import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
+import { PatienMedicalInsuranceGridComponent } from './patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insura
     LoginComponent,
     PatientMangerComponent,
     GooglePlaceComponent,
-    MedicalInsuranceGridComponent
+    MedicalInsuranceGridComponent,
+    PatienMedicalInsuranceGridComponent
     
 
   ],

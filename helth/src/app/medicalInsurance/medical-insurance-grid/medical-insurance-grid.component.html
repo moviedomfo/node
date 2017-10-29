@@ -10,10 +10,13 @@
       <div class="panel-body">
           <span id="selectedRows"></span>
         <div style="clear: both;"></div>
-        <ag-grid-angular style="width: 500px; height: 515px;" class="ag-fresh" [rowData]="mutualList" [columnDefs]="columnDefs"
-      (cellClicked)="onObraSocialGridCellClick($event)" 
-          (rowDoubleClicked)="onGridRowDoubleClick($event)">
-        </ag-grid-angular>
+        <ag-grid-angular style="width: 500px; height: 515px;" class="ag-fresh" 
+        [rowData]="mutualList" [columnDefs]="columnDefs"  rowSelection="multiple"
+        (cellClicked)="onMedicalInsurance_cellClicked($event)" 
+          (rowDoubleClicked)="onMedicalInsurance_rowDoubleClicked($event)"
+          (selectionChanged)="onMedicalInsurance_SelectionChanged()"
+          (rowClicked)="onMedicalInsurance_RowClicked($event)"></ag-grid-angular>
+        
         
 
       </div>
