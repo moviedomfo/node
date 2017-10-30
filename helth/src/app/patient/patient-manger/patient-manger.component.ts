@@ -36,6 +36,14 @@ export class PatientMangerComponent implements OnInit {
   this.patientService.createPatientsService$(this.currentPatient,null);
 
  }
+ private updatePatient()
+ {
+  var res$ = this.patientService.updatePatientsService$(this.currentPatient,this.mutualPorPacienteList,null);
+  res$.subscribe(res=>{
+      alert('Actualizado con exito');
+  })
+ }
+ 
   private  preInitializePatient()
   {      this.currentPatient = new PatientBE();
     this.currentPatient.Persona = new PersonBE();

@@ -21,7 +21,7 @@ export class PatienMedicalInsuranceGridComponent implements OnInit {
   medicalInsuranceByPatientList:MutualPorPacienteBE[];
   private columnDefs: any[];
   private gridOptions: GridOptions;
-  @Output() onMedicalInsuranceChanged = new EventEmitter<MutualPorPacienteBE>();
+  @Output() onMedicalInsuranceByPatientChanged = new EventEmitter<MutualPorPacienteBE>();
   public currentMedicalInsuranceByPatient:MutualPorPacienteBE;
 
   constructor() { }
@@ -48,11 +48,12 @@ export class PatienMedicalInsuranceGridComponent implements OnInit {
         { headerName: "NroAfiliadoMutual", field: "NroAfiliadoMutual", width: 200, pinned: true }
     ];
 }
-onMedicalInsurance_cellClicked($event) {
+onMedicalInsuranceByPatient_cellClicked($event) {
   this.currentMedicalInsuranceByPatient = $event.node.data;
   
   //document.querySelector('#selectedRows').innerHTML = this.currentMedicalInsuranceByPatient.Nombre;
-  this.onMedicalInsuranceChanged.emit(this.currentMedicalInsuranceByPatient);
+  this.onMedicalInsuranceByPatientChanged.emit(this.currentMedicalInsuranceByPatient);
   
 }
+
 }
