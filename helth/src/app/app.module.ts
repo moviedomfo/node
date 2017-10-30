@@ -40,7 +40,7 @@ import {TestModule} from './prueba/test/test.module';
 
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceComponent } from './commonComponents/google-place/google-place.component';
-import { GComponent } from './g/g.component';
+
 import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
 
 
@@ -56,7 +56,7 @@ import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insura
     LoginComponent,
     PatientMangerComponent,
     GooglePlaceComponent,
-    GComponent,
+  
     MedicalInsuranceGridComponent
     
 
