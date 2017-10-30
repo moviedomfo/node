@@ -1,18 +1,19 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { PatientsService, CommonService } from '../../service/index';
 import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants } from '../../model/index';
 import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
-
+// Base 64 IMage display issues with unsafe image
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-person-card',
   templateUrl: './person-card.component.html',
   styleUrls: ['./person-card.component.css']
 })
 export class PersonCardComponent implements AfterContentInit {
-  @Input() 
+  @Input()
   currentPerson: PersonBE;
 
   private selectedPais: Param;
@@ -25,9 +26,10 @@ export class PersonCardComponent implements AfterContentInit {
   tipoDocumentoList: Param[];
 
   fullImagePath: string;
-
+  private base64Image: string;
   @ViewChild('cmbEstadoCivil') cmbEstadoCivil: ElementRef;
-
+  @ViewChild('img2') img2: ElementRef;
+  @ViewChild('img1') img1: ElementRef;
   constructor(
     private patientService: PatientsService,
     private commonService: CommonService,
@@ -35,31 +37,47 @@ export class PersonCardComponent implements AfterContentInit {
 
   }
   ngOnChanges() {
-    
+
+    //alert('ngOnChanges' + this.currentPerson.Nombre);
+    if(this.currentPerson.Foto===null)
+    {
+      //alert('no hay foto' + this.currentPerson.Nombre);
+      this.currentPerson.Sexo==0 ? this.onSexChanged(false):this.onSexChanged(true);
+    }
+    else
+    {
+     this.fullImagePath = ''+this.currentPerson.Foto;
+    }
 
   }
   ngAfterViewInit() {
-
+    
   }
   ngAfterContentInit() {
 
-       //var comboEstadocivil=  (<HTMLInputElement>document.getElementById('cmbEstadoCivil'));
-       //console.log("Esto es cmbEstadoCivil");
-      //console.log(this.cmbEstadoCivil.nativeElement);
+    //var comboEstadocivil=  (<HTMLInputElement>document.getElementById('cmbEstadoCivil'));
+    //console.log("Esto es cmbEstadoCivil");
+    //console.log(this.cmbEstadoCivil.nativeElement);
     // console.log(this.comboEstadocivil.nativeElement);
 
-  
-   //this.fullImagePath = HealtConstants.ImagesSrc_Man;
-   this.nroDoc = Number(this.currentPerson.NroDocumento);
-
+    
+    //this.fullImagePath = HealtConstants.ImagesSrc_Man;
+    //this.nroDoc = Number(this.currentPerson.NroDocumento);
+    
+   
 
   }
+  loadImg(){
+    
+    this.fullImagePath = ''+this.currentPerson.Foto;
+  }
+  
   ngOnInit() {
     this.preInitializePerson();
-    
 
-   
-  
+
+
+
     this.estadoCivilList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.EstadoCivil, null);
     this.estadoCivilList$.subscribe(
       res => {
@@ -71,10 +89,10 @@ export class PersonCardComponent implements AfterContentInit {
       res => {
 
         this.tipoDocumentoList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
-        
+
       }
     );
-    
+
 
 
   }
@@ -83,9 +101,9 @@ export class PersonCardComponent implements AfterContentInit {
   byParam(item1: number, item2: number) {
     console.log(JSON.stringify(item1));
     return item1 === item2;
-  
+
   }
-  onPaisSelection(event) { 
+  onPaisSelection(event) {
     //alert(this.selectedPais); 
   }
 
@@ -100,29 +118,35 @@ export class PersonCardComponent implements AfterContentInit {
     console.log(value);
   }
 
-
   onSexChanged(inChecked: boolean) {
+
+    if(this.currentPerson.Foto)
+    {
+     // this.base64Image =''+this.currentPerson.Foto;
+      //this.img1.src  = "'data:image/jpg;base64,' + fullImagePath";
+      //this.fullImagePath = ''+this.currentPerson.Foto;
+      return;
+    }
 
     if (inChecked) {
       this.fullImagePath = HealtConstants.ImagesSrc_Man;
       this.currentPerson.Sexo = 0;
     }
     else {
-      
+
       this.fullImagePath = HealtConstants.ImagesSrc_Woman;
       this.currentPerson.Sexo = 1;
     }
   }
-  nroDoc:number;
-  private  preInitializePerson()
-  {
+  nroDoc: number;
+  private preInitializePerson() {
     this.fullImagePath = HealtConstants.ImagesSrc_Woman;
-     this.currentPerson = new PersonBE(-1,"");
-     //this.currentPerson.TipoDocumento=613;
-     this.currentPerson.Nombre="";
-     this.currentPerson.TipoDocumento = CommonParams.SeleccioneUnaOpcion.IdParametro.toString();
-     this.currentPerson.IdEstadocivil =CommonParams.SeleccioneUnaOpcion.IdParametro;
-     this.nroDoc = Number(this.currentPerson.NroDocumento);
+    this.currentPerson = new PersonBE(-1, "");
+    //this.currentPerson.TipoDocumento=613;
+    this.currentPerson.Nombre = "";
+    this.currentPerson.TipoDocumento = CommonParams.SeleccioneUnaOpcion.IdParametro.toString();
+    this.currentPerson.IdEstadocivil = CommonParams.SeleccioneUnaOpcion.IdParametro;
+    this.nroDoc = Number(this.currentPerson.NroDocumento);
   }
 
 }

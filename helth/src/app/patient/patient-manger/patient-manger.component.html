@@ -16,6 +16,9 @@
   <li class="nav-item">
     <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Medio de contacto</a>
   </li>
+  <li class="nav-item">
+      <a class="nav-link" href="#patientJson" role="tab" data-toggle="tab">JSON </a>
+    </li>
 </ul>
 
 <!-- Tab panes -->
@@ -54,4 +57,19 @@
       </div>
     </section>
   </div>
+  <div role="tabpanel" class="tab-pane fade in active" id="patientJson">
+      
+          
+          
+            <div class="col-xs-9 col-md-6">
+              <div class="alert-info">
+                  
+                <div>Current Person </div>
+                <div>{{currentPatient | json}}</div>
+              </div>
+            </div>
+            
+            
+      
+    </div>
 </div>

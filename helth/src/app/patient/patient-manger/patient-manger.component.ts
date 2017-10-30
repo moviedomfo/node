@@ -14,6 +14,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./patient-manger.component.css']
 })
 export class PatientMangerComponent implements OnInit {
+  isEdit :boolean;
   currentPatient: PatientBE;
   currentPatient$:Observable< PatientBE>;
   currentMutual_toAdd :MutualPlanGridView;
@@ -36,27 +37,41 @@ export class PatientMangerComponent implements OnInit {
 
  }
   private  preInitializePatient()
-  {
+  {      this.currentPatient = new PatientBE();
+    this.currentPatient.Persona = new PersonBE();
     var id:any;
-     this.currentPatient = new PatientBE();
-     this.route.params.subscribe( params  => 
+    
+     this.route.params.subscribe( params  => {
         id= params  
+        if(id.id!=null)
+          this.isEdit=true;
+      }
     );
-    this.currentPatient$= this.patientService.getPatientById(id.id);
+    if(this.isEdit)
+    {
+      this.currentPatient$= this.patientService.getPatientById(id.id);
 
-    this.currentPatient$.subscribe(res=>{
-      this.currentPatient= res;
-      alert(JSON.stringify(res));
-    })
-    //  this.currentPatient.Persona = new PersonBE();
+      this.currentPatient$.subscribe(res=>{
+        this.currentPatient= res;
+        //alert(JSON.stringify(res));
+
+      })
+    }
+    if(this.isEdit==false)
+    {
+      this.currentPatient = new PatientBE();
+      this.currentPatient.Persona = new PersonBE();
      //this.currentPerson.TipoDocumento=613;
-     this.currentPatient.FechaAlta= new Date();
-     this.mutualPorPacienteList= [];
-     
+      this.currentPatient.FechaAlta= new Date();
+      this.mutualPorPacienteList= [];
+    }
      //this.patientService.RetriveAllObraSocial()
      
   }
 
+  initView(){
+    
+  }
   //viene de la lista de todas las mutuales
   onMedicalInsuranceChanged($event)
   {

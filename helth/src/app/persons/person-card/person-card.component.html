@@ -1,26 +1,163 @@
+<div class="">
+    <form>
+        <h1>Should you have any questions, please do not hesitate to contact me :</h1>
+        
+      <div class="contentform">
+        <div id="sendmessage"> Your message has been sent successfully. Thank you. </div>
+  
+  
+        <div class="leftcontact">
+          <div class="form-group">
+            <!-- <img #img1 class="img-rounded" [src]="fullImagePath" alt="Foto" /> -->
+            <img #img2 class="img-rounded" [src]="'data:image/jpg;base64,' + fullImagePath" alt="Foto" />
+        
+            <!-- <img #img3 *ngIf="base64Image" [src]="domSanitizer.bypassSecurityTrustUrl(base64Image)" /> -->
+            <div class="btn btn-default" (click)="loadImg()">load img</div>
+          </div>
+          <div class="form-group ">
+        
+        
+            <div class="radio">
+              <label>
+                <input type="radio" [checked]="currentPerson.Sexo===0" (click)="onSexChanged($event.target.checked)" name="modelProperty">Hombre
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" [checked]="currentPerson.Sexo===1" (click)="onSexChanged(!$event.target.checked)" name="modelProperty">Mujer
+              </label>
+            </div>
+        
+        
+          </div>
+
+
+        
+        
+        
+          <div class="form-group">
+            <p>E-mail
+              <span>*</span>
+            </p>
+            <span class="icon-case">
+              <i class="fa fa-envelope-o"></i>
+            </span>
+            <input type="email" name="email" id="email" data-rule="email" data-msg="Vérifiez votre saisie sur les champs : Le champ 'E-mail' est obligatoire."
+            />
+            <div class="validation"></div>
+          </div>
+        
+          <div class="form-group">
+            <p>Company
+              <span>*</span>
+            </p>
+            <span class="icon-case">
+              <i class="fa fa-home"></i>
+            </span>
+            <input type="text" name="society" id="society" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Société' doit être renseigné."
+            />
+            <div class="validation"></div>
+          </div>
+        
+          <div class="form-group">
+            <p>Company Address
+              <span>*</span>
+            </p>
+            <span class="icon-case">
+              <i class="fa fa-location-arrow"></i>
+            </span>
+            <input type="text" name="adresse" id="adresse" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Adresse' doit être renseigné."
+            />
+            <div class="validation"></div>
+          </div>
+        
+          <div class="form-group">
+            <p>Postcode
+              <span>*</span>
+            </p>
+            <span class="icon-case">
+              <i class="fa fa-map-marker"></i>
+            </span>
+            <input type="text" name="postal" id="postal" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Code postal' doit être renseigné."
+            />
+            <div class="validation"></div>
+          </div>
+        
+        
+          <!-- fin leftcontent -->
+        </div>
+    <div class="rightcontact">	
+        <div class="form-group">
+            <p>Nombre <span>*</span></p>
+            <span class="icon-case"><i class="fa fa-user"></i></span>
+        <input type="text" name="prenom" id="prenom" data-rule="required" [(ngModel)]="currentPerson.Nombre" data-msg="Nombre es requerido."/>
+                <div class="validation"></div>
+      </div>
+      <div class="form-group">
+          <p>Apellido <span>*</span></p>
+          <span class="icon-case"><i class="fa fa-user"></i></span>
+      <input type="text" name="prenom" id="prenom" data-rule="required" [(ngModel)]="currentPerson.Apellido" data-msg="Apellido es requerido."/>
+              <div class="validation"></div>
+    </div>
+
+      
+  
+        <div class="form-group">
+        <p>TipoDocumento <span>*</span></p>	
+        <span class="icon-case"><i class="fa fa-phone"></i></span>
+        <label for="TipoDocumento" class="col-lg-2 control-label">Tipo Document </label>
+        <div class="col-lg-5">
+            <select name="cmbTipoDocumento" class="form-control " #cmbTipoDocumento [(ngModel)]="currentPerson.TipoDocumento">
+                <option *ngFor="let item of tipoDocumentoList" [ngValue]="item.IdParametro.toString()">{{item.Nombre}}</option>
+              </select>
+        </div>
+        </div>
+        <div class="form-group">
+            <p>Nro Documento <span>*</span></p>
+            <span class="icon-case"><i class="fa fa-building-o"></i></span>
+            <input class="form-control" name="nroDoc" type="text" maxlength="8" placeholder="Nro Documento" [(ngModel)]="currentPerson.NroDocumento"
+               #txtBox_NroDocumento2/>
+            </div>	
+
+        <div class="form-group">
+        <p>Fecha alta <span>*</span></p>
+        <span class="icon-case"><i class="fa fa-info"></i></span>
+                  <!-- <input type="text" name="fonction" id="fonction" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Fonction' doit être renseigné."/> -->
+                  <input class="form-control" name="FechaAlta" type="date" data-rule="required" [(ngModel)]="currentPerson.FechaAlta"/>
+                  <div class="validation"></div>
+        </div>
+  
+        <div class="form-group">
+        <p>Fecha nacimiento<span>*</span></p>	
+        <span class="icon-case"><i class="fa fa-calendar"></i></span>
+            <input class="form-control" name="fechaNacimiento" type="date" [(ngModel)]="currentPerson.FechaNacimiento"/>
+                  <div class="validation"></div>
+        </div>
+      
+        <div class="form-group">
+        <p>Message <span>*</span></p>
+        <span class="icon-case"><i class="fa fa-calendar"></i></span>
+                  <textarea name="message" rows="14" data-rule="required" data-msg="Vérifiez votre saisie sur les champs : Le champ 'Message' doit être renseigné."></textarea>
+                  <div class="validation"></div>
+        </div>	
+    </div>
+    </div>
+  <button type="submit" class="bouton-contact">Actualizar</button>
+
+</form>	</div>
+<div class="row">
+
+
+
 <div class="col-lg-2">
+
 
   <form class="form">
     <div class="form-group ">
       {{patientId}}
-      <img class="img-rounded" [src]="fullImagePath" alt="Foto" />
-    </div>
-    <div class="form-group ">
-
-
-      <div class="radio">
-        <label>
-          <input type="radio" [checked]="currentPerson.Sexo===0" (click)="onSexChanged($event.target.checked)" name="modelProperty">Hombre
-           </label>
-      </div>
-      <div class="radio">
-        <label>
-             <input type="radio" [checked]="currentPerson.Sexo===1" (click)="onSexChanged(!$event.target.checked)" name="modelProperty">Mujer
-         </label>
-      </div>
-
 
     </div>
+   
   </form>
 </div>
 
@@ -28,37 +165,44 @@
 <div class="col-lg-10">
 
   <form class="form-horizontal">
-    <div class="form-group ">
+    <!-- <div class="form-group ">
       <label for="Nombre" class="col-lg-2 control-label">Nombre </label>
       <div class="col-lg-5">
-         <input type="text" class="form-control" name="txtNombre" placeholder="Nombre" [(ngModel)]="currentPerson.Nombre">
+        <input type="text" class="form-control" name="txtNombre" placeholder="Nombre" [(ngModel)]="currentPerson.Nombre">
       </div>
     </div>
 
     <div class="form-group ">
-      <label for="Apellido" class="col-lg-2 control-label">Apellido </label>
-      <div class="col-lg-5">
-        <input class="form-control" name="apell" placeholder="Apellido " type="text" [(ngModel)]="currentPerson.Apellido">
-      </div>
-    </div>
-
-    <div class="form-group">
+        <label for="Apellido" class="col-lg-2 control-label">Apellido </label>
+        <div class="col-lg-5">
+          <input class="form-control" name="apell" placeholder="Apellido " type="text" [(ngModel)]="currentPerson.Apellido">
+        </div>
+      </div> -->
+      <div class="form-group ">
+          <label for="TipoDocumento" class="col-lg-2 control-label">Tipo Document </label>
+          <div class="col-lg-5">
+              <select name="cmbTipoDocumento" class="form-control " #cmbTipoDocumento [(ngModel)]="currentPerson.TipoDocumento">
+                  <option *ngFor="let item of tipoDocumentoList" [ngValue]="item.IdParametro.toString()">{{item.Nombre}}</option>
+                </select>
+          </div>
+        </div>
+     <!--<div class="form-group">
       <div class="col-lg-4">
-        <label  for="TipoDocumento" class="col-lg-2">Tipo Documento</label>
-        <select  name="cmbTipoDocumento" class="form-control " #cmbTipoDocumento [(ngModel)]="currentPerson.TipoDocumento">
-                <option *ngFor="let item of tipoDocumentoList" 
-                 [ngValue]="item.IdParametro.toString()">{{item.Nombre}}</option>
-            </select>
-     
-      
-      </div>
-      <div class="col-lg-pull-1 col-lg-6">
+        <label for="TipoDocumento" class="col-lg-3">Tipo Documento</label>
+        <select name="cmbTipoDocumento" class="form-control " #cmbTipoDocumento [(ngModel)]="currentPerson.TipoDocumento">
+          <option *ngFor="let item of tipoDocumentoList" [ngValue]="item.IdParametro.toString()">{{item.Nombre}}</option>
+        </select>
+
+
+      </div> -->
+      <!-- <div class="col-lg-pull-1 col-lg-6">
         <label for="NroDocumento" class="col-lg-5 ">Nro documento </label>
         <div class="col-lg-pull-1 col-lg-5">
-          <input class="form-control" name="nroDoc" type="text" maxlength="8" placeholder="Nro Documento" [(ngModel)]="currentPerson.NroDocumento" #txtBox_NroDocumento2>
+          <input class="form-control" name="nroDoc" type="text" maxlength="8" placeholder="Nro Documento" [(ngModel)]="currentPerson.NroDocumento"
+            #txtBox_NroDocumento2>
         </div>
-      </div>
-    </div>
+      </div> 
+    </div>-->
 
     <div class="form-group row">
       <label for="fechaAlta" class="col-lg-2 control-label">FechaAlta</label>
@@ -76,66 +220,36 @@
       <label for="ecivil" class="col-lg-2 control-label">Estado civil</label>
       <div class="col-lg-4">
         <select name="cmbEstadoCivil" class="form-control margin-bottom" #cmbEstadoCivil [(ngModel)]="currentPerson.IdEstadocivil">
-                        <option *ngFor="let item of estadoCivilList"  
-                            
-                        [ngValue]="item.IdParametro">{{item.Nombre}}</option>
-                 </select>
+          <option *ngFor="let item of estadoCivilList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
+        </select>
       </div>
     </div>
   </form>
 
 </div>
-<!-- 
-  
-    <div class="form-group">
-        <input class="form-control" name="nroDoc" placeholder="NroDocumento" [(ngModel)]="currentPerson.NroDocumento" #txtBox_NroDocumento (keyup.enter)="txtBox_NroDocumento_onKeyEnter(txtBox_NroDocumento.value)"
-          (blur)="txtBox_NroDocumento_onKeyEnter(txtBox_NroDocumento.value)"> -->
-<!-- </div> -->
-
-
-
-
-
-
-
-
-
-<br/>
-
-<br/>
-<br/>
-<br/>
-
-
-
-
-
-
-
-<div class="row">
-
-
-  <div class="col-xs-6 col-md-4">
-    <div class="alert-danger">
-        <select  class="col-lg-4" [(ngModel)]="currentPerson.TipoDocumento">
-            <option *ngFor="let c of tipoDocumentoList" 
-             [ngValue]="c.IdParametro">{{c.Nombre}}</option>
-      </select>
-      <div>Current Person </div>
-      <div>{{currentPerson | json}}</div>
-    </div>
-  </div>
-  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-  <div class="col-xs-6 col-md-4">
-    <div class="alert-info">
-
-
-      <div>TipoDocumento : {{currentPerson.TipoDocumento | json}}</div>
-      <div>Estado civil : {{currentPerson.IdEstadocivil | json}}</div>
-      
-    </div>
-  </div>
 </div>
+
+
+
+
+
+
+
+
+
+<br/>
+
+<br/>
+<br/>
+<br/>
+
+
+
+
+
+
+
+
 
 
 
