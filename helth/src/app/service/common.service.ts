@@ -167,4 +167,11 @@ export class CommonService {
     console.error(error.message || error);
     return Promise.reject(error.message || error);
   }
+
+  //cuando se le pasa un byte[] retorna su base64 string
+  public convert_byteArrayTobase64(arrayBuffer:ArrayBuffer):string
+  {
+    var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
+    return  base64String;
+  }
 }

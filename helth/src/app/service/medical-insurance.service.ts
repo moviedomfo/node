@@ -39,7 +39,7 @@ export class MedicalInsuranceService {
           .map(function (res: Response) {
     
             let result: Result = JSON.parse(res.json());
-            alert(JSON.stringify(res.json()));
+            
             if (result.Error) {
               this.commonService.handleErrorService(result.Error.Message);
             }

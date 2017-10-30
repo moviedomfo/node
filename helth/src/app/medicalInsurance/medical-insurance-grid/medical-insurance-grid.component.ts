@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter, Input } from '@angular/core';
 //permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
 //permite observar
@@ -10,6 +10,7 @@ import { DateComponent } from "../../commonComponents/ag-grid/date.component";
 import { HeaderComponent } from "../../commonComponents/ag-grid/header.component";
 import { HeaderGroupComponent } from "../../commonComponents/ag-grid/header-group.component";
 import { GridOptions } from "ag-grid/main";
+import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
 
 @Component({
     selector: 'app-medical-insurance-grid',
@@ -19,6 +20,8 @@ import { GridOptions } from "ag-grid/main";
 export class MedicalInsuranceGridComponent implements OnInit {
     private columnDefs: any[];
     private gridOptions: GridOptions;
+    @Output() onMedicalInsuranceChanged = new EventEmitter<MutualBE>();
+    public currentMedicalInsurance:MutualBE;
 
     private mutualList: MutualBE[];
     private mutualList$: Observable<MutualBE[]>;
@@ -65,14 +68,36 @@ export class MedicalInsuranceGridComponent implements OnInit {
         this.mutualList$ = this.medicalInsuranceService.retriveAllObraSocialService$("");
         this.mutualList$.subscribe(
             res => {
-                alert(JSON.stringify(res));
+                
                 this.mutualList = res;
             }
         );
 
     }
+    onMedicalInsurance_rowDoubleClicked($event) {
 
-    onObraSocialGridCellClick(event) {
-        alert(event);
+    }
+    onMedicalInsurance_cellClicked($event) {
+        //console.log('onCellClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
+        //document.querySelector('#selectedRows').innerHTML = $event;
+        //item : RowNode;
+        this.currentMedicalInsurance = $event.node.data;
+        //alert(JSON.stringify(this.currentMutual)); 
+        document.querySelector('#selectedRows').innerHTML = this.currentMedicalInsurance.Nombre;
+        this.onMedicalInsuranceChanged.emit(this.currentMedicalInsurance);
+        
+    }
+
+    //por el momento no se utiliza
+    onMedicalInsurance_SelectionChanged() {
+        var selectedRows = this.gridOptions.api.getSelectedRows();
+        var selectedRowsString = '';
+        selectedRows.forEach( function(selectedRow, index) {
+            if (index!==0) {
+                selectedRowsString += ', ';
+            }
+            selectedRowsString += selectedRow.Nombre;
+        });
+        document.querySelector('#selectedRows').innerHTML = selectedRowsString;
     }
 }

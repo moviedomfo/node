@@ -172,7 +172,7 @@ export class PatientsService {
   getPatientById(patientId: number): Observable<PatientBE> {
       
     var bussinesData = {
-      id: patientId
+      Id: patientId
     };
 
 
