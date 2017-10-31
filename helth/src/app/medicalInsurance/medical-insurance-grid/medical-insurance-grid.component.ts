@@ -108,7 +108,7 @@ export class MedicalInsuranceGridComponent implements OnInit {
         //item : RowNode;
         this.currentMedicalInsurance = $event.node.data;
         //alert(JSON.stringify(this.currentMutual)); 
-        document.querySelector('#selectedRows').innerHTML = this.currentMedicalInsurance.ComercialCode;
+        
         this.onMedicalInsuranceChanged.emit(this.currentMedicalInsurance);
         
     }

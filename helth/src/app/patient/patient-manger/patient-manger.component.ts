@@ -71,6 +71,7 @@ export class PatientMangerComponent implements OnInit {
   //viene de la lista de todas las mutuales
   onMedicalInsuranceChanged($event) {
     this.currentMutual_toAdd = $event;
+    //document.querySelector('#currentMutual_toAdd_div').innerHTML = this.currentMutual_toAdd.Nombre + ' ' + this.currentMutual_toAdd.ComercialCode;
   }
   addMedicalInsurance() {
 

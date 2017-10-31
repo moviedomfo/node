@@ -31,18 +31,18 @@
   </app-person-card>
   </div>
   <div role="tabpanel" class="tab-pane fade" id="medicalInsuranceTab">
-  <div class="col-lg-5">
-    <app-medical-insurance-grid
-      (onMedicalInsuranceChanged)="onMedicalInsuranceChanged($event)">
-    </app-medical-insurance-grid>
-  </div>
     <div class="col-lg-5">
-        <app-patien-medical-insurance-grid
-        
-        [medicalInsuranceByPatientList]="currentPatient.Mutuales"
-        (onMedicalInsuranceChanged)="onMedicalInsuranceByPatientChanged($event)">
-
-        </app-patien-medical-insurance-grid>
+      <app-medical-insurance-grid (onMedicalInsuranceChanged)="onMedicalInsuranceChanged($event)">
+      </app-medical-insurance-grid>
+    </div>
+    <div class="col-lg-2">
+        <button class="btn btn-default"  type="submit" (click)=addMedicalInsurance() 
+         >Agregar --></button>
+        <div class="label label-info">Mutual {{currentMutual_toAdd | json}}</div>
+    </div>
+    <div class="col-lg-5">
+      <app-patien-medical-insurance-grid [medicalInsuranceByPatientList]="currentPatient.Mutuales" (onMedicalInsuranceChanged)="onMedicalInsuranceByPatientChanged($event)">
+      </app-patien-medical-insurance-grid>
     </div>
   </div>
   <div role="tabpanel" class="tab-pane fade" id="medioContacto">

@@ -5,8 +5,10 @@
   </div>
   <div class="panel-body">
     <div style="clear: both;"></div>
-    <ag-grid-angular style="width: 100%;height: 515px;" class="ag-fresh" [rowData]="mutualPlanGridViewList" [columnDefs]="columnDefs" (cellClicked)="onObraSocialGridCellClick($event)"
-      (rowDoubleClicked)="onGridRowDoubleClick($event)">
+    <ag-grid-angular style="width: 100%;height: 515px;" class="ag-fresh" [rowData]="mutualPlanGridViewList" 
+      [columnDefs]="columnDefs" 
+      (cellClicked)="onMedicalInsurance_cellClicked($event)"
+      (rowDoubleClicked)="onMedicalInsurance_rowDoubleClicked($event)">
     </ag-grid-angular>
 
 
