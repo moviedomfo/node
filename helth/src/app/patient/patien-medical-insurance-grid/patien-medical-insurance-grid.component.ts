@@ -44,8 +44,8 @@ export class PatienMedicalInsuranceGridComponent implements OnInit {
   private createColumnDefs() {
     this.columnDefs = [
         { headerName: "Mutual", field: "NombreMutual", width: 150, pinned: true, filter: 'text' },
-        { headerName: "Plan", field: "NombrePlan", width: 150, pinned: true, filter: 'text' },
-        { headerName: "NroAfiliadoMutual", field: "NroAfiliadoMutual", width: 200, pinned: true }
+        { headerName: "Nro Afiliado", field: "NroAfiliadoMutual", width: 150, pinned: true, filter: 'text' },
+        { headerName: "Activa", field: "IsActive", width: 100, pinned: true }
     ];
 }
 onMedicalInsuranceByPatient_cellClicked($event) {

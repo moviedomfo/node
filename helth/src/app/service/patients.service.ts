@@ -190,7 +190,7 @@ export class PatientsService {
         }
 
         let patient: PatientBE = result.BusinessData["Patient"] as PatientBE;
-
+        patient.Mutuales = result.BusinessData["Mutuales"] as MutualPorPacienteBE[];
 
 
         return patient;

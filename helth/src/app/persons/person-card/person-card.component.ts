@@ -38,21 +38,19 @@ export class PersonCardComponent implements AfterContentInit {
   }
   ngOnChanges() {
 
-    //alert('ngOnChanges' + this.currentPerson.Nombre);
     if(this.currentPerson.Foto===null)
     {
-      //alert('no hay foto' + this.currentPerson.Nombre);
       this.currentPerson.Sexo==0 ? this.onSexChanged(false):this.onSexChanged(true);
     }
     else
     {
      this.fullImagePath = ''+this.currentPerson.Foto;
     }
+  }
 
+  ngAfterViewInit() {   
   }
-  ngAfterViewInit() {
-    
-  }
+
   ngAfterContentInit() {
 
     //var comboEstadocivil=  (<HTMLInputElement>document.getElementById('cmbEstadoCivil'));
@@ -63,10 +61,9 @@ export class PersonCardComponent implements AfterContentInit {
     
     //this.fullImagePath = HealtConstants.ImagesSrc_Man;
     //this.nroDoc = Number(this.currentPerson.NroDocumento);
-    
-   
 
   }
+
   loadImg(){
     
     this.fullImagePath = ''+this.currentPerson.Foto;
@@ -82,6 +79,7 @@ export class PersonCardComponent implements AfterContentInit {
     this.estadoCivilList$.subscribe(
       res => {
         this.estadoCivilList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
+
       }
     );
     this.tipoDocumentoList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.TipoDocumento, null);

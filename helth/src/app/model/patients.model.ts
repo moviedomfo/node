@@ -20,7 +20,7 @@ export class PatientBE {//implements IPatient {
     public LastAccessUserId: string;
     public LastHealthInstId: string;
     public Persona:PersonBE;
- 
+    public Mutuales : MutualPorPacienteBE[];
 }
 
 export class MutualBE{
@@ -32,6 +32,7 @@ export class MutualBE{
     public LastAccessTime: Date;
     public LastAccessUserId: string;
     public LastHealthInstId: string;
+    public MutualPlanList :MutualPlanGridView[];
 }
 export class MutualPorPacienteBE{
     public Id: number;
@@ -45,6 +46,7 @@ export class MutualPorPacienteBE{
     public  EntityState :string;
     public  NombreMutual :string;
     public  NombrePlan : string;
+    
 }
 
 export class MutualPlanGridView

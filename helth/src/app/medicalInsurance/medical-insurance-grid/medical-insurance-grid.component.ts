@@ -3,7 +3,7 @@ import { Component, OnInit,Output,EventEmitter, Input } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 //permite observar
 import { Observable } from 'rxjs/Observable';
-import { MutualBE } from '../../model/index';
+import { MutualBE ,MutualPlanGridView} from '../../model/index';
 import { PatientsService, CommonService, MedicalInsuranceService } from '../../service/index';
 // rich grid and rich grid declarative
 import { DateComponent } from "../../commonComponents/ag-grid/date.component";
@@ -20,10 +20,11 @@ import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
 export class MedicalInsuranceGridComponent implements OnInit {
     private columnDefs: any[];
     private gridOptions: GridOptions;
-    @Output() onMedicalInsuranceChanged = new EventEmitter<MutualBE>();
-    public currentMedicalInsurance:MutualBE;
+    @Output() onMedicalInsuranceChanged = new EventEmitter<MutualPlanGridView>();
+    public currentMedicalInsurance:MutualPlanGridView;
 
     private mutualList: MutualBE[];
+    private mutualPlanGridViewList : MutualPlanGridView[];
     private mutualList$: Observable<MutualBE[]>;
 
     constructor(private medicalInsuranceService: MedicalInsuranceService) { }
@@ -57,9 +58,9 @@ export class MedicalInsuranceGridComponent implements OnInit {
     }
     private createColumnDefs() {
         this.columnDefs = [
-            { headerName: "Nombre", field: "Nombre", width: 150, pinned: true, filter: 'text' },
-            { headerName: "Exige coseguro", field: "ExigeCoseguro", width: 150, pinned: true, filter: 'text' },
-            { headerName: "CUIT", field: "CUIT", width: 200, pinned: true }
+            { headerName: "Mutual", field: "Nombre", width: 150, pinned: true, filter: 'text' },
+            { headerName: "Plan", field: "ComercialCode", width: 150, pinned: true, filter: 'text' }
+            
         ];
     }
 
@@ -70,6 +71,30 @@ export class MedicalInsuranceGridComponent implements OnInit {
             res => {
                 
                 this.mutualList = res;
+                this.mutualPlanGridViewList=[];
+                //Generamos mutualPlanGridViewList para bindearlo a la grilla
+                this.mutualList.forEach(element => {
+                    var mMutualPlanGridView : MutualPlanGridView;
+                    if (element.MutualPlanList != null)
+                    {
+                        //recorro todos los planes
+                        element.MutualPlanList.forEach(plan => {
+                            mMutualPlanGridView = new MutualPlanGridView();
+                            mMutualPlanGridView.MutualId = element.IdMutual;
+                            mMutualPlanGridView.Nombre = element.Nombre;
+                            mMutualPlanGridView.PlanId = plan.PlanId;
+                            mMutualPlanGridView.ComercialCode = plan.ComercialCode;
+                            this.mutualPlanGridViewList.push(mMutualPlanGridView);
+                        });
+                         
+                    }//gen ero un solo plan
+                    else{
+                        mMutualPlanGridView = new MutualPlanGridView();
+                        mMutualPlanGridView.MutualId = element.IdMutual;
+                        mMutualPlanGridView.Nombre = element.Nombre;
+                        this.mutualPlanGridViewList.push(mMutualPlanGridView);
+                    }
+                });
             }
         );
 
@@ -83,7 +108,7 @@ export class MedicalInsuranceGridComponent implements OnInit {
         //item : RowNode;
         this.currentMedicalInsurance = $event.node.data;
         //alert(JSON.stringify(this.currentMutual)); 
-        document.querySelector('#selectedRows').innerHTML = this.currentMedicalInsurance.Nombre;
+        document.querySelector('#selectedRows').innerHTML = this.currentMedicalInsurance.ComercialCode;
         this.onMedicalInsuranceChanged.emit(this.currentMedicalInsurance);
         
     }

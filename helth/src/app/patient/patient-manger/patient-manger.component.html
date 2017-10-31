@@ -31,14 +31,15 @@
   </app-person-card>
   </div>
   <div role="tabpanel" class="tab-pane fade" id="medicalInsuranceTab">
-  <div class="col-lg-6">
+  <div class="col-lg-5">
     <app-medical-insurance-grid
       (onMedicalInsuranceChanged)="onMedicalInsuranceChanged($event)">
     </app-medical-insurance-grid>
   </div>
-    <div class="col-lg-6">
+    <div class="col-lg-5">
         <app-patien-medical-insurance-grid
-        [medicalInsuranceByPatientList]="mutualPorPacienteList"
+        
+        [medicalInsuranceByPatientList]="currentPatient.Mutuales"
         (onMedicalInsuranceChanged)="onMedicalInsuranceByPatientChanged($event)">
 
         </app-patien-medical-insurance-grid>
@@ -46,31 +47,21 @@
   </div>
   <div role="tabpanel" class="tab-pane fade" id="medioContacto">
     <section>
-      <div class="col-lg-10">
-        <form class="form-horizontal">
-          <div class="form-group ">
-            <label for="Nombre" class="col-lg-2 control-label">Nombre </label>
-            <div class="col-lg-5">
-               <input type="text" class="form-control" name="txtNombre" placeholder="Nombre"
-                [(ngModel)]="currentPatient.Nombre">
-            </div>
-          </div>
-        </form>
-      </div>
+        <h1 >Medio de contacto </h1>
     </section>
   </div>
   <div role="tabpanel" class="tab-pane fade in active" id="patientJson">
       
           
-          
-            <div class="col-xs-9 col-md-6">
+      <section>
+            
               <div class="alert-info">
                   
                 <div>Current Person </div>
                 <div>{{currentPatient | json}}</div>
               </div>
-            </div>
-            
+          
+          </section>
             
       
     </div>
