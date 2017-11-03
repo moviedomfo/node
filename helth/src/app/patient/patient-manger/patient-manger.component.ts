@@ -18,7 +18,8 @@ export class PatientMangerComponent implements OnInit {
   currentPatient: PatientBE;
   currentPatient$: Observable<PatientBE>;
   currentMutual_toAdd: MutualPlanGridView;
-  currentMutual_Patient: MutualPlanGridView;
+  //currentMedicalInsuranceByPatient: MutualPlanGridView;
+  currentMedicalInsuranceByPatient : MutualPorPacienteBE;
   mutualPorPacienteAuxList: MutualPorPacienteBE[];
 
   constructor(private route: ActivatedRoute,
@@ -52,6 +53,7 @@ export class PatientMangerComponent implements OnInit {
 
       this.currentPatient$.subscribe(res => {
         this.currentPatient = res;
+        this.mutualPorPacienteAuxList = this.currentPatient.Mutuales;
 
       })
     }
@@ -73,19 +75,29 @@ export class PatientMangerComponent implements OnInit {
     this.currentMutual_toAdd = $event;
     //document.querySelector('#currentMutual_toAdd_div').innerHTML = this.currentMutual_toAdd.Nombre + ' ' + this.currentMutual_toAdd.ComercialCode;
   }
+  onMedicalInsuranceByPatientChanged($event) {
+    this.currentMedicalInsuranceByPatient = $event;
+    alert(JSON.stringify(this.currentMedicalInsuranceByPatient));
+  }
+  
   addMedicalInsurance() {
 
     var item: MutualPorPacienteBE = new MutualPorPacienteBE();
-    if (this.mutualPorPacienteAuxList.some(p => p.IdMutual == this.currentMutual_toAdd.MutualId)) {
+
+    var existe = this.mutualPorPacienteAuxList.some(p => p.IdMutual == this.currentMutual_toAdd.MutualId);
+    
+    if (existe) {
       //Esto se hace por si la mutual habia sido eliminada de la grilla pero si e una q esta en bd todavia no se quita de MutualListAux
-      var m = this.mutualPorPacienteAuxList.find(p => p.IdMutual == this.currentMutual_toAdd.MutualId)[0];
+      
+      var m = this.mutualPorPacienteAuxList.find(p => p.IdMutual == this.currentMutual_toAdd.MutualId);
+      
       m.IsActive = true;
       m.PlanId = this.currentMutual_toAdd.PlanId;
       m.EntityState = 'Changed';
       //gridControl_MutualXPatient.RefreshDataSource();
       return;
     }
-
+    
     item.IdMutual = this.currentMutual_toAdd.MutualId;
     item.NombreMutual = this.currentMutual_toAdd.Nombre + ' plan ' + this.currentMutual_toAdd.ComercialCode;
 
@@ -93,6 +105,7 @@ export class PatientMangerComponent implements OnInit {
     item.PlanId = this.currentMutual_toAdd.PlanId;
     item.IsActive = true;
     this.mutualPorPacienteAuxList.push(item);
+
     //this.currentPatient.Mutuales.push(item);
   }
 

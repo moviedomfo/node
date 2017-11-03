@@ -97,7 +97,7 @@ export class CommonService {
  
            }
      
-           console.log(p);
+           
            params.push(p);
  
            return params;

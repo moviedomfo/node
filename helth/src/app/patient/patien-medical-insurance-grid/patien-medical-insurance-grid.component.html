@@ -8,11 +8,17 @@
       </div>
       <div class="panel-body">
         <div style="clear: both;"></div>
-        <ag-grid-angular style="width: 100%; height: 515px;" class="ag-fresh" [rowData]="medicalInsuranceByPatientList" [columnDefs]="columnDefs"
-          (cellClicked)="onMedicalInsuranceByPatient_cellClicked($event)">
+        <ag-grid-angular style="width: 100%; height: 315px;" class="ag-fresh" 
+        [rowData]="medicalInsuranceByPatientList" 
+        [columnDefs]="columnDefs"
+        (cellClicked)="onMedicalInsuranceByPatient_cellClicked($event)"
+        (gridReady)="onReady($event)">
+        
         </ag-grid-angular>
 
 
       </div>
     </div>
 
+    <button class="btn btn-default"  type="button" (click)='showMedicalInsuranceByPatientList()'
+    >Mostrar lista</button>

@@ -40,6 +40,7 @@ import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insura
 import { PatienMedicalInsuranceGridComponent } from './patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import { PatienMedicalInsuranceGridComponent } from './patient/patien-medical-in
     GooglePlaceComponent,
     MedicalInsuranceGridComponent,
     PatienMedicalInsuranceGridComponent
+    
   
 
   ],

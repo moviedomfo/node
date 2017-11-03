@@ -3,10 +3,10 @@
 </h3>
 
 
-<button class="btn btn-success" #btnActualizar type="submit" (click)=updatePatient() 
+<button class="btn btn-success" #btnActualizar type="submit" (click)="updatePatient()" 
 [ngClass]="{hidden: !isEdit}">Actualizar</button>
 <button class="btn btn-success" [ngClass]="{hidden: isEdit}" 
-#btnCreate (click)=createPatient()>Crear paciente</button>
+#btnCreate (click)="createPatient()">Crear paciente</button>
 
 <ul class="nav nav-tabs" role="tablist">
   <li class="nav-item">
@@ -36,12 +36,14 @@
       </app-medical-insurance-grid>
     </div>
     <div class="col-lg-2">
-        <button class="btn btn-default"  type="submit" (click)=addMedicalInsurance() 
+        <button class="btn btn-default"  type="button" (click)='addMedicalInsurance()'
          >Agregar --></button>
         <div class="label label-info">Mutual {{currentMutual_toAdd | json}}</div>
     </div>
     <div class="col-lg-5">
-      <app-patien-medical-insurance-grid [medicalInsuranceByPatientList]="currentPatient.Mutuales" (onMedicalInsuranceChanged)="onMedicalInsuranceByPatientChanged($event)">
+      <app-patien-medical-insurance-grid 
+      [medicalInsuranceByPatientList]="mutualPorPacienteAuxList" 
+      (onMedicalInsuranceChanged)="onMedicalInsuranceByPatientChanged($event)">
       </app-patien-medical-insurance-grid>
     </div>
   </div>

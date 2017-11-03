@@ -21,6 +21,7 @@ const appRoutes: Routes = [
    { path: 'patientCreate', component: PatientMangerComponent },
    { path: 'prueba', component: PruebaComponent },
    { path: 'test', component: TestControlesComponent },
+   { path: 'testAgGrid', component: PruebaComponent },
    
    { path: '**', component: PageNotFoundComponent }
 ];
