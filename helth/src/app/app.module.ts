@@ -38,6 +38,7 @@ import { GooglePlaceComponent } from './commonComponents/google-place/google-pla
 
 import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
 import { PatienMedicalInsuranceGridComponent } from './patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
+//import { TestGridParentComponent } from './prueba/test-grid-parent/test-grid-parent.component';
 
 
 
@@ -55,6 +56,7 @@ import { PatienMedicalInsuranceGridComponent } from './patient/patien-medical-in
     GooglePlaceComponent,
     MedicalInsuranceGridComponent,
     PatienMedicalInsuranceGridComponent
+    
     
   
 

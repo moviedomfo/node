@@ -9,6 +9,7 @@ import { PruebaComponent } from './prueba/prueba.component';
 import { AuthGuard } from './commonComponents/routingGuard/AuthGuard';
 import { PageNotFoundComponent }from './commonComponents/page-not-found/page-not-found.component';
 import { TestControlesComponent } from './prueba/testcontroles.component';
+import { TestGridParentComponent } from './prueba/test-grid-parent/test-grid-parent.component';
 
 const appRoutes: Routes = [
    { path: 'login', component: LoginComponent },
@@ -20,8 +21,8 @@ const appRoutes: Routes = [
    { path: 'patientEdit/:id', component: PatientMangerComponent },
    { path: 'patientCreate', component: PatientMangerComponent },
    { path: 'prueba', component: PruebaComponent },
-   { path: 'test', component: TestControlesComponent },
-   { path: 'testAgGrid', component: PruebaComponent },
+   { path: 'testControles', component: TestControlesComponent },
+   { path: 'testAgGridParent', component: TestGridParentComponent },
    
    { path: '**', component: PageNotFoundComponent }
 ];

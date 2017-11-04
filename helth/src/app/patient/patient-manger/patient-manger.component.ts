@@ -14,6 +14,8 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./patient-manger.component.css']
 })
 export class PatientMangerComponent implements OnInit {
+ 
+
   isEdit: boolean;
   currentPatient: PatientBE;
   currentPatient$: Observable<PatientBE>;
@@ -21,7 +23,8 @@ export class PatientMangerComponent implements OnInit {
   //currentMedicalInsuranceByPatient: MutualPlanGridView;
   currentMedicalInsuranceByPatient : MutualPorPacienteBE;
   mutualPorPacienteAuxList: MutualPorPacienteBE[];
-
+  private addItem_mutualPorPacienteAuxList_Source = new Subject<MutualPorPacienteBE[]>();
+  private medicalInsuranceByPatientList$:Observable<MutualPorPacienteBE[]>;
   constructor(private route: ActivatedRoute,
     private patientService: PatientsService,
     private commonService: CommonService,
@@ -30,9 +33,13 @@ export class PatientMangerComponent implements OnInit {
 
   ngOnInit() {
     this.preInitializePatient();
+     this.medicalInsuranceByPatientList$ = this.addItem_mutualPorPacienteAuxList_Source.asObservable();
+    
   }
 
-
+  medicalInsuranceByPatientList(item: any) {
+    this.addItem_mutualPorPacienteAuxList_Source.next(item);
+  }
   private preInitializePatient() {
     this.currentPatient = new PatientBE();
     this.currentPatient.Persona = new PersonBE();
@@ -106,6 +113,9 @@ export class PatientMangerComponent implements OnInit {
     item.IsActive = true;
     this.mutualPorPacienteAuxList.push(item);
 
+    
+    this.medicalInsuranceByPatientList(this.mutualPorPacienteAuxList);
+    
     //this.currentPatient.Mutuales.push(item);
   }
 

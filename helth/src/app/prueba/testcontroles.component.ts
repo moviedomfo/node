@@ -51,7 +51,7 @@ export class TestControlesComponent implements OnInit {
       this.currentPatient.Persona.Nombre= "Marcelo";
       this.currentPatient.Persona.Apellido= "Oviedo";
       this.currentPatient.FechaAlta = new Date(Date.now());
-      alert(JSON.stringify(this.currentPatient));
+ 
       //this.patientList$ = this.patientService.retrivePatientsSimple$();
       // this.patientList$.subscribe(
       //   res => {

@@ -9,16 +9,17 @@ import { ColumnApi, GridApi, GridOptions } from "ag-grid/main";
 import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
 
 import { MutualBE, MutualPorPacienteBE } from '../../model/index';
-
+import { Subscription }   from 'rxjs/Subscription';
 @Component({
     selector: 'app-patien-medical-insurance-grid',
     templateUrl: './patien-medical-insurance-grid.component.html',
     styleUrls: ['./patien-medical-insurance-grid.component.css']
 })
 export class PatienMedicalInsuranceGridComponent implements OnInit {
-
+    subscription: Subscription;
     @Input()
     medicalInsuranceByPatientList: MutualPorPacienteBE[];
+    @Input()
     medicalInsuranceByPatientList$:Observable<MutualPorPacienteBE[]>;
     private columnDefs: any[];
     private gridOptions: GridOptions;
@@ -48,10 +49,16 @@ export class PatienMedicalInsuranceGridComponent implements OnInit {
         this.createColumnDefs();
         this.gridOptions.columnDefs = this.columnDefs;
 
-        this.medicalInsuranceByPatientList$.subscribe(res => {
-            alert('this.medicalInsuranceByPatientList');
-            this.api.setRowData(this.medicalInsuranceByPatientList);
-          });
+        // this.medicalInsuranceByPatientList$.subscribe(res => {
+        //     alert('this.medicalInsuranceByPatientList');
+        //     this.api.setRowData(this.medicalInsuranceByPatientList);
+        //   });
+          this.subscription =  this.medicalInsuranceByPatientList$.subscribe(
+            item => {
+                //aquí tenemos el ítem seleccionado por el usuario en el componente que nos interesa y podemos reaccionar como aplique… 
+                alert('this.medicalInsuranceByPatientList');
+                this.api.setRowData(this.medicalInsuranceByPatientList);
+            });
 
     }
     private onReady(params) {
