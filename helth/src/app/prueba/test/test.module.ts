@@ -11,6 +11,8 @@ import { TestControlesComponent } from '../testcontroles.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AggridTestComponent } from '../test-grid-parent/aggrid-test/aggrid-test.component';
 import { TestGridParentComponent } from '../test-grid-parent/test-grid-parent.component';
+import {TestObservablesChildComponent} from '../test-observables/test-observables-child/test-observables-child.component';
+import {TestObservablesComponent} from '../test-observables/test-observables.component';
 // import {TablaComponent} from '../../tabla/tabla.component';
 @NgModule({
   imports: [
@@ -23,8 +25,9 @@ import { TestGridParentComponent } from '../test-grid-parent/test-grid-parent.co
   ],
   declarations: [PruebaComponent,
     TestControlesComponent,AggridTestComponent    ,
-    TestGridParentComponent
-    // TablaComponent
+    TestGridParentComponent,
+     TestObservablesChildComponent,
+     TestObservablesComponent
   ]
 })
 export class TestModule { }

@@ -10,7 +10,7 @@ import { AuthGuard } from './commonComponents/routingGuard/AuthGuard';
 import { PageNotFoundComponent }from './commonComponents/page-not-found/page-not-found.component';
 import { TestControlesComponent } from './prueba/testcontroles.component';
 import { TestGridParentComponent } from './prueba/test-grid-parent/test-grid-parent.component';
-
+import {TestObservablesComponent} from  './prueba/test-observables/test-observables.component';
 const appRoutes: Routes = [
    { path: 'login', component: LoginComponent },
    //  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -23,7 +23,7 @@ const appRoutes: Routes = [
    { path: 'prueba', component: PruebaComponent },
    { path: 'testControles', component: TestControlesComponent },
    { path: 'testAgGridParent', component: TestGridParentComponent },
-   
+   { path: 'testObservables', component: TestObservablesComponent },
    { path: '**', component: PageNotFoundComponent }
 ];
 
