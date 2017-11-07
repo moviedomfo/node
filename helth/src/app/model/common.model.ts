@@ -84,15 +84,26 @@ export class Param {
 }
 
   /// Contiene informacion del error de un servicio.-
-export class ServiceError{
+  // if(e instanceof EvalError)
+export class ServiceError extends Error{
 
-   //    Gets a string representation of the frames on the call stack at the time
-   //   the current exception was thrown.
+
    Message:string;
    StackTrace:string;
    Type:string;
    Machine:string;
 
+
+}
+
+
+export class FwkEvent{
+    Message : string;
+    Source : string;
+    Machine :string;
+    LogDate : Date;
+    Type : string;  
+    User:string;
 }
 
 export class User {

@@ -2,11 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { PatientsService, CommonService } from '../../service/index';
-import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants } from '../../model/index';
+import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, EventType,TipoParametroEnum, CommonParams, HealtConstants } from '../../model/index';
 import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
 // Base 64 IMage display issues with unsafe image
 import { DomSanitizer } from '@angular/platform-browser';
+import { ServiceError } from 'app/model/common.model';
+import { AlertBlockComponent } from 'app/commonComponents/alert-block/alert-block.component';
 @Component({
   selector: 'app-person-card',
   templateUrl: './person-card.component.html',
@@ -27,9 +29,12 @@ export class PersonCardComponent implements AfterContentInit {
 
   fullImagePath: string;
   private base64Image: string;
+  @ViewChild('alertBlock1') alertBlock1: AlertBlockComponent;
   @ViewChild('cmbEstadoCivil') cmbEstadoCivil: ElementRef;
   @ViewChild('img2') img2: ElementRef;
   @ViewChild('img1') img1: ElementRef;
+
+  globalError:ServiceError;
   constructor(
     private patientService: PatientsService,
     private commonService: CommonService,
@@ -49,6 +54,8 @@ export class PersonCardComponent implements AfterContentInit {
   }
 
   ngAfterViewInit() {   
+    
+    this.alertBlock1.Show('Hola a todos',true,EventType.Information);
   }
 
   ngAfterContentInit() {
@@ -79,7 +86,10 @@ export class PersonCardComponent implements AfterContentInit {
     this.estadoCivilList$.subscribe(
       res => {
         this.estadoCivilList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
-
+      },
+      err=>{
+         this.globalError =err;
+        //alert(JSON.stringify( e.Message));
       }
     );
     this.tipoDocumentoList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.TipoDocumento, null);

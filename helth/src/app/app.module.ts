@@ -38,6 +38,8 @@ import { GooglePlaceComponent } from './commonComponents/google-place/google-pla
 
 import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
 import { PatienMedicalInsuranceGridComponent } from './patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
+import { ErrorBoxContainerComponent } from './commonComponents/error-box-container/error-box-container.component';
+import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.component';
 // import { TestObservablesComponent } from './prueba/test-observables/test-observables.component';
 // import { TestObservablesChildComponent } from './prueba/test-observables/test-observables-child/test-observables-child.component';
 //import { TestGridParentComponent } from './prueba/test-grid-parent/test-grid-parent.component';
@@ -58,6 +60,8 @@ import { PatienMedicalInsuranceGridComponent } from './patient/patien-medical-in
     GooglePlaceComponent,
     MedicalInsuranceGridComponent,
     PatienMedicalInsuranceGridComponent,
+    ErrorBoxContainerComponent,
+    AlertBlockComponent,
     // TestObservablesComponent,
     // TestObservablesChildComponent
     

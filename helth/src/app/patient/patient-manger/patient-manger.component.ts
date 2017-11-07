@@ -23,7 +23,7 @@ export class PatientMangerComponent implements OnInit {
   //currentMedicalInsuranceByPatient: MutualPlanGridView;
   currentMedicalInsuranceByPatient : MutualPorPacienteBE;
   mutualPorPacienteAuxList: MutualPorPacienteBE[];
-  private addItem_mutualPorPacienteAuxList_Source = new Subject<MutualPorPacienteBE[]>();
+  //private addItem_mutualPorPacienteAuxList_Source = new Subject<MutualPorPacienteBE[]>();
   private medicalInsuranceByPatientList$:Observable<MutualPorPacienteBE[]>;
   constructor(private route: ActivatedRoute,
     private patientService: PatientsService,
@@ -33,12 +33,14 @@ export class PatientMangerComponent implements OnInit {
 
   ngOnInit() {
     this.preInitializePatient();
-     this.medicalInsuranceByPatientList$ = this.addItem_mutualPorPacienteAuxList_Source.asObservable();
+     
+    //this.medicalInsuranceByPatientList$ = this.addItem_mutualPorPacienteAuxList_Source.asObservable();
     
   }
 
   medicalInsuranceByPatientList(item: any) {
-    this.addItem_mutualPorPacienteAuxList_Source.next(item);
+    
+    //this.addItem_mutualPorPacienteAuxList_Source.next(item);
   }
   private preInitializePatient() {
     this.currentPatient = new PatientBE();

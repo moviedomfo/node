@@ -34,7 +34,7 @@ export class CommonService {
    * @idParametroRef : Subnombre , subcategoria
    */
   searchParametroByParams$(idTipoParametro: number, idParametroRef: number): Observable<Param[]> {
-
+  
     var bussinesData = {
       IdParametroRef: idParametroRef,
       IdTipoParametro: idTipoParametro,
@@ -57,7 +57,7 @@ export class CommonService {
         let params: Param[] = resToObject.BusinessData as Param[];
 
         return params;
-      });
+      }).catch(this.handleError);;
   }
    /**
    * @params : parametros 
@@ -158,10 +158,25 @@ export class CommonService {
       alert("Se encontraron errores " + serviceError.Message);
     }
   }
-
-  public handleErrorObservable(error: Response | any) {
-    console.error(error.message || error);
-    return Observable.throw(error.message || error);
+  public handleError(error: Response | any) {
+    console.log('----------------------------------------');
+    console.log(error.status);
+    console.log(error.ok);
+    console.log('----------------------------------------');
+    let ex :ServiceError = new ServiceError();
+    ex.Message= 'Despachador de servicio no responde .-';
+    ex.Machine = '10.200.5.100';
+    if (error.status === 0) {
+     // return Observable.throw(new Error('Despachador de servicio no responde .-'));
+      return Observable.throw(ex);
+    }
+    
+    return Observable.throw(error); // <= B
+}
+  public handleErrorObservable(error: ServiceError) {
+    
+    console.error(error.Message || error);
+    return Observable.throw(error.Message);
   }
   public handleErrorPromise(error: Response | any) {
     console.error(error.message || error);

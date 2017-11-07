@@ -41,12 +41,12 @@ p {
   color:#333;
 }
 
-h1 {
+/* h1 {
   text-align:center; 
   color: #666;
   text-shadow: 1px 1px 0px #FFF;
   margin:50px 0px 0px 0px
-}
+} */
 
 input {
   border-radius: 0px 5px 5px 0px;

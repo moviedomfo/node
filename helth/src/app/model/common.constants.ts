@@ -39,7 +39,26 @@ export  const HealtConstants={
       };
 
 
+export  const EventType = 
+      {
+              //
+        // Summary:
+        //     Representa mensajes de información.
+        Information : 0,
+        //
+        // Summary:
+        //     Representa mensajes de advertencia.
+        Warning : 1,
+        //
+        // Summary:
+        //     Representa mensajes de error.
+        Error : 2,
      
+        //     Representa la ausencia de tipo de evento.
+        Success : 4,
+        
+      }
+      
 export  const TipoParametroEnum = 
       {
         Especialidad : 500,

@@ -54,7 +54,7 @@ export class PatientsService {
     var bussinesData = {
       Id: id
     };
-
+    
     let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("getPatientService", bussinesData);
     HealtConstants.httpOptions.search = searchParams;
 
@@ -64,13 +64,14 @@ export class PatientsService {
         let result: Result= JSON.parse(res.json());
 
         if (result.Error) {
+          alert(result.Error);
           this.commonService.handleErrorService(result.Error.Message);
         }
 
         let patient: PatientBE = result.BusinessData as PatientBE;
 
         return patient;
-      });
+      }).catch(this.commonService.handleError);
   }
 
 
