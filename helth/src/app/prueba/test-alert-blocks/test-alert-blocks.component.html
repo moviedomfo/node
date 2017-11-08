@@ -1,0 +1,19 @@
+<p>
+  Test Alert Blocks
+</p>
+
+<h2>Compoente app-alert-block 1 </h2>
+<br>
+<app-alert-block #alertBlock1></app-alert-block>
+
+
+<button type="button" class="btn btn-info" (click)="btnShowAlert_click(event)" >
+  <span aria-hidden="true">&times;</span> Show Alert Info
+</button>
+
+<button type="button" class="btn btn-success" (click)="btnShowAlertSuccess_click(event)" >
+  <span aria-hidden="true">&times;</span> Show Alert Success
+</button>
+<button type="button" class="btn btn-danger" (click)="btnHideAlert_click(event)" >
+  <span aria-hidden="true">&times;</span> Hide Alert 
+</button>

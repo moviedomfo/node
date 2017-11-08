@@ -13,6 +13,8 @@ import { AggridTestComponent } from '../test-grid-parent/aggrid-test/aggrid-test
 import { TestGridParentComponent } from '../test-grid-parent/test-grid-parent.component';
 import {TestObservablesChildComponent} from '../test-observables/test-observables-child/test-observables-child.component';
 import {TestObservablesComponent} from '../test-observables/test-observables.component';
+
+
 // import {TablaComponent} from '../../tabla/tabla.component';
 @NgModule({
   imports: [
@@ -28,6 +30,7 @@ import {TestObservablesComponent} from '../test-observables/test-observables.com
     TestGridParentComponent,
      TestObservablesChildComponent,
      TestObservablesComponent
+     //AlertBlockComponent,TestAlertBlocksComponent
   ]
 })
 export class TestModule { }

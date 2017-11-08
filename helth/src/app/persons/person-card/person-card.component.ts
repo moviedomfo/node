@@ -54,8 +54,9 @@ export class PersonCardComponent implements AfterContentInit {
   }
 
   ngAfterViewInit() {   
-    
-    this.alertBlock1.Show('Hola a todos',true,EventType.Information);
+    this.currentPerson= new PersonBE();
+
+    this.alertBlock1.Show('Error en el sistema ','Hola a todos','',true,EventType.Warning);
   }
 
   ngAfterContentInit() {

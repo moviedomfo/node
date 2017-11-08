@@ -30,7 +30,7 @@ import { FontAgComponent } from './commonComponents/font-ag/font-ag.component';
 import { PersonCardComponent } from './persons/person-card/person-card.component';
 import { LoginComponent } from './commonComponents/login/login.component';
 
-import {TestModule} from './prueba/test/test.module';
+
 
 
 import { AgmCoreModule } from '@agm/core';
@@ -39,12 +39,15 @@ import { GooglePlaceComponent } from './commonComponents/google-place/google-pla
 import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
 import { PatienMedicalInsuranceGridComponent } from './patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
 import { ErrorBoxContainerComponent } from './commonComponents/error-box-container/error-box-container.component';
-import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.component';
+// import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.component';
+import {TestModule} from './prueba/test/test.module';
+
 // import { TestObservablesComponent } from './prueba/test-observables/test-observables.component';
 // import { TestObservablesChildComponent } from './prueba/test-observables/test-observables-child/test-observables-child.component';
 //import { TestGridParentComponent } from './prueba/test-grid-parent/test-grid-parent.component';
 
-
+import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.component';
+import { TestAlertBlocksComponent } from './prueba/test-alert-blocks/test-alert-blocks.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,10 @@ import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.
     MedicalInsuranceGridComponent,
     PatienMedicalInsuranceGridComponent,
     ErrorBoxContainerComponent,
-    AlertBlockComponent,
+
+    AlertBlockComponent,TestAlertBlocksComponent
+    
+    
     // TestObservablesComponent,
     // TestObservablesChildComponent
     
