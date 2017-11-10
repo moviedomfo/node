@@ -10,8 +10,7 @@ export class ErrorBoxContainerComponent implements OnInit {
 
   @Input()
   public globalError: ServiceError;
-  @Input()
-  public Dismissing : boolean;
+
 
 
   constructor() { }

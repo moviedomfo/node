@@ -1,72 +1,85 @@
+
 <section>
   <h2>Controles conglyphicon </h2>
   <div class="input-group">
-    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+    <span class="input-group-addon">
+      <i class="glyphicon glyphicon-lock"></i>
+    </span>
     <input id="password" type="password" class="form-control" name="password" placeholder="Password">
   </div>
-  
+
 </section>
 
 <section>
-        
-          <header class="header">
-            
-            <div class="form-group row">
-              <label for="" class="col-lg-2">Nombre </label>
-              <div class="col-lg-10">
-                 <input class="form-control" name="qq" type="text" [(ngModel)]="currentPatient.Persona.Nombre" >
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="" class="col-lg-2">Apellido </label>
-              <div class="col-lg-10">
-                 <input class="form-control" name="qq3"   type="text" [(ngModel)]="currentPatient.Persona.Apellido" > 
-              </div>
-            </div>
-            
-        
-          </header>
-        
-        
-          
-        </section>
-        
-        <!-- <app-tabla tipoTabla="Esta tabla si anda desde persons" ></app-tabla> -->
-  
-        
-        <div class="alert alert-success" role="alert">
-          <div class="btn-group" dropdown keyboardNav="true">
-            <button id="pepe" dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-            Listado de paises <span class="caret"></span> {{selectedPais}} </button>
-            <ul *dropdownMenu class="dropdown-menu" role="<menubar></menubar>" aria-labelledby="pepe">
-              <li role="menuitem" *ngFor="let pais of paises">
-                <a class="dropdown-item" href="setCountry/{{pais}}"> {{pais}}</a></li>
-        
-            </ul>
-          </div>
-        </div>
-        
-        <label for="selectedPais"> Pais seleccionado</label>
-        <div>{{selectedPais}}</div>
-        <button class="btn btn-danger" (mouseout)="seMovio($event)" (click)="createPatient($event)">Crear paciente</button>
-        <button class="btn btn-default" (click)="reriveAllPatientList($event)">Buscar pacientes -->reriveAllPatientList</button>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Listado de pacientes</h3>
-               
-          </div>
-          <div class="panel-body">
-         
-            
-            <div *ngFor="let patient of patientList">
-              {{patient.Persona.Nombre}}
-              <!-- The next line refers to a missing member of user, should generate compile error -->
-              {{patient.Persona.apellido}}
-        
-              <label [attr.for]="patient.FechaAlta"></label>
-            </div>
-          </div>
-          
-          
-        </div>
-        
+
+  <header class="header">
+
+    <div class="form-group row">
+      <label for="" class="col-lg-2">Nombre </label>
+      <div class="col-lg-10">
+        <input class="form-control" name="qq" type="text" [(ngModel)]="currentPatient.Persona.Nombre">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="" class="col-lg-2">Apellido </label>
+      <div class="col-lg-10">
+        <input class="form-control" name="qq3" type="text" [(ngModel)]="currentPatient.Persona.Apellido">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="" class="col-lg-2">Fecha Alta </label>
+      <div class="col-lg-10">
+        <input class="form-control" name="qq3" type="date" [(ngModel)]="currentPatient.FechaAlta">
+      </div>
+    </div>
+    <p-calendar [(ngModel)]="currentPatient.FechaAlta"></p-calendar>
+  </header>
+
+
+
+</section>
+
+<div class="text-center alert">
+  {{currentPatient | json}}
+
+</div>
+<!-- <app-tabla tipoTabla="Esta tabla si anda desde persons" ></app-tabla> -->
+
+
+<div class="alert alert-success" role="alert">
+  <div class="btn-group" dropdown keyboardNav="true">
+    <button id="pepe" dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+      Listado de paises
+      <span class="caret"></span> {{selectedPais}} </button>
+    <ul *dropdownMenu class="dropdown-menu" role="<menubar></menubar>" aria-labelledby="pepe">
+      <li role="menuitem" *ngFor="let pais of paises">
+        <a class="dropdown-item" href="setCountry/{{pais}}"> {{pais}}</a>
+      </li>
+
+    </ul>
+  </div>
+</div>
+
+<label for="selectedPais"> Pais seleccionado</label>
+<div>{{selectedPais}}</div>
+<button class="btn btn-danger" (mouseout)="seMovio($event)" (click)="createPatient($event)">Crear paciente</button>
+<button class="btn btn-default" (click)="reriveAllPatientList($event)">Buscar pacientes -->reriveAllPatientList</button>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Listado de pacientes</h3>
+
+  </div>
+  <div class="panel-body">
+
+
+    <div *ngFor="let patient of patientList">
+      {{patient.Persona.Nombre}}
+      <!-- The next line refers to a missing member of user, should generate compile error -->
+      {{patient.Persona.apellido}}
+
+      <label [attr.for]="patient.FechaAlta"></label>
+    </div>
+  </div>
+
+
+</div>

@@ -35,6 +35,7 @@ export class TestControlesComponent implements OnInit {
       "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain",
       "Bangladesh", "Cote d'Ivoire", "Croatia", "Cuba"];
   
+      private fechaAlta : string;
   
     //constructor(private dialogService:DialogService) { }
     constructor(private patientService: PatientsService) {
@@ -51,7 +52,7 @@ export class TestControlesComponent implements OnInit {
       this.currentPatient.Persona.Nombre= "Marcelo";
       this.currentPatient.Persona.Apellido= "Oviedo";
       this.currentPatient.FechaAlta = new Date(Date.now());
- 
+      this.fechaAlta =this.currentPatient.FechaAlta.toISOString();
       //this.patientList$ = this.patientService.retrivePatientsSimple$();
       // this.patientList$.subscribe(
       //   res => {
@@ -72,20 +73,7 @@ export class TestControlesComponent implements OnInit {
       //this.patientList$.subscribe(res => this.onCreatePatient(res));
     }
   
-    createPatient(event) {
-      //var result = this.patientService.myData();
-      //var str: String = 'Pais seleccionado ' + this.selectedPais + ' ' + result;
-      //alert(str);
-      //var paicesFiltrados = this.paises.filter(p => p.startsWith('Ar'));
-  
-  
-      // paicesFiltrados.forEach(element => {
-      //   alert(element);
-      // });
-      //alert(str);
-      //this.patientService.createPatientsService$(this.currentPatient);
-    }
-  
+   
     reriveAllPatientList() {
       console.log("LLAMANDO A this.patientService.reriveAllPatientList$()");
       this.patientService.reriveAllPatientList$();
