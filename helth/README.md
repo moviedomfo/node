@@ -40,3 +40,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Google Place API Angular 2
 http://brianflove.com/2016/10/18/angular-2-google-maps-places-autocomplete/
+
+4- Librerias UI PrimeNG (ultima instalada ^4.1.0)
+    npm install primeng --save
