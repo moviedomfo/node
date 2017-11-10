@@ -1,0 +1,16 @@
+
+
+<!-- <ul class="items">
+<li *ngFor="let crisis of crises$ | async"
+  [class.selected]="persona.IdPersona === selectedId">
+    <a [routerLink]="['/persons', persona.IdPersona]">
+      <span class="badge">{{ persona.IdPersona }}</span>{{ persona.Nombre }}
+    </a>
+  </li>
+</ul> -->
+<app-person-card
+  [currentPerson] = "currentPerson" >
+</app-person-card>
+
+<app-google-place></app-google-place>
+

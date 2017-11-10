@@ -36,10 +36,17 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     npm install ag-grid-angular
 3- Reinstalar Angular2 Bootstrap Modal Service
     npm install ng2-bootstrap-modal
+4-npm install --save font-awesome
 
-
-Google Place API Angular 2
+**Google Place API Angular 2**
 http://brianflove.com/2016/10/18/angular-2-google-maps-places-autocomplete/
+
+    npm install @agm/core
+    Errores: error TS2304: Cannot find name 'google'
+        solucion: instalar  @types/googlemaps 
+        npm install @types/googlemaps --save --dev
+        luego onde se uce google.maps ....
+        poner  import { } from '@types/googlemaps';
 
 4- Librerias UI PrimeNG (ultima instalada ^4.1.0) 
     npm install primeng --save
