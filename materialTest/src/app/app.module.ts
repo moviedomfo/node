@@ -1,4 +1,3 @@
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -7,8 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TablaComponent } from './tabla/tabla.component';
 import { ParentComponent } from './parent/parent.component';
-
-
+// material design
+import {MaterialModule} from './Modules/material.module';
 
 
 
@@ -22,11 +21,8 @@ import { ParentComponent } from './parent/parent.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    FormsModule
-    
-    
-    
- 
+    FormsModule,MaterialModule
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

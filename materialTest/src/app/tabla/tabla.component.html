@@ -1,3 +1,27 @@
-<p>
-  tabla works! {{tipoTabla}}
-</p>
+<h1>
+ Algunos componetes de Material designer 
+</h1>
+
+<mat-form-field>
+  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<p> datepicker is composed of a text input and a calendar pop-up, connected via the 
+  matDatepicker property on the text input.</p>
+<input [matDatepicker]="myDatepicker">
+<mat-datepicker #myDatepicker></mat-datepicker>
+
+
+<br>
+<p>An optional datepicker toggle button is available. 
+  A toggle can be added to the example above:</p>
+
+<input [matDatepicker]="myDatepicker2">
+<mat-datepicker-toggle [for]="myDatepicker2"></mat-datepicker-toggle>
+<mat-datepicker #myDatepicker2></mat-datepicker>
+
+
+<h3>Setting the calendar starting view</h3>
+<p> setting the startView property of <strong class="text text-danger"> &lt;mat-datepicker&gt; </strong>  to year</p>
