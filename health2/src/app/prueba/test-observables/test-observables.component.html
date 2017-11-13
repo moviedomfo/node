@@ -1,0 +1,19 @@
+<p>
+  test-observables works!
+</p>
+
+<app-test-observables-child #child></app-test-observables-child>
+
+<h4>Aqui mostramos la patientList con  patientList | json</h4>
+<div class="alert alert-success">
+  <div class="text text-primary" >
+    {{patientList |  json}}
+  </div>
+</div>
+
+<h4>Aqui mostramos la Observable con patientList$| async | json</h4>
+<div class="alert alert-warning">
+  <div class="text text-info" >
+    {{patientList$ | async | json}}
+  </div>
+</div>

@@ -15,7 +15,18 @@ export class CommonService {
     
    }
 
-
+   parseDate(dateString: string): Date {
+     alert(dateString);
+    let f:Date;
+    if (dateString) {
+      f=new Date(dateString);
+      alert(f);
+        return f;//new Date(dateString);
+    } else {
+        return null;
+    }
+ 
+  }
   serarPlaces_google_place_api(input :string ){
     console.log('Ejecutando serarPlaces_google_place_api()');
     var api_url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=[input]&types=geocode&key=AIzaSyAEBn6XjDRlouhZP-nQHSU4equHUeR2wEc';

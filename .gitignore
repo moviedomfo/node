@@ -1,2 +1,4 @@
 
 helth/src/app/app.module.ts
+health2/src/app/prueba/prueba.component.spec.ts
+*.spect.ts

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import { TestModule } from './test.module';
 
 import { AppComponent } from './app.component';
 
@@ -72,9 +72,9 @@ import {ErrorBoxContainerComponent } from './commonComponents/error-box-containe
   ReactiveFormsModule,
   HttpModule,
   rutesModule,
-  //TestModule
+  TestModule
   ],
-  providers: [],
+  providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
