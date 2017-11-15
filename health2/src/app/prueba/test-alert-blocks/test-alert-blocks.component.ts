@@ -1,13 +1,13 @@
-import { Component, OnInit, AfterContentInit, ViewChild } from '@angular/core';
-import { AlertBlockComponent } from 'app/commonComponents/alert-block/alert-block.component';
-import { EventType } from 'app/model';
+import { Component, OnInit, AfterContentInit, ViewChild, AfterViewInit } from '@angular/core';
+import { AlertBlockComponent } from '../../commonComponents/alert-block/alert-block.component';
+import { EventType } from '../../model';
 
 @Component({
   selector: 'app-test-alert-blocks',
   templateUrl: './test-alert-blocks.component.html',
   
 })
-export class TestAlertBlocksComponent implements AfterContentInit {
+export class TestAlertBlocksComponent implements AfterViewInit {
   @ViewChild('alertBlock1') alertBlock1: AlertBlockComponent;
   constructor() { }
 

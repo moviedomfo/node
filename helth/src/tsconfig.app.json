@@ -14,7 +14,7 @@
     "**/.git": true,
         "**/.DS_Store": true,
         "**/*.js.map": true,
-        //"**/*.spec.ts":true
+        "**/*.spec.ts":true,
         "**/*.spec.ts": {"when": "$(basename).ts"},
         "**/*.js": {"when": "$(basename).ts"}
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViewChild, AfterViewInit} from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import {PersonBE } from 'app/model';
+import {PersonBE } from '../../model';
 
 import { TestObservablesChildComponent } from './test-observables-child/test-observables-child.component';
 @Component({

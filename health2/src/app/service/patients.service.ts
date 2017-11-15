@@ -109,7 +109,7 @@ export class PatientsService {
         //alert(JSON.stringify(patientlist));
 
         return patientlist;
-      });
+      }).catch(this.commonService.handleError);
   }
 
 
@@ -133,34 +133,32 @@ export class PatientsService {
       patient.PatientId =  result.BusinessData["PatientId"] as number;
 
       return patient;
-    });
+    }).catch(this.commonService.handleError);
 
   }
 
   //AnteriorFechaNacimiento Vacunas
-  updatePatientsService$(patient: PatientBE,mutuales: MutualPorPacienteBE[],AnteriorFechaNacimiento:Date): Observable<any>  {
-    
-  var bussinesData = {
-    Patient: patient,
-    Mutuales: mutuales,
-    AnteriorFechaNacimiento :Date
-  
-  };
-  HealtConstants.httpOptions.search = this.commonService.generete_get_searchParams("UpdatePatientService", bussinesData);;
-  return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
-  .map(function (res: Response) {
+  updatePatientsService$(patient: PatientBE, mutuales: MutualPorPacienteBE[], AnteriorFechaNacimiento: Date): Observable<any> {
 
-    let result: Result = JSON.parse(res.json());
+    var bussinesData = {
+      Patient: patient,
+      Mutuales: mutuales,
+      AnteriorFechaNacimiento: Date
 
-    if (result.Error) {
-      this.commonService.handleErrorService(result.Error.Message);
-    }
-    
+    };
+    HealtConstants.httpOptions.search = this.commonService.generete_get_searchParams("UpdatePatientService", bussinesData);;
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+      .map(function (res: Response) {
 
-    return "the patient was updated";
-  });
+        let result: Result = JSON.parse(res.json());
 
-}
+        if (result.Error) {
+          this.commonService.handleErrorService(result.Error.Message);
+        }
+        return "the patient was updated";
+      }).catch(this.commonService.handleError);
+
+  }
 
 
 
@@ -191,11 +189,13 @@ export class PatientsService {
         }
 
         let patient: PatientBE = result.BusinessData["Patient"] as PatientBE;
-        patient.Mutuales = result.BusinessData["Mutuales"] as MutualPorPacienteBE[];
+        
+        if(result.BusinessData["Mutuales"]!=null)
+          patient.Mutuales = result.BusinessData["Mutuales"] as MutualPorPacienteBE[];
 
 
         return patient;
-      });
+      }).catch(this.commonService.handleError);
    }
 }
 

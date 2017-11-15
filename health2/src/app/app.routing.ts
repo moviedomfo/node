@@ -3,6 +3,8 @@ import { LoginComponent } from './commonComponents/login/login.component';
 //import { HomeComponent } from './commonComponents/login/login.component';
 import { PatientComponent } from './patient/patient.component';
 import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
+import { PatientCreateComponent } from './patient/patient-create/patient-create.component';
+
 import { PersonsComponent } from './persons/persons.component';
 import { PruebaComponent } from './prueba/prueba.component';
 
@@ -19,8 +21,9 @@ const appRoutes: Routes = [
    
 // //    { path: 'persons/:id', component: PersonsComponent },
 // //    { path: 'patient', component: PatientComponent },
-// //    { path: 'patientEdit/:id', component: PatientMangerComponent },
-// //    { path: 'patientCreate', component: PatientMangerComponent },
+   { path: 'patientEdit/:id', component: PatientMangerComponent },
+   { path: 'patientCreate', component: PatientMangerComponent },
+   { path: 'patientCreate2', component: PatientCreateComponent },
 // //    { path: 'prueba', component: PruebaComponent },
     { path: 'testControles', component: TestControlesComponent },
 // //    { path: 'testAgGridParent', component: TestGridParentComponent },

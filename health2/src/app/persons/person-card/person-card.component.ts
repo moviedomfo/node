@@ -4,20 +4,22 @@ import { Observable } from 'rxjs/Observable';
 import { PatientsService, CommonService } from '../../service/index';
 import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, EventType,TipoParametroEnum, CommonParams, HealtConstants } from '../../model/index';
 import { FormGroup } from '@angular/forms';
-import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
+import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 // Base 64 IMage display issues with unsafe image
 import { DomSanitizer } from '@angular/platform-browser';
-import { ServiceError } from 'app/model/common.model';
-import { AlertBlockComponent } from 'app/commonComponents/alert-block/alert-block.component';
+
+import { AlertBlockComponent } from '../../commonComponents/alert-block/alert-block.component';
+import { ServiceError } from '../../model/common.model';
+
 @Component({
   selector: 'app-person-card',
   templateUrl: './person-card.component.html',
   styleUrls: ['./person-card.component.css']
 })
-export class PersonCardComponent implements AfterContentInit {
+export class PersonCardComponent implements AfterViewInit {
   @Input()
   currentPerson: PersonBE;
-
+  private nroDoc: number;
   private selectedPais: Param;
   private selectedEstadoCivil: number;
   private selectedTipoDoc: number;
@@ -34,15 +36,20 @@ export class PersonCardComponent implements AfterContentInit {
   @ViewChild('img2') img2: ElementRef;
   @ViewChild('img1') img1: ElementRef;
 
-  globalError:ServiceError;
+  
+  @Output() OnComponentError = new EventEmitter<ServiceError>();
+  
   constructor(
+    private sanitizer: DomSanitizer,
     private patientService: PatientsService,
     private commonService: CommonService,
     private rd: Renderer2) {
 
   }
-  ngOnChanges() {
 
+  //Se ejecuta antes q ngOnInit
+  ngOnChanges() {
+    
     if(this.currentPerson.Foto===null)
     {
       this.currentPerson.Sexo==0 ? this.onSexChanged(false):this.onSexChanged(true);
@@ -54,56 +61,29 @@ export class PersonCardComponent implements AfterContentInit {
   }
 
   ngAfterViewInit() {   
-    this.currentPerson= new PersonBE();
-
-    this.alertBlock1.Show('Error en el sistema ','Hola a todos','',true,EventType.Warning);
+   
   }
 
-  ngAfterContentInit() {
 
-    //var comboEstadocivil=  (<HTMLInputElement>document.getElementById('cmbEstadoCivil'));
-    //console.log("Esto es cmbEstadoCivil");
-    //console.log(this.cmbEstadoCivil.nativeElement);
-    // console.log(this.comboEstadocivil.nativeElement);
-
-    
-    //this.fullImagePath = HealtConstants.ImagesSrc_Man;
-    //this.nroDoc = Number(this.currentPerson.NroDocumento);
-
-  }
-
-  loadImg(){
-    
-    this.fullImagePath = ''+this.currentPerson.Foto;
-  }
+ 
   
   ngOnInit() {
-    this.preInitializePerson();
-
-
-
 
     this.estadoCivilList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.EstadoCivil, null);
     this.estadoCivilList$.subscribe(
       res => {
         this.estadoCivilList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
       },
-      err=>{
-         this.globalError =err;
-        //alert(JSON.stringify( e.Message));
-      }
+      err => {this.OnComponentError.emit(err);}
     );
     this.tipoDocumentoList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.TipoDocumento, null);
     this.tipoDocumentoList$.subscribe(
       res => {
-
-        this.tipoDocumentoList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
-
-      }
+       this.tipoDocumentoList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
+      },
+      err => {this.OnComponentError.emit(err); }
     );
-
-
-
+    this.preInitializePerson();
   }
 
 
@@ -136,7 +116,7 @@ export class PersonCardComponent implements AfterContentInit {
       //this.fullImagePath = ''+this.currentPerson.Foto;
       return;
     }
-
+    
     if (inChecked) {
       this.fullImagePath = HealtConstants.ImagesSrc_Man;
       this.currentPerson.Sexo = 0;
@@ -147,14 +127,35 @@ export class PersonCardComponent implements AfterContentInit {
       this.currentPerson.Sexo = 1;
     }
   }
-  nroDoc: number;
+  loadImg(){
+    
+    this.fullImagePath = ''+this.currentPerson.Foto;
+  }
+  loadImage(){
+    if (this.currentPerson.Sexo === 0) {
+      return(this.photoURL(HealtConstants.ImagesSrc_Man));
+      
+    }
+    else {
+
+      return this.photoURL(HealtConstants.ImagesSrc_Woman);
+      
+    }
+  }
+  photoURL(imgUrl) {
+    return this.sanitizer.bypassSecurityTrustUrl(imgUrl);
+  }
+
   private preInitializePerson() {
+   
     this.fullImagePath = HealtConstants.ImagesSrc_Woman;
     this.currentPerson = new PersonBE(-1, "");
     //this.currentPerson.TipoDocumento=613;
     this.currentPerson.Nombre = "";
     this.currentPerson.TipoDocumento = CommonParams.SeleccioneUnaOpcion.IdParametro.toString();
     this.currentPerson.IdEstadocivil = CommonParams.SeleccioneUnaOpcion.IdParametro;
+    this.currentPerson.FechaNacimiento=new Date();
+    this.currentPerson.NroDocumento="0";
     this.nroDoc = Number(this.currentPerson.NroDocumento);
   }
 

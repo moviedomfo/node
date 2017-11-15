@@ -176,7 +176,7 @@ export class CommonService {
     console.log('----------------------------------------');
     let ex :ServiceError = new ServiceError();
     ex.Message= 'Despachador de servicio no responde .-';
-    ex.Machine = '10.200.5.100';
+    ex.Machine = 'PC-Desarrollo-Santana';
     if (error.status === 0) {
      // return Observable.throw(new Error('Despachador de servicio no responde .-'));
       return Observable.throw(ex);

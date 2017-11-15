@@ -21,14 +21,15 @@ import { ModalDialogComponent } from './commonComponents/modal-dialog/modal-dial
 import { FontAgComponent } from './commonComponents/font-ag/font-ag.component';
 import {AuthGuard} from './commonComponents/routingGuard/AuthGuard';
 
-// google 
+// // google 
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceComponent } from './commonComponents/google-place/google-place.component';
-
-//Bussines components
+//import {HealthModule } from './health.module';
+// //Bussines components
 import { PersonsComponent } from './persons/persons.component' ;
 import { PatientComponent } from './patient/patient.component';
 import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
+import { PatientCreateComponent } from './patient/patient-create/patient-create.component';
 import { PersonCardComponent } from './persons/person-card/person-card.component';
 import { LoginComponent } from './commonComponents/login/login.component';
 import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
@@ -42,24 +43,26 @@ import {ErrorBoxContainerComponent } from './commonComponents/error-box-containe
 @NgModule({
   declarations: [
     AppComponent,
-    PatientComponent,
+    
     FontAgComponent,
     ModalDialogComponent, DateComponent, HeaderComponent, HeaderGroupComponent,PageNotFoundComponent,
+    PatientComponent,
     PersonsComponent,
     PatientGridComponent,
     PersonCardComponent,
     LoginComponent,
-    PatientMangerComponent,
-    GooglePlaceComponent,
+    PatientMangerComponent,PatientCreateComponent,
     MedicalInsuranceGridComponent,
     PatienMedicalInsuranceGridComponent,
+    GooglePlaceComponent,
     ErrorBoxContainerComponent,
     AlertBlockComponent
   ],
-  imports: [AgmCoreModule.forRoot({
+  imports: [
+    AgmCoreModule.forRoot({
     apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
-    libraries: ['places']
-  }),
+    libraries: ['places']  })
+    ,
     BrowserModule,
     AgGridModule.withComponents([
       DateComponent,
@@ -73,8 +76,10 @@ import {ErrorBoxContainerComponent } from './commonComponents/error-box-containe
   HttpModule,
   rutesModule,
   TestModule
+  
   ],
-  providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,AuthGuard],
+   providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,AuthGuard],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

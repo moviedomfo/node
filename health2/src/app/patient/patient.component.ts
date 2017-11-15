@@ -34,7 +34,7 @@ export class PatientComponent implements OnInit {
 
   //constructor(private dialogService:DialogService) { }
   constructor(private patientService: PatientsService) {
-    //let paises: Array<number> = [1, 2, 3];
+    
 
   }
 

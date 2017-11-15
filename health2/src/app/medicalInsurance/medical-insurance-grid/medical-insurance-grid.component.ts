@@ -11,6 +11,7 @@ import { HeaderComponent } from "../../commonComponents/ag-grid/header.component
 import { HeaderGroupComponent } from "../../commonComponents/ag-grid/header-group.component";
 import { GridOptions } from "ag-grid/main";
 import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
+import { ServiceError } from '../../model/common.model';
 
 @Component({
     selector: 'app-medical-insurance-grid',
@@ -18,9 +19,11 @@ import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
     styleUrls: ['./medical-insurance-grid.component.css']
 })
 export class MedicalInsuranceGridComponent implements OnInit {
+    
     private columnDefs: any[];
     private gridOptions: GridOptions;
     @Output() onMedicalInsuranceChanged = new EventEmitter<MutualPlanGridView>();
+    @Output() OnComponentError = new EventEmitter<ServiceError>();
     public currentMedicalInsurance:MutualPlanGridView;
 
     private mutualList: MutualBE[];
@@ -95,7 +98,8 @@ export class MedicalInsuranceGridComponent implements OnInit {
                         this.mutualPlanGridViewList.push(mMutualPlanGridView);
                     }
                 });
-            }
+            },
+            err=>{this.OnComponentError.emit(err); }
         );
 
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ServiceError } from 'app/model';
+import { ServiceError } from '../../model';
 
 @Component({
   selector: 'app-error-box-container',

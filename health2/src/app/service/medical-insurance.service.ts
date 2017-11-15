@@ -48,7 +48,7 @@ export class MedicalInsuranceService {
   
     
             return MutualList;
-          });
+          }).catch(this.commonService.handleError);
       }
     
       getObraSocialPorPatientService$(status:string,startDate: Date): Observable<MutualPorPacienteBE[]> {
@@ -71,7 +71,7 @@ export class MedicalInsuranceService {
                 let list: MutualPorPacienteBE[] = result.BusinessData as MutualPorPacienteBE[];
         
                 return list;
-              });
+              }).catch(this.commonService.handleError);
           }
 
           updateObraSocialService$(mutualBE:MutualBE): Observable<any> {
@@ -90,7 +90,7 @@ export class MedicalInsuranceService {
                     }
 
                     return "Ok";
-                  });
+                  }).catch(this.commonService.handleError);
               }
               createObraSocialService$(mutualBE:MutualBE): Observable<number> {
             
@@ -108,7 +108,7 @@ export class MedicalInsuranceService {
                     }
                     let id: number = result.BusinessData["IdMutual"] as number;
                     return id;
-                  });
+                  }).catch(this.commonService.handleError);
               }
             
           
