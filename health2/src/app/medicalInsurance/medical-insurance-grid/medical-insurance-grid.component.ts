@@ -75,6 +75,8 @@ export class MedicalInsuranceGridComponent implements OnInit {
                 
                 this.mutualList = res;
                 this.mutualPlanGridViewList=[];
+                if(this.mutualList!=null)
+                {
                 //Generamos mutualPlanGridViewList para bindearlo a la grilla
                 this.mutualList.forEach(element => {
                     var mMutualPlanGridView : MutualPlanGridView;
@@ -98,8 +100,12 @@ export class MedicalInsuranceGridComponent implements OnInit {
                         this.mutualPlanGridViewList.push(mMutualPlanGridView);
                     }
                 });
+            }
             },
-            err=>{this.OnComponentError.emit(err); }
+            err=>{
+                
+                this.OnComponentError.emit(err.error); 
+            }
         );
 
     }

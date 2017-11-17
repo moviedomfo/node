@@ -55,7 +55,8 @@ export class PatienMedicalInsuranceGridComponent implements OnInit {
         this.api = params.api;
         this.columnApi = params.columnApi;
     }
-    private showMedicalInsuranceByPatientList() {
+    public showMedicalInsuranceByPatientList() {
+        
         this.api.setRowData(this.medicalInsuranceByPatientList);
     }
 

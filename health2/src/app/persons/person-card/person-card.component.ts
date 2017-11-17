@@ -74,14 +74,19 @@ export class PersonCardComponent implements AfterViewInit {
       res => {
         this.estadoCivilList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
       },
-      err => {this.OnComponentError.emit(err);}
+      err => {
+        // console.info('result de llamada al servicio searchParametroByParams');
+        // console.info(err.error);
+        this.OnComponentError.emit(err.error);
+      }
     );
+
     this.tipoDocumentoList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.TipoDocumento, null);
     this.tipoDocumentoList$.subscribe(
       res => {
        this.tipoDocumentoList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
       },
-      err => {this.OnComponentError.emit(err); }
+      err => {this.OnComponentError.emit(err.error); }
     );
     this.preInitializePerson();
   }

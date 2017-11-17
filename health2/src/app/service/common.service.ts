@@ -16,11 +16,11 @@ export class CommonService {
    }
 
    parseDate(dateString: string): Date {
-     alert(dateString);
+     
     let f:Date;
     if (dateString) {
       f=new Date(dateString);
-      alert(f);
+      
         return f;//new Date(dateString);
     } else {
         return null;
@@ -62,7 +62,7 @@ export class CommonService {
         resToObject = JSON.parse(res.json());
 
         if (resToObject.Error) {
-          alert("Se encontraron errores " + resToObject.Error.Message);
+          throw  Observable.throw(resToObject.Error);
         }
 
         let params: Param[] = resToObject.BusinessData as Param[];
@@ -170,10 +170,10 @@ export class CommonService {
     }
   }
   public handleError(error: Response | any) {
-    console.log('----------------------------------------');
-    console.log(error.status);
-    console.log(error.ok);
-    console.log('----------------------------------------');
+    // console.log('----------------------------------------');
+    // console.log(error.status);
+    // console.log(error.ok);
+    // console.log('----------------------------------------');
     let ex :ServiceError = new ServiceError();
     ex.Message= 'Despachador de servicio no responde .-';
     ex.Machine = 'PC-Desarrollo-Santana';
@@ -190,7 +190,7 @@ export class CommonService {
     return Observable.throw(error.Message);
   }
   public handleErrorPromise(error: Response | any) {
-    console.error(error.message || error);
+  
     return Promise.reject(error.message || error);
   }
 

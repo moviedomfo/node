@@ -48,7 +48,9 @@
   </div>
   <div role="tabpanel" class="tab-pane fade" id="medicalInsuranceTab">
     <div class="col-lg-5">
-      <app-medical-insurance-grid (onMedicalInsuranceChanged)="onMedicalInsuranceChanged($event)">
+      <app-medical-insurance-grid 
+          (onMedicalInsuranceChanged)="onMedicalInsuranceChanged($event)"
+          (OnComponentError)="OnComponentError_MedidalInsurance($event)">
       </app-medical-insurance-grid>
     </div>
     <div class="col-lg-2">
@@ -57,7 +59,7 @@
         <div class="label label-info">Mutual {{currentMutual_toAdd | json}}</div>
     </div>
     <div class="col-lg-5">
-      <app-patien-medical-insurance-grid 
+      <app-patien-medical-insurance-grid #patienMedicalInsuranceGridComponent
       [medicalInsuranceByPatientList]="mutualPorPacienteAuxList" 
       (onMedicalInsuranceChanged)="onMedicalInsuranceByPatientChanged($event)">
       </app-patien-medical-insurance-grid>
@@ -77,8 +79,13 @@
                   
                 <div>Current Person </div>
                 <div>{{currentPatient | json}}</div>
-              </div>
-          
+
+                              </div>
+                              <div class="alert-warning">
+                                <div>{{globalError | json}}</div>
+                              </div>
+                                
+                              
           </section>
             
       

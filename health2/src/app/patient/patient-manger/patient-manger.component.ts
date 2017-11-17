@@ -9,6 +9,7 @@ import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/cor
 import { ActivatedRoute } from "@angular/router";
 import { ServiceError } from '../../model/common.model';
 import { element } from 'protractor';
+import { PatienMedicalInsuranceGridComponent } from '../patien-medical-insurance-grid/patien-medical-insurance-grid.component';
 
 @Component({
   selector: 'app-patient-manger',
@@ -26,6 +27,8 @@ export class PatientMangerComponent implements OnInit {
   mutualPorPacienteAuxList: MutualPorPacienteBE[];
   //private addItem_mutualPorPacienteAuxList_Source = new Subject<MutualPorPacienteBE[]>();
   private medicalInsuranceByPatientList$: Observable<MutualPorPacienteBE[]>;
+
+  @ViewChild('patienMedicalInsuranceGridComponent') patienMedicalInsuranceGridComponent: PatienMedicalInsuranceGridComponent;
 
   constructor(private route: ActivatedRoute,
     private patientService: PatientsService,
@@ -75,7 +78,7 @@ export class PatientMangerComponent implements OnInit {
           }
         },
         err => {
-          alert(err);
+
           this.globalError = err;
         }
       );
@@ -91,8 +94,13 @@ export class PatientMangerComponent implements OnInit {
     }
   }
 
-  OnComponentError_personCard(err: ServiceError) {
-    this.globalError = err;
+  OnComponentError_personCard($event) {
+      this.globalError = $event;
+    
+  }
+  OnComponentError_MedidalInsurance($event){
+    this.globalError = $event;
+  
   }
 
 
@@ -101,6 +109,7 @@ export class PatientMangerComponent implements OnInit {
     this.currentMutual_toAdd = $event;
     //document.querySelector('#currentMutual_toAdd_div').innerHTML = this.currentMutual_toAdd.Nombre + ' ' + this.currentMutual_toAdd.ComercialCode;
   }
+ 
   onMedicalInsuranceByPatientChanged($event) {
     this.currentMedicalInsuranceByPatient = $event;
     alert(JSON.stringify(this.currentMedicalInsuranceByPatient));
@@ -135,12 +144,21 @@ export class PatientMangerComponent implements OnInit {
 
     this.medicalInsuranceByPatientList(this.mutualPorPacienteAuxList);
 
-    //this.currentPatient.Mutuales.push(item);
+    this.patienMedicalInsuranceGridComponent.showMedicalInsuranceByPatientList();
   }
 
 
   private createPatient() {
-    this.patientService.createPatientsService$(this.currentPatient, null);
+    var res$ = this.patientService.createPatientsService$(this.currentPatient, null);
+    res$.subscribe(
+      res => {
+        alert('paciente creado ok');
+      },
+      err => {
+
+        this.globalError = err;
+      }
+    );
 
   }
 

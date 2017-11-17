@@ -41,7 +41,7 @@ export class MedicalInsuranceService {
             let result: Result = JSON.parse(res.json());
             
             if (result.Error) {
-              this.commonService.handleErrorService(result.Error.Message);
+              Observable.throw(result.Error)
             }
     
             let MutualList: MutualBE[] = result.BusinessData["ObraSocialList"] as MutualBE[];
@@ -49,6 +49,7 @@ export class MedicalInsuranceService {
     
             return MutualList;
           }).catch(this.commonService.handleError);
+          
       }
     
       getObraSocialPorPatientService$(status:string,startDate: Date): Observable<MutualPorPacienteBE[]> {
@@ -65,7 +66,7 @@ export class MedicalInsuranceService {
                 let result: Result = JSON.parse(res.json());
         
                 if (result.Error) {
-                  this.commonService.handleErrorService(result.Error.Message);
+                  this.commonService.handleErrorObservable(result.Error);
                 }
         
                 let list: MutualPorPacienteBE[] = result.BusinessData as MutualPorPacienteBE[];
@@ -86,7 +87,7 @@ export class MedicalInsuranceService {
                     let result: Result = JSON.parse(res.json());
             
                     if (result.Error) {
-                      this.commonService.handleErrorService(result.Error.Message);
+                      this.commonService.handleErrorObservable(result.Error);
                     }
 
                     return "Ok";
@@ -104,7 +105,7 @@ export class MedicalInsuranceService {
                     let result: Result = JSON.parse(res.json());
             
                     if (result.Error) {
-                      this.commonService.handleErrorService(result.Error.Message);
+                      this.commonService.handleErrorObservable(result.Error);
                     }
                     let id: number = result.BusinessData["IdMutual"] as number;
                     return id;

@@ -64,8 +64,7 @@ export class PatientsService {
         let result: Result= JSON.parse(res.json());
 
         if (result.Error) {
-          alert(result.Error);
-          this.commonService.handleErrorService(result.Error.Message);
+          throw  Observable.throw(result.Error);
         }
 
         let patient: PatientBE = result.BusinessData as PatientBE;
@@ -100,7 +99,7 @@ export class PatientsService {
         let result: Result = JSON.parse(res.json());
 
         if (result.Error) {
-          this.commonService.handleErrorService(result.Error.Message);
+          throw  Observable.throw(result.Error);
         }
 
         let patientlist: PatientBE[] = result.BusinessData["PatientList"] as PatientBE[];
@@ -127,7 +126,7 @@ export class PatientsService {
       let result: Result = JSON.parse(res.json());
 
       if (result.Error) {
-        this.commonService.handleErrorService(result.Error.Message);
+        throw  Observable.throw(result.Error);
       }
       patient.IdPersona =  result.BusinessData["IdPersona"] as number;
       patient.PatientId =  result.BusinessData["PatientId"] as number;
@@ -153,7 +152,8 @@ export class PatientsService {
         let result: Result = JSON.parse(res.json());
 
         if (result.Error) {
-          this.commonService.handleErrorService(result.Error.Message);
+          throw  Observable.throw(result.Error);
+          
         }
         return "the patient was updated";
       }).catch(this.commonService.handleError);
@@ -185,7 +185,7 @@ export class PatientsService {
         let result: Result = JSON.parse(res.json());
       
         if (result.Error) {
-          this.commonService.handleErrorService(result.Error.Message);
+          throw  Observable.throw(result.Error);
         }
 
         let patient: PatientBE = result.BusinessData["Patient"] as PatientBE;
