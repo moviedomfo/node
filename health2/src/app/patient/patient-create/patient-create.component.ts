@@ -46,6 +46,7 @@ export class PatientCreateComponent implements OnInit {
   } 
 
   OnComponentError_personCard(err: ServiceError) {
+ 
     this.globalError = err;
   }
   

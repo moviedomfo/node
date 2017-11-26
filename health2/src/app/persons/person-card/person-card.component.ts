@@ -77,7 +77,8 @@ export class PersonCardComponent implements AfterViewInit {
       err => {
         // console.info('result de llamada al servicio searchParametroByParams');
         // console.info(err.error);
-        this.OnComponentError.emit(err.error);
+        //alert('handleError' +  JSON.stringify(err));
+        this.OnComponentError.emit(err);
       }
     );
 
@@ -86,7 +87,7 @@ export class PersonCardComponent implements AfterViewInit {
       res => {
        this.tipoDocumentoList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
       },
-      err => {this.OnComponentError.emit(err.error); }
+      err => {this.OnComponentError.emit(err); }
     );
     this.preInitializePerson();
   }
@@ -154,7 +155,7 @@ export class PersonCardComponent implements AfterViewInit {
   private preInitializePerson() {
    
     this.fullImagePath = HealtConstants.ImagesSrc_Woman;
-    this.currentPerson = new PersonBE(-1, "");
+    //this.currentPerson = new PersonBE(-1, "");
     //this.currentPerson.TipoDocumento=613;
     this.currentPerson.Nombre = "";
     this.currentPerson.TipoDocumento = CommonParams.SeleccioneUnaOpcion.IdParametro.toString();

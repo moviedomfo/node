@@ -104,7 +104,7 @@ export class MedicalInsuranceGridComponent implements OnInit {
             },
             err=>{
                 
-                this.OnComponentError.emit(err.error); 
+                this.OnComponentError.emit(err); 
             }
         );
 

@@ -6,7 +6,9 @@ import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angul
 import { Subject } from 'rxjs/Subject';
 //permite observar
 import { Observable } from 'rxjs/Observable';
+import { element } from 'protractor';
 
+//var colors = require('colors/safe');
 @Injectable()
 export class CommonService {
   public paramList: Param[] = [];
@@ -62,13 +64,14 @@ export class CommonService {
         resToObject = JSON.parse(res.json());
 
         if (resToObject.Error) {
+          
           throw  Observable.throw(resToObject.Error);
         }
 
         let params: Param[] = resToObject.BusinessData as Param[];
 
         return params;
-      }).catch(this.handleError);;
+      }).catch(this.handleError);
   }
    /**
    * @params : parametros 
@@ -170,19 +173,22 @@ export class CommonService {
     }
   }
   public handleError(error: Response | any) {
-    // console.log('----------------------------------------');
-    // console.log(error.status);
-    // console.log(error.ok);
-    // console.log('----------------------------------------');
+    
+    console.log('----------------------------------------');
+     console.log(error.status);
+     console.log(error.ok);
+     console.log('----------------------------------------');
+     
     let ex :ServiceError = new ServiceError();
     ex.Message= 'Despachador de servicio no responde .-';
     ex.Machine = 'PC-Desarrollo-Santana';
     if (error.status === 0) {
+    
      // return Observable.throw(new Error('Despachador de servicio no responde .-'));
       return Observable.throw(ex);
     }
-    
-    return Observable.throw(error); // <= B
+    ex.Message= ex.Message + "\n" + error;
+    return Observable.throw(ex); // <= B
 }
   public handleErrorObservable(error: ServiceError) {
     

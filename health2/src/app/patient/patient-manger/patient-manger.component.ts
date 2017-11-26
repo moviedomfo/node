@@ -78,7 +78,7 @@ export class PatientMangerComponent implements OnInit {
           }
         },
         err => {
-
+          
           this.globalError = err;
         }
       );
@@ -93,11 +93,17 @@ export class PatientMangerComponent implements OnInit {
       this.currentPatient.Persona.NroDocumento = "0";
     }
   }
-
-  OnComponentError_personCard($event) {
-      this.globalError = $event;
+  OnComponentError_personCard(err: ServiceError) {
     
-  }
+      
+       this.globalError = err;
+     }
+  // OnComponentError_personCard($event) {
+  //   console.log($event.Message + ' --> OnComponentError_personCard');
+  //     this.globalError = $event;
+     
+    
+  // }
   OnComponentError_MedidalInsurance($event){
     this.globalError = $event;
   
@@ -107,6 +113,7 @@ export class PatientMangerComponent implements OnInit {
   //viene de la lista de todas las mutuales
   onMedicalInsuranceChanged($event) {
     this.currentMutual_toAdd = $event;
+    this.currentPatient.Mutuales= $event;
     //document.querySelector('#currentMutual_toAdd_div').innerHTML = this.currentMutual_toAdd.Nombre + ' ' + this.currentMutual_toAdd.ComercialCode;
   }
  
@@ -155,8 +162,7 @@ export class PatientMangerComponent implements OnInit {
         alert('paciente creado ok');
       },
       err => {
-
-        this.globalError = err;
+        this.globalError = err.error;
       }
     );
 
@@ -166,7 +172,10 @@ export class PatientMangerComponent implements OnInit {
     var res$ = this.patientService.updatePatientsService$(this.currentPatient, this.mutualPorPacienteAuxList, null);
     res$.subscribe(res => {
       alert('Actualizado con exito');
-    })
+    },
+    err => {
+      this.globalError = err.error;
+    });
   }
 
 }

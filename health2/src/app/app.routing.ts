@@ -23,7 +23,7 @@ const appRoutes: Routes = [
 // //    { path: 'patient', component: PatientComponent },
    { path: 'patientEdit/:id', component: PatientMangerComponent },
    { path: 'patientCreate', component: PatientMangerComponent },
-   { path: 'patientCreate2', component: PatientCreateComponent },
+   { path: 'patient', component: PatientComponent },
 // //    { path: 'prueba', component: PruebaComponent },
     { path: 'testControles', component: TestControlesComponent },
 // //    { path: 'testAgGridParent', component: TestGridParentComponent },

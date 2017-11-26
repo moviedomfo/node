@@ -88,7 +88,8 @@ export class PatientsService {
     };
 
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetrivePatientsService", bussinesData);
+    let searchParams: URLSearchParams =
+    this.commonService.generete_get_searchParams("RetrivePatientsService",  bussinesData);
     
     HealtConstants.httpOptions.search = searchParams;
 
@@ -108,7 +109,10 @@ export class PatientsService {
         //alert(JSON.stringify(patientlist));
 
         return patientlist;
-      }).catch(this.commonService.handleError);
+      }).catch(
+        
+        this.commonService.handleError
+      );
   }
 
 

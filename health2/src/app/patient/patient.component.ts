@@ -64,19 +64,7 @@ export class PatientComponent implements OnInit {
     //this.patientList$.subscribe(res => this.onCreatePatient(res));
   }
 
-  createPatient(event) {
-    //var result = this.patientService.myData();
-    //var str: String = 'Pais seleccionado ' + this.selectedPais + ' ' + result;
-    //alert(str);
-    //var paicesFiltrados = this.paises.filter(p => p.startsWith('Ar'));
 
-
-    // paicesFiltrados.forEach(element => {
-    //   alert(element);
-    // });
-    //alert(str);
-    //this.patientService.createPatientsService$(this.currentPatient,);
-  }
 
   reriveAllPatientList() {
     console.log("LLAMANDO A this.patientService.reriveAllPatientList$()");
