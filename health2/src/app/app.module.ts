@@ -41,6 +41,7 @@ import {CommonService, PatientsService, PersonsService, MedicalInsuranceService}
 import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.component';
 import {ErrorBoxContainerComponent } from './commonComponents/error-box-container/error-box-container.component';
 import { ProfesionalManageComponent } from './profesional/profesional-manage/profesional-manage.component';
+import { ProfesionalCardComponent } from './profesional/profesional-card/profesional-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +59,8 @@ import { ProfesionalManageComponent } from './profesional/profesional-manage/pro
     GooglePlaceComponent,
     ErrorBoxContainerComponent,
     AlertBlockComponent,
-    ProfesionalManageComponent
+    ProfesionalManageComponent,
+    ProfesionalCardComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

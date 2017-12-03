@@ -20,6 +20,66 @@
     <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Inicio de sesión</a>
   </li>
   <li class="nav-item">
-      <a class="nav-link" href="#patientJson" role="tab" data-toggle="tab">json </a>
+      <a class="nav-link" href="#profJson" role="tab" data-toggle="tab">json </a>
     </li>
 </ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="profile">
+      <!-- <div class="form-group">
+          <p>Fecha alta
+            <span>*</span>
+          </p>
+          <span class="icon-case">
+            <i class="fa fa-info"></i>
+          </span>
+          <input type="date" [ngModel] ="currentPatient.FechaAlta | date:'yyyy-MM-dd'" 
+          (ngModelChange)="currentPatient.FechaAlta = $event" [value]="datee | date:'yyyy-MM-dd'">
+          {{currentPatient.FechaAlta| date:'yyyy-MM-dd'}}
+          <div class="validation"></div>
+        </div> -->
+    <app-person-card
+    [currentPerson] = "currentProfesional.Persona" 
+    (OnComponentError)="OnComponentError_personCard($event)">
+  </app-person-card>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="medicalInsuranceTab">
+    <div class="col-lg-5">
+    
+    </div>
+    <div class="col-lg-2">
+        <button class="btn btn-default"  type="button" (click)='addMedicalInsurance()'
+         >Agregar --></button>
+        <div class="label label-info">Mutual {{currentMutual_toAdd | json}}</div>
+    </div>
+    <div class="col-lg-5">
+      
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="medioContacto">
+    <section>
+        <h1 >Medio de contacto </h1>
+    </section>
+  </div>
+  <div role="tabpanel" class="tab-pane fade in active" id="profJson">
+      
+          
+      
+            
+              <div class="alert-info">
+                  
+                <div>Current Person </div>
+                <div>{{currentProfesional | json}}</div>
+
+                              </div>
+                              <div class="alert-warning">
+                                <div>{{globalError | json}}</div>
+                              </div>
+                                
+                              
+      
+      
+      
+    </div>
+</div>
