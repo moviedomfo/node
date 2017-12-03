@@ -1,0 +1,25 @@
+<h3>
+ Gestión de profesionales
+ </h3>
+ <button class="btn btn-success" #btnActualizar type="submit" (click)="updatePatient()" 
+ [ngClass]="{hidden: !isEdit}">Actualizar</button>
+ <button class="btn btn-success" [ngClass]="{hidden: isEdit}" 
+ #btnCreate (click)="createPatient()">Crear paciente</button>
+ 
+ <app-error-box-container [globalError]="globalError"  
+ ></app-error-box-container>
+
+ <ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Datos principales</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#medicalInsuranceTab" role="tab" data-toggle="tab">Programación de turnos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Inicio de sesión</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="#patientJson" role="tab" data-toggle="tab">json </a>
+    </li>
+</ul>

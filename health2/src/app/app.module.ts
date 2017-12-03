@@ -40,6 +40,7 @@ import { PatientGridComponent } from './patient/patient-grid/patient-grid.compon
 import {CommonService, PatientsService, PersonsService, MedicalInsuranceService} from './service/index';
 import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.component';
 import {ErrorBoxContainerComponent } from './commonComponents/error-box-container/error-box-container.component';
+import { ProfesionalManageComponent } from './profesional/profesional-manage/profesional-manage.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,8 @@ import {ErrorBoxContainerComponent } from './commonComponents/error-box-containe
     PatienMedicalInsuranceGridComponent,
     GooglePlaceComponent,
     ErrorBoxContainerComponent,
-    AlertBlockComponent
+    AlertBlockComponent,
+    ProfesionalManageComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
