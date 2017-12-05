@@ -1,4 +1,7 @@
+# dependencies
 
+/node_modules
 helth/src/app/app.module.ts
 health2/src/app/prueba/prueba.component.spec.ts
 *.spect.ts
+ionic/sample1/node_modules/zone.js/lib/zone-spec/wtf.ts

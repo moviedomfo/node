@@ -95,4 +95,13 @@ export class ProfesionalManageComponent implements AfterViewInit {
   OnComponentError_profesionalCard(err: ServiceError) {
        this.globalError = err;
      }
+
+
+     createProfesionalt   (){
+       
+     }
+
+     updateProfesionalt   (){
+
+     }
 }

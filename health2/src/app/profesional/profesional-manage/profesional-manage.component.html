@@ -1,10 +1,10 @@
 <h3>
  Gestión de profesionales
  </h3>
- <button class="btn btn-success" #btnActualizar type="submit" (click)="updatePatient()" 
+ <button class="btn btn-success" #btnActualizar type="submit" (click)="updateProfesionalt()" 
  [ngClass]="{hidden: !isEdit}">Actualizar</button>
  <button class="btn btn-success" [ngClass]="{hidden: isEdit}" 
- #btnCreate (click)="createPatient()">Crear paciente</button>
+ #btnCreate (click)="createProfesionalt()">Crear profesional</button>
  
  <app-error-box-container [globalError]="globalError"  
  ></app-error-box-container>
@@ -70,7 +70,7 @@
               <div class="alert-info">
                   
                 <div>Current Profesional </div>
-                <div>{{currentProfesional | json}}</div>
+                <!-- <div>{{currentProfesional | json}}</div> -->
 
                               </div>
                               <div class="alert-warning">
