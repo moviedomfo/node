@@ -51,3 +51,30 @@ http://brianflove.com/2016/10/18/angular-2-google-maps-places-autocomplete/
 4- Librerias UI PrimeNG (ultima instalada ^4.1.0) 
     npm install primeng --save
     **NOTA 2017/10/10** Esta lib no se instala correctamante : los modulos como cvalendar y otros no son reconocidos
+
+
+
+**Global installs**
+
+5- A JavaScript-Friendly .NET Based TypeScript Library
+    git --> https://github.com/electricessence/TypeScript.NET/tree/master/tests/mocha/System
+    install:
+            `Universal Module Definition (UMD)`
+
+                 npm install typescript-dotnet-umd
+
+            It's highly recommended to use the UMD (minified) version for most cases since it works for AMD and CommonJS.
+            Note: WebPack has trouble with UMD. Use CommonJS or AMD if you intend to use WebPack.
+
+            `All Published NPM Module Types`
+
+                    typescript-dotnet-umd
+                    typescript-dotnet-es6
+                    typescript-dotnet-commonjs
+                    typescript-dotnet-amd
+                    typescript-dotnet-system
+            Install on only the module type you need in order to avoid type collisions.
+            Currently it is possible/supported to use TypeScript .NET in a number of different ways:
+
+            `Import Examples:`
+                import Enumerable from "typescript-dotnet-es6/System.Linq/Linq"

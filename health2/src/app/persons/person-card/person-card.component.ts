@@ -49,7 +49,8 @@ export class PersonCardComponent implements AfterViewInit {
 
   //Se ejecuta antes q ngOnInit
   ngOnChanges() {
-    
+    //alert('ngOnChanges person card');
+    if(this.currentPerson){
     if(this.currentPerson.Foto===null)
     {
       this.currentPerson.Sexo==0 ? this.onSexChanged(false):this.onSexChanged(true);
@@ -58,6 +59,7 @@ export class PersonCardComponent implements AfterViewInit {
     {
      this.fullImagePath = ''+this.currentPerson.Foto;
     }
+  }
   }
 
   ngAfterViewInit() {   

@@ -3,9 +3,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { ProfesionalService, CommonService } from '../../service/index';
-import { ProfesionalBE, PersonBE,  GetProfesionalRes, User,IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants, ResourceSchedulingBE } from '../../model/index';
+import { ProfesionalBE, PersonBE,  GetProfesionalRes, ResourceSchedulingBE,User,IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants ,contextInfo} from '../../model/index';
 import { FormGroup } from '@angular/forms';
-import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
+import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { ServiceError } from '../../model/common.model';
 
@@ -15,23 +15,36 @@ import { ServiceError } from '../../model/common.model';
   templateUrl: './profesional-manage.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class ProfesionalManageComponent implements OnInit {
+export class ProfesionalManageComponent implements AfterViewInit {
   globalError: ServiceError;
-  currentProfesional: ProfesionalBE;
+  public currentProfesional: ProfesionalBE;
   currentResourceSchedulingList:ResourceSchedulingBE[];
   currentUser:User;
   getProfesionalRes$: Observable<GetProfesionalRes>;
-
   isEdit:boolean;
+
+
   constructor(private route: ActivatedRoute,
     private profesionalService: ProfesionalService,
-    private commonService: CommonService,) { }
+    private commonService: CommonService) { 
 
+      
+    }
+
+
+    ngAfterViewInit(): void {
+   
+     }
+    
   ngOnInit() {
-    this.preInitializeProf();
+    
+    this.preInitialize();
+    
   }
 
-  private preInitializeProf() {
+  private preInitialize() {
+
+    //alert('ngOnInit preInitialize ProfesionalManageComponent');
     this.currentProfesional = new ProfesionalBE();
     this.currentProfesional.Persona = new PersonBE();
     
@@ -46,8 +59,8 @@ export class ProfesionalManageComponent implements OnInit {
 
     if (this.isEdit) {
       //Busco el paciente
-      this.getProfesionalRes$ = this.profesionalService.getProfesionalService$(id.id,true);
-    var GetProfesionalRes : GetProfesionalRes;
+      this.getProfesionalRes$ = this.profesionalService.getProfesionalService$(true,true,id.id,contextInfo.UserId,HealtConstants.DefaultHealthInstitutionId,true);
+      var GetProfesionalRes : GetProfesionalRes;
       this.getProfesionalRes$.subscribe(
         res => {
           this.currentProfesional = res.ProfesionalBE;
@@ -70,16 +83,16 @@ export class ProfesionalManageComponent implements OnInit {
     //if is create 
     if (this.isEdit == false) {
 
-      //this.currentPerson.TipoDocumento=613;
+      this.currentProfesional.IdEspecialidad = CommonParams.SeleccioneUnaOpcion.IdParametro;
+      this.currentProfesional.IdProfesion = CommonParams.SeleccioneUnaOpcion.IdParametro;
       this.currentProfesional.FechaAlta = new Date();
       this.currentProfesional.Persona.FechaNacimiento = new Date();
       this.currentProfesional.Persona.NroDocumento = "0";
+      this.currentUser= new  User();
     }
   }
-
-  OnComponentError_personCard(err: ServiceError) {
-    
-      
+  
+  OnComponentError_profesionalCard(err: ServiceError) {
        this.globalError = err;
      }
 }

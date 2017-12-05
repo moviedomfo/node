@@ -125,16 +125,32 @@ export class CommonService {
     return param;
   }
 
-
+    // retornra el objeto Request de un URLSearchParams: Este contiene las siguientes clases
+    //  SecurityProviderName?: string;
+    // Encrypt?: boolean;
+    // Error?:object;
+    // ServiceName?: string;
+    // BusinessData?:object;
+    // CacheSettings?:object;
+    // ContextInformation:ContextInformation;
+  retrive_Request(searchParams:URLSearchParams) {
+     
+     let REQ :Request =  JSON.parse(searchParams.get("jsonRequest")) as Request;
+      //alert(JSON.stringify(context));
+     return REQ;
+  }
   generete_get_searchParams(serviceName, bussinesData): URLSearchParams {
     let searchParams: URLSearchParams = new URLSearchParams();
     var req = this.createFwk_SOA_REQ(bussinesData);
     req.ServiceName = serviceName;
+
     searchParams.set("serviceProviderName", "health");//defaul 
     searchParams.set("serviceName", serviceName);
     searchParams.set("jsonRequest", JSON.stringify(req));
 
-  
+    
+
+   
     // console.log("-------------"+serviceName+"------------------");
     // console.log(JSON.stringify(JSON.stringify(req)));
     // console.log("-------------"+serviceName+"------------------");
@@ -150,10 +166,10 @@ export class CommonService {
     contextInfo.HostName = 'localhost';
     contextInfo.HostIp = '10.10.200.168';
     contextInfo.HostTime = new Date(),
-      contextInfo.ServerName = 'WebAPIDispatcherClienteWeb';
+    contextInfo.ServerName = 'WebAPIDispatcherClienteWeb';
     contextInfo.ServerTime = new Date();
     contextInfo.UserName = 'moviedo',
-      contextInfo.UserId = '';
+    contextInfo.UserId = '';
     contextInfo.AppId = 'Healt';
     contextInfo.ProviderName = 'health';
     req.ContextInformation = contextInfo;

@@ -22,7 +22,8 @@ export  const HealtConstants={
      HealthExecuteAPI_URL:"http://localhost:63251/api/patients/execute",
      ImagesSrc_Woman:'assets/images/User_Famele.bmp',
      ImagesSrc_Man:'assets/images/User_Male.bmp',
-     httpOptions:options
+     httpOptions:options,
+     DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A'
 }
   export  const contextInfo ={
         Culture: "ES-AR",
@@ -32,13 +33,13 @@ export  const HealtConstants={
         HostTime : new Date(),
         ServerName : 'WebAPIDispatcherClienteWeb',
         ServerTime : new Date(),
-        UserName : 'moviedo',
-        UserId : '',
+        UserName : 'mrenaudo',
+        UserId : '466541AB-0DB6-47CB-A19E-46152EDEE4A3',
         AppId : 'Healt',
         ProviderName: 'health'
       };
 
-
+   
 export  const EventType = 
       {
               //
@@ -62,7 +63,7 @@ export  const EventType =
 export  const TipoParametroEnum = 
       {
         Especialidad : 500,
-        Profecion : 100,
+        Profesion : 100,
         EstadoCivil : 600,
         TipoDocumento : 601,
         TipoRecepcion : 200,

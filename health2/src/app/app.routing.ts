@@ -14,6 +14,9 @@ import { PageNotFoundComponent }from './commonComponents/page-not-found/page-not
  import { TestGridParentComponent } from './prueba/test-grid-parent/test-grid-parent.component';
  import {TestObservablesComponent} from  './prueba/test-observables/test-observables.component';
  import {TestAlertBlocksComponent} from  './prueba/test-alert-blocks/test-alert-blocks.component';
+
+ import { ProfesionalManageComponent } from './profesional/profesional-manage/profesional-manage.component';
+
 const appRoutes: Routes = [
    { path: 'login', component: LoginComponent },
    //  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -26,10 +29,13 @@ const appRoutes: Routes = [
    { path: 'patient', component: PatientComponent },
 // //    { path: 'prueba', component: PruebaComponent },
     { path: 'testControles', component: TestControlesComponent },
+    { path: 'profesionalCreate', component: ProfesionalManageComponent },
+    { path: 'profesionalEdit/:id', component: ProfesionalManageComponent },
 // //    { path: 'testAgGridParent', component: TestGridParentComponent },
 // //    { path: 'testObservables', component: TestObservablesComponent },
 // //    { path: 'testAlerts', component: TestAlertBlocksComponent },
    { path: '**', component: PageNotFoundComponent }
+
 ];
 
 //TODO:Ver por que en otros desarrollos se usa esto 

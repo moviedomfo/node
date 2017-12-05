@@ -39,10 +39,10 @@
           {{currentPatient.FechaAlta| date:'yyyy-MM-dd'}}
           <div class="validation"></div>
         </div> -->
-    <app-person-card
-    [currentPerson] = "currentProfesional.Persona" 
-    (OnComponentError)="OnComponentError_personCard($event)">
-  </app-person-card>
+    <app-profesional-card
+    [currentProfesional] = "currentProfesional" 
+    (OnComponentError)="OnComponentError_profesionalCard($event)">
+  </app-profesional-card>
   </div>
   <div role="tabpanel" class="tab-pane fade" id="medicalInsuranceTab">
     <div class="col-lg-5">
@@ -69,7 +69,7 @@
             
               <div class="alert-info">
                   
-                <div>Current Person </div>
+                <div>Current Profesional </div>
                 <div>{{currentProfesional | json}}</div>
 
                               </div>

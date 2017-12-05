@@ -1,6 +1,6 @@
 import { PersonBE } from '../model/persons.model';
 import { HelperBE, HealthInstitutionBE ,User} from '../model/common.model';
-
+//import {Enumerable} from 'typescript-dotnet-es6/System.Linq/Linq';
 export class ProfesionalBE {
     constructor() { }
     public IdProfesional: number;

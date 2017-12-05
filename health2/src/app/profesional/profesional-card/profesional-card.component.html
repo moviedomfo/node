@@ -1,3 +1,26 @@
-<p>
-  profesional-card works!
-</p>
+<app-person-card
+  [currentPerson] = "currentProfesional.Persona" 
+  (OnComponentError)="OnComponentError_personCard($event)">
+</app-person-card>
+
+
+ 
+<div class="form-group">
+  <p  class="text-primary">Especialidad<span>*</span></p>
+    <span class="icon-case">
+      <i class="fa fa-user"></i>
+    </span>
+   <select name="cmbEspecialidad" class="" style="width: 200px" #cmbEstadoCivil [(ngModel)]="currentProfesional.IdEspecialidad">
+     <option *ngFor="let item of especialidadList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
+ </select>
+
+ <p  class="text-primary">Profesion<span>*</span></p>
+ <span class="icon-case">
+   <i class="fa fa-user"></i>
+ </span>
+<select name="cmbProfesion" class="" style="width: 200px" #cmbEstadoCivil [(ngModel)]="currentProfesional.IdProfesion">
+  <option *ngFor="let item of profesionList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
+</select>
+</div>
+
+<div>Nombre Profesional <strong>{{currentProfesional | json}}</strong></div>

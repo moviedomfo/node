@@ -29,15 +29,18 @@ export class ProfesionalService {
                        includeSecurityInfo:Boolean,
                        idProfesional?: number,
                        userGuid ?:String,
-                       healthInstitutionId?:Boolean,includeAllInstitutions?:Boolean): Observable<GetProfesionalRes> {
+                       healthInstitutionId?:String,includeAllInstitutions?:Boolean,
+                       personaId?:String): Observable<GetProfesionalRes> {
+
     var bussinesData = {
       IdProfesional: idProfesional,
       IncludeScheduler: includeScheduler,
       IncludeSecurityInfo: includeSecurityInfo,
       UserGuid: userGuid,
       HealthInstitutionId: healthInstitutionId,
-      IncludeAllInstitutions: includeAllInstitutions
-      
+      IncludeAllInstitutions: includeAllInstitutions,
+      PersonaId: personaId
+
     };
     
     let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("GetProfesionalService", bussinesData);

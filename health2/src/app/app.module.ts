@@ -37,7 +37,7 @@ import { PatienMedicalInsuranceGridComponent } from './patient/patien-medical-in
 import { PatientBE } from './model/patients.model';
 import {IContextInformation, ContextInformation, IRequest, Request, IResponse, Result, ServiceError } from './model/common.model';
 import { PatientGridComponent } from './patient/patient-grid/patient-grid.component';
-import {CommonService, PatientsService, PersonsService, MedicalInsuranceService} from './service/index';
+import {CommonService, PatientsService, PersonsService, MedicalInsuranceService,ProfesionalService} from './service/index';
 import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.component';
 import {ErrorBoxContainerComponent } from './commonComponents/error-box-container/error-box-container.component';
 import { ProfesionalManageComponent } from './profesional/profesional-manage/profesional-manage.component';
@@ -82,7 +82,7 @@ import { ProfesionalCardComponent } from './profesional/profesional-card/profesi
   TestModule
   
   ],
-   providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,AuthGuard],
+   providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,ProfesionalService,AuthGuard],
   
   bootstrap: [AppComponent]
 })

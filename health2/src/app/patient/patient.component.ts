@@ -17,10 +17,8 @@ import {DropdownToggle} from './dropdown-toggle.directive';*/
 
 @Component({
   selector: 'app-patient',
-  templateUrl: './patient.component.html',
-  styleUrls: ['./patient.component.css'],
-
-})
+  templateUrl: './patient.component.html'
+  })
 export class PatientComponent implements OnInit {
 
   patientList$: Observable<PatientBE[]>;
