@@ -11,7 +11,7 @@ export class PersonBE {
 
      IdPersona: number;
      UserId: string;
-     TipoDocumento: string;
+     TipoDocumento: number;
      NroDocumento: string;
      Apellido: string;
     Nombre: string;

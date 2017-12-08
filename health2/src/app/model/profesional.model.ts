@@ -160,6 +160,7 @@ export class ResourceSchedulingBE{
     
     public  weekDays_BinArray:Boolean[] ;
 
+    //ejemplo "Miercoles|Jueves|Viernes"
     public WeekDays_List:String;
 
     //  private   GetDayNames():String {

@@ -56,8 +56,9 @@ export class ProfesionalService {
           throw  Observable.throw(result.Error);
         }
 
-        let profesionalBE: ProfesionalBE = result.BusinessData['ProfesionalBE'] as ProfesionalBE;
-        let resourceSchedulingList: ResourceSchedulingBE[] = result.BusinessData['ResourceSchedulingList'] as ResourceSchedulingBE[];
+        let profesionalBE: ProfesionalBE = result.BusinessData['profesional'] as ProfesionalBE;
+        
+        let resourceSchedulingList: ResourceSchedulingBE[] = result.BusinessData['ResourceSchedulerList'] as ResourceSchedulingBE[];
         let user: User = result.BusinessData['User'] as User;
 
         let healthInstitution_ProfesionalBE= result.BusinessData['HealthInstitution_ProfesionalBE'] as HealthInstitution_ProfesionalBE;
@@ -69,7 +70,7 @@ export class ProfesionalService {
 
         response.HealthInstitution_ProfesionalBE=healthInstitution_ProfesionalBE;
         response.User=user;
-        response.HealthInstitution_ProfesionalBE=healthInstitution_ProfesionalBE;
+        response.ResourceSchedulingList=resourceSchedulingList;
         response.HealthInstitution_ProfesionalList =healthInstitution_ProfesionalList;
 
         return response;

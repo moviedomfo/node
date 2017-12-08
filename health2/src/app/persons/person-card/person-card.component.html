@@ -82,7 +82,7 @@
         <i class="fa fa-address-card-o"></i>
       </span>
         <select name="cmbTipoDocumento" style="width: 200px" #cmbTipoDocumento [(ngModel)]="currentPerson.TipoDocumento">
-          <option *ngFor="let item of tipoDocumentoList" [ngValue]="item.IdParametro.toString()">{{item.Nombre}}</option>
+          <option *ngFor="let item of tipoDocumentoList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
         </select>
       
     </div>

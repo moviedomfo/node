@@ -21,6 +21,7 @@
 <select name="cmbProfesion" class="" style="width: 200px" #cmbEstadoCivil [(ngModel)]="currentProfesional.IdProfesion">
   <option *ngFor="let item of profesionList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
 </select>
+
+
 </div>
 
-<div>Nombre Profesional <strong>{{currentProfesional | json}}</strong></div>

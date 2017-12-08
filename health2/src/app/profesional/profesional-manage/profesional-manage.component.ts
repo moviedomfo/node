@@ -3,7 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { ProfesionalService, CommonService } from '../../service/index';
-import { ProfesionalBE, PersonBE,  GetProfesionalRes, ResourceSchedulingBE,User,IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants ,contextInfo} from '../../model/index';
+import { ProfesionalBE, PersonBE,  GetProfesionalRes,HealthInstitution_ProfesionalBE, ResourceSchedulingBE,User,IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants ,contextInfo} from '../../model/index';
 import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
@@ -19,6 +19,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
   globalError: ServiceError;
   public currentProfesional: ProfesionalBE;
   currentResourceSchedulingList:ResourceSchedulingBE[];
+  currentHealthInstitution_ProfesionalBE:HealthInstitution_ProfesionalBE;
   currentUser:User;
   getProfesionalRes$: Observable<GetProfesionalRes>;
   isEdit:boolean;
@@ -27,7 +28,8 @@ export class ProfesionalManageComponent implements AfterViewInit {
   constructor(private route: ActivatedRoute,
     private profesionalService: ProfesionalService,
     private commonService: CommonService) { 
-
+    
+   
       
     }
 
@@ -60,12 +62,16 @@ export class ProfesionalManageComponent implements AfterViewInit {
     if (this.isEdit) {
       //Busco el paciente
       this.getProfesionalRes$ = this.profesionalService.getProfesionalService$(true,true,id.id,contextInfo.UserId,HealtConstants.DefaultHealthInstitutionId,true);
-      var GetProfesionalRes : GetProfesionalRes;
+      
       this.getProfesionalRes$.subscribe(
         res => {
+       
           this.currentProfesional = res.ProfesionalBE;
-          if (this.currentProfesional == null) {
+          
+          if (this.currentProfesional != null) {
+            
             this.currentResourceSchedulingList = res.ResourceSchedulingList;
+            this.currentHealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE;
             this.currentUser = res.User;
           }
           else {

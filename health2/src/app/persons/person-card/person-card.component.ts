@@ -63,14 +63,24 @@ export class PersonCardComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {   
-   
+    
   }
 
-
- 
-  
   ngOnInit() {
 
+    
+
+    this.tipoDocumentoList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.TipoDocumento, null);
+    this.tipoDocumentoList$.subscribe(
+      res => {
+       this.tipoDocumentoList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
+      },
+      err => 
+      {
+     
+        this.OnComponentError.emit(err); 
+      }
+    );
     this.estadoCivilList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.EstadoCivil, null);
     this.estadoCivilList$.subscribe(
       res => {
@@ -82,14 +92,6 @@ export class PersonCardComponent implements AfterViewInit {
         //alert('handleError' +  JSON.stringify(err));
         this.OnComponentError.emit(err);
       }
-    );
-
-    this.tipoDocumentoList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.TipoDocumento, null);
-    this.tipoDocumentoList$.subscribe(
-      res => {
-       this.tipoDocumentoList = this.commonService.appendExtraParamsCombo(res, CommonParams.SeleccioneUnaOpcion.IdParametro);
-      },
-      err => {this.OnComponentError.emit(err); }
     );
     this.preInitializePerson();
   }
@@ -155,16 +157,22 @@ export class PersonCardComponent implements AfterViewInit {
   }
 
   private preInitializePerson() {
-   
+
+
     this.fullImagePath = HealtConstants.ImagesSrc_Woman;
-    //this.currentPerson = new PersonBE(-1, "");
-    //this.currentPerson.TipoDocumento=613;
-    this.currentPerson.Nombre = "";
-    this.currentPerson.TipoDocumento = CommonParams.SeleccioneUnaOpcion.IdParametro.toString();
-    this.currentPerson.IdEstadocivil = CommonParams.SeleccioneUnaOpcion.IdParametro;
-    this.currentPerson.FechaNacimiento=new Date();
-    this.currentPerson.NroDocumento="0";
-    this.nroDoc = Number(this.currentPerson.NroDocumento);
+    if (this.currentPerson == null) {
+
+      this.currentPerson = new PersonBE(-1, "");
+
+      alert(JSON.stringify(this.currentPerson));
+      this.currentPerson.Nombre = "";
+      //this.currentPerson.TipoDocumento = CommonParams.SeleccioneUnaOpcion.IdParametro.toString();
+      this.currentPerson.TipoDocumento = CommonParams.SeleccioneUnaOpcion.IdParametro;
+      this.currentPerson.IdEstadocivil = CommonParams.SeleccioneUnaOpcion.IdParametro;
+      this.currentPerson.FechaNacimiento = new Date();
+      this.currentPerson.NroDocumento = "0";
+      this.nroDoc = Number(this.currentPerson.NroDocumento);
+    }
   }
 
 }
