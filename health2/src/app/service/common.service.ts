@@ -83,7 +83,7 @@ export class CommonService {
            var p: Param = new Param();
  
            
-           switch (+parameterToAppend) {
+           switch (parameterToAppend) {
              case CommonParams.SeleccioneUnaOpcion.IdParametro:
                {
                  p.Nombre = CommonParams.SeleccioneUnaOpcion.Nombre;

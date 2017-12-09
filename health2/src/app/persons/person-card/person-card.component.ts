@@ -13,8 +13,8 @@ import { ServiceError } from '../../model/common.model';
 
 @Component({
   selector: 'app-person-card',
-  templateUrl: './person-card.component.html',
-  styleUrls: ['./person-card.component.css']
+  templateUrl: './person-card.component.html'
+  
 })
 export class PersonCardComponent implements AfterViewInit {
   @Input()
@@ -53,7 +53,7 @@ export class PersonCardComponent implements AfterViewInit {
     if(this.currentPerson){
     if(this.currentPerson.Foto===null)
     {
-      this.currentPerson.Sexo==0 ? this.onSexChanged(false):this.onSexChanged(true);
+      this.currentPerson.Sexo==0 ? this.onSexChanged(0):this.onSexChanged(1);
     }
     else
     {
@@ -98,7 +98,7 @@ export class PersonCardComponent implements AfterViewInit {
 
 
   byParam(item1: number, item2: number) {
-    console.log(JSON.stringify(item1));
+    //console.log(JSON.stringify(item1));
     return item1 === item2;
 
   }
@@ -114,10 +114,10 @@ export class PersonCardComponent implements AfterViewInit {
 
   txtBox_NroDocumento_onKeyEnter(value: string) {
     //this.txtQuery += value + ' | ';
-    console.log(value);
+   // console.log(value);
   }
 
-  onSexChanged(inChecked: boolean) {
+  onSexChanged(sexo: number) {
 
     if(this.currentPerson.Foto)
     {
@@ -127,12 +127,12 @@ export class PersonCardComponent implements AfterViewInit {
       return;
     }
     
-    if (inChecked) {
+    if (sexo===0) { //Hombre
       this.fullImagePath = HealtConstants.ImagesSrc_Man;
       this.currentPerson.Sexo = 0;
     }
-    else {
-
+    if (sexo===1){
+    //Mujer
       this.fullImagePath = HealtConstants.ImagesSrc_Woman;
       this.currentPerson.Sexo = 1;
     }
@@ -159,15 +159,15 @@ export class PersonCardComponent implements AfterViewInit {
   private preInitializePerson() {
 
 
-    this.fullImagePath = HealtConstants.ImagesSrc_Woman;
+    this.fullImagePath = HealtConstants.ImagesSrc_Man;
     if (this.currentPerson == null) {
 
       this.currentPerson = new PersonBE(-1, "");
 
-      alert(JSON.stringify(this.currentPerson));
+      //alert(JSON.stringify(this.currentPerson));
       this.currentPerson.Nombre = "";
       //this.currentPerson.TipoDocumento = CommonParams.SeleccioneUnaOpcion.IdParametro.toString();
-      this.currentPerson.TipoDocumento = CommonParams.SeleccioneUnaOpcion.IdParametro;
+      this.currentPerson.TipoDocumento = CommonParams.SeleccioneUnaOpcion.IdParametro.toString();
       this.currentPerson.IdEstadocivil = CommonParams.SeleccioneUnaOpcion.IdParametro;
       this.currentPerson.FechaNacimiento = new Date();
       this.currentPerson.NroDocumento = "0";

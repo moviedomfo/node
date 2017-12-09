@@ -48,8 +48,8 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
     //alert('ngOnInit preInitialize ProfesionalManageComponent');
     this.currentProfesional = new ProfesionalBE();
-    this.currentProfesional.Persona = new PersonBE();
-    
+    this.currentProfesional.Persona = new PersonBE(-1, "");
+   
     
     var id: any;
 
@@ -60,6 +60,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
     });
 
     if (this.isEdit) {
+     
       //Busco el paciente
       this.getProfesionalRes$ = this.profesionalService.getProfesionalService$(true,true,id.id,contextInfo.UserId,HealtConstants.DefaultHealthInstitutionId,true);
       
@@ -103,11 +104,11 @@ export class ProfesionalManageComponent implements AfterViewInit {
      }
 
 
-     createProfesionalt   (){
+     createProfesional   (){
        
      }
 
-     updateProfesionalt   (){
+     updateProfesional   (){
 
      }
 }

@@ -51,13 +51,13 @@ export class ProfesionalService {
       .map(function (res: Response) {
 
         let result: Result= JSON.parse(res.json());
-
+        
         if (result.Error) {
           throw  Observable.throw(result.Error);
         }
 
         let profesionalBE: ProfesionalBE = result.BusinessData['profesional'] as ProfesionalBE;
-        
+        //alert(profesionalBE.Persona.Sexo.toString());
         let resourceSchedulingList: ResourceSchedulingBE[] = result.BusinessData['ResourceSchedulerList'] as ResourceSchedulingBE[];
         let user: User = result.BusinessData['User'] as User;
 
