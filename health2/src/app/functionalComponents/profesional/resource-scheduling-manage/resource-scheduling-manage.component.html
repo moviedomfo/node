@@ -1,0 +1,28 @@
+<div class="contentform">
+
+  <div class="leftcontact">
+    <div class="form-group">
+      <p>Descripcion del turno</p>
+      <span class="icon-case">
+        <i class="fa fa-sticky-note-o"></i>
+      </span>
+      <input type="text" name="rsDescription"   [(ngModel)]="currentResourceScheduling.Description"/>
+      
+
+
+      <p>Duración del turno</p>
+      <span class="icon-case">
+        <i class="fa fa-sticky-note-o"></i>
+      </span>
+      <input type="text" name="rsDuration"   [(ngModel)]="currentResourceScheduling.Duration"/>
+      
+      <p>Días de la semana</p>
+      <span class="icon-case">
+        <i class="fa fa-sticky-note-o"></i>
+      </span>
+      <input type="checkbox" name="chkTodos" (ngModelChange)="on_chkTodos($event.target.checked)"  [(ngModel)]="currentResourceScheduling.Duration"/>
+      
+
+
+    </div>
+</div>

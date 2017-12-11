@@ -1,11 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './commonComponents/login/login.component';
 //import { HomeComponent } from './commonComponents/login/login.component';
-import { PatientComponent } from './patient/patient.component';
-import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
-import { PatientCreateComponent } from './patient/patient-create/patient-create.component';
-
-import { PersonsComponent } from './persons/persons.component';
+import { PatientComponent } from './functionalComponents/patient/patient.component';
+import { PatientMangerComponent } from './functionalComponents/patient/patient-manger/patient-manger.component';
+import { PatientCreateComponent } from './functionalComponents/patient/patient-create/patient-create.component';
+import { ProfesionalManageComponent } from './functionalComponents/profesional/profesional-manage/profesional-manage.component';
+import { PersonsComponent } from './functionalComponents/persons/persons.component';
 import { PruebaComponent } from './prueba/prueba.component';
 
 import { AuthGuard } from './commonComponents/routingGuard/AuthGuard';
@@ -15,7 +15,7 @@ import { PageNotFoundComponent }from './commonComponents/page-not-found/page-not
  import {TestObservablesComponent} from  './prueba/test-observables/test-observables.component';
  import {TestAlertBlocksComponent} from  './prueba/test-alert-blocks/test-alert-blocks.component';
 
- import { ProfesionalManageComponent } from './profesional/profesional-manage/profesional-manage.component';
+
 
 const appRoutes: Routes = [
    { path: 'login', component: LoginComponent },

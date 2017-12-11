@@ -26,22 +26,24 @@ import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceComponent } from './commonComponents/google-place/google-place.component';
 //import {HealthModule } from './health.module';
 // //Bussines components
-import { PersonsComponent } from './persons/persons.component' ;
-import { PatientComponent } from './patient/patient.component';
-import { PatientMangerComponent } from './patient/patient-manger/patient-manger.component';
-import { PatientCreateComponent } from './patient/patient-create/patient-create.component';
-import { PersonCardComponent } from './persons/person-card/person-card.component';
+import { PersonsComponent } from './functionalComponents/persons/persons.component' ;
+import { PatientComponent } from './functionalComponents/patient/patient.component';
+import { PatientMangerComponent } from './functionalComponents/patient/patient-manger/patient-manger.component';
+import { PatientCreateComponent } from './functionalComponents/patient/patient-create/patient-create.component';
+import { PersonCardComponent } from './functionalComponents/persons/person-card/person-card.component';
 import { LoginComponent } from './commonComponents/login/login.component';
-import { MedicalInsuranceGridComponent } from './medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
-import { PatienMedicalInsuranceGridComponent } from './patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
+import { MedicalInsuranceGridComponent } from './functionalComponents/medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
+import { PatienMedicalInsuranceGridComponent } from './functionalComponents/patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
 import { PatientBE } from './model/patients.model';
 import {IContextInformation, ContextInformation, IRequest, Request, IResponse, Result, ServiceError } from './model/common.model';
-import { PatientGridComponent } from './patient/patient-grid/patient-grid.component';
+import { PatientGridComponent } from './functionalComponents/patient/patient-grid/patient-grid.component';
 import {CommonService, PatientsService, PersonsService, MedicalInsuranceService,ProfesionalService} from './service/index';
 import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.component';
 import {ErrorBoxContainerComponent } from './commonComponents/error-box-container/error-box-container.component';
-import { ProfesionalManageComponent } from './profesional/profesional-manage/profesional-manage.component';
-import { ProfesionalCardComponent } from './profesional/profesional-card/profesional-card.component';
+import { ProfesionalManageComponent } from './functionalComponents/profesional/profesional-manage/profesional-manage.component';
+import { ProfesionalCardComponent } from './functionalComponents/profesional/profesional-card/profesional-card.component';
+import { ResourceSchedulingGridComponent } from './functionalComponents/profesional/resource-scheduling-grid/resource-scheduling-grid.component';
+import { ResourceSchedulingManageComponent } from './functionalComponents/profesional/resource-scheduling-manage/resource-scheduling-manage.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +62,7 @@ import { ProfesionalCardComponent } from './profesional/profesional-card/profesi
     ErrorBoxContainerComponent,
     AlertBlockComponent,
     ProfesionalManageComponent,
-    ProfesionalCardComponent
+    ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

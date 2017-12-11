@@ -25,6 +25,13 @@ export  const HealtConstants={
      httpOptions:options,
      DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A'
 }
+
+export const Sexo =
+{
+    Masculino : 0,
+    Femenino : 1
+};
+
   export  const contextInfo ={
         Culture: "ES-AR",
         ProviderNameWithCultureInfo:"",
@@ -76,8 +83,8 @@ export  const TipoParametroEnum =
         AllergiesItemTypes : 101012
       };
 
-      
-        
+
+
 export const CommonValuesEnum =
     {
         TodosComboBoxValue : -1000,
