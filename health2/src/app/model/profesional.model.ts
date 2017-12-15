@@ -146,17 +146,30 @@ export class ResourceSchedulingBE{
     public HealthInstitutionId?: String;
 
 
+//Retorna un array binario con los dias en comun: 
+//a = 111110
+        // b = 010101
+        // res=111111
+    public GetCommonDays (a:Boolean[],  b:Boolean[]):Boolean[]
+    {
+        for (var  i = 0; i < a.length; i++)
+        {
+            b[i] = a[i] || b[i];
+        }
 
-    // public GetCommonDays (a:Boolean[],  b:Boolean[]):Boolean[]
-    // {
-    //     for (var  i = 0; i < a.length; i++)
-    //     {
-    //         b[i] = a[i] || b[i];
-    //     }
+        return b;
+    }
+    public Get_WeekDays_BinArray (): Boolean[]
+    {
+        
+            if (!this.WeekDays)
+                this.WeekDays = 0;
+            if (!this.weekDays_BinArray)
+                this.weekDays_BinArray = this.CreateBoolArray(this.WeekDays);
+            return this.weekDays_BinArray;
+        
 
-    //     return b;
-    // }
-
+    }
     
     public  weekDays_BinArray:Boolean[] ;
 
@@ -169,10 +182,51 @@ export class ResourceSchedulingBE{
     // }
 
 
-    // private CreateBoolArray (weekdays:number):Boolean[]{
-    //     let stackk:Boolean[];
-    //     return stackk;
-    // }
+        /// <summary>
+        /// Crea vector booleano y rellena hasta 7 con false en caso de no existir
+        /// Resultado Valor
+        /// 0000100	4
+        /// 0000101	5
+        /// 0000110	6
+        /// 0000111	7
+        /// 0001000	8
+        /// 0001001	9
+        /// 0001010	10
+        /// </summary>
+        /// <param name="weekdays">4</param>
+        /// <returns>0000100</returns>
+        private CreateBoolArray(weekdays: number): boolean[] {
+            let stack = [];
+            var weekdays_to_bin = Number(weekdays).toString(2);
+      
+            var weekdays_to_bin_Array = weekdays_to_bin.split('');
+      
+            let val: boolean;
+            //Recorro el vector desde atras y los voy metiendo en la pila
+            for (let i: number = weekdays_to_bin_Array.length - 1; i >= 0; i--) {
+              //s = weekdays_to_bin_Array[i].ToString();
+              val = weekdays_to_bin_Array[i] === '1' ? true : false;
+              //bool val = Convert.ToBoolean(Convert.ToInt16(weekdays_to_bin_Array[i]));
+              stack.push(val);
+            }
+      
+            //console.log(this.stackk);
+            //Completo la pila con con falses hasta llegar a 7 posiciones (i < 7 - weekdays_to_bin_Array.Length)
+            //Es desir: Si weekdays_to_bin_Array tiene =  11 dado q weekdays fue 3 completo la pila con 11+00000,
+            //de modo q al hacer ToArray me quede : 0000011
+      
+            for (let i: number = 0; i < 7 - weekdays_to_bin_Array.length; i++) {
+              stack.push(false);
+            }
+      
+            let stackInvertida:boolean[] = [];
+            for (let i: number = stack.length-1; i >0; i--) {
+                stackInvertida.push(stack[i]);
+              }
+        
+            return stackInvertida;
+      
+          }
 }
 
 export class GetProfesionalRes{

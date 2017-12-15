@@ -44,6 +44,7 @@ import { ProfesionalManageComponent } from './functionalComponents/profesional/p
 import { ProfesionalCardComponent } from './functionalComponents/profesional/profesional-card/profesional-card.component';
 import { ResourceSchedulingGridComponent } from './functionalComponents/profesional/resource-scheduling-grid/resource-scheduling-grid.component';
 import { ResourceSchedulingManageComponent } from './functionalComponents/profesional/resource-scheduling-manage/resource-scheduling-manage.component';
+import { WeekDaysCheckEditComponent } from './commonComponents/week-days-check-edit/week-days-check-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,7 @@ import { ResourceSchedulingManageComponent } from './functionalComponents/profes
     ErrorBoxContainerComponent,
     AlertBlockComponent,
     ProfesionalManageComponent,
-    ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent
+    ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent, WeekDaysCheckEditComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

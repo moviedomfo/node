@@ -1,0 +1,29 @@
+<div class="form-group">
+  <label class="col-lg-2 control-label">Dias programados</label>
+  <div class="col-lg-10">
+    <label class=" checkbox-inline">
+      <input type="checkbox" value="" (change)="on_chk(1,$event.target.checked)">Domingo</label>
+
+    <label class=" checkbox-inline">
+      <input type="checkbox" value=""  (change)="on_chk(2,$event.target.checked)">Lunes</label>
+
+    <label class=" checkbox-inline">
+      <input type="checkbox" value=""  (change)="on_chk(4,$event.target.checked)">Martes</label>
+
+    <label class=" checkbox-inline">
+      <input type="checkbox" value=""  (change)="on_chk(6,$event.target.checked)">Miercoles</label>
+
+    <label class=" checkbox-inline">
+      <input type="checkbox" value=""  (change)="on_chk(12,$event.target.checked)">Jueves</label>
+
+    <label class=" checkbox-inline">
+      <input type="checkbox" value=""  (change)="on_chk(31,$event.target.checked)">Viernes</label>
+    <label class=" checkbox-inline">
+      <input type="checkbox" value=""  (change)="on_chk(64,$event.target.checked)"  >Sabado</label>
+
+    <label class=" checkbox-inline">
+      <input type="checkbox" value="" (change)="on_chk(127,$event.target.checked)">Todos</label>
+  </div>
+
+  <button class="btn btn-danger" (click)="show()"></button>
+</div>

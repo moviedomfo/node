@@ -102,7 +102,52 @@ export class TestControlesComponent implements OnInit {
   
   
     }
+    weekdays_to_bin:string;
+    weekdays_to_bin_Array:string[]
+     stackk:boolean[];
+    convertToBase2(value:number)
+    {
+     
+      this.weekdays_to_bin = Number(value).toString(2);
+
+      this.weekdays_to_bin_Array=this.weekdays_to_bin.split('');
+    
+      this.stackk = this.CreateBoolArray(value);
+      
+    }
+
+
+    private CreateBoolArray(weekdays: number): boolean[] {
+      let stack = [];
+      this.weekdays_to_bin = Number(weekdays).toString(2);
+
+      this.weekdays_to_bin_Array = this.weekdays_to_bin.split('');
+
+      let val: boolean;
+      //Recorro el vector desde atras y los voy metiendo en la pila
+      for (let i: number = this.weekdays_to_bin_Array.length - 1; i >= 0; i--) {
+        //s = weekdays_to_bin_Array[i].ToString();
+        val = this.weekdays_to_bin_Array[i] === '1' ? true : false;
+        //bool val = Convert.ToBoolean(Convert.ToInt16(weekdays_to_bin_Array[i]));
+        stack.push(val);
+      }
+
+      //console.log(this.stackk);
+      //Completo la pila con con falses hasta llegar a 7 posiciones (i < 7 - weekdays_to_bin_Array.Length)
+      //Es desir: Si weekdays_to_bin_Array tiene =  11 dado q weekdays fue 3 completo la pila con 11+00000,
+      //de modo q al hacer ToArray me quede : 0000011
+
+      for (let i: number = 0; i < 7 - this.weekdays_to_bin_Array.length; i++) {
+        stack.push(false);
+      }
+      this.stackk = stack;
+      
+      let stackInvertida:boolean[] = [];
+      for (let i: number = this.stackk.length-1; i >0; i--) {
+          stackInvertida.push(this.stackk[i]);
+        }
   
-  
+      return stackInvertida;
+
+    }
   }
-  

@@ -4,6 +4,7 @@
     // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "type": "extensionHost",
             "request": "launch",
@@ -27,7 +28,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/src\\app\\persons\\person-card\\person-card.component.ts",
+            "program": "${workspaceFolder}/src\\app\\functionalComponents\\persons\\person-card\\person-card.component.ts",
             "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/dist/out-tsc/**/*.js"

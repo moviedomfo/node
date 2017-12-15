@@ -31,4 +31,6 @@ export class ResourceSchedulingManageComponent implements OnInit {
       alert('on_chkTodos ' + value);
   }
 
+
+
 }

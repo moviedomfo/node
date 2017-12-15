@@ -30,8 +30,15 @@
   </div>
   <div role="tabpanel" class="tab-pane fade" id="sheduling">
     <div class="col-lg-5">
-      <app-resource-scheduling-grid [profesionalResourceSchedulingList]="currentResourceSchedulingList"  >
 
+      
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resouceShedulingModal">
+  Agregar nueva programación de turnos
+</button>
+      <app-resource-scheduling-grid 
+      [profesionalResourceSchedulingList]="currentResourceSchedulingList"  
+      (onResourceSchedulingChanged) = "onResourceSchedulingChanged">
+      
       </app-resource-scheduling-grid>
     </div>
 
@@ -73,28 +80,26 @@
 
 
 <!-- show resourse sheduling modal dialog -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
-<div class="modal-dialog"  role="document">
-  <div class="modal-content">
-     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Plan de turnos</h5>
+<div class="modal fade" id="resouceShedulingModal" tabindex="-1" role="dialog" aria-labelledby="resouceShedulingModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resouceShedulingModalLabel">Plan de turnos</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
 
-       <!-- <button type="button" class="close" (click)="close()" >&times;</button> -->
-       
-     </div>
-     <div class="modal-body">
-      <app-resource-scheduling-manage 
-      [isEditMode]="isEditMode_resource_scheduling"
-      (OnResourceCreated)="OnResourceCreated"
-      (OnComponentError)="OnComponentError"></app-resource-scheduling-manage>
-     </div>
-     <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resource_scheduling_dialog_confirm()">OK</button>
-       <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_close()" >Cancel</button>
-     </div>
-   </div>
-</div>
+      </div>
+      <div class="modal-body">
+        <app-resource-scheduling-manage [isEditMode]="isEditMode_resource_scheduling" (OnResourceCreated)="OnResourceCreated" (OnComponentError)="OnComponentError">
+        </app-resource-scheduling-manage>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resource_scheduling_dialog_confirm()">OK</button>
+        <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_close()">Cancel</button> -->
+      </div>
+    </div>
+  </div>
 </div>

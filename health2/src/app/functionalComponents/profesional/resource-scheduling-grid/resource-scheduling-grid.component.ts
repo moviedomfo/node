@@ -26,7 +26,8 @@ export class ResourceSchedulingGridComponent implements OnInit {
   globalError: ServiceError;
   @Input()   
   profesionalResourceSchedulingList:ResourceSchedulingBE[];
- 
+  @Output()  onResourceSchedulingChanged= new EventEmitter<ResourceSchedulingBE>();
+  
   currentResourceScheduling:ResourceSchedulingBE;
     
   private columnDefs: any[];
@@ -72,5 +73,13 @@ export class ResourceSchedulingGridComponent implements OnInit {
 public showGrid() {
   
   this.api.setRowData(this.profesionalResourceSchedulingList);
+}
+
+onResourceSheduler_cellClicked($event) {
+  this.currentResourceScheduling = $event.node.data;
+
+  //document.querySelector('#selectedRows').innerHTML = this.currentMedicalInsuranceByPatient.Nombre;
+  this.onResourceSchedulingChanged.emit(this.currentResourceScheduling);
+
 }
 }

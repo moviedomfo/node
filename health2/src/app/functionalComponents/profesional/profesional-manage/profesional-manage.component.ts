@@ -102,7 +102,9 @@ export class ProfesionalManageComponent implements AfterViewInit {
       this.currentUser= new  User();
     }
   }
-  
+  btnAddResorceSheduling(){
+    
+  }
   OnComponentError_profesionalCard(err: ServiceError) {
        this.globalError = err;
      }
@@ -112,13 +114,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
      }
 
-     createProfesional   (){
-       
-     }
-
-     updateProfesional   (){
-
-     }
+   
 
 
 
@@ -133,5 +129,17 @@ export class ProfesionalManageComponent implements AfterViewInit {
   }
   resource_scheduling_dialog_close() {
     
+  }
+
+  onResourceSchedulingChanged(currentResourceScheduling :ResourceSchedulingBE){
+
+  }
+
+  createProfesional   (){
+    
+  }
+
+  updateProfesional   (){
+
   }
 }

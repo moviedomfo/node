@@ -107,6 +107,49 @@ export const CommonValuesEnum =
         Lunes : 5,
         Domingo : 6
     }
+    export const  WeekDays_EN =
+    {
+        // Summary:
+        //     Specifies Sunday.
+        Sunday : 1,
+        //
+        // Summary:
+        //     Specifies Monday.
+        Monday : 2,
+        //
+        // Summary:
+        //     Specifies Tuesday.
+        Tuesday : 4,
+        //
+        // Summary:
+        //     Specifies Wednesday.
+        Wednesday : 8,
+        //
+        // Summary:
+        //     Specifies Thursday.
+        Thursday : 16,
+        //
+        // Summary:
+        //     Specifies Friday.
+        Friday : 32,
+        //
+        // Summary:
+        //     Specifies work days (Monday, Tuesday, Wednesday, Thursday and Friday).
+        WorkDays : 62,
+        //
+        // Summary:
+        //     Specifies Saturday.
+        Saturday : 64,
+        //
+        // Summary:
+        //     Specifies Saturday and Sunday.
+        WeekendDays : 65,
+        //
+        // Summary:
+        //     Specifies every day of the week.
+        EveryDay : 127
+    }
+
 export const CommonParams={
     TodosComboBoxValue:{
             IdParametro:-1000,
