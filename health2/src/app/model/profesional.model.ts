@@ -1,5 +1,6 @@
 import { PersonBE } from '../model/persons.model';
 import { HelperBE, HealthInstitutionBE ,User} from '../model/common.model';
+import { DayNamesIndex_Value_ES } from "./common.constants";
 //import {Enumerable} from 'typescript-dotnet-es6/System.Linq/Linq';
 export class ProfesionalBE {
     constructor() { }
@@ -181,27 +182,46 @@ export class ResourceSchedulingBE{
     //     return GetDayNames(weekdays_to_bin_Array);
     // }
 
+    private getDayNames():string[] {
+        var days: string[]=[];
+        if(!this.weekDays_BinArray)
+          this.weekDays_BinArray = this.CreateBoolArray(this.WeekDays);
 
-        /// <summary>
+        for (let i: number = 0; i <= this.weekDays_BinArray.length-1; i++) {
+  
+          var dayName: string;
+  
+         // alert('push  ' + this.stackk[i]  + ' to ' + days);
+          //console.log('push  ' + this.stackk[i]  + ' to ' + days);
+          
+           if (this.weekDays_BinArray[i]) {
+             dayName = DayNamesIndex_Value_ES.find(d => d.index === i).name;
+             days.push(dayName);
+            
+           }
+        }
+        return days;
+      }
+       
         /// Crea vector booleano y rellena hasta 7 con false en caso de no existir
         /// Resultado Valor
-        /// 0000100	4
-        /// 0000101	5
-        /// 0000110	6
+        //  index    6    5     4     3     2    1    0
+        //          Sab   Vier   Jue  Mie   Mar  Lun    Dom
+        /// 0000100	false,false,false,false,true,false,false = 4 --> Martes
+        /// 0000101 false,false,false,false,true,false,true  = 5 --> Martes , Dom
+        /// 0000110	false,false,false,false,true,true,false  = 6 --> Martes , Lunes
         /// 0000111	7
         /// 0001000	8
         /// 0001001	9
         /// 0001010	10
-        /// </summary>
-        /// <param name="weekdays">4</param>
-        /// <returns>0000100</returns>
-        private CreateBoolArray(weekdays: number): boolean[] {
+        private CreateBoolArray(weekdays: number): Boolean[] {
             let stack = [];
+            let stackInvertida:Boolean[] = [];
             var weekdays_to_bin = Number(weekdays).toString(2);
       
             var weekdays_to_bin_Array = weekdays_to_bin.split('');
       
-            let val: boolean;
+            let val: Boolean;
             //Recorro el vector desde atras y los voy metiendo en la pila
             for (let i: number = weekdays_to_bin_Array.length - 1; i >= 0; i--) {
               //s = weekdays_to_bin_Array[i].ToString();
@@ -210,17 +230,16 @@ export class ResourceSchedulingBE{
               stack.push(val);
             }
       
-            //console.log(this.stackk);
+       
             //Completo la pila con con falses hasta llegar a 7 posiciones (i < 7 - weekdays_to_bin_Array.Length)
             //Es desir: Si weekdays_to_bin_Array tiene =  11 dado q weekdays fue 3 completo la pila con 11+00000,
-            //de modo q al hacer ToArray me quede : 0000011
-      
             for (let i: number = 0; i < 7 - weekdays_to_bin_Array.length; i++) {
               stack.push(false);
             }
       
-            let stackInvertida:boolean[] = [];
-            for (let i: number = stack.length-1; i >0; i--) {
+          //invierto stack asi me queda : 0000011 o false,false,false,false,false,true,true
+            
+            for (let i: number = stack.length-1; i >=0; i--) {
                 stackInvertida.push(stack[i]);
               }
         

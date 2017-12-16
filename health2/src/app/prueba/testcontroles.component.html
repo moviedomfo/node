@@ -1,3 +1,33 @@
+<div class="form-group row">
+  
+  
+  
+    <label for="" class="col-lg-2">Nomero a convertir </label>
+    <div class="col-lg-4">
+      <input class="form-control" #txtBox_Numero (keyup.enter)="convertToBase2(txtBox_Numero.value);"     />
+    </div>
+    <label for="" class="col-lg-2">weekdays_to_bin </label>
+    <div class="col-lg-4">
+        <input class="form-control" [(ngModel)]="weekdays_to_bin"     />
+      </div>
+    
+      <label for="" class="col-lg-2">weekdays_to_bin_Array </label>
+      <div class="col-lg-4">
+          <input class="form-control" [(ngModel)]="weekdays_to_bin_Array"     />
+        </div>
+    
+        <label for="" class="col-lg-2">Stack </label>
+        <div class="col-lg-4">
+            <input class="form-control" [(ngModel)]="stackk"     />
+          </div>
+      
+          <label for="" class="col-lg-2">Lista de dias </label>
+          <div class="col-lg-4">
+              <input class="form-control" [(ngModel)]="selectedDaysList"     />
+            </div>
+        
+  </div>
+  
 
 <section>
   <h2>Controles conglyphicon </h2>
@@ -94,30 +124,6 @@
     </div>
   </div>
 
-  <div class="form-group row">
   
-  
-  
-    <label for="" class="col-lg-2">Nomero a convertir </label>
-    <div class="col-lg-4">
-      <input class="form-control" #txtBox_Numero (keyup.enter)="convertToBase2(txtBox_Numero.value);"     />
-    </div>
-    <label for="" class="col-lg-2">weekdays_to_bin </label>
-    <div class="col-lg-4">
-        <input class="form-control" [(ngModel)]="weekdays_to_bin"     />
-      </div>
-    
-      <label for="" class="col-lg-2">weekdays_to_bin_Array </label>
-      <div class="col-lg-4">
-          <input class="form-control" [(ngModel)]="weekdays_to_bin_Array"     />
-        </div>
-    
-        <label for="" class="col-lg-2">Stack </label>
-        <div class="col-lg-4">
-            <input class="form-control" [(ngModel)]="stackk"     />
-          </div>
-      
-    
-  </div>
 
 </div>

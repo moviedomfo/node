@@ -1,5 +1,15 @@
 import { AnonymousSubject } from "rxjs/Subject";
 
+export class chkDays {
+    public chkDomingo: Boolean = false;
+    public chkLunes: Boolean = false;
+    public chkMartes: Boolean = false;
+    public chkMiercoles: Boolean = false;
+    public chkJueves: Boolean = false;
+    public chkViernes: Boolean = false;
+    public chkSabado: Boolean = false;
+    public chkTodos: Boolean = false;
+  }
 export interface IContextInformation  {
      Culture?: string;
      ProviderNameWithCultureInfo?: string;

@@ -32,6 +32,7 @@ export const Sexo =
     Femenino : 1
 };
 
+
   export  const contextInfo ={
         Culture: "ES-AR",
         ProviderNameWithCultureInfo:"",
@@ -96,6 +97,17 @@ export const CommonValuesEnum =
         /// </summary>
         Particular : -5000
     };
+
+    export const DayNamesIndex_Value_ES =[ 
+        {"name" : 'Sabado' ,"index"  : 0,"bidValue": 1},
+        {"name" : 'Viernes' ,"index"  : 1,"bidValue": 2 },
+        {"name" : 'Jueves' ,"index"  : 2,"bidValue": 4 },
+        {"name" : 'Miercoles' ,"index"  : 3,"bidValue": 8 },
+        {"name" : 'Martes' ,"index"  : 4,"bidValue": 16 },
+        {"name" : 'Lunes' ,"index"  : 5,"bidValue": 32 },
+        {"name" : 'Domingo' ,"index"  : 6,"bidValue": 64 },
+     ];
+
     export const DayNamesIndex_ES =
     {
         //SAB	VIE	JUE	MIE	MAR	LUN	DOM

@@ -1,7 +1,7 @@
 <form>
     <div class="form-group">
       <label for="rsDescription">Descripcion de la jornada</label>
-      <textarea type="text" class="form-control" id="rsDescription" aria-describedby="emailHelp" placeholder="Descripcion"  rows="3" [(ngModel)]="currentResourceScheduling.Description">
+      <textarea type="text" class="form-control" name="rsDescription" aria-describedby="emailHelp" placeholder="Descripcion"  rows="3" [(ngModel)]="currentResourceScheduling.Description">
 
       </textarea>
       <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
@@ -12,7 +12,9 @@
     </div>
     
       
-      <app-week-days-check-edit>  </app-week-days-check-edit>
+      <app-week-days-check-edit
+      [WeekDays]='currentResourceScheduling.WeekDays'
+      >  </app-week-days-check-edit>
     
 
     <fieldset class="form-group">
@@ -44,44 +46,3 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-<!-- <div class="contentform">
-
-  <div class="">
-    <div class="form-group">
-      <p>Descripcion del turno</p>
-      <span class="icon-case">
-        <i class="fa fa-sticky-note-o"></i>
-      </span>
-      <input type="text" name="rsDescription"   [(ngModel)]="currentResourceScheduling.Description"/>
-      
-
-
-      <p>Duración del turno</p>
-      <span class="icon-case">
-        <i class="fa fa-sticky-note-o"></i>
-      </span>
-      <input type="text" name="rsDuration"   [(ngModel)]="currentResourceScheduling.Duration"/>
-      
-      <p>Días de la semana</p>
-      <span class="icon-case">
-        <i class="fa fa-sticky-note-o"></i>
-      </span>
-      <input type="checkbox" name="chkTodos" (ngModelChange)="on_chkTodos($event.target.checked)"  [(ngModel)]="currentResourceScheduling.Duration"/>
-      
-
-      <app-week-days-check-edit>  </app-week-days-check-edit>
-
-      <p>TimeStart</p>
-      <span class="icon-case">
-        <i class="fa fa-sticky-note-o"></i>
-      </span>
-      <input type="text" name="rsTimeStart"   [(ngModel)]="currentResourceScheduling.TimeStart"/>
-
-      <p>TimeEnd</p>
-      <span class="icon-case">
-        <i class="fa fa-sticky-note-o"></i>
-      </span>
-      <input type="text" name="rsTimeEnd"   [(ngModel)]="currentResourceScheduling.TimeEnd"/>
-
-    </div>
-</div> -->
