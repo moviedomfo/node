@@ -1,14 +1,128 @@
 import { AnonymousSubject } from "rxjs/Subject";
+/*********************************************************
+ 
+.Net like TimeSpan class in typescript
+ 
+Author: Ran Wahle
+ 
+ 
+*********************************************************/
+const MILLISECONDS_IN_A_SECOND: number = 1000;
+const SECONDS_IN_A_MINUTE: number = 60;
+const MINUTES_IN_AN_HOUR: number = 60;
+const HOURS_IN_A_DAY: number = 24;
+const DAYS_IN_A_WEEK: number = 7;
+const DAYS_IN_A_MONTH: number = 30;
+const DAYS_IN_A_YEAR: number = 365;
+ 
+const MILLISECONDS_IN_A_MINUTE = MILLISECONDS_IN_A_SECOND * SECONDS_IN_A_MINUTE;
+const MILLISECONDS_IN_AN_HOUR = MILLISECONDS_IN_A_MINUTE * MINUTES_IN_AN_HOUR;
+const MILLISECONDS_IN_A_DAY = MILLISECONDS_IN_AN_HOUR * HOURS_IN_A_DAY;
+const MILLISECONDS_IN_A_WEEK = MILLISECONDS_IN_A_DAY * DAYS_IN_A_WEEK;
+const MILLISECONDS_IN_A_MONTH = MILLISECONDS_IN_A_DAY * DAYS_IN_A_MONTH;
+const MILLISECONDS_IN_A_YEAR = MILLISECONDS_IN_A_DAY * DAYS_IN_A_YEAR;
+ 
+const UNITS = {
+    SECOND: 'second',
+    MINUTE: 'minute',
+    HOUR: 'hour',
+    DAY: 'day',
+    WEEK: 'week',
+    MONTH: 'month',
+    YEAR: 'year'
+};
+ 
+interface DivisionResult {
+    modulu: number;
+    addition: number;
+}
+ 
+
+       
+       
+
+ 
+
+export class TimeSpan{
+
+    public  TicksPerDay :number = 864000000000;
+    public  TicksPerHour      :number = 36000000000;
+    public  TicksPerMillisecond :number = 10000;
+    public  TicksPerMinute :number = 600000000;
+    public  TicksPerSecond :number = 10000000;
+
+    public Fecha:Date;
+    public Milliseconds:number;
+    
+    
+    
+    public TotalMilliseconds:number;
+    public TotalDays:number;
+    public TotalHours:number;
+    public TotalMinutes:number;
+    public TotalSeconds:number;
+    
+    public Tick:number;
+    constructor(ticks?:number){
+
+   }
+
+   Parse(dd:number ,hhmmss:string)
+       {
+        //var Wday: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var day = new Date();
+        
+         //var TodayDay = Wday[day.getUTCDay()];
+         var today = Date.now();
+            // alert("today " +day);
+            // alert("getDay " +day.getDate());
+            // alert("getMonth " + day.getMonth() + 1 );
+            // alert("getFullYear " + day.getFullYear());
+       let hhmmArray = hhmmss.split(':');
+        if(hhmmArray.length==3)
+        {
+            let hh = Number.parseInt(hhmmArray[0]);
+            let mm :number= Number.parseInt(hhmmArray[1]);
+            let ss :number= Number.parseInt(hhmmArray[2]);
+            var day = new Date();
+            this.Fecha= new Date(day.getFullYear(),day.getMonth(),day.getDate(),hh,mm,ss,0) ;
+            let fechaInicio :Date= new Date(1,1,1,0,0,0);
+
+            this.TotalMilliseconds = this.Fecha.getTime() - fechaInicio.getTime();
+            this.Tick =  this.TotalMilliseconds *  this.TicksPerMillisecond;
+
+
+            this.TotalSeconds = this.TotalMilliseconds / 1000 ;
+            this.TotalMinutes =  this.TotalSeconds / 60;
+            this.TotalHours = this.TotalMinutes * 60  ;
+            this.TotalDays = this.TotalHours * 24  ;
+            
+        }
+        //this.Fecha= new Date( day.getFullYear(),day.getMonth(),day.getDate(),hh,mm,0,0) ;
+      
+        //this.Milliseconds = (this.TicksPerDay/this.TicksPerMillisecond ) - this.Fecha.getTime();
+        
+        //this.Tick = Math.round(this.Fecha.getTime()/1000)
+       }
+   
+     setDate(d:Date)
+   {
+    this.Fecha=d;
+    this.Milliseconds = new Date().getTime();
+
+    this.Tick = Math.round(this.Fecha.getTime()/1000)
+   }
+}
 
 export class chkDays {
-    public chkDomingo: Boolean = false;
-    public chkLunes: Boolean = false;
-    public chkMartes: Boolean = false;
-    public chkMiercoles: Boolean = false;
-    public chkJueves: Boolean = false;
-    public chkViernes: Boolean = false;
-    public chkSabado: Boolean = false;
-    public chkTodos: Boolean = false;
+    public chkDomingo: boolean  = false;
+    public chkLunes: boolean  = false;
+    public chkMartes: boolean  = false;
+    public chkMiercoles: boolean  = false;
+    public chkJueves: boolean  = false;
+    public chkViernes: boolean  = false;
+    public chkSabado: boolean  = false;
+    public chkTodos: boolean  = false;
   }
 export interface IContextInformation  {
      Culture?: string;
@@ -125,23 +239,23 @@ export class User {
     public LastName: string;
     public Email:string;
 
-    public  AnswerPassword :String;
-    public  AppName :String;
-    public  Comment :String;
+    public  AnswerPassword :string;
+    public  AppName :string;
+    public  Comment :string;
     
     public  CreationDate? : Date ;
-    public  DNI :String;
+    public  DNI :string;
 
     
-    public  IsApproved :Boolean;
-    public  IsLockedOut :Boolean;
+    public  IsApproved :boolean ;
+    public  IsLockedOut :boolean ;
     public  LastActivityDate? : Date ;
     public  ModifiedDate? : Date ;
     public ModifiedByUserId?:number;
-    public  MustChangePassword? : Boolean ;
+    public  MustChangePassword? : boolean  ;
     public  ProviderId: any;
-    public  QuestionPassword :String;
-    public  Roles :String[];
+    public  QuestionPassword :string;
+    public  Roles :string[];
     public  UserId? :number;
     
     //public void AddRoles(RolList rolList);
@@ -157,37 +271,37 @@ export class User {
 
 export class Rol{
 
-    public  RolName: String;
-    public  Description :String;
+    public  RolName: string;
+    public  Description :string;
 
 }
 export class HealthInstitutionBE{
 
-    public  HealthInstitutionId :String;
+    public  HealthInstitutionId :string;
     public  HealthInstitutionType?  : number;
-    public  Street  :String;
+    public  Street  :string;
     public  StreetNumber?:number;
-    public  Floor:String;
+    public  Floor:string;
     public CountryId? :number;
     public ProvinceId? :number;
     public CityId? :number;
-    public  RazonSocial :String;
-    public  Province :String;
-    public  City :String;
-    public  Neighborhood :String;
-    public  ZipCode :String;
+    public  RazonSocial :string;
+    public  Province :string;
+    public  City :string;
+    public  Neighborhood :string;
+    public  ZipCode :string;
     public  CreatedDate :Date;
     public  LastAccessTime? :Date;
-    public  LastAccessUserId? :String;
-    public  ActivationKey :String;
-    public  Description :String;
-    public  CUIT :String;
-    public  HealthInstitutionIdParent? :String;
+    public  LastAccessUserId? :string;
+    public  ActivationKey :string;
+    public  Description :string;
+    public  CUIT :string;
+    public  HealthInstitutionIdParent? :string;
 }
 
 
 export class HelperBE{
-    public  getFullName(name:String, lastName:String) {
+    public  getFullName(name:string, lastName:string) {
         return lastName + ', ' + name;
     }
 }

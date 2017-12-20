@@ -1,6 +1,59 @@
+<section>
+    <!-- <h2>TimesPan from npm </h2>
+    <label for="" class="col-lg-2  text-danger">HH:MM a convertir </label>
+    <div class="col-lg-4">
+      <input class="form-control" #txtBox_hhmm (keyup.enter)="timeSpanParse2(txtBox_hhmm.value);" value="11:52:15"/>
+    </div>
+    <label for="" class="col-lg-2 text-info">Timespan.TotalMilliseconds </label>
+    <div class="col-lg-4">
+      <input class="form-control"  [(ngModel)]="time_start.TotalMilliseconds"     />
+    </div> -->
+
+  <h2>TimesPan </h2>
+  <label for="" class="col-lg-2  text-danger">HH:MM a convertir </label>
+  <div class="col-lg-4">
+    <input class="form-control" #txtBox_hhmm (keyup.enter)="timeSpanParse(txtBox_hhmm.value);" value="11:52:15"/>
+  </div>
+  <label for="" class="col-lg-2 text-info">Timespan.Fecha </label>
+  <div class="col-lg-4">
+    <input class="form-control"  [(ngModel)]="time_start.Fecha"     />
+  </div>
+
+  <label for="" class="col-lg-2 text-info">Timespan.TotalDays </label>
+  <div class="col-lg-4">
+    <input class="form-control"  [(ngModel)]="time_start.TotalDays"     />
+  </div>
+
+  
+  <label for="" class="col-lg-2 text-info">Timespan.TotalHours </label>
+  <div class="col-lg-4">
+    <input class="form-control "  [(ngModel)]="time_start.TotalHours"     />
+  </div>  
+  <label for="" class="col-lg-2 text-info">Timespan.TotalMinutes </label>
+  <div class="col-lg-4">
+    <input class="form-control "  [(ngModel)]="time_start.TotalMinutes"     />
+  </div>  
+
+
+  <label for="" class="col-lg-2 text-info">Timespan.TotalSeconds </label>
+  <div class="col-lg-4">
+    <input class="form-control "  [(ngModel)]="time_start.TotalSeconds"     />
+  </div>  
+
+  <label for="" class="col-lg-2 text-info">Timespan.TotalMilliseconds </label>
+  <div class="col-lg-4">
+    <input class="form-control "  [(ngModel)]="time_start.TotalMilliseconds"     />
+  </div>  
+  <label for="" class="col-lg-2 text-info">Timespan.Tick </label>
+  <div class="col-lg-4">
+    <input class="form-control"  [(ngModel)]="time_start.Tick"     />
+  </div>
+
+</section>
+
 <div class="form-group row">
   
-  
+  <h2>Week Day control  </h2>
   
     <label for="" class="col-lg-2">Nomero a convertir </label>
     <div class="col-lg-4">

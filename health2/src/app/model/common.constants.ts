@@ -108,6 +108,34 @@ export const CommonValuesEnum =
         {"name" : 'Domingo' ,"index"  : 6,"bidValue": 64 },
      ];
 
+export const AppoimantsStatus_SP={
+    Reservado : 630,
+    EnAtencion : 631,
+    Cerrado : 632,
+    Cancelado : 633,
+    Expirado : 634,
+    EnEspera : 635,
+    Libre : 636,
+    Nulo : 637
+}
+export const AppoimantsStatus_SP_type=
+{
+
+    Entreturno : 638,
+    Sobreturno : 639
+}
+
+  /// <summary>
+    /// Estados de una subscripcion enviada para pertenecer a una institución
+    /// </summary>
+    export const SubscriptionRequestStatus=
+    {
+        EnEspera : 650,
+        Rechazado : 651,
+        Expirado : 652,
+        Null : 653
+
+    }
     export const DayNamesIndex_ES =
     {
         //SAB	VIE	JUE	MIE	MAR	LUN	DOM
@@ -160,6 +188,34 @@ export const CommonValuesEnum =
         // Summary:
         //     Specifies every day of the week.
         EveryDay : 127
+    }
+    export const MonthsShortName_ES=
+    {
+        ENE : 1,
+        FEB : 2,
+        MAR : 3,
+        ABR : 4,
+        MAY : 5,
+        JUN : 6,
+        JUL : 7,
+        AGO : 8,
+        SET : 9,
+        OCT : 10,
+        NOV : 11,
+        DIC : 12
+
+    }
+
+    export const MonthsNames_ES=
+    {
+        Enero : 1,
+        Febrero : 2,
+        Marzo : 3, Abril : 4, Mayo : 5, Junio : 6, Julio : 7, Agosto : 8,
+        Septiembre : 9,
+        Octubre : 10,
+        Noviembre : 11,
+        Diciembre : 12
+
     }
 
 export const CommonParams={

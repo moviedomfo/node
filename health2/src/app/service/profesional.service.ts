@@ -25,11 +25,11 @@ export class ProfesionalService {
 
   
   getProfesionalService$(
-                        includeScheduler:Boolean,
-                       includeSecurityInfo:Boolean,
+                        includeScheduler:boolean ,
+                       includeSecurityInfo:boolean ,
                        idProfesional?: number,
                        userGuid ?:String,
-                       healthInstitutionId?:String,includeAllInstitutions?:Boolean,
+                       healthInstitutionId?:String,includeAllInstitutions?:boolean ,
                        personaId?:String): Observable<GetProfesionalRes> {
 
     var bussinesData = {

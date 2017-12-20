@@ -8,6 +8,8 @@ import {TipoParametroEnum,DayNamesIndex_Value_ES} from '../model/common.constant
 import { Subject } from 'rxjs/Subject';
 //permite observar
 import { Observable } from 'rxjs/Observable';
+import { TimespamView } from "../model/profesional.model";
+import { TimeSpan } from "../model/common.model";
 /*import {Dropdown} from './dropdown.directive';
 import {DropdownMenu} from './dropdown-menu.directive';
 import {DropdownToggle} from './dropdown-toggle.directive';*/
@@ -27,6 +29,9 @@ interface Friend {
 
 export class TestControlesComponent implements OnInit {
 
+  
+    TimespamView:TimespamView;
+    time_start:TimeSpan;
     patientList$: Observable<PatientBE[]>;
     patientList: PatientBE[];
     currentPatient: PatientBE;
@@ -49,39 +54,48 @@ export class TestControlesComponent implements OnInit {
       this.patientList = res;
     }
     ngOnInit() {
+
+      
+
+      this.time_start = new TimeSpan();
+
+      this.TimespamView = new TimespamView();
+
+      this.TimespamView.Status=12;
+
       this.currentPatient = new PatientBE();
       this.currentPatient.Persona = new  PersonBE(999,"Marcelo");
       this.currentPatient.Persona.Nombre= "Marcelo";
       this.currentPatient.Persona.Apellido= "Oviedo";
       this.currentPatient.FechaAlta = new Date(Date.now());
       this.fechaAlta =this.currentPatient.FechaAlta.toISOString();
-      //this.patientList$ = this.patientService.retrivePatientsSimple$();
-      // this.patientList$.subscribe(
-      //   res => {
-  
-      //     this.patientList = res;
-  
-      //   }
-      // );
-  
-      // this.patientService.retrivePatientsSimple$().subscribe(
-      //   res=>{
-      //     alert('dasdasd');
-      //       this.patientList = res;
-      //       alert(JSON.stringify(this.patientList));
-      //   }
-      // ); 
-  
-      //this.patientList$.subscribe(res => this.onCreatePatient(res));
+ 
     }
   
    
-    reriveAllPatientList() {
-      console.log("LLAMANDO A this.patientService.reriveAllPatientList$()");
-      this.patientService.reriveAllPatientList$();
-  
-    }
-  
+    
+    timeSpanParse2(hhmm:string) {
+        //this.time_start.Parse(hhmm);
+       
+        
+          let hhmmArray = hhmm.split(':');
+              
+          var day = new Date();
+          var Fecha = new Date( day.getFullYear(),day.getMonth(),day.getDate(),Number.parseInt(hhmmArray[0]),Number.parseInt(hhmmArray[1]),0,0) ;
+
+          var timespan = require('timespan');
+       
+          timespan.FromDates(Fecha);
+
+          this.time_start.TotalMilliseconds = timespan.totalMilliseconds()
+      
+          
+      }
+      timeSpanParse(hhmm:string) {
+        this.time_start.Parse(0,hhmm);
+       
+          
+      }
     onPaisSelection2(pais) {
   
       this.selectedPais = pais;
@@ -104,7 +118,7 @@ export class TestControlesComponent implements OnInit {
     }
     weekdays_to_bin:string;
     weekdays_to_bin_Array:string[]
-     stackk:Boolean[];
+     stackk:boolean [];
 
      selectedDaysList:string[];
     convertToBase2(value:number)
@@ -119,14 +133,14 @@ export class TestControlesComponent implements OnInit {
     }
 
 
-    private CreateBoolArray(weekdays: number): Boolean[] {
+    private CreateBoolArray(weekdays: number): boolean [] {
       let stack = [];
-      let stackInvertida:Boolean[] = [];
+      let stackInvertida:boolean [] = [];
       this.weekdays_to_bin = Number(weekdays).toString(2);
 
       this.weekdays_to_bin_Array = this.weekdays_to_bin.split('');
 
-      let val: Boolean;
+      let val: boolean ;
       
       //Recorro el vector desde atras y los voy metiendo en la pila
       for (let i: number = this.weekdays_to_bin_Array.length-1 ; i >= 0; i--) {

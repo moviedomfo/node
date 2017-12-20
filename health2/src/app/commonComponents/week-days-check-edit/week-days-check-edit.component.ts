@@ -16,7 +16,7 @@ export class WeekDaysCheckEditComponent implements OnInit {
 
   chkDays: chkDays;
   private resourceSchedulingBE: ResourceSchedulingBE;
-  private weekdays_to_bin_Array: Boolean[];
+  private weekdays_to_bin_Array: boolean [];
   ngOnInit() {
     this.resourceSchedulingBE = new ResourceSchedulingBE();
     this.WeekDays = 0;
@@ -30,7 +30,7 @@ export class WeekDaysCheckEditComponent implements OnInit {
 
   }
 
-  on_chk(value: number, checked: Boolean) {
+  on_chk(value: number, checked: boolean ) {
 
 
     this.resourceSchedulingBE = new ResourceSchedulingBE();

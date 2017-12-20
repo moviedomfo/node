@@ -62,21 +62,21 @@ export class PatientAllergy {
 
      AllergyId: number;
      PatientId: number;
-     FoodAllergy: Boolean;
+     FoodAllergy: boolean ;
      MedicamentsAllergy: boolean;
-     MiteAllergy: Boolean;
-     InsectAllergy: Boolean;
-     PollenAllergy: Boolean;
-     OtherAllergy: String;
-     GeneralDetails: String;
-     Observation: String;
+     MiteAllergy: boolean ;
+     InsectAllergy: boolean ;
+     PollenAllergy: boolean ;
+     OtherAllergy: string;
+     GeneralDetails: string;
+     Observation: string;
      LastAccessTime: Date;
      LastAccessUserId: string;
-     AnimalAllergy: Boolean;
-     ChemicalAllergy: Boolean;
-     SunAllergy: Boolean;
+     AnimalAllergy: boolean ;
+     ChemicalAllergy: boolean ;
+     SunAllergy: boolean ;
      MedicalEventId: number;
-     Enabled: Boolean;
+     Enabled: boolean ;
 
     
 }
@@ -86,13 +86,13 @@ export class PatientMedicament {
     public PatientId: number;
     public CreatedDate: Date;
     public CreatedUserId: string;
-    public MedicamentName: String;
+    public MedicamentName: string;
     public Periodicity_hours: number;
     public DaysCount: number;
     public MedicalEventId: number;
     public PatientMedicamentId_Parent: number;
-    public MedicamentPresentation: String;
-    public Enabled: Boolean;
-    public Dosis: String;
+    public MedicamentPresentation: string;
+    public Enabled: boolean ;
+    public Dosis: string;
     public Status: number;
 }
