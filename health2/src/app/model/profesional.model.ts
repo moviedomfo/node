@@ -265,7 +265,7 @@ export class ResourceSchedulingBE {
     
         get TimeStart_timesp(): TimeSpan {
             this.timeStart_timesp= new TimeSpan(null);
-            this.timeStart_timesp.Parse(this.TimeStart);
+            this.timeStart_timesp.Parse(0,this.TimeStart);
             return this.timeStart_timesp;
         }
         set TimeStart_timesp(s: TimeSpan) {
@@ -278,7 +278,7 @@ export class ResourceSchedulingBE {
     
         get TimeEnd_timesp(): TimeSpan {
             this.timeEnd_timesp= new TimeSpan(null);
-            this.timeStart_timesp.Parse(this.TimeStart);
+            this.timeStart_timesp.Parse(0,this.TimeStart);
             return this.timeStart_timesp;
         }
         set TimeEnd_timesp(s: TimeSpan) {

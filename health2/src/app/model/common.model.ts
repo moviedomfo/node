@@ -66,44 +66,50 @@ export class TimeSpan{
     constructor(ticks?:number){
 
    }
+   
+    Parse(dd: number, hhmmss: string) {
 
-   Parse(dd:number ,hhmmss:string)
-       {
-        //var Wday: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        var day = new Date();
-        
-         //var TodayDay = Wday[day.getUTCDay()];
-         var today = Date.now();
-            // alert("today " +day);
-            // alert("getDay " +day.getDate());
-            // alert("getMonth " + day.getMonth() + 1 );
-            // alert("getFullYear " + day.getFullYear());
-       let hhmmArray = hhmmss.split(':');
-        if(hhmmArray.length==3)
-        {
-            let hh = Number.parseInt(hhmmArray[0]);
-            let mm :number= Number.parseInt(hhmmArray[1]);
-            let ss :number= Number.parseInt(hhmmArray[2]);
-            var day = new Date();
-            this.Fecha= new Date(day.getFullYear(),day.getMonth(),day.getDate(),hh,mm,ss,0) ;
-            let fechaInicio :Date= new Date(1,1,1,0,0,0);
+        var today= Date.now();
+        var day: Date = new Date();
+        let hhmmArray = hhmmss.split(':');
+        let hh: number = 0;
+        let mm: number = 0;
+        let ss: number = 0;
 
-            this.TotalMilliseconds = this.Fecha.getTime() - fechaInicio.getTime();
-            this.Tick =  this.TotalMilliseconds *  this.TicksPerMillisecond;
-
-
-            this.TotalSeconds = this.TotalMilliseconds / 1000 ;
-            this.TotalMinutes =  this.TotalSeconds / 60;
-            this.TotalHours = this.TotalMinutes * 60  ;
-            this.TotalDays = this.TotalHours * 24  ;
-            
+        if (hhmmArray.length > 0) {
+            hh = Number.parseInt(hhmmArray[0]);
         }
+        if (hhmmArray.length > 1) {
+            mm = Number.parseInt(hhmmArray[1]);
+        }
+
+        if (hhmmArray.length > 2) {
+            ss = Number.parseInt(hhmmArray[2]);
+        }
+
+        this.Fecha = new Date(day.getFullYear(), day.getMonth(), day.getDate(), hh, mm, ss, 0);
+        alert(this.Fecha.getHours());
+        let fechaInicio: Date = new Date(1, 1, 1, 0, 0, 0);
+
+        this.TotalMilliseconds = this.Fecha.getTime() - fechaInicio.getTime();
+
+        //this.TotalMilliseconds = this.Fecha.valueOf() - fechaInicio.valueOf();
+
+        this.Tick = this.TotalMilliseconds * this.TicksPerMillisecond;
+
+
+        this.TotalSeconds = this.TotalMilliseconds / 1000;
+        this.TotalMinutes = this.TotalSeconds / 60;
+        this.TotalHours = this.TotalMinutes / 60;
+        this.TotalDays = this.TotalHours / 24;
+
+
         //this.Fecha= new Date( day.getFullYear(),day.getMonth(),day.getDate(),hh,mm,0,0) ;
-      
+
         //this.Milliseconds = (this.TicksPerDay/this.TicksPerMillisecond ) - this.Fecha.getTime();
-        
+
         //this.Tick = Math.round(this.Fecha.getTime()/1000)
-       }
+    }
    
      setDate(d:Date)
    {
