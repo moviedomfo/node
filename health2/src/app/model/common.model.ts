@@ -88,7 +88,10 @@ export class TimeSpan{
         }
 
         this.Fecha = new Date(day.getFullYear(), day.getMonth(), day.getDate(), hh, mm, ss, 0);
+        alert(this.Fecha.getDate());
         alert(this.Fecha.getHours());
+        alert(this.Fecha.getSeconds());
+        alert(this.Fecha.getMilliseconds());
         let fechaInicio: Date = new Date(1, 1, 1, 0, 0, 0);
 
         this.TotalMilliseconds = this.Fecha.getTime() - fechaInicio.getTime();
