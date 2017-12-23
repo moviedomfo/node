@@ -22,6 +22,44 @@ export class PatientBE {//implements IPatient {
     public Persona:PersonBE;
     public Mutuales : MutualPorPacienteBE[];
 }
+export class PlanVacunacion_FullViewBE {
+    constructor(){}
+    public Codigo: number;
+    
+    public FechaPlaneada: Date;
+    public FechaColocacion: Date;
+    public CodigoVacunaSustituta?: number;
+    public Lote: string;
+    
+    public FechaPlaneada_Alterada: boolean;
+
+    public Cantidad: number;
+    public Nombre: number;
+    public OrdenGrupo: number;
+    public Grupo: number;
+    public Comentario: number;
+    
+    public Anulaciones: number;
+    public PatientId: number;
+    public ProfesionalColocadorUserID: number;
+    
+    public NombreProfesionalQueColoco : string;
+
+
+}
+
+export class PlanVacunacionBE{
+    public PatientId: number;
+    public Codigo: number;
+    public FechaPlaneada: Date;
+    public FechaColocacion: Date;
+    public ProfesionalColocadorUserID: number;
+    public NombreProfesionalQueColoco : string;
+    public Lote: string;
+    public FechaPlaneada_Alterada: Boolean;
+    public CodigoVacunaSustituta?: number;
+}
+
 
 export class MutualBE{
     
