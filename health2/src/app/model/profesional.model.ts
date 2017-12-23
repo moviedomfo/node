@@ -35,6 +35,37 @@ export class ProfesionalBE {
     }
 }
 
+export class ProfesionalesGridBE {
+    constructor() { }
+    public IdProfesional: number;
+    public IdPersona: number;
+    public Matricula: string;
+    public FechaAlta: Date;
+    public Apellido: string;
+    public Nombre: string;
+    public Sexo: string;
+    public IdEspecialidad: number;
+    public NombreEspecialidad: string;
+    public NroDocumento: string;
+    public TipoDocumento: string;
+    public UserName: string;
+    public UserId: string;
+    public IdEstadocivil: number;
+
+    public FechaNacimiento: Date;
+    public Street:string;
+    public StreetNumber:number;
+    public Floor:string;
+    
+    public mail:string;
+    public Telefono1:string;
+    public Telefon2:string;
+    public Foto: ArrayBuffer;
+    
+    public NombreProfecion:string;
+    public IdProfesion:number;
+
+}
 export class Profesional_FullViewBE {
     constructor() { }
     public IdProfesional: number;
@@ -53,11 +84,7 @@ export class Profesional_FullViewBE {
     public NroDocumento: string;
     public TipoDocumento: string;
     public Sexo: string;
-
-
-
-
-
+    
 
     public IdEstadocivil: number;
 
@@ -265,7 +292,7 @@ export class ResourceSchedulingBE {
     
         get TimeStart_timesp(): TimeSpan {
             this.timeStart_timesp= new TimeSpan(null);
-            this.timeStart_timesp.Parse(0,this.TimeStart);
+            this.timeStart_timesp.Set_hhmmss(this.TimeStart);
             return this.timeStart_timesp;
         }
         set TimeStart_timesp(s: TimeSpan) {
@@ -278,7 +305,7 @@ export class ResourceSchedulingBE {
     
         get TimeEnd_timesp(): TimeSpan {
             this.timeEnd_timesp= new TimeSpan(null);
-            this.timeStart_timesp.Parse(0,this.TimeStart);
+            this.timeStart_timesp.Set_hhmmss(this.TimeStart);
             return this.timeStart_timesp;
         }
         set TimeEnd_timesp(s: TimeSpan) {

@@ -1,6 +1,6 @@
-import { Injectable,Inject } from '@angular/core';
-import { ProfesionalBE,PersonBE,ResourceSchedulingBE,HealthInstitution_ProfesionalBE,GetProfesionalRes } from '../model/index';
-import { Param, IParam, IContextInformation, IRequest, IResponse, Result,User } from '../model/common.model';
+import { Injectable, Inject } from '@angular/core';
+import { ProfesionalBE, PersonBE, ResourceSchedulingBE, HealthInstitution_ProfesionalBE, GetProfesionalRes } from '../model/index';
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
@@ -10,6 +10,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { CommonService } from '../service/common.service';
 import 'rxjs/add/operator/map';
+import { Profesional_FullViewBE, ProfesionalesGridBE } from "../model/profesional.model";
 
 @Injectable()
 export class ProfesionalService {
@@ -23,14 +24,14 @@ export class ProfesionalService {
   }
 
 
-  
+
   getProfesionalService$(
-                        includeScheduler:boolean ,
-                       includeSecurityInfo:boolean ,
-                       idProfesional?: number,
-                       userGuid ?:String,
-                       healthInstitutionId?:String,includeAllInstitutions?:boolean ,
-                       personaId?:String): Observable<GetProfesionalRes> {
+    includeScheduler: boolean,
+    includeSecurityInfo: boolean,
+    idProfesional?: number,
+    userGuid?: String,
+    healthInstitutionId?: String, includeAllInstitutions?: boolean,
+    personaId?: String): Observable<GetProfesionalRes> {
 
     var bussinesData = {
       IdProfesional: idProfesional,
@@ -42,18 +43,18 @@ export class ProfesionalService {
       PersonaId: personaId
 
     };
-    
+
     let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("GetProfesionalService", bussinesData);
-    
+
     HealtConstants.httpOptions.search = searchParams;
 
     return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
       .map(function (res: Response) {
 
-        let result: Result= JSON.parse(res.json());
-        
+        let result: Result = JSON.parse(res.json());
+
         if (result.Error) {
-          throw  Observable.throw(result.Error);
+          throw Observable.throw(result.Error);
         }
 
         let profesionalBE: ProfesionalBE = result.BusinessData['profesional'] as ProfesionalBE;
@@ -61,20 +62,175 @@ export class ProfesionalService {
         let resourceSchedulingList: ResourceSchedulingBE[] = result.BusinessData['ResourceSchedulerList'] as ResourceSchedulingBE[];
         let user: User = result.BusinessData['User'] as User;
 
-        let healthInstitution_ProfesionalBE= result.BusinessData['HealthInstitution_ProfesionalBE'] as HealthInstitution_ProfesionalBE;
-        let healthInstitution_ProfesionalList= result.BusinessData['HealthInstitution_ProfesionalList'] as HealthInstitution_ProfesionalBE[];
+        let healthInstitution_ProfesionalBE = result.BusinessData['HealthInstitution_ProfesionalBE'] as HealthInstitution_ProfesionalBE;
+        let healthInstitution_ProfesionalList = result.BusinessData['HealthInstitution_ProfesionalList'] as HealthInstitution_ProfesionalBE[];
 
-        let response:GetProfesionalRes = new GetProfesionalRes() ;
+        let response: GetProfesionalRes = new GetProfesionalRes();
 
-        response.ProfesionalBE=profesionalBE;
+        response.ProfesionalBE = profesionalBE;
 
-        response.HealthInstitution_ProfesionalBE=healthInstitution_ProfesionalBE;
-        response.User=user;
-        response.ResourceSchedulingList=resourceSchedulingList;
-        response.HealthInstitution_ProfesionalList =healthInstitution_ProfesionalList;
+        response.HealthInstitution_ProfesionalBE = healthInstitution_ProfesionalBE;
+        response.User = user;
+        response.ResourceSchedulingList = resourceSchedulingList;
+        response.HealthInstitution_ProfesionalList = healthInstitution_ProfesionalList;
 
         return response;
       }).catch(this.commonService.handleError);
   }
 
+  DesvincularProfesionalService$(
+    profesionalId?: number,
+    healthInstitutionId?: String, 
+    ): Observable<Boolean> {
+
+    var bussinesData = {
+      ProfesionalId: profesionalId,
+      HealthInstitutionId: healthInstitutionId,
+    };
+
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("DesvincularProfesionalService", bussinesData);
+
+    HealtConstants.httpOptions.search = searchParams;
+
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+      .map(function (res: Response) {
+
+        let result: Result = JSON.parse(res.json());
+
+        if (result.Error) {
+          throw Observable.throw(result.Error);
+        }
+        return true;
+      }).catch(this.commonService.handleError);
+  }
+
+
+  crearProfesionalService$(
+    profesionalBE: ProfesionalBE,
+    user: User, 
+    healthInstitutionId:string,
+    soloAsociarProfesionalAinst:Boolean
+    ): Observable<any> {
+
+    var bussinesData = {
+      Profesional: profesionalBE,
+      User:user,
+      HealthInstitutionId: healthInstitutionId,
+      SoloAsociarProfesionalAinst:soloAsociarProfesionalAinst
+    };
+
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("CrearProfesionalService", bussinesData);
+
+    HealtConstants.httpOptions.search = searchParams;
+
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+      .map(function (res: Response) {
+
+        let result: Result = JSON.parse(res.json());
+
+        if (result.Error) {
+          throw Observable.throw(result.Error);
+        }
+        // let IdProfesional: number = result.BusinessData['IdProfesional'] as number;
+        // let UserId: string = result.BusinessData['UserId'] as string;
+        return result.BusinessData;
+      }).catch(this.commonService.handleError);
+  }
+
+
+  UpdateProfesionalService$(
+    profesionalBE: ProfesionalBE,
+    user: User, 
+    healthInstitutionId:string,
+    soloAsociarProfesionalAinst:Boolean
+    ): Observable<Boolean> {
+
+    var bussinesData = {
+      Profesional: profesionalBE,
+      User:user,
+      HealthInstitutionId: healthInstitutionId
+   
+    };
+
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("UpdateProfesionalService", bussinesData);
+
+    HealtConstants.httpOptions.search = searchParams;
+
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+      .map(function (res: Response) {
+
+        let result: Result = JSON.parse(res.json());
+
+        if (result.Error) {
+          throw Observable.throw(result.Error);
+        }
+
+        return true;
+      }).catch(this.commonService.handleError);
+  }
+
+  retriveProfesionalesService$(
+    nombre: string,
+    apellido: string, 
+    healthInstitutionId?:string
+    
+    ): Observable<Profesional_FullViewBE []> {
+
+    var bussinesData = {
+      Nombre: nombre,
+      Apellido:apellido,
+      HealthInstId: healthInstitutionId
+      
+    };
+
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetriveProfesionalesService", bussinesData);
+
+    HealtConstants.httpOptions.search = searchParams;
+
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+      .map(function (res: Response) {
+
+        let result: Result = JSON.parse(res.json());
+
+        if (result.Error) {
+          throw Observable.throw(result.Error);
+        }
+         var profesional_FullView : Profesional_FullViewBE[] = result.BusinessData as Profesional_FullViewBE[];
+        
+        return profesional_FullView;
+      }).catch(this.commonService.handleError);
+  }
+
+
+  RetriveProfesionalesGridService$(
+    nombre: string,
+    apellido: string, 
+    healthInstitutionId?:string
+    
+    ): Observable<ProfesionalesGridBE []> {
+
+    var bussinesData = {
+      Nombre: nombre,
+      Apellido:apellido,
+      HealthInstId: healthInstitutionId
+      
+    };
+
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetriveProfesionalesGridService", bussinesData);
+
+    HealtConstants.httpOptions.search = searchParams;
+
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+      .map(function (res: Response) {
+
+        let result: Result = JSON.parse(res.json());
+
+        if (result.Error) {
+          throw Observable.throw(result.Error);
+        }
+         var ProfesionalesGridBELis : ProfesionalesGridBE[] = result.BusinessData as ProfesionalesGridBE[];
+        
+        return ProfesionalesGridBELis;
+      }).catch(this.commonService.handleError);
+  }
 }

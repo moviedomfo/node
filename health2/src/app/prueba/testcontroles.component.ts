@@ -92,7 +92,7 @@ export class TestControlesComponent implements OnInit {
           
       }
       timeSpanParse(hhmm:string) {
-        this.time_start.Parse(0,hhmm);
+        this.time_start.Set_hhmmss(hhmm);
        
           
       }
