@@ -14,6 +14,9 @@ import { TestGridParentComponent } from './prueba/test-grid-parent/test-grid-par
 import {TestObservablesChildComponent} from './prueba/test-observables/test-observables-child/test-observables-child.component';
 import {TestObservablesComponent} from './prueba/test-observables/test-observables.component';
 
+import { TestTimesComponent } from './prueba/test-times/test-times.component';
+//import { TestAlertBlocksComponent } from "./prueba/test-alert-blocks/test-alert-blocks.component";
+//import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.component';
 
 // import {TablaComponent} from '../../tabla/tabla.component';
 @NgModule({
@@ -29,8 +32,11 @@ import {TestObservablesComponent} from './prueba/test-observables/test-observabl
     TestControlesComponent,AggridTestComponent    ,
     TestGridParentComponent,
      TestObservablesChildComponent,
-     TestObservablesComponent
-     //AlertBlockComponent,TestAlertBlocksComponent
+     TestObservablesComponent,
+     
+     TestTimesComponent
+     //TestAlertBlocksComponent,
+     //AlertBlockComponent
   ]
 })
 export class TestModule { }

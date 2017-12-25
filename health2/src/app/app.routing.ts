@@ -13,8 +13,9 @@ import { PageNotFoundComponent }from './commonComponents/page-not-found/page-not
  import { TestControlesComponent } from './prueba/testcontroles.component';
  import { TestGridParentComponent } from './prueba/test-grid-parent/test-grid-parent.component';
  import {TestObservablesComponent} from  './prueba/test-observables/test-observables.component';
- import {TestAlertBlocksComponent} from  './prueba/test-alert-blocks/test-alert-blocks.component';
-
+ import {TestTimesComponent} from  './prueba/test-times/test-times.component';
+ 
+ 
 
 
 const appRoutes: Routes = [
@@ -31,9 +32,12 @@ const appRoutes: Routes = [
     { path: 'testControles', component: TestControlesComponent },
     { path: 'profesionalCreate', component: ProfesionalManageComponent },
     { path: 'profesionalEdit/:id', component: ProfesionalManageComponent },
+    
+    { path: 'testTimes', component: TestTimesComponent },
 // //    { path: 'testAgGridParent', component: TestGridParentComponent },
 // //    { path: 'testObservables', component: TestObservablesComponent },
-// //    { path: 'testAlerts', component: TestAlertBlocksComponent },
+    // { path: 'testAlerts', component: TestAlertBlocksComponent },
+
    { path: '**', component: PageNotFoundComponent }
 
 ];

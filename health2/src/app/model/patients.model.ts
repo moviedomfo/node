@@ -56,7 +56,7 @@ export class PlanVacunacionBE{
     public ProfesionalColocadorUserID: number;
     public NombreProfesionalQueColoco : string;
     public Lote: string;
-    public FechaPlaneada_Alterada: Boolean;
+    public FechaPlaneada_Alterada: boolean;
     public CodigoVacunaSustituta?: number;
 }
 

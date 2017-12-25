@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Input ,Output,EventEmitter} from '@angular/core';
-import { ResourceSchedulingBE } from "../../../model/profesional.model";
+import { ResourceSchedulingBE, TimespamView } from "../../../model/profesional.model";
 import { ServiceError } from "../../../model/common.model";
 
 @Component({
@@ -17,6 +17,9 @@ export class ResourceSchedulingManageComponent implements OnInit {
   isEditMode:boolean;
   @Output() OnResourceCreated = new EventEmitter<ResourceSchedulingBE>();
   @Output() OnComponentError = new EventEmitter<ServiceError>();
+
+
+  private ArrayOfTimes : TimespamView[];
   constructor() { }
 
   ngOnInit() {

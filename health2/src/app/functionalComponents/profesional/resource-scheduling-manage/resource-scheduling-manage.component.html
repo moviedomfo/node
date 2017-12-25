@@ -1,3 +1,4 @@
+<!-- Form levantado como popup que permite generar un ResourceScheduling -->
 <form>
     <div class="form-group">
       <label for="rsDescription">Descripcion de la jornada</label>
@@ -11,13 +12,23 @@
       <input type="number" lass="form-control"  name="rsDuration"   [(ngModel)]="currentResourceScheduling.Duration"/>
     </div>
     
-      
+      <!-- Permite seleccionar los dias de la semana y establece  -->
       <app-week-days-check-edit
       [WeekDays]='currentResourceScheduling.WeekDays'
       >  </app-week-days-check-edit>
+    <p>
+      <div class="form-group">
+        <p class="text-primary">Profesion        </p>
+        <span class="icon-case">
+          <i class="fa fa-user"></i>
+        </span>
+        <!-- <select name="cmbTimeStart" class="" style="width: 200px" #cmbTimeStart [(ngModel)]="currentResourceScheduling.TimeStart">
+          <option *ngFor="let item of arrayOfTimes" [ngValue]="item.Time">{{item.Label}}</option>
+        </select> -->
+      </div>
     
 
-    <fieldset class="form-group">
+    <!-- <fieldset class="form-group">
       <legend>Radio buttons</legend>
       <div class="form-check">
         <label class="form-check-label">
@@ -37,12 +48,12 @@
           Option three is disabled
         </label>
       </div>
-    </fieldset>
-    <div class="form-check">
+    </fieldset> -->
+    <!-- <div class="form-check">
       <label class="form-check-label">
         <input type="checkbox" class="form-check-input">
         Check me out
       </label>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button> -->
   </form>

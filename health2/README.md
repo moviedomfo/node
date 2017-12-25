@@ -52,7 +52,8 @@ http://brianflove.com/2016/10/18/angular-2-google-maps-places-autocomplete/
     npm install primeng --save
     **NOTA 2017/10/10** Esta lib no se instala correctamante : los modulos como cvalendar y otros no son reconocidos
 
-
+5-Moment
+npm install moment
 
 **Global installs**
 

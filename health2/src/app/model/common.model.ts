@@ -1,42 +1,9 @@
 import { AnonymousSubject } from "rxjs/Subject";
-/*********************************************************
- 
-.Net like TimeSpan class in typescript
- 
-Author: Ran Wahle
- 
- 
-*********************************************************/
-const MILLISECONDS_IN_A_SECOND: number = 1000;
-const SECONDS_IN_A_MINUTE: number = 60;
-const MINUTES_IN_AN_HOUR: number = 60;
-const HOURS_IN_A_DAY: number = 24;
-const DAYS_IN_A_WEEK: number = 7;
-const DAYS_IN_A_MONTH: number = 30;
-const DAYS_IN_A_YEAR: number = 365;
- 
-const MILLISECONDS_IN_A_MINUTE = MILLISECONDS_IN_A_SECOND * SECONDS_IN_A_MINUTE;
-const MILLISECONDS_IN_AN_HOUR = MILLISECONDS_IN_A_MINUTE * MINUTES_IN_AN_HOUR;
-const MILLISECONDS_IN_A_DAY = MILLISECONDS_IN_AN_HOUR * HOURS_IN_A_DAY;
-const MILLISECONDS_IN_A_WEEK = MILLISECONDS_IN_A_DAY * DAYS_IN_A_WEEK;
-const MILLISECONDS_IN_A_MONTH = MILLISECONDS_IN_A_DAY * DAYS_IN_A_MONTH;
-const MILLISECONDS_IN_A_YEAR = MILLISECONDS_IN_A_DAY * DAYS_IN_A_YEAR;
- 
-const UNITS = {
-    SECOND: 'second',
-    MINUTE: 'minute',
-    HOUR: 'hour',
-    DAY: 'day',
-    WEEK: 'week',
-    MONTH: 'month',
-    YEAR: 'year'
-};
- 
-interface DivisionResult {
-    modulu: number;
-    addition: number;
-}
- 
+import * as moment from 'moment'
+import { Duration } from "moment";
+
+
+
 
        
        
@@ -72,98 +39,94 @@ export class TimeSpan{
    
    Set_hhmmss(hhmmss: string){
 
-    let hhmmArray = hhmmss.split(':');
-    let hh: number = 0;
-    let mm: number = 0;
-    let ss: number = 0;
+    let duration:Duration = moment.duration(hhmmss);
+  
+    this.setFromDuration(duration);
+   }
 
-    if (hhmmArray.length > 0) {
-        hh = Number.parseInt(hhmmArray[0]);
-    }
-    if (hhmmArray.length > 1) {
-        mm = Number.parseInt(hhmmArray[1]);
-    }
+   setFromDuration( duration:Duration ){
 
-    if (hhmmArray.length > 2) {
-        ss = Number.parseInt(hhmmArray[2]);
-    }
+    this.Days = duration.days();  //number of days in a duration
+    this.Hours = duration.hours();
+    this.Minutes = duration.minutes();
+    this.Seconds = duration.seconds();
+    this.Milliseconds = duration.milliseconds();  //number of milliseconds in a duration
 
-    this.Hours= hh;
-    this.Minutes= mm;
-    this.Seconds= ss;
-
-    let day: Date = new Date();
-    this.Fecha = new Date(day.getFullYear(), day.getMonth(), day.getDate(), hh, mm, ss, 0);
-    let fechaInicio: Date = new Date(1, 0, 1, 0, 0, 0);
-    //fechaInicio = new Date(2017, 11, 21, 0, 0, 0);
     
-    this.TotalMilliseconds = this.Fecha.getTime() - fechaInicio.getTime();
-
-    this.Tick = this.TotalMilliseconds * this.TicksPerMillisecond;
-
-
-    this.TotalSeconds = this.TotalMilliseconds / 1000;
-    this.TotalMinutes = this.TotalSeconds / 60;
-    this.TotalHours = this.TotalMinutes / 60;
-    this.TotalDays = this.TotalHours / 24;
-    var millisecondsPerDay = 24 * 60 * 60 * 1000;
+    this.TotalDays = duration.asDays();//The length of the duration in days,
+    this.TotalHours = duration.asHours();//The length of the duration in minutes
+    this.TotalMinutes = duration.asMinutes();
+    this.TotalSeconds = duration.asSeconds();
+    this.TotalMilliseconds = duration.asMilliseconds();
    }
-   Set_ddhhmmss(dd: number, hhmmss: string) {
+//    Set_ddhhmmss(dd: number, hhmmss: string) {
 
-        let hhmmArray = hhmmss.split(':');
-        let hh: number = 0;
-        let mm: number = 0;
-        let ss: number = 0;
+//         let hhmmArray = hhmmss.split(':');
+//         let hh: number = 0;
+//         let mm: number = 0;
+//         let ss: number = 0;
 
-        if (hhmmArray.length > 0) {
-            hh = Number.parseInt(hhmmArray[0]);
-        }
-        if (hhmmArray.length > 1) {
-            mm = Number.parseInt(hhmmArray[1]);
-        }
+//         if (hhmmArray.length > 0) {
+//             hh = Number.parseInt(hhmmArray[0]);
+//         }
+//         if (hhmmArray.length > 1) {
+//             mm = Number.parseInt(hhmmArray[1]);
+//         }
 
-        if (hhmmArray.length > 2) {
-            ss = Number.parseInt(hhmmArray[2]);
-        }
+//         if (hhmmArray.length > 2) {
+//             ss = Number.parseInt(hhmmArray[2]);
+//         }
 
-        this.Hours= hh;
-        this.Minutes= mm;
-        this.Seconds= ss;
+//         this.Hours= hh;
+//         this.Minutes= mm;
+//         this.Seconds= ss;
         
-        var millisecondsPerDay = 24 * 60 * 60 * 1000;
-        this.TotalMilliseconds = dd*this.TotalMilliseconds + (mm * 60 * 60 * 1000) +  (ss * 60 * 1000) ;
-        this.Tick = this.TotalMilliseconds * this.TicksPerMillisecond;
+//         var millisecondsPerDay = 24 * 60 * 60 * 1000;
+//         this.TotalMilliseconds = dd*this.TotalMilliseconds + (mm * 60 * 60 * 1000) +  (ss * 60 * 1000) ;
+//         this.Tick = this.TotalMilliseconds * this.TicksPerMillisecond;
 
-        this.TotalSeconds = (this.TotalMilliseconds/1000) ;
-        this.TotalMinutes = this.TotalSeconds / 60;
-        this.TotalHours = this.TotalMinutes / 60;
-        this.TotalDays = this.TotalHours / 24;
+//         this.TotalSeconds = (this.TotalMilliseconds/1000) ;
+//         this.TotalMinutes = this.TotalSeconds / 60;
+//         this.TotalHours = this.TotalMinutes / 60;
+//         this.TotalDays = this.TotalHours / 24;
         
-        //this.TotalDays  = Math.floor(fechaInicio.getTimezoneOffset() / millisecondsPerDay) - Math.floor(this.Fecha.getTimezoneOffset() / millisecondsPerDay);
-        //this.Fecha= new Date( day.getFullYear(),day.getMonth(),day.getDate(),hh,mm,0,0) ;
+//         this.TotalDays  = Math.floor(fechaInicio.getTimezoneOffset() / millisecondsPerDay) - Math.floor(this.Fecha.getTimezoneOffset() / millisecondsPerDay);
+//         this.Fecha= new Date( day.getFullYear(),day.getMonth(),day.getDate(),hh,mm,0,0) ;
 
-        //this.Milliseconds = (this.TicksPerDay/this.TicksPerMillisecond ) - this.Fecha.getTime();
+//         this.Milliseconds = (this.TicksPerDay/this.TicksPerMillisecond ) - this.Fecha.getTime();
 
-        //this.Tick = Math.round(this.Fecha.getTime()/1000)
+//         this.Tick = Math.round(this.Fecha.getTime()/1000)
+//     }
+
+   
+    setDate(d: Date) {
+        this.Fecha = d;
+        this.Milliseconds = new Date().getTime();
+
+        this.Tick = Math.round(this.Fecha.getTime() / 1000)
     }
 
-    //  daysBetween(startDate:Date, endDate:Date) {
-    //     var millisecondsPerDay = 24 * 60 * 60 * 1000;
-    //     alert(endDate.getUTCDate());
-    //     return (endDate.getUTCDate() - startDate.getUTCDate()) / millisecondsPerDay;
-    // }
-    treatAsUTC(date:Date) {
-        var result = new Date(date);
-        date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-        return result;
+    public static FromString(hhmmss:string)
+    {
+        var t :TimeSpan=new TimeSpan();
+        t.Set_hhmmss(hhmmss);
+        
+        return t;
     }
-     setDate(d:Date)
-   {
-    this.Fecha=d;
-    this.Milliseconds = new Date().getTime();
-
-    this.Tick = Math.round(this.Fecha.getTime()/1000)
-   }
+    public static FromMinutes(mm:number)
+    {
+        var t :TimeSpan=new TimeSpan();
+        let duration:Duration = moment.duration(mm,'minutes');
+        t.setFromDuration(duration);
+        return t;
+    }
+    public static FromSeconds(s:number)
+    {
+        var t :TimeSpan=new TimeSpan();
+        let duration:Duration = moment.duration(s,'seconds');
+        t.setFromDuration(duration);
+        return t;
+    }
 }
 
 export class chkDays {

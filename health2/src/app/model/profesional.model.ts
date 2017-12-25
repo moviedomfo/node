@@ -413,6 +413,33 @@ export class ResourceSchedulingBE {
         return stackInvertida;
 
     }
+
+
+
+   static Get_ArrayOfTimes(currentDate:Date,start:TimeSpan,  end:TimeSpan,  duration:number,  name:string){
+    var times :TimespamView[];
+    let t : TimeSpan = start;
+    let wTimespamView:TimespamView;
+
+    while(true){
+
+        //Para este algoritmo colaboro el cuero mrenaudo 
+         //if ((end - t).TotalMinutes >= 0)
+
+         if ((end.TotalMinutes - t.TotalMinutes) >= duration)
+         {
+            wTimespamView = new TimespamView(currentDate);
+            wTimespamView.Time = t;
+            wTimespamView.Duration = duration;
+            wTimespamView.Name = name;
+
+            times.push(wTimespamView);
+
+            //t = t.Add(TimeSpan.FromMinutes(duration));
+         }
+    }
+
+   }
 }
 
 export class GetProfesionalRes {
