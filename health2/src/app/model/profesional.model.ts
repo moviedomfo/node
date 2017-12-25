@@ -435,7 +435,8 @@ export class ResourceSchedulingBE {
 
             times.push(wTimespamView);
 
-            //t = t.Add(TimeSpan.FromMinutes(duration));
+            //t = t.addMinutes(TimeSpan.FromMinutes(duration));
+            t.addMinutes(duration);
          }
     }
 

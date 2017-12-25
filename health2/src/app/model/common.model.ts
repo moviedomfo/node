@@ -106,6 +106,14 @@ export class TimeSpan{
         this.Tick = Math.round(this.Fecha.getTime() / 1000)
     }
 
+    addMinutes(m:number)
+    {
+       let duration:Duration = moment.duration(this.Milliseconds,'milliseconds');
+       duration.add(m,'minutes');
+       
+        this.setFromDuration(duration);
+    
+    }
     public static FromString(hhmmss:string)
     {
         var t :TimeSpan=new TimeSpan();
