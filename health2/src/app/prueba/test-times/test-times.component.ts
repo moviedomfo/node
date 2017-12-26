@@ -4,6 +4,7 @@ import { PersonBE,PatientBE,IContextInformation, IParam, Param,TimespamView,Time
 import {TipoParametroEnum,DayNamesIndex_Value_ES} from '../../model/common.constants'
 import * as moment from 'moment';
 import { Duration } from "moment";
+import { ResourceSchedulingBE } from "../../model/profesional.model";
 
 @Component({
   selector: 'app-test-times',
@@ -14,16 +15,19 @@ import { Duration } from "moment";
 export class TestTimesComponent implements OnInit {
   TimespamView:TimespamView;
   time_start:TimeSpan;
+  time_end:TimeSpan;
   meses :string[];
   duration:Duration;
   duration2:Duration;
+
+  arrayOftimes : TimespamView[];
   constructor() { }
 
   ngOnInit() {
     this.time_start = new TimeSpan();
-    this.TimespamView = new TimespamView();
+    this.time_end = new TimeSpan();
 
-    moment.locale('pt-BR');
+    //moment.locale('pt-BR');
 
     this.meses = moment.months();
 
@@ -31,6 +35,12 @@ export class TestTimesComponent implements OnInit {
     this.duration2 = moment.duration('3:30:59');
     //moment.duration(1440,'minutes').format("hh:ss");
     //alert(this.duration.asHours() );
+    this.time_start.Set_hhmmss('08:30');
+    this.time_end.Set_hhmmss('18:30');
+    let wTimespamView:TimespamView;
+
+
+    this.arrayOftimes = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), this.time_start,this.time_end,30,'health dates');
     
   }
   
@@ -56,7 +66,8 @@ export class TestTimesComponent implements OnInit {
   }
   timeSpanParse(hhmm:string) {
     this.time_start.Set_hhmmss(hhmm);
-    alert(this.time_start.Milliseconds);
+    
+    //alert(this.time_start.Milliseconds);
       
   }
 

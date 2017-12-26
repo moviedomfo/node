@@ -416,18 +416,32 @@ export class ResourceSchedulingBE {
 
 
 
-   static Get_ArrayOfTimes(currentDate:Date,start:TimeSpan,  end:TimeSpan,  duration:number,  name:string){
-    var times :TimespamView[];
-    let t : TimeSpan = start;
+   static Get_ArrayOfTimes(currentDate:Date,start:TimeSpan,  end:TimeSpan,  duration:number,  name:string):TimespamView[]
+   {
     let wTimespamView:TimespamView;
-
-    while(true){
+    var times :TimespamView[] = [];
+    wTimespamView = new TimespamView(currentDate);
+    
+    let t : TimeSpan = start;
+    
+     let control :boolean=true;
+     let count = 0;
+    while(control){
 
         //Para este algoritmo colaboro el cuero mrenaudo 
          //if ((end - t).TotalMinutes >= 0)
 
          if ((end.TotalMinutes - t.TotalMinutes) >= duration)
          {
+             count = count +1;
+             console.log((end.TotalMinutes - t.TotalMinutes));
+             if(count=20)
+             {
+                control = false    ;
+                
+             }
+             
+            //alert((end.TotalMinutes - t.TotalMinutes) .toString());
             wTimespamView = new TimespamView(currentDate);
             wTimespamView.Time = t;
             wTimespamView.Duration = duration;
@@ -438,8 +452,10 @@ export class ResourceSchedulingBE {
             //t = t.addMinutes(TimeSpan.FromMinutes(duration));
             t.addMinutes(duration);
          }
+         else{ control=false;}
     }
-
+    
+    return times;
    }
 }
 

@@ -12,11 +12,7 @@ import { Duration } from "moment";
 
 export class TimeSpan{
 
-    public  TicksPerDay :number = 864000000000;
-    public  TicksPerHour      :number = 36000000000;
-    public  TicksPerMillisecond :number = 10000;
-    public  TicksPerMinute :number = 600000000;
-    public  TicksPerSecond :number = 10000000;
+
 
     public Fecha:Date;
     public Milliseconds:number;
@@ -42,6 +38,7 @@ export class TimeSpan{
     let duration:Duration = moment.duration(hhmmss);
   
     this.setFromDuration(duration);
+     this.hhmm=   this.getHHMM();
    }
 
    setFromDuration( duration:Duration ){
@@ -58,6 +55,10 @@ export class TimeSpan{
     this.TotalMinutes = duration.asMinutes();
     this.TotalSeconds = duration.asSeconds();
     this.TotalMilliseconds = duration.asMilliseconds();
+
+    // let x = moment.utc(duration.asMilliseconds()).format("HH:mm:ss");
+    // let y = moment.utc(duration.asMilliseconds());
+    // alert(y);
    }
 //    Set_ddhhmmss(dd: number, hhmmss: string) {
 
@@ -99,20 +100,33 @@ export class TimeSpan{
 //     }
 
    
-    setDate(d: Date) {
-        this.Fecha = d;
-        this.Milliseconds = new Date().getTime();
-
-        this.Tick = Math.round(this.Fecha.getTime() / 1000)
+    setDate(day: Date) {
+        this.Fecha = day;
+        var dayWrapper = moment(day);
+        //'7.23:59:59.999'
+        let duration:Duration = moment.duration(dayWrapper.day + '.' + dayWrapper.hour + ':' + + ':' + dayWrapper.minute + ':' + dayWrapper.second + '.' +  dayWrapper.milliseconds);
+       
+        this.setFromDuration(duration);
+        
     }
 
     addMinutes(m:number)
     {
        let duration:Duration = moment.duration(this.Milliseconds,'milliseconds');
-       duration.add(m,'minutes');
-       
+       //duration = duration.add(m,'minutes');
+        duration.add(m,'minutes');
         this.setFromDuration(duration);
     
+    }
+    
+    private hhmm: string;
+
+    get HHMM(): string {
+        return this.getHHMM();
+    }
+  
+    getHHMM(){
+         return this.Minutes + ':' + this.Seconds;//  moment(this.TotalMinutes,'minutes').format('hh:mm');
     }
     public static FromString(hhmmss:string)
     {

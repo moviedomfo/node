@@ -5,7 +5,7 @@
   <h2>TimesPan </h2>
   <label for="" class="col-lg-2  text-danger">HH:MM a convertir </label>
   <div class="col-lg-4">
-    <input class="form-control" #txtBox_hhmm (keyup.enter)="timeSpanParse(txtBox_hhmm.value);" value="11:52:15" />
+    <input class="form-control" #txtBox_hhmm (keyup.enter)="timeSpanParse(txtBox_hhmm.value);" value="8:30:15" />
   </div>
   <label for="" class="col-lg-2 text-info">Timespan.Fecha </label>
   <div class="col-lg-4">
@@ -41,6 +41,10 @@
   <div class="col-lg-4">
     <input class="form-control" [(ngModel)]="time_start.Tick" />
   </div>
+  <label for="" class="col-lg-2 text-info">Timespan.HHMM </label>
+  <div class="col-lg-4">
+    <input class="form-control" [(ngModel)]="time_start.hhmm" />
+  </div>
 
 </section> 
 
@@ -60,7 +64,41 @@
       </div>
 
       <div class="form-group">
-          <label for="Duration"> moment.duration('3:30:59') </label>
+          <label for="Duration"> moment.duration('3:30:59').asHours() </label>
+          <label class="form-control">{{ duration2.asHours()}} </label>
+      </div>
+</form>
+
+
+
+<h1>TimespamView</h1> 
+
+<label for="" class="col-lg-2 text-info">Start Timespan </label>
+<div class="col-lg-4">
+  <input class="form-control" [(ngModel)]="time_start.hhmm" />
+</div>
+<label for="" class="col-lg-2 text-info">End timespan </label>
+<div class="col-lg-4">
+  <input class="form-control" [(ngModel)]="time_end.hhmm" />
+</div>
+<form>
+
+
+    <div class="form-group">
+        <label for="locale_months">Array of times</label>
+        <!-- <label>moment.locale('pt-BR')</label> -->
+        
+       <p>{{arrayOftimes | json}}</p>
+        
+      </div>
+
+      <div class="form-group">
+          <label for="Duration">Duration 1440 </label>
+          <label class="form-control">{{duration.asHours()}} </label>
+      </div>
+
+      <div class="form-group">
+          <label for="Duration"> moment.duration('3:30:59').asHours() </label>
           <label class="form-control">{{ duration2.asHours()}} </label>
       </div>
 </form>
