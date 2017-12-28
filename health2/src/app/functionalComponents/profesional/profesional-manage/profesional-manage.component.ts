@@ -54,7 +54,8 @@ export class ProfesionalManageComponent implements AfterViewInit {
   }
 
   private preInitialize() {
-
+    this.isEditMode_resource_scheduling=false;
+    //this.resourceSchedulingManageComponent.currentResourceScheduling = new ResourceSchedulingBE();
     //alert('ngOnInit preInitialize ProfesionalManageComponent');
     this.currentProfesional = new ProfesionalBE();
     this.currentProfesional.Persona = new PersonBE(-1, "");
@@ -123,9 +124,10 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
 
 
-  show_resource_scheduling_dialog(isEdit:boolean,resosurceSheduling:ResourceSchedulingBE){
+  show_resource_scheduling_dialog(isEdit:boolean){
+         
     this.isEditMode_resource_scheduling=isEdit;
-    
+    //alert(this.isEditMode_resource_scheduling);
   }
   
   resource_scheduling_dialog_confirm() {
@@ -147,12 +149,16 @@ export class ProfesionalManageComponent implements AfterViewInit {
   updateProfesional   (){
 
   }
+
   resource_scheduling_dialog_Acept(){
     
     var resourceSchedulin_copy = Object.assign({}, this.resourceSchedulingManageComponent.currentResourceScheduling);
    
     this.currentResourceSchedulingList.push(resourceSchedulin_copy);
-    alert(JSON.stringify( resourceSchedulin_copy));
-    alert(JSON.stringify( this.currentResourceSchedulingList));
+    this.resourceSchedulingManageComponent.currentResourceScheduling = new ResourceSchedulingBE();
+    
+    this.resourceSchedulingGridComponent.showGrid();
+    // alert(JSON.stringify( resourceSchedulin_copy));
+    // alert(JSON.stringify( this.currentResourceSchedulingList));
   }
 }

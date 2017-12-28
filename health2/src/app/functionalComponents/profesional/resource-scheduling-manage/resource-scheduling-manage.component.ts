@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewEncapsulation, Input ,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input ,Output,EventEmitter, AfterViewInit} from '@angular/core';
 import { ResourceSchedulingBE, TimespamView } from "../../../model/profesional.model";
 import { ServiceError, TimeSpan } from "../../../model/common.model";
+import { HealtConstants } from "../../../model/common.constants";
 
 @Component({
   selector: 'app-resource-scheduling-manage',
@@ -8,14 +9,12 @@ import { ServiceError, TimeSpan } from "../../../model/common.model";
   
   encapsulation: ViewEncapsulation.None
 })
-export class ResourceSchedulingManageComponent implements OnInit {
+export class ResourceSchedulingManageComponent implements AfterViewInit {
   globalError: ServiceError;
-
   arrayOfTimes:TimespamView[];
-
   @Input()
   currentResourceScheduling:ResourceSchedulingBE;
-  
+ 
   @Input()  
   isEditMode:boolean;
   @Output() OnResourceCreated = new EventEmitter<ResourceSchedulingBE>();
@@ -23,23 +22,45 @@ export class ResourceSchedulingManageComponent implements OnInit {
 
 
   private ArrayOfTimes : TimespamView[];
-  constructor() { }
+  constructor() { 
+   
+ }
 
+  ngAfterViewInit() {
+   
+  }
   ngOnInit() {
-    var time_start:TimeSpan = new TimeSpan();
-    var time_end:TimeSpan = new TimeSpan();
+    var time_start: TimeSpan = new TimeSpan();
+    var time_end: TimeSpan = new TimeSpan();
     time_start.Set_hhmmss('08:30');
     time_end.Set_hhmmss('18:30');
-
-    if(!this.currentResourceScheduling){
+    //alert(this.isEditMode)
+    
+    if (this.isEditMode === false) {
       this.currentResourceScheduling = new ResourceSchedulingBE();
 
-      this.currentResourceScheduling.TimeStart ='08:30';
-      this.currentResourceScheduling.TimeEnd ='18:30';
-      this.currentResourceScheduling.WeekDays= 0;
+      this.currentResourceScheduling.WeekDays = 0;
+      this.currentResourceScheduling.DateStart = null;
+      this.currentResourceScheduling.DateEnd = null;
+      this.currentResourceScheduling.Duration = 30;
+      this.currentResourceScheduling.Description = '';
+      this.currentResourceScheduling.TimeStart = '08:30';
+      this.currentResourceScheduling.TimeEnd = '18:30';
+      this.currentResourceScheduling.TimeStart_timesp = TimeSpan.FromHHMM('08:30');
+      this.currentResourceScheduling.TimeEnd_timesp = TimeSpan.FromHHMM('08:30');
+      this.currentResourceScheduling.HealthInstitutionId = HealtConstants.DefaultHealthInstitutionId;
     }
 
-    this.arrayOfTimes = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), time_start,time_end,30,'health dates');
+    if (this.isEditMode == true) {
+      if (!this.currentResourceScheduling) {
+        alert('Debe seleccionar una configuracion de turnos');
+        return;
+      }
+    }
+
+
+
+    this.arrayOfTimes = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), time_start, time_end, 30, 'health dates');
   }
 
 

@@ -126,6 +126,15 @@ export class TimeSpan{
         
         return t;
     }
+
+    public static FromHHMM(hhmm:string)
+    {
+        var t :TimeSpan=new TimeSpan();
+        
+        t.Set_hhmmss(hhmm);
+        return t;
+    }
+
     public static FromMinutes(mm:number)
     {
         var t :TimeSpan=new TimeSpan();

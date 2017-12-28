@@ -32,7 +32,7 @@
     <div class="col-lg-5">
 
       
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resouceShedulingModal">
+<button type="button" class="btn btn-primary" data-toggle="modal" (click)='show_resource_scheduling_dialog(false)' data-target="#resouceShedulingModal">
   Agregar nueva programación de turnos
 </button>
       <app-resource-scheduling-grid  #resourceSchedulingGrid1
@@ -68,14 +68,20 @@
               <strong>{{currentResourceSchedulingList | json}}</strong>
             </div>
       </div>
-    <div class="alert-dismissible">
+    <!-- <div class="alert-dismissible">
       <label>Usuario</label>
       <div>{{currentUser | json}}</div>
     </div>
     <div class="alert-warning">
       <div>{{globalError | json}}</div>
     </div>
+  </div> -->
+  <div class="alert-warning">
+    <legend>currentResourceSchedulingList</legend>
+    <div>{{currentResourceSchedulingList | json}}</div>
   </div>
+</div>
+  
 </div>
 
 
