@@ -35,8 +35,9 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#resouceShedulingModal">
   Agregar nueva programación de turnos
 </button>
-      <app-resource-scheduling-grid 
+      <app-resource-scheduling-grid  #resourceSchedulingGrid1
       [profesionalResourceSchedulingList]="currentResourceSchedulingList"  
+              
       (onResourceSchedulingChanged) = "onResourceSchedulingChanged">
       
       </app-resource-scheduling-grid>
@@ -91,12 +92,13 @@
 
       </div>
       <div class="modal-body">
-        <app-resource-scheduling-manage [isEditMode]="isEditMode_resource_scheduling" (OnResourceCreated)="OnResourceCreated" (OnComponentError)="OnComponentError">
+        <app-resource-scheduling-manage #resourceSchedulingManageComponent1 
+        [isEditMode]="isEditMode_resource_scheduling" (OnResourceCreated)="OnResourceCreated" (OnComponentError)="OnComponentError">
         </app-resource-scheduling-manage>
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_Acept()">Aceptar</button>
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resource_scheduling_dialog_confirm()">OK</button>
         <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_close()">Cancel</button> -->
       </div>

@@ -1,6 +1,6 @@
 import { PersonBE } from '../model/persons.model';
 import { HelperBE, HealthInstitutionBE, User,TimeSpan } from '../model/common.model';
-import { DayNamesIndex_Value_ES, AppoimantsStatus_SP, AppoimantsStatus_SP_type } from "./common.constants";
+import { DayNamesIndex_Value_ES, AppoimantsStatus_SP, AppoimantsStatus_SP_type, WeekDays_EN, DayOfWeek } from "./common.constants";
 
 
 //import {Enumerable} from 'typescript-dotnet-es6/System.Linq/Linq';
@@ -226,7 +226,12 @@ export class TimespamView {
     public Appointment: AppointmentsBE;
     public Name: string;
     public Time : TimeSpan;
+
     public TimeString: string;
+  
+
+
+
     public Duration: number;
     private nowTicks?: number = null;
 
@@ -283,7 +288,7 @@ export class ResourceSchedulingBE {
     public ResourceType?: number;
 
     public TimeStart: string;
-    public TimeEndt: string;
+    public TimeEnd: string;
 
 
     
@@ -333,7 +338,7 @@ export class ResourceSchedulingBE {
         if (!this.WeekDays)
             this.WeekDays = 0;
         if (!this.weekDays_BinArray)
-            this.weekDays_BinArray = this.CreateBoolArray(this.WeekDays);
+            this.weekDays_BinArray = ResourceSchedulingBE.CreateBoolArray(this.WeekDays);
         return this.weekDays_BinArray;
 
 
@@ -352,7 +357,7 @@ export class ResourceSchedulingBE {
     private getDayNames(): string[] {
         var days: string[] = [];
         if (!this.weekDays_BinArray)
-            this.weekDays_BinArray = this.CreateBoolArray(this.WeekDays);
+            this.weekDays_BinArray = ResourceSchedulingBE.CreateBoolArray(this.WeekDays);
 
         for (let i: number = 0; i <= this.weekDays_BinArray.length - 1; i++) {
 
@@ -381,7 +386,7 @@ export class ResourceSchedulingBE {
     /// 0001000	8
     /// 0001001	9
     /// 0001010	10
-    private CreateBoolArray(weekdays: number): boolean[] {
+    static CreateBoolArray(weekdays: number): boolean[] {
         let stack = [];
         let stackInvertida: boolean[] = [];
         var weekdays_to_bin = Number(weekdays).toString(2);
@@ -414,18 +419,40 @@ export class ResourceSchedulingBE {
 
     }
 
+    Get_ArrayOfTimes(date:Date):TimespamView[]{
 
+       return ResourceSchedulingBE.Get_ArrayOfTimes(date,this.timeStart_timesp,this.TimeEnd_timesp,this.Duration,this.Description);
+    }
+
+    Get_ArrayOfTimes2(date:Date,chekWith:boolean):TimespamView[]{
+
+        if (chekWith)
+        {
+            if (!this.Date_IsContained(date))
+                return null;
+        }
+       return ResourceSchedulingBE.Get_ArrayOfTimes(date,this.timeStart_timesp,this.TimeEnd_timesp,this.Duration,this.Description);
+    }
 
    static Get_ArrayOfTimes(currentDate:Date,start:TimeSpan,  end:TimeSpan,  duration:number,  name:string):TimespamView[]
    {
+    var aux : TimeSpan= new TimeSpan();
+    
+    //console.log('---------------------Get_ArrayOfTimes (' + duration+')');
     let wTimespamView:TimespamView;
     var times :TimespamView[] = [];
     wTimespamView = new TimespamView(currentDate);
+    aux.Set_hhmmss(start.getHHMM()); 
+    wTimespamView.Time =aux ;
+    wTimespamView.TimeString=wTimespamView.Time.getHHMM();
+    //alert( start.Fecha.toISOString());
+    times.push(wTimespamView);
+    //wTimespamView = new TimespamView(currentDate);
     
-    let t : TimeSpan = start;
-    
+    var t : TimeSpan = new TimeSpan();//=  Object.assign({}, start); 
+    t.Set_hhmmss(start.getHHMM()); 
      let control :boolean=true;
-     let count = 0;
+    //  let count = 0;
     while(control){
 
         //Para este algoritmo colaboro el cuero mrenaudo 
@@ -433,30 +460,110 @@ export class ResourceSchedulingBE {
 
          if ((end.TotalMinutes - t.TotalMinutes) >= duration)
          {
-             count = count +1;
-             console.log((end.TotalMinutes - t.TotalMinutes));
-             if(count=20)
-             {
-                control = false    ;
+             //count = count +1;
+             //console.log(end.TotalMinutes + '-' + t.TotalMinutes + ' = '+ (end.TotalMinutes - t.TotalMinutes));
+            //  if(count==20)
+            //  {
+            //     control = false    ;
                 
-             }
+            //  }
              
             //alert((end.TotalMinutes - t.TotalMinutes) .toString());
-            wTimespamView = new TimespamView(currentDate);
-            wTimespamView.Time = t;
+            wTimespamView = new TimespamView(null);
             wTimespamView.Duration = duration;
             wTimespamView.Name = name;
-
-            times.push(wTimespamView);
-
-            //t = t.addMinutes(TimeSpan.FromMinutes(duration));
-            t.addMinutes(duration);
+             aux = new TimeSpan();
+             t.addMinutes(duration);
+             aux.Set_hhmmss(t.getHHMM()); 
+             
+             wTimespamView.Time =aux ;
+             wTimespamView.TimeString= aux.getHHMM();
+             times.push(wTimespamView);
+             //console.log('t.addMinutes(duration) = ' + t.TotalMinutes);
          }
-         else{ control=false;}
+         else{ control=false;}  
     }
-    
+    // console.log('------------------------------------------------------------------------');
     return times;
    }
+
+   /// <summary>
+        /// Determina si el dia de la fecha [date] pertenece a la confuguracion [WeekDays] mediante operaciones logicas y binarias
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+private  Date_IsContained(date:Date):boolean
+        {
+            var weekDay = WeekDays_EN.EveryDay;
+            let dayOfWeek = date.getDay();
+
+            switch (dayOfWeek)
+            {
+                case DayOfWeek.Monday://Lunes
+                    {
+                        weekDay = WeekDays_EN.Monday;
+                        break;
+                    }
+                case DayOfWeek.Tuesday://Martes
+                    {
+                        weekDay = WeekDays_EN.Tuesday;
+                        break;
+                    }
+                case DayOfWeek.Wednesday://Miercoles
+                    {
+                        weekDay = WeekDays_EN.Wednesday;
+                        break;
+                    }
+                case DayOfWeek.Thursday://Jueves
+                    {
+                        weekDay = WeekDays_EN.Thursday;
+                        break;
+                    }
+                case DayOfWeek.Friday://Viernes
+                    {
+                        weekDay = WeekDays_EN.Friday;
+                        break;
+                    }
+                case DayOfWeek.Saturday://Sabado
+                    {
+                        weekDay = WeekDays_EN.Saturday;
+
+                        break;
+                    }
+                case DayOfWeek.Sunday://Domingo
+                    {
+                        weekDay = WeekDays_EN.Sunday;
+                        break;
+                    }
+            }
+            var bin1:boolean[] = ResourceSchedulingBE.CreateBoolArray(weekDay);
+            return ResourceSchedulingBE.Math(bin1, this.weekDays_BinArray);
+        }
+
+        
+    /// <summary>
+    /// 0000111
+    /// 1000001 return True
+    /// 
+    /// 100000
+     /// 000010 return False
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    static Math(a:boolean[],b:boolean[]):boolean
+        {
+
+            for (var i = 0; i < a.length; i++) {
+                if (a[i] && b[i])
+                 return true;
+            }
+    
+            return false;
+         
+        }
+
 }
 
 export class GetProfesionalRes {

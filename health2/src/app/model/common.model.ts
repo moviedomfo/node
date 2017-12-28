@@ -29,76 +29,54 @@ export class TimeSpan{
     public TotalSeconds:number;
     
     public Tick:number;
+    private currentDuration:Duration;
+
     constructor(ticks?:number){
 
    }
    
    Set_hhmmss(hhmmss: string){
 
-    let duration:Duration = moment.duration(hhmmss);
-  
-    this.setFromDuration(duration);
-     this.hhmm=   this.getHHMM();
+     var startDate = new Date( 1,0,1,0,0,0,0) ;
+     let duration:Duration = moment.duration(hhmmss);
+
+     var day = new Date();
+     //alert(hhmmss +'  '+ duration.hours());
+     this.Fecha = new Date( day.getFullYear(),day.getMonth(),day.getDate(),duration.hours(),duration.minutes(),duration.seconds(),duration.milliseconds()) ;
+     
+     //alert(hhmmss +'  '+ duration.hours() + ' fecha = ' + this.Fecha.toString());
+
+     var startMomentDate = moment(startDate);
+     var endMomentDate = moment(this.Fecha);//moment('1/1/2013', 'DD/MM/YYYY');
+     //var days = endMomentDate.diff(startMomentDate, 'days');
+ 
+     
+     this.currentDuration = moment.duration(endMomentDate.diff(startMomentDate));
+
+     this.setFromDuration( this.currentDuration );
+    
    }
 
    setFromDuration( duration:Duration ){
 
     this.Days = duration.days();  //number of days in a duration
     this.Hours = duration.hours();
+    // console.log('hours:' + this.Hours);
     this.Minutes = duration.minutes();
+    // console.log('Minutes:' +this.Minutes);
     this.Seconds = duration.seconds();
+    // console.log('Seconds:' +this.Seconds);
     this.Milliseconds = duration.milliseconds();  //number of milliseconds in a duration
 
     
-    this.TotalDays = duration.asDays();//The length of the duration in days,
-    this.TotalHours = duration.asHours();//The length of the duration in minutes
-    this.TotalMinutes = duration.asMinutes();
-    this.TotalSeconds = duration.asSeconds();
-    this.TotalMilliseconds = duration.asMilliseconds();
-
-    // let x = moment.utc(duration.asMilliseconds()).format("HH:mm:ss");
-    // let y = moment.utc(duration.asMilliseconds());
-    // alert(y);
+    this.TotalDays = this.currentDuration.asDays();//The length of the duration in days,
+    this.TotalHours = this.currentDuration.asHours();//The length of the duration in minutes
+    this.TotalMinutes = this.currentDuration.asMinutes();
+    this.TotalSeconds = this.currentDuration.asSeconds();
+    this.TotalMilliseconds = this.currentDuration.asMilliseconds();
+    
+    this.hhmm=   moment(this.Fecha).format('HH:mm');
    }
-//    Set_ddhhmmss(dd: number, hhmmss: string) {
-
-//         let hhmmArray = hhmmss.split(':');
-//         let hh: number = 0;
-//         let mm: number = 0;
-//         let ss: number = 0;
-
-//         if (hhmmArray.length > 0) {
-//             hh = Number.parseInt(hhmmArray[0]);
-//         }
-//         if (hhmmArray.length > 1) {
-//             mm = Number.parseInt(hhmmArray[1]);
-//         }
-
-//         if (hhmmArray.length > 2) {
-//             ss = Number.parseInt(hhmmArray[2]);
-//         }
-
-//         this.Hours= hh;
-//         this.Minutes= mm;
-//         this.Seconds= ss;
-        
-//         var millisecondsPerDay = 24 * 60 * 60 * 1000;
-//         this.TotalMilliseconds = dd*this.TotalMilliseconds + (mm * 60 * 60 * 1000) +  (ss * 60 * 1000) ;
-//         this.Tick = this.TotalMilliseconds * this.TicksPerMillisecond;
-
-//         this.TotalSeconds = (this.TotalMilliseconds/1000) ;
-//         this.TotalMinutes = this.TotalSeconds / 60;
-//         this.TotalHours = this.TotalMinutes / 60;
-//         this.TotalDays = this.TotalHours / 24;
-        
-//         this.TotalDays  = Math.floor(fechaInicio.getTimezoneOffset() / millisecondsPerDay) - Math.floor(this.Fecha.getTimezoneOffset() / millisecondsPerDay);
-//         this.Fecha= new Date( day.getFullYear(),day.getMonth(),day.getDate(),hh,mm,0,0) ;
-
-//         this.Milliseconds = (this.TicksPerDay/this.TicksPerMillisecond ) - this.Fecha.getTime();
-
-//         this.Tick = Math.round(this.Fecha.getTime()/1000)
-//     }
-
    
     setDate(day: Date) {
         this.Fecha = day;
@@ -112,10 +90,22 @@ export class TimeSpan{
 
     addMinutes(m:number)
     {
-       let duration:Duration = moment.duration(this.Milliseconds,'milliseconds');
-       //duration = duration.add(m,'minutes');
-        duration.add(m,'minutes');
-        this.setFromDuration(duration);
+        //console.log('antes this.currentDuration.minutes == ' + this.currentDuration.minutes());
+       this.currentDuration.add(m,'minutes');
+
+       this.Fecha = new Date( 
+             this.Fecha.getFullYear(),this.Fecha.getMonth(),this.Fecha.getDate(),
+            this.currentDuration.hours(),
+            this.currentDuration.minutes(),
+            this.currentDuration.seconds(),
+            this.currentDuration.milliseconds()) ;
+
+  
+        this.setFromDuration(this.currentDuration);
+        // console.log('despues hh:mm == ' + this.currentDuration.hours() + ':' +  this.currentDuration.minutes());
+        // console.log('despues hh:mm == ' + this.hhmm);
+        // console.log('despues hh:mm == ' + this.getHHMM());
+        // console.log('despues hh:mm == ' + moment(this.Fecha).format('HH:mm'));
     
     }
     
@@ -126,7 +116,8 @@ export class TimeSpan{
     }
   
     getHHMM(){
-         return this.Minutes + ':' + this.Seconds;//  moment(this.TotalMinutes,'minutes').format('hh:mm');
+        return moment(this.Fecha).format('HH:mm');
+         //return this.Hours + ':' + this.Minutes;//  moment(this.TotalMinutes,'minutes').format('hh:mm');
     }
     public static FromString(hhmmss:string)
     {

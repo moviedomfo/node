@@ -1,104 +1,144 @@
+<fieldset>
 
- <section>
+  <legend>TimesPan</legend>
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">HH:MM a convertir</label>
+    <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" placeholder="hh:mm:ss" class="form-control input-md" #txtBox_hhmm (keyup.enter)="timeSpanParse(txtBox_hhmm.value);"
+        value="8:30:15">
 
-
-  <h2>TimesPan </h2>
-  <label for="" class="col-lg-2  text-danger">HH:MM a convertir </label>
-  <div class="col-lg-4">
-    <input class="form-control" #txtBox_hhmm (keyup.enter)="timeSpanParse(txtBox_hhmm.value);" value="8:30:15" />
-  </div>
-  <label for="" class="col-lg-2 text-info">Timespan.Fecha </label>
-  <div class="col-lg-4">
-    <input class="form-control" [(ngModel)]="time_start.Fecha" />
+    </div>
   </div>
 
-  <label for="" class="col-lg-2 text-info">Timespan.TotalDays </label>
-  <div class="col-lg-4">
-    <input class="form-control" [(ngModel)]="time_start.TotalDays" />
+  <div class="form-group">
+    <label for="" class="col-lg-2 text-info">Timespan.Fecha </label>
+    <div class="col-lg-4">
+      <input class="form-control" [(ngModel)]="time_start.Fecha" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-lg-2 text-info">Timespan.TotalDays </label>
+    <div class="col-lg-4">
+      <input class="form-control" [(ngModel)]="time_start.TotalDays" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-lg-2 text-info">Timespan.TotalHours </label>
+    <div class="col-lg-4">
+      <input class="form-control " [(ngModel)]="time_start.TotalHours" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-lg-2 text-info">Timespan.TotalMinutes </label>
+    <div class="col-lg-4">
+      <input class="form-control " [(ngModel)]="time_start.TotalMinutes" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-lg-2 text-info">Timespan.TotalSeconds </label>
+    <div class="col-lg-4">
+      <input class="form-control " [(ngModel)]="time_start.TotalSeconds" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-lg-2 text-info">Timespan.TotalMilliseconds </label>
+    <div class="col-lg-4">
+      <input class="form-control " [(ngModel)]="time_start.TotalMilliseconds" />
+    </div>
   </div>
 
+  <div class="form-group">
+    <label for="" class="col-lg-2 text-info">Timespan.Tick </label>
+    <div class="col-lg-4">
+      <input class="form-control" [(ngModel)]="time_start.Tick" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-lg-2 text-info">Timespan.HHMM </label>
+    <div class="col-lg-4">
+      <input class="form-control" [(ngModel)]="time_start.hhmm" />
+    </div>
+  </div>
+</fieldset>
 
-  <label for="" class="col-lg-2 text-info">Timespan.TotalHours </label>
-  <div class="col-lg-4">
-    <input class="form-control " [(ngModel)]="time_start.TotalHours" />
-  </div>
-  <label for="" class="col-lg-2 text-info">Timespan.TotalMinutes </label>
-  <div class="col-lg-4">
-    <input class="form-control " [(ngModel)]="time_start.TotalMinutes" />
-  </div>
 
 
-  <label for="" class="col-lg-2 text-info">Timespan.TotalSeconds </label>
-  <div class="col-lg-4">
-    <input class="form-control " [(ngModel)]="time_start.TotalSeconds" />
+<form>
+  <div class="form-group">
+    <label for="locale_months">Moment months</label>
+    <!-- <label>moment.locale('pt-BR')</label> -->
+
+    <input type="text" class="form-control" name="locale_months" aria-describedby="emailHelp" [(ngModel)]="meses">
+
   </div>
 
-  <label for="" class="col-lg-2 text-info">Timespan.TotalMilliseconds </label>
-  <div class="col-lg-4">
-    <input class="form-control " [(ngModel)]="time_start.TotalMilliseconds" />
+  <div class="form-group">
+    <label for="Duration">Duration 1440 </label>
+    <label class="form-control">{{duration.asHours()}} </label>
   </div>
-  <label for="" class="col-lg-2 text-info">Timespan.Tick </label>
-  <div class="col-lg-4">
-    <input class="form-control" [(ngModel)]="time_start.Tick" />
+
+  <div class="form-group">
+    <label for="Duration"> moment.duration('3:30:59').asHours() </label>
+    <label class="form-control">{{ duration2.asHours()}} </label>
   </div>
-  <label for="" class="col-lg-2 text-info">Timespan.HHMM </label>
+</form>
+
+  
+
+
+<fieldset>
+  <legend  class="text text-danger">TimespamView</legend>
+
+  <table class="table table-bordered">
+  
+    <tbody>
+      <tr>
+        <td class="text-info">Start Timespan</td>
+        <td class="text-info">End Timespan</td>
+      </tr>
+      <tr>
+        
+        <td><input id="name" class="form-control" placeholder="hh:mm"  [(ngModel)]="time_start.hhmm"></td>
+        <td><input id="name" class="form-control" placeholder="hh:mm"  [(ngModel)]="time_end.hhmm"></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+<!-- 
+<div class="form-group">
+  <label for="" class="col-lg-2 text-info">Start Timespan </label>
   <div class="col-lg-4">
     <input class="form-control" [(ngModel)]="time_start.hhmm" />
   </div>
-
-</section> 
-
-
-<form>
-    <div class="form-group">
-        <label for="locale_months">Moment months</label>
-        <!-- <label>moment.locale('pt-BR')</label> -->
-        
-        <input type="text" class="form-control" name="locale_months" aria-describedby="emailHelp"  [(ngModel)]="meses" >
-        
-      </div>
-
-      <div class="form-group">
-          <label for="Duration">Duration 1440 </label>
-          <label class="form-control">{{duration.asHours()}} </label>
-      </div>
-
-      <div class="form-group">
-          <label for="Duration"> moment.duration('3:30:59').asHours() </label>
-          <label class="form-control">{{ duration2.asHours()}} </label>
-      </div>
-</form>
-
-
-
-<h1>TimespamView</h1> 
-
-<label for="" class="col-lg-2 text-info">Start Timespan </label>
-<div class="col-lg-4">
-  <input class="form-control" [(ngModel)]="time_start.hhmm" />
 </div>
-<label for="" class="col-lg-2 text-info">End timespan </label>
-<div class="col-lg-4">
-  <input class="form-control" [(ngModel)]="time_end.hhmm" />
-</div>
-<form>
 
+<div class="form-group">
+  <label for="" class="col-lg-2 text-info">End timespan </label>
+  <div class="col-lg-4">
+    <input class="form-control" [(ngModel)]="time_end.hhmm" />
+  </div>
+</div> -->
 
-    <div class="form-group">
-        <label for="locale_months">Array of times</label>
-        <!-- <label>moment.locale('pt-BR')</label> -->
-        
-       <p>{{arrayOftimes | json}}</p>
-        
-      </div>
+  <div class="form-group">
+    <label for="locale_months">Array of times</label>
+    <!-- <label>moment.locale('pt-BR')</label> -->
 
-      <div class="form-group">
-          <label for="Duration">Duration 1440 </label>
-          <label class="form-control">{{duration.asHours()}} </label>
-      </div>
+    <div class="alert alert-info" style="text-align: center">
+      <p>{{arrayOftimes | json}}</p>
+    </div>
+    
 
-      <div class="form-group">
-          <label for="Duration"> moment.duration('3:30:59').asHours() </label>
-          <label class="form-control">{{ duration2.asHours()}} </label>
-      </div>
-</form>
+  </div>
+
+  <div class="form-group">
+    <label for="Duration">Duration 1440 </label>
+    <label class="form-control">{{duration.asHours()}} </label>
+  </div>
+
+  <div class="form-group">
+    <label for="Duration"> moment.duration('3:30:59').asHours() </label>
+    <label class="form-control">{{ duration2.asHours()}} </label>
+  </div>
+</fieldset>
+

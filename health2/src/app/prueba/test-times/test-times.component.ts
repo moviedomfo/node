@@ -37,13 +37,15 @@ export class TestTimesComponent implements OnInit {
     //alert(this.duration.asHours() );
     this.time_start.Set_hhmmss('08:30');
     this.time_end.Set_hhmmss('18:30');
-    let wTimespamView:TimespamView;
+ 
 
 
     this.arrayOftimes = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), this.time_start,this.time_end,30,'health dates');
     
   }
   
+
+
   timeSpanParse2(hhmm:string) {
     //this.time_start.Parse(hhmm);
     
@@ -64,8 +66,8 @@ export class TestTimesComponent implements OnInit {
   
       
   }
-  timeSpanParse(hhmm:string) {
-    this.time_start.Set_hhmmss(hhmm);
+  timeSpanParse(hhmmss:string) {
+    this.time_start.Set_hhmmss(hhmmss);
     
     //alert(this.time_start.Milliseconds);
       

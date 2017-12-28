@@ -11,6 +11,8 @@ import { ServiceError } from '../../../model/common.model';
 import { ModalDialogComponent } from '../../../commonComponents/modal-dialog/modal-dialog.component';
 
 import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
+import { ResourceSchedulingManageComponent } from "../resource-scheduling-manage/resource-scheduling-manage.component";
+import { ResourceSchedulingGridComponent } from "../resource-scheduling-grid/resource-scheduling-grid.component";
 
 @Component({
   selector: 'app-profesional-manage',
@@ -27,6 +29,9 @@ export class ProfesionalManageComponent implements AfterViewInit {
   isEdit:boolean;
   isEditMode_resource_scheduling:boolean;
 
+  @ViewChild('resourceSchedulingManageComponent1') resourceSchedulingManageComponent: ResourceSchedulingManageComponent;
+  @ViewChild('resourceSchedulingGrid1') resourceSchedulingGridComponent: ResourceSchedulingGridComponent;
+  
   constructor(private route: ActivatedRoute,
     private profesionalService: ProfesionalService,
     private commonService: CommonService,
@@ -141,5 +146,13 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
   updateProfesional   (){
 
+  }
+  resource_scheduling_dialog_Acept(){
+    
+    var resourceSchedulin_copy = Object.assign({}, this.resourceSchedulingManageComponent.currentResourceScheduling);
+   
+    this.currentResourceSchedulingList.push(resourceSchedulin_copy);
+    alert(JSON.stringify( resourceSchedulin_copy));
+    alert(JSON.stringify( this.currentResourceSchedulingList));
   }
 }

@@ -70,6 +70,7 @@ export class ResourceSchedulingGridComponent implements OnInit {
     this.api = params.api;
     this.columnApi = params.columnApi;
 }
+
 public showGrid() {
   
   this.api.setRowData(this.profesionalResourceSchedulingList);

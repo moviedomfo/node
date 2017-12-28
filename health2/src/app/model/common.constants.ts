@@ -149,28 +149,17 @@ export const AppoimantsStatus_SP_type=
     }
     export const  WeekDays_EN =
     {
-        // Summary:
-        //     Specifies Sunday.
+
         Sunday : 1,
-        //
-        // Summary:
-        //     Specifies Monday.
+
         Monday : 2,
-        //
-        // Summary:
-        //     Specifies Tuesday.
+
         Tuesday : 4,
-        //
-        // Summary:
-        //     Specifies Wednesday.
+
         Wednesday : 8,
-        //
-        // Summary:
-        //     Specifies Thursday.
+
         Thursday : 16,
-        //
-        // Summary:
-        //     Specifies Friday.
+
         Friday : 32,
         //
         // Summary:
@@ -189,6 +178,21 @@ export const AppoimantsStatus_SP_type=
         //     Specifies every day of the week.
         EveryDay : 127
     }
+
+     //
+    // Summary:
+    //     Specifies the day of the week c# System
+   export const DayOfWeek=
+    {
+        Sunday : 0,
+        Monday : 1,
+        Tuesday : 2,
+        Wednesday : 3,
+        Thursday : 4,
+        Friday : 5,
+        Saturday : 6
+    }
+
     export const MonthsShortName_ES=
     {
         ENE : 1,
