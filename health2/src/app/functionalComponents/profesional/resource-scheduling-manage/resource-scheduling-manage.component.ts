@@ -36,6 +36,7 @@ export class ResourceSchedulingManageComponent implements OnInit {
 
       this.currentResourceScheduling.TimeStart ='08:30';
       this.currentResourceScheduling.TimeEnd ='18:30';
+      this.currentResourceScheduling.WeekDays= 0;
     }
 
     this.arrayOfTimes = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), time_start,time_end,30,'health dates');

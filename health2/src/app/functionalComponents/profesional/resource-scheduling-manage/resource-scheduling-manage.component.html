@@ -13,8 +13,8 @@
     </div>
     
       <!-- Permite seleccionar los dias de la semana y establece  -->
-      <app-week-days-check-edit
-      [WeekDays]='currentResourceScheduling.WeekDays'
+      <app-week-days-check-edit #weekDaysCheckEdit
+        [resourceSchedulingBE]='currentResourceScheduling'
       >  </app-week-days-check-edit>
     <p>
       <div class="form-group">
