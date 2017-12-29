@@ -1,6 +1,6 @@
 import { PersonBE } from '../model/persons.model';
 import { HelperBE, HealthInstitutionBE, User, TimeSpan } from '../model/common.model';
-import { DayNamesIndex_Value_ES, AppoimantsStatus_SP, AppoimantsStatus_SP_type, WeekDays_EN, DayOfWeek } from "./common.constants";
+import { DayNamesIndex_Value_ES, AppoimantsStatus_SP, AppoimantsStatus_SP_type, WeekDays_EN, DayOfWeek, HealtConstants } from "./common.constants";
 
 
 //import {Enumerable} from 'typescript-dotnet-es6/System.Linq/Linq';
@@ -268,7 +268,21 @@ export class TimespamView {
 
 export class ResourceSchedulingBE {
 
+  constructor (){
+      
+      this.WeekDays = 0;
+      this.DateStart = null;
+      this.DateEnd = null;
+      this.Duration = 30;
+      this.Description = '';
+      this.TimeStart = '08:30';
+      this.TimeEnd = '18:30';
+      this.TimeStart_timesp = TimeSpan.FromHHMM('08:30');
+      this.TimeEnd_timesp = TimeSpan.FromHHMM('08:30');
+      this.HealthInstitutionId = HealtConstants.DefaultHealthInstitutionId;
+      this.Generate_Attributes();
 
+  }
     public IdSheduler: number;
     public DateStart?: Date;
     public DateEnd: Date;
@@ -309,11 +323,13 @@ export class ResourceSchedulingBE {
     //ejemplo "Miercoles|Jueves|Viernes"
     public WeekDays_List: string;
 
-    Geenerate_Attributes(){
+    public Generate_Attributes(){
         
         this.weekDays_BinArray= this.Get_WeekDays_BinArray();
+        alert(this.weekDays_BinArray);
+        //console.log('this.weekDays_BinArray = ' + this.weekDays_BinArray);
         this.WeekDays_List = this.getDayNames().join("|");
-        
+        //console.log('this.WeekDays_List = ' + this.WeekDays_List);
         this.timeStart_timesp = new TimeSpan(null);
         this.timeStart_timesp.Set_hhmmss(this.TimeStart);
         
@@ -336,8 +352,8 @@ export class ResourceSchedulingBE {
 
         if (!this.WeekDays)
             this.WeekDays = 0;
-        if (!this.weekDays_BinArray)
-            this.weekDays_BinArray = ResourceSchedulingBE.CreateBoolArray(this.WeekDays);
+        //if (!this.weekDays_BinArray)
+        this.weekDays_BinArray = ResourceSchedulingBE.CreateBoolArray(this.WeekDays);
         return this.weekDays_BinArray;
 
 
@@ -386,9 +402,9 @@ export class ResourceSchedulingBE {
         let stack = [];
         let stackInvertida: boolean[] = [];
         var weekdays_to_bin = Number(weekdays).toString(2);
-
+        
         var weekdays_to_bin_Array = weekdays_to_bin.split('');
-
+        
         let val: boolean;
         //Recorro el vector desde atras y los voy metiendo en la pila
         for (let i: number = weekdays_to_bin_Array.length - 1; i >= 0; i--) {

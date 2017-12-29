@@ -12,6 +12,7 @@ import { HeaderComponent } from "../../../commonComponents/ag-grid/header.compon
 import { HeaderGroupComponent } from "../../../commonComponents/ag-grid/header-group.component";
 import { ColumnApi, GridApi, GridOptions } from "ag-grid/main";
 import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
+import { WeekDaysCheckEditComponent } from "../../../commonComponents/week-days-check-edit/week-days-check-edit.component";
 
 @Component({
   selector: 'app-resource-scheduling-grid',
@@ -35,7 +36,7 @@ export class ResourceSchedulingGridComponent implements OnInit {
   private icons: any;
   private api: GridApi;
   private columnApi: ColumnApi;
-
+  
   constructor() { }
 
   ngOnInit() {

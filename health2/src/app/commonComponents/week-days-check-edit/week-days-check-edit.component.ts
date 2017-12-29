@@ -55,7 +55,8 @@ export class WeekDaysCheckEditComponent implements OnInit {
         this.resourceSchedulingBE.WeekDays = 0; 
 
      // this.resourceSchedulingBE.WeekDays = this.resourceSchedulingBE.WeekDays;
-      this.weekdays_to_bin_Array = this.resourceSchedulingBE.Get_WeekDays_BinArray();
+     // this.weekdays_to_bin_Array = this.resourceSchedulingBE.Get_WeekDays_BinArray();
+
       return;
     }
 
@@ -65,21 +66,35 @@ export class WeekDaysCheckEditComponent implements OnInit {
       //this.WeekDays = this.WeekDays - 127;
       this.chkDays.chkTodos=false;
     }
-
+    
     if (checked === true) {
       //console.log('Suma ' + value);
       this.resourceSchedulingBE.WeekDays = this.resourceSchedulingBE.WeekDays + value;
     }
     else {
-      //  console.log('Resta ' + value);
+        //console.log('Resta ' + value);
       this.resourceSchedulingBE.WeekDays = this.resourceSchedulingBE.WeekDays - value;
     }
 
-
-    this.resourceSchedulingBE.WeekDays = this.resourceSchedulingBE.WeekDays;
+    
+    
     this.weekdays_to_bin_Array = this.resourceSchedulingBE.Get_WeekDays_BinArray();
+
+    
   }
 
+  Init(){
+    let checked:boolean=false;
+    this.chkDays.chkDomingo = checked;
+    this.chkDays.chkLunes = checked;
+    this.chkDays.chkMartes = checked;
+    this.chkDays.chkMiercoles = checked;
+    this.chkDays.chkJueves = checked;
+    this.chkDays.chkViernes = checked;
+    this.chkDays.chkSabado = checked;
+    this.chkDays.chkTodos = checked;
+    
+  }
   show() {
     alert(this.resourceSchedulingBE.Get_WeekDays_BinArray());
   }

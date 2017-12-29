@@ -13,6 +13,7 @@ import { ModalDialogComponent } from '../../../commonComponents/modal-dialog/mod
 import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
 import { ResourceSchedulingManageComponent } from "../resource-scheduling-manage/resource-scheduling-manage.component";
 import { ResourceSchedulingGridComponent } from "../resource-scheduling-grid/resource-scheduling-grid.component";
+import { WeekDaysCheckEditComponent } from "../../../commonComponents/week-days-check-edit/week-days-check-edit.component";
 
 @Component({
   selector: 'app-profesional-manage',
@@ -31,6 +32,8 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
   @ViewChild('resourceSchedulingManageComponent1') resourceSchedulingManageComponent: ResourceSchedulingManageComponent;
   @ViewChild('resourceSchedulingGrid1') resourceSchedulingGridComponent: ResourceSchedulingGridComponent;
+  
+  
   
   constructor(private route: ActivatedRoute,
     private profesionalService: ProfesionalService,
@@ -151,10 +154,12 @@ export class ProfesionalManageComponent implements AfterViewInit {
   }
 
   resource_scheduling_dialog_Acept(){
+    this.resourceSchedulingManageComponent.currentResourceScheduling.Generate_Attributes();
+    var resourceSchedulin_copy:ResourceSchedulingBE = Object.assign({}, this.resourceSchedulingManageComponent.currentResourceScheduling);
     
-    var resourceSchedulin_copy = Object.assign({}, this.resourceSchedulingManageComponent.currentResourceScheduling);
-   
+    //resourceSchedulin_copy.Generate_Attributes();
     this.currentResourceSchedulingList.push(resourceSchedulin_copy);
+
     this.resourceSchedulingManageComponent.currentResourceScheduling = new ResourceSchedulingBE();
     
     this.resourceSchedulingGridComponent.showGrid();
