@@ -53,6 +53,8 @@ export class ProfesionalManageComponent implements AfterViewInit {
   ngOnInit() {
     
     this.preInitialize();
+
+    
     
   }
 
@@ -163,6 +165,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
     this.resourceSchedulingManageComponent.currentResourceScheduling = new ResourceSchedulingBE();
     
     this.resourceSchedulingGridComponent.showGrid();
+    this.resourceSchedulingManageComponent.preinItialize();
     // alert(JSON.stringify( resourceSchedulin_copy));
     // alert(JSON.stringify( this.currentResourceSchedulingList));
   }

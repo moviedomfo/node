@@ -31,6 +31,18 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
    
   }
   ngOnInit() {
+    this.preinItialize();
+  }
+
+
+  on_chkTodos(value:boolean){
+      alert('on_chkTodos ' + value);
+  }
+
+  public preinItialize()
+  {
+    this.weekDaysCheckEdit.Init();
+    
     var time_start: TimeSpan = new TimeSpan();
     var time_end: TimeSpan = new TimeSpan();
     time_start.Set_hhmmss('08:30');
@@ -63,12 +75,5 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
 
     this.arrayOfTimes = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), time_start, time_end, 30, 'health dates');
   }
-
-
-  on_chkTodos(value:boolean){
-      alert('on_chkTodos ' + value);
-  }
-
-
 
 }
