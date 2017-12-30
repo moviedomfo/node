@@ -18,6 +18,8 @@ export class WeekDaysCheckEditComponent implements OnInit {
   @Input()
   resourceSchedulingBE: ResourceSchedulingBE;
   private weekdays_to_bin_Array: boolean [];
+
+
   ngOnInit() {
     if(!this.resourceSchedulingBE)
     {
@@ -84,6 +86,7 @@ export class WeekDaysCheckEditComponent implements OnInit {
   }
 
   Init(){
+    if(!this.chkDays) return;
     let checked:boolean=false;
     this.chkDays.chkDomingo = checked;
     this.chkDays.chkLunes = checked;

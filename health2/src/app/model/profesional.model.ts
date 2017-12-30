@@ -326,7 +326,7 @@ export class ResourceSchedulingBE {
     public Generate_Attributes(){
         
         this.weekDays_BinArray= this.Get_WeekDays_BinArray();
-        alert(this.weekDays_BinArray);
+        
         //console.log('this.weekDays_BinArray = ' + this.weekDays_BinArray);
         this.WeekDays_List = this.getDayNames().join("|");
         //console.log('this.WeekDays_List = ' + this.WeekDays_List);

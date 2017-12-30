@@ -10,6 +10,8 @@ import { WeekDaysCheckEditComponent } from "../../../commonComponents/week-days-
   
   encapsulation: ViewEncapsulation.None
 })
+
+//allows create and edit ResourceSchedulingBE. this component contains weekDaysCheckEdit
 export class ResourceSchedulingManageComponent implements AfterViewInit {
   globalError: ServiceError;
   arrayOfTimes:TimespamView[];
@@ -18,9 +20,9 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
  
   @Input()  
   isEditMode:boolean;
-  @Output() OnResourceCreated = new EventEmitter<ResourceSchedulingBE>();
+  //@Output() OnResourceCreated = new EventEmitter<ResourceSchedulingBE>();
   @Output() OnComponentError = new EventEmitter<ServiceError>();
-  @ViewChild('WeekDaysCheckEditComponent') weekDaysCheckEdit: WeekDaysCheckEditComponent;
+  @ViewChild('weekDaysCheckEdit') weekDaysCheckEdit: WeekDaysCheckEditComponent;
 
   private ArrayOfTimes : TimespamView[];
   constructor() { 
@@ -41,7 +43,7 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
 
   public preinItialize()
   {
-    this.weekDaysCheckEdit.Init();
+ 
     
     var time_start: TimeSpan = new TimeSpan();
     var time_end: TimeSpan = new TimeSpan();
@@ -70,7 +72,7 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
         return;
       }
     }
-
+    this.weekDaysCheckEdit.Init();
 
 
     this.arrayOfTimes = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), time_start, time_end, 30, 'health dates');

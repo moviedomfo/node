@@ -6,9 +6,9 @@
 
 <app-error-box-container [globalError]="globalError"></app-error-box-container>
 
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Datos principales</a>
+<ul class="nav nav-tabs " role="tablist">
+  <li class="nav-item ">
+    <a class="nav-link  active" href="#profile" role="tab" data-toggle="tab">Datos principales</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#sheduling" role="tab" data-toggle="tab">Programación de turnos</a>
@@ -48,7 +48,7 @@
       <h1>Medio de contacto </h1>
     </section>
   </div>
-  <div role="tabpanel" class="tab-pane fade in active" id="profJson">
+  <div role="tabpanel" class="tab-pane fade" id="profJson">
     <div class="alert-info">
 
       <div>Current Profesional </div>
@@ -97,15 +97,16 @@
 
       </div>
       <div class="modal-body">
-        <app-resource-scheduling-manage #resourceSchedulingManageComponent1 [isEditMode]="isEditMode_resource_scheduling" (OnResourceCreated)="OnResourceCreated"
+        <app-resource-scheduling-manage #resourceSchedulingManageComponent1 
+          [currentResourceScheduling]="currentResourceScheduling"
+          [isEditMode]="isEditMode_resource_scheduling" 
           (OnComponentError)="OnComponentError">
         </app-resource-scheduling-manage>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button #closeBtn type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_Acept()">Aceptar</button>
-        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resource_scheduling_dialog_confirm()">OK</button>
-        <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_close()">Cancel</button> -->
+     
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { ProfesionalService, CommonService } from '../../../service/index';
-import { ProfesionalBE, PersonBE,  GetProfesionalRes,HealthInstitution_ProfesionalBE, ResourceSchedulingBE,User,IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants ,contextInfo} from '../../../model/index';
+import { ProfesionalBE, PersonBE, GetProfesionalRes, HealthInstitution_ProfesionalBE, ResourceSchedulingBE, User, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants, contextInfo } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
@@ -23,49 +23,50 @@ import { WeekDaysCheckEditComponent } from "../../../commonComponents/week-days-
 export class ProfesionalManageComponent implements AfterViewInit {
   globalError: ServiceError;
   public currentProfesional: ProfesionalBE;
-  currentResourceSchedulingList:ResourceSchedulingBE[];
-  currentHealthInstitution_ProfesionalBE:HealthInstitution_ProfesionalBE;
-  currentUser:User;
+  currentResourceSchedulingList: ResourceSchedulingBE[];
+  currentHealthInstitution_ProfesionalBE: HealthInstitution_ProfesionalBE;
+  currentUser: User;
   getProfesionalRes$: Observable<GetProfesionalRes>;
-  isEdit:boolean;
-  isEditMode_resource_scheduling:boolean;
-
+  isEdit: boolean;
+  isEditMode_resource_scheduling: boolean;
+  currentResourceScheduling = new ResourceSchedulingBE();
   @ViewChild('resourceSchedulingManageComponent1') resourceSchedulingManageComponent: ResourceSchedulingManageComponent;
   @ViewChild('resourceSchedulingGrid1') resourceSchedulingGridComponent: ResourceSchedulingGridComponent;
-  
-  
-  
+
+
+
   constructor(private route: ActivatedRoute,
     private profesionalService: ProfesionalService,
     private commonService: CommonService,
-    private dialogService:DialogService 
-    ) { 
+    private dialogService: DialogService
+  ) {
+
     
-      //super(dialogService);
-      
-    }
+
+  }
 
 
-    ngAfterViewInit(): void {
-   
-     }
-    
+  ngAfterViewInit(): void {
+
+  }
+
   ngOnInit() {
-    
+
     this.preInitialize();
 
-    
-    
+
+
   }
 
   private preInitialize() {
-    this.isEditMode_resource_scheduling=false;
-    //this.resourceSchedulingManageComponent.currentResourceScheduling = new ResourceSchedulingBE();
+    this.isEditMode_resource_scheduling = false;
+
+    this.resourceSchedulingManageComponent.currentResourceScheduling = this.currentResourceScheduling;
     //alert('ngOnInit preInitialize ProfesionalManageComponent');
     this.currentProfesional = new ProfesionalBE();
     this.currentProfesional.Persona = new PersonBE(-1, "");
-   
-    
+
+
     var id: any;
 
     this.route.params.subscribe(params => {
@@ -75,17 +76,17 @@ export class ProfesionalManageComponent implements AfterViewInit {
     });
 
     if (this.isEdit) {
-     
+
       //Busco el paciente
-      this.getProfesionalRes$ = this.profesionalService.getProfesionalService$(true,true,id.id,contextInfo.UserId,HealtConstants.DefaultHealthInstitutionId,true);
-      
+      this.getProfesionalRes$ = this.profesionalService.getProfesionalService$(true, true, id.id, contextInfo.UserId, HealtConstants.DefaultHealthInstitutionId, true);
+
       this.getProfesionalRes$.subscribe(
         res => {
-       
+
           this.currentProfesional = res.ProfesionalBE;
-          
+
           if (this.currentProfesional != null) {
-            
+
             this.currentResourceSchedulingList = res.ResourceSchedulingList;
             this.currentHealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE;
             this.currentUser = res.User;
@@ -96,7 +97,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
           }
         },
         err => {
-          
+
           this.globalError = err;
         }
       );
@@ -110,63 +111,61 @@ export class ProfesionalManageComponent implements AfterViewInit {
       this.currentProfesional.FechaAlta = new Date();
       this.currentProfesional.Persona.FechaNacimiento = new Date();
       this.currentProfesional.Persona.NroDocumento = "0";
-      this.currentUser= new  User();
+      this.currentUser = new User();
     }
   }
-  btnAddResorceSheduling(){
-    
-  }
+
   OnComponentError_profesionalCard(err: ServiceError) {
-       this.globalError = err;
-     }
-
-
-     OnResourceCreated(resosurceSheduling:ResourceSchedulingBE){
-
-     }
-
-   
+    this.globalError = err;
+  }
 
 
 
-  show_resource_scheduling_dialog(isEdit:boolean){
-         
-    this.isEditMode_resource_scheduling=isEdit;
+
+
+
+  show_resource_scheduling_dialog(isEdit: boolean) {
+
+    this.resourceSchedulingManageComponent.preinItialize();
+    this.isEditMode_resource_scheduling = isEdit;
+    this.resourceSchedulingManageComponent.currentResourceScheduling.ResourceId=this.currentProfesional.IdProfesional;
+    this.resourceSchedulingManageComponent.currentResourceScheduling.ResourceType =null;
+    
     //alert(this.isEditMode_resource_scheduling);
   }
-  
-  resource_scheduling_dialog_confirm() {
-    // this.result = false;
-    // this.close();
+
+
+
+  onResourceSchedulingChanged(currentResourceScheduling: ResourceSchedulingBE) {
+
   }
-  resource_scheduling_dialog_close() {
+
+
+  @ViewChild('closeBtn') closeBtn: ElementRef;
+
+  resource_scheduling_dialog_Acept() {
     
-  }
-
-  onResourceSchedulingChanged(currentResourceScheduling :ResourceSchedulingBE){
-
-  }
-
-  createProfesional   (){
-    
-  }
-
-  updateProfesional   (){
-
-  }
-
-  resource_scheduling_dialog_Acept(){
     this.resourceSchedulingManageComponent.currentResourceScheduling.Generate_Attributes();
-    var resourceSchedulin_copy:ResourceSchedulingBE = Object.assign({}, this.resourceSchedulingManageComponent.currentResourceScheduling);
-    
+    var resourceSchedulin_copy: ResourceSchedulingBE = Object.assign({}, this.resourceSchedulingManageComponent.currentResourceScheduling);
+
     //resourceSchedulin_copy.Generate_Attributes();
     this.currentResourceSchedulingList.push(resourceSchedulin_copy);
 
     this.resourceSchedulingManageComponent.currentResourceScheduling = new ResourceSchedulingBE();
-    
+
     this.resourceSchedulingGridComponent.showGrid();
-    this.resourceSchedulingManageComponent.preinItialize();
-    // alert(JSON.stringify( resourceSchedulin_copy));
-    // alert(JSON.stringify( this.currentResourceSchedulingList));
+    //this.resourceSchedulingManageComponent.preinItialize();
+    this.closeBtn.nativeElement.click();
+
+
+  }
+
+
+  createProfesional() {
+
+  }
+
+  updateProfesional() {
+
   }
 }
