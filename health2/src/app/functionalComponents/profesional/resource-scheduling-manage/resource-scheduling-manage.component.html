@@ -1,20 +1,26 @@
 <!-- Form levantado como popup que permite generar un ResourceScheduling -->
-<form name="complexForm">
+<form  #f="ngForm" novalidate>
     <div class="form-group">
-      <label for="rsDescription">Descripcion de la jornada</label>
-      <textarea type="text" class="form-control" required name="rsDescription" aria-describedby="emailHelp" placeholder="Descripcion"  rows="3" [(ngModel)]="currentResourceScheduling.Description">
+        <small [hidden]="Description.valid || (Description.pristine)"   
+        class="form-text text-danger">Ingrese alguna descripción para esta programación de turno
+    </small>
+      <label for="description">Descripcion de la jornada</label>
+      <textarea type="text" class="form-control" required name="Description"  #Description="ngModel" [(ngModel)]="currentResourceScheduling.Description" aria-describedby="emailHelp" placeholder="Descripción"  rows="3" >
       </textarea>
-      <small id="rsDescription_req" [display]="true" class="form-text text-muted">Ingrese alguna descripción para esta programación de turno</small>
+
     </div>
     <div class="form-group">
-      <label for="rsDuration">Duración</label>
-      <input type="number" lass="form-control"  name="rsDuration"   [(ngModel)]="currentResourceScheduling.Duration"/>
+      <label for="duration">Duración</label>
+      <input type="number" lass="form-control"required name="duration"    #duration="ngModel"  [(ngModel)]="currentResourceScheduling.Duration"/>
+      <small [hidden]="duration.valid || (duration.pristine)"   
+          class="form-text text-danger">Duración es obligatorio
+      </small>
     </div>
     
       <!-- Permite seleccionar los dias de la semana y establece  -->
       <app-week-days-check-edit #weekDaysCheckEdit
-        [resourceSchedulingBE]='currentResourceScheduling'
-      >  </app-week-days-check-edit>
+        [resourceSchedulingBE]='currentResourceScheduling'>
+        </app-week-days-check-edit>
     <p>
       <div class="form-group">
         <p class="text-primary">Hora inicio</p>
@@ -36,4 +42,4 @@
       </div>
     
 
-  </form>
+    </form>

@@ -1,5 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+ 
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { TestModule } from './test.module';
@@ -67,10 +69,10 @@ import { WeekDaysCheckEditComponent } from './commonComponents/week-days-check-e
   ],
   imports: [
     AgmCoreModule.forRoot({
-    apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
-    libraries: ['places']  })
+      apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
+      libraries: ['places']  })
     ,
-    BrowserModule,
+    BrowserModule,ReactiveFormsModule ,
     AgGridModule.withComponents([
       DateComponent,
       HeaderComponent,
@@ -79,7 +81,7 @@ import { WeekDaysCheckEditComponent } from './commonComponents/week-days-check-e
   ]),
   BootstrapModalModule,
   FormsModule,
-  ReactiveFormsModule,
+  //ReactiveFormsModule,
   HttpModule,
   rutesModule,
   TestModule
