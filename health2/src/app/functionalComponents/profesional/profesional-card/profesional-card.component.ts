@@ -8,12 +8,13 @@ import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { ServiceError } from '../../../model/common.model';
+import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-profesional-card',
   templateUrl: './profesional-card.component.html',
-  
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ]
 })
 export class ProfesionalCardComponent implements AfterViewInit {
  

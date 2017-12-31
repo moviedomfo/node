@@ -13,12 +13,13 @@ import { HeaderGroupComponent } from "../../../commonComponents/ag-grid/header-g
 import { ColumnApi, GridApi, GridOptions } from "ag-grid/main";
 import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
 import { WeekDaysCheckEditComponent } from "../../../commonComponents/week-days-check-edit/week-days-check-edit.component";
+import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-resource-scheduling-grid',
   templateUrl: './resource-scheduling-grid.component.html',
-  styleUrls: ['./resource-scheduling-grid.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ]
 })
 
 

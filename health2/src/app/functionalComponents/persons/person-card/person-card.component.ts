@@ -10,10 +10,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { AlertBlockComponent } from '../../../commonComponents/alert-block/alert-block.component';
 import { ServiceError } from '../../../model/common.model';
+import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-person-card',
-  templateUrl: './person-card.component.html'
+  templateUrl: './person-card.component.html', 
+  viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ]
   
 })
 export class PersonCardComponent implements AfterViewInit {

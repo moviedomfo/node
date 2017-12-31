@@ -1,4 +1,4 @@
-<form>
+<fieldset ngModelGroup="personCard">
   <app-alert-block #alertBlock1></app-alert-block>
   <div class="contentform">
     <div class="leftcontact">
@@ -47,7 +47,10 @@
         <span class="icon-case">
           <i class="fa fa-user"></i>
         </span>
-        <input type="text" name="nombre" id="nombre" data-rule="required" [(ngModel)]="currentPerson.Nombre" />
+        <input type="text" name="nombre" data-rule="required" #nombre="ngModel" [(ngModel)]="currentPerson.Nombre" />
+        <small [hidden]="nombre.valid || (nombre.pristine)" class="form-text text-danger">
+            El nombre es requerido
+        </small>
 
       </div>
       <div class="form-group">
@@ -84,8 +87,7 @@
         </span>
         <input type="text" name="NroDocumento" #txtBox_NroDocumento maxlength="8" placeholder="Nro Documento" [(ngModel)]="currentPerson.NroDocumento"
         />
-        <!-- <input class="form-control" name="nroDoc" type="text" maxlength="8" placeholder="Nro Documento" [(ngModel)]="currentPerson.NroDocumento" 
-          #txtBox_NroDocumento2/>-->
+    
       </div>
 
 
@@ -105,4 +107,4 @@
 
     </div>
   </div>
-</form>
+</fieldset>

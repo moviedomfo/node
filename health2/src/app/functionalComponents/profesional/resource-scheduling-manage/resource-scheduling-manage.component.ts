@@ -3,12 +3,14 @@ import { ResourceSchedulingBE, TimespamView } from "../../../model/profesional.m
 import { ServiceError, TimeSpan } from "../../../model/common.model";
 import { HealtConstants } from "../../../model/common.constants";
 import { WeekDaysCheckEditComponent } from "../../../commonComponents/week-days-check-edit/week-days-check-edit.component";
+import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-resource-scheduling-manage',
   templateUrl: './resource-scheduling-manage.component.html',
   
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ]
 })
 
 //allows create and edit ResourceSchedulingBE. this component contains weekDaysCheckEdit
