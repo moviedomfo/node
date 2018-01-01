@@ -60,8 +60,10 @@
         <span class="icon-case">
           <i class="fa fa-user"></i>
         </span>
-        <input type="text" name="apellido" id="apellido" data-rule="required" [(ngModel)]="currentPerson.Apellido" />
-
+        <input type="text" name="apellido" #apellido="ngModel" data-rule="required" [(ngModel)]="currentPerson.Apellido" />
+        <small [hidden]="apellido.valid || (apellido.pristine)" class="form-text text-danger">
+            El apellido es requerido
+        </small> 
       </div>
 
 
@@ -85,8 +87,8 @@
         <span class="icon-case">
           <i class="fa fa-building-o"></i>
         </span>
-        <input type="text" name="NroDocumento" #txtBox_NroDocumento maxlength="8" placeholder="Nro Documento" [(ngModel)]="currentPerson.NroDocumento"
-        />
+        <input type="text" name="NroDocumento" #txtBox_NroDocumento maxlength="8" placeholder="Nro Documento" 
+        [(ngModel)]="currentPerson.NroDocumento"/>
     
       </div>
 

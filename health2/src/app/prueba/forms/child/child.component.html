@@ -1,0 +1,28 @@
+    <!--adrress group-->
+    <div ngModelGroup="persona">
+        <!--nombre-->
+        <div>
+            <label>Nombre</label>
+            <input type="text" name="nombre" [(ngModel)]="person.Nombre" #nombre="ngModel" required>
+            <small [hidden]="nombre.valid || (nombre.pristine && !f.submitted)" class="text-danger">
+                Nombre is required.
+            </small>
+        </div>
+
+        <!--apellido-->
+        <div>
+            <label>Apellido</label>
+            <input type="text" name="apellido" [(ngModel)]="person.Apellido" #apellido="ngModel" required maxlength="10">
+            <small [hidden]="apellido.valid || (apellido.pristine && !f.submitted)" class="text-danger">
+                Apellido is required.
+            </small>
+        </div>
+        <div>
+                <label>FechaNacimiento</label>
+                <input type="date" name="FechaNacimiento" [(ngModel)]="person.FechaNacimiento"  #FechaNacimiento="ngModel" required>
+                <small [hidden]="FechaNacimiento.valid" class="text-danger">
+                        FechaNacimiento is required.
+                </small>
+            </div>
+        
+    </div>

@@ -1,0 +1,15 @@
+<form #f ="ngForm" novalidate (ngSubmit)="onSubmit(f.value, f.valid)">
+    
+  <!--IdProfesional-->
+    <div class="form-group">
+      <label for="IdProfesional">Id del Profesional</label>
+      <input placeholder="Id Prefesion" class="form-control" name="IdProfesional" type="number" #IdProfesional="ngModel" [(ngModel)]="profesional.IdProfesional" required>
+      <small [hidden]="IdProfesional.valid || (IdProfesional.pristine)" class="text-danger">
+          IdProfesional is required.
+      </small>
+    </div>
+
+    <app-child [person]="profesional.Persona"></app-child>
+
+    <button class = "btn btn-danger" type="submit"  >Acept</button>
+</form>
