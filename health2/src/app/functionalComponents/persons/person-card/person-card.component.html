@@ -87,8 +87,8 @@
         <span class="icon-case">
           <i class="fa fa-building-o"></i>
         </span>
-        <input type="text" name="NroDocumento" #NroDocumento="ngModel" maxlength="8" placeholder="Nro Documento" 
-        [(ngModel)]="currentPerson.NroDocumento" required maxlength="8"/>
+        <input type="text" name="NroDocumento" #NroDocumento="ngModel"  placeholder="Nro Documento" 
+        [(ngModel)]="currentPerson.NroDocumento" required />
         <small [hidden]="NroDocumento.valid || (NroDocumento.pristine)" class="form-text text-danger">
             El apellido es requerido
         </small> 

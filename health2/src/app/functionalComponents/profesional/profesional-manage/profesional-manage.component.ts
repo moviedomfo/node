@@ -142,8 +142,9 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
 
   @ViewChild('closeBtn') closeBtn: ElementRef;
-
-  resource_scheduling_dialog_Acept() {
+  
+  onSubmit_resourceShedulingForm(){
+  //resource_scheduling_dialog_Acept() {
 
     this.resourceSchedulingManageComponent.currentResourceScheduling.Generate_Attributes();
     var resourceSchedulin_copy: ResourceSchedulingBE = Object.assign({}, this.resourceSchedulingManageComponent.currentResourceScheduling);
@@ -159,8 +160,9 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
 
   }
-  onSubmit(value, isValid: boolean) {
+  onSubmit(isValid: boolean) {
 
+    alert(isValid);
     if (!isValid) return;
 
     if (this.isEdit)

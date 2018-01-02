@@ -1,8 +1,8 @@
-<form #profesionalManageForm="ngForm" novalidate (ngSubmit)="onSubmit(f.value, f.valid)">
+<form #f="ngForm"  (ngSubmit)="onSubmit(f.valid)" novalidate>
   <h3>
     Gestión de profesionales
   </h3>
-  <button class="btn btn-success" #btnActualizar type="submit" [disabled] ="!profesionalManageForm.valid"  [ngClass]="{hidden: !isEdit}">Actualizar</button>
+  <button class="btn btn-success"  type="submit"   [disabled]='!f.valid'>Actualizar</button>
   <!-- <button class="btn btn-success" [ngClass]="{hidden: isEdit}" #btnCreate (click)="createProfesionalt()">Crear profesional</button> -->
 
   <app-error-box-container [globalError]="globalError"></app-error-box-container>
@@ -102,7 +102,7 @@
         </div>
         <div class="modal-footer">
           <button #closeBtn type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_Acept()">Aceptar</button>
+          <!-- <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_Acept()">Aceptar</button> -->
 
         </div>
       </div>

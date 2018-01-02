@@ -1,46 +1,50 @@
 <!-- Form levantado como popup que permite generar un ResourceScheduling -->
-<fieldset  ngModelGroup="resourceSchedulingManage" >
-    <div class="form-group">
-   
-      <label for="description">Descripcion de la jornada</label>
-   
-      <textarea type="text" class="form-control"  name="Description"  [(ngModel)]="currentResourceScheduling.Description"
-         placeholder="Descripción" rows="3">
-          </textarea>
-          <!-- <small [hidden]="Description.valid || (Description.pristine)" class="form-text text-danger">Ingrese alguna descripción para esta programación de turno
-            </small> -->
-    </div>
-    <div class="form-group">
-      <label for="duration">Duración</label>
-      <input type="number" lass="form-control" name="duration"     [(ngModel)]="currentResourceScheduling.Duration"/>
-      <!-- <small [hidden]="duration.valid || (duration.pristine)"   
-          class="form-text text-danger">Duración es obligatorio
-      </small> -->
-    </div>
-    
-      <!-- Permite seleccionar los dias de la semana y establece  -->
-      <app-week-days-check-edit #weekDaysCheckEdit
-        [resourceSchedulingBE]='currentResourceScheduling'>
-        </app-week-days-check-edit>
-    
+ <!-- <fieldset  > ngModelGroup="resourceSchedulingManage" -->
+    <form #resourceShedulingForm="ngForm"  (ngSubmit)="onSubmit_resourceShedulingForm(resourceShedulingForm.valid)" novalidate>
       <div class="form-group">
-        <p class="text-primary">Hora inicio</p>
-        <span class="icon-case">
-          <i class="fa fa-times"></i>
-        </span>
-        <select name="cmbTimeStart" class="" style="width: 200px" #cmbTimeStart [(ngModel)]="currentResourceScheduling.TimeStart">
-          <option *ngFor="let item of arrayOfTimes" [ngValue]="item.TimeString">{{item.TimeString}}</option>
-        </select>
+    
+        <label for="description">Descripcion de la jornada</label>
+    
+        <textarea type="text" class="form-control"  name="Description" #Description='ngModel' [(ngModel)]="currentResourceScheduling.Description"
+          placeholder="Descripción" rows="3" required>
+            </textarea>
+            <small [hidden]="Description.valid || (Description.pristine)" class="form-text text-danger">Ingrese alguna descripción para esta programación de turno
+              </small>
       </div>
       <div class="form-group">
-        <p class="text-primary">Hora fin</p>
-        <span class="icon-case">
-          <i class="fa fa-times"></i>
-        </span>
-        <select name="cmbTimeEnd" class="" style="width: 200px" #cmbTimeEnd [(ngModel)]="currentResourceScheduling.TimeEnd">
-          <option *ngFor="let item of arrayOfTimes" [ngValue]="item.TimeString">{{item.TimeString}}</option>
-        </select>
+        <label for="duration">Duración</label>
+        <input type="number" lass="form-control" name="duration"    #duration='ngModel'  [(ngModel)]="currentResourceScheduling.Duration" required/>
+        <small [hidden]="duration.valid || (duration.pristine)"    class="form-text text-danger">Duración es obligatorio
+        </small>
       </div>
-    
-
-    </fieldset>
+      
+        <!-- Permite seleccionar los dias de la semana y establece  -->
+        <app-week-days-check-edit #weekDaysCheckEdit
+          [resourceSchedulingBE]='currentResourceScheduling'>
+          </app-week-days-check-edit>
+      
+        <div class="form-group">
+          <p class="text-primary">Hora inicio</p>
+          <span class="icon-case">
+            <i class="fa fa-times"></i>
+          </span>
+          <select name="cmbTimeStart" class="" style="width: 200px" #cmbTimeStart [(ngModel)]="currentResourceScheduling.TimeStart">
+            <option *ngFor="let item of arrayOfTimes" [ngValue]="item.TimeString">{{item.TimeString}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <p class="text-primary">Hora fin</p>
+          <span class="icon-case">
+            <i class="fa fa-times"></i>
+          </span>
+          <select name="cmbTimeEnd" class="" style="width: 200px" #cmbTimeEnd [(ngModel)]="currentResourceScheduling.TimeEnd">
+            <option *ngFor="let item of arrayOfTimes" [ngValue]="item.TimeString">{{item.TimeString}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10 ">
+              <button type="submit" class="btn btn-success" [disabled]='!resourceShedulingForm.valid' >Aceptar</button>
+          </div>
+        
+        </div>
+    </form>

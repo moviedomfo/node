@@ -11,5 +11,5 @@
 
     <app-child [person]="profesional.Persona"></app-child>
 
-    <button class = "btn btn-danger" type="submit"  >Acept</button>
+    <button class = "btn btn-danger" type="submit"  [disabled]='!f.valid'> Acept</button>
 </form>

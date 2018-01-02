@@ -18,8 +18,8 @@ import { ControlContainer, NgForm } from '@angular/forms';
 @Component({
   selector: 'app-resource-scheduling-grid',
   templateUrl: './resource-scheduling-grid.component.html',
-  encapsulation: ViewEncapsulation.None,
-  viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ]
+  encapsulation: ViewEncapsulation.None
+  
 })
 
 
