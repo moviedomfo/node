@@ -41,7 +41,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
     private dialogService: DialogService
   ) {
 
-    
+
 
   }
 
@@ -128,9 +128,9 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
     this.resourceSchedulingManageComponent.preinItialize();
     this.isEditMode_resource_scheduling = isEdit;
-    this.resourceSchedulingManageComponent.currentResourceScheduling.ResourceId=this.currentProfesional.IdProfesional;
-    this.resourceSchedulingManageComponent.currentResourceScheduling.ResourceType =null;
-    
+    this.resourceSchedulingManageComponent.currentResourceScheduling.ResourceId = this.currentProfesional.IdProfesional;
+    this.resourceSchedulingManageComponent.currentResourceScheduling.ResourceType = null;
+
     //alert(this.isEditMode_resource_scheduling);
   }
 
@@ -144,7 +144,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
   @ViewChild('closeBtn') closeBtn: ElementRef;
 
   resource_scheduling_dialog_Acept() {
-    
+
     this.resourceSchedulingManageComponent.currentResourceScheduling.Generate_Attributes();
     var resourceSchedulin_copy: ResourceSchedulingBE = Object.assign({}, this.resourceSchedulingManageComponent.currentResourceScheduling);
 
@@ -159,7 +159,16 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
 
   }
+  onSubmit(value, isValid: boolean) {
 
+    if (!isValid) return;
+
+    if (this.isEdit)
+      this.updateProfesional();
+    else
+      this.createProfesional();
+
+  }
 
   createProfesional() {
 

@@ -47,7 +47,7 @@
         <span class="icon-case">
           <i class="fa fa-user"></i>
         </span>
-        <input type="text" name="nombre" data-rule="required" #nombre="ngModel" [(ngModel)]="currentPerson.Nombre" />
+        <input type="text" name="nombre" data-rule="required" #nombre="ngModel" [(ngModel)]="currentPerson.Nombre" required/>
         <small [hidden]="nombre.valid || (nombre.pristine)" class="form-text text-danger">
             El nombre es requerido
         </small>
@@ -60,7 +60,7 @@
         <span class="icon-case">
           <i class="fa fa-user"></i>
         </span>
-        <input type="text" name="apellido" #apellido="ngModel" data-rule="required" [(ngModel)]="currentPerson.Apellido" />
+        <input type="text" name="apellido" #apellido="ngModel" data-rule="required" [(ngModel)]="currentPerson.Apellido" required/>
         <small [hidden]="apellido.valid || (apellido.pristine)" class="form-text text-danger">
             El apellido es requerido
         </small> 
@@ -87,9 +87,11 @@
         <span class="icon-case">
           <i class="fa fa-building-o"></i>
         </span>
-        <input type="text" name="NroDocumento" #txtBox_NroDocumento maxlength="8" placeholder="Nro Documento" 
-        [(ngModel)]="currentPerson.NroDocumento"/>
-    
+        <input type="text" name="NroDocumento" #NroDocumento="ngModel" maxlength="8" placeholder="Nro Documento" 
+        [(ngModel)]="currentPerson.NroDocumento" required maxlength="8"/>
+        <small [hidden]="NroDocumento.valid || (NroDocumento.pristine)" class="form-text text-danger">
+            El apellido es requerido
+        </small> 
       </div>
 
 

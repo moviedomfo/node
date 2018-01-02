@@ -6,7 +6,6 @@ import { ProfesionalBE } from "../../model/profesional.model";
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
-  viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
   encapsulation: ViewEncapsulation.None
 })
 export class FormsComponent implements OnInit {

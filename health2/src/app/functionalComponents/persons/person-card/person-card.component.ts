@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input ,ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { PatientsService, CommonService } from '../../../service/index';
 import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, EventType,TipoParametroEnum, CommonParams, HealtConstants } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
-import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { } from '@angular/core';
 // Base 64 IMage display issues with unsafe image
 import { DomSanitizer } from '@angular/platform-browser';
 

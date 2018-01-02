@@ -23,6 +23,13 @@
                 <small [hidden]="FechaNacimiento.valid" class="text-danger">
                         FechaNacimiento is required.
                 </small>
-            </div>
+          </div>
+          <div>
+                <label>e-mail</label>
+                <input type="date" name="mail" [(ngModel)]="person.mail"  #mail="ngModel" required >
+                <small [hidden]="mail.valid" class="text-danger">
+                        mail is required.
+                </small>
+          </div>
         
     </div>

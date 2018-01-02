@@ -3,19 +3,19 @@
     <div class="form-group">
    
       <label for="description">Descripcion de la jornada</label>
-      <small [hidden]="Description.valid || (Description.pristine)" class="form-text text-danger">Ingrese alguna descripción para esta programación de turno
-        </small>
-      <textarea type="text" class="form-control" required name="Description" #Description="ngModel" [(ngModel)]="currentResourceScheduling.Description"
+   
+      <textarea type="text" class="form-control"  name="Description"  [(ngModel)]="currentResourceScheduling.Description"
          placeholder="Descripción" rows="3">
           </textarea>
-    
+          <!-- <small [hidden]="Description.valid || (Description.pristine)" class="form-text text-danger">Ingrese alguna descripción para esta programación de turno
+            </small> -->
     </div>
     <div class="form-group">
       <label for="duration">Duración</label>
-      <input type="number" lass="form-control"required name="duration"    #duration="ngModel"  [(ngModel)]="currentResourceScheduling.Duration"/>
-      <small [hidden]="duration.valid || (duration.pristine)"   
+      <input type="number" lass="form-control" name="duration"     [(ngModel)]="currentResourceScheduling.Duration"/>
+      <!-- <small [hidden]="duration.valid || (duration.pristine)"   
           class="form-text text-danger">Duración es obligatorio
-      </small>
+      </small> -->
     </div>
     
       <!-- Permite seleccionar los dias de la semana y establece  -->

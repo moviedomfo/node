@@ -1,75 +1,73 @@
+<form #profesionalManageForm="ngForm" novalidate (ngSubmit)="onSubmit(f.value, f.valid)">
+  <h3>
+    Gestión de profesionales
+  </h3>
+  <button class="btn btn-success" #btnActualizar type="submit" [disabled] ="!profesionalManageForm.valid"  [ngClass]="{hidden: !isEdit}">Actualizar</button>
+  <!-- <button class="btn btn-success" [ngClass]="{hidden: isEdit}" #btnCreate (click)="createProfesionalt()">Crear profesional</button> -->
 
+  <app-error-box-container [globalError]="globalError"></app-error-box-container>
 
-<form #myForm="ngForm" novalidate>
-<h3>
-  Gestión de profesionales
-</h3>
-<button class="btn btn-success" #btnActualizar type="submit" (click)="updateProfesionalt()" [ngClass]="{hidden: !isEdit}">Actualizar</button>
-<button class="btn btn-success" [ngClass]="{hidden: isEdit}" #btnCreate (click)="createProfesionalt()">Crear profesional</button>
+  <ul class="nav nav-tabs " role="tablist">
+    <li class="nav-item ">
+      <a class="nav-link  active" href="#profile" role="tab" data-toggle="tab">Datos principales</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#sheduling" role="tab" data-toggle="tab">Programación de turnos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Inicio de sesión</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#profJson" role="tab" data-toggle="tab">json </a>
+    </li>
+  </ul>
 
-<app-error-box-container [globalError]="globalError"></app-error-box-container>
+  <!-- Tab panes -->
+  <div class="tab-content">
 
-<ul class="nav nav-tabs " role="tablist">
-  <li class="nav-item ">
-    <a class="nav-link  active" href="#profile" role="tab" data-toggle="tab">Datos principales</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#sheduling" role="tab" data-toggle="tab">Programación de turnos</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Inicio de sesión</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#profJson" role="tab" data-toggle="tab">json </a>
-  </li>
-</ul>
+    <div role="tabpanel" class="tab-pane fade in active" id="profile">
 
-<!-- Tab panes -->
-<div class="tab-content">
-
-  <div role="tabpanel" class="tab-pane fade in active" id="profile">
-
-    <app-profesional-card [currentProfesional]="currentProfesional" (OnComponentError)="OnComponentError_profesionalCard($event)">
-    </app-profesional-card>
-  </div>
-
-  <div role="tabpanel" class="tab-pane fade" id="sheduling">
-    <div class="col-lg-10">
-
-      <button type="button" class="btn btn-primary" data-toggle="modal" (click)='show_resource_scheduling_dialog(false)' data-target="#resouceShedulingModal">
-        Agregar nueva programación de turnos
-      </button>
-
-      <app-resource-scheduling-grid #resourceSchedulingGrid1 [profesionalResourceSchedulingList]="currentResourceSchedulingList"
-        (onResourceSchedulingChanged)="onResourceSchedulingChanged">
-      </app-resource-scheduling-grid>
+      <app-profesional-card [currentProfesional]="currentProfesional" (OnComponentError)="OnComponentError_profesionalCard($event)">
+      </app-profesional-card>
     </div>
-  </div>
-  
-  <div role="tabpanel" class="tab-pane fade" id="medioContacto">
-    <section>
-      <h1>Medio de contacto </h1>
-    </section>
-  </div>
-  <div role="tabpanel" class="tab-pane fade" id="profJson">
-    <div class="alert-info">
 
-      <div>Current Profesional </div>
+    <div role="tabpanel" class="tab-pane fade" id="sheduling">
+      <div class="col-lg-10">
 
-      <div>
-        <strong>{{currentProfesional | json}}</strong>
-      </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" (click)='show_resource_scheduling_dialog(false)' data-target="#resouceShedulingModal">
+          Agregar nueva programación de turnos
+        </button>
 
-
-    </div>
-    <div class="alert-dismissible">
-      <label> Profesional Scheduling</label>
-
-      <div>
-        <strong>{{currentResourceSchedulingList | json}}</strong>
+        <app-resource-scheduling-grid #resourceSchedulingGrid1 [profesionalResourceSchedulingList]="currentResourceSchedulingList"
+          (onResourceSchedulingChanged)="onResourceSchedulingChanged">
+        </app-resource-scheduling-grid>
       </div>
     </div>
-    <!-- <div class="alert-dismissible">
+
+    <div role="tabpanel" class="tab-pane fade" id="medioContacto">
+      <section>
+        <h1>Medio de contacto </h1>
+      </section>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="profJson">
+      <div class="alert-info">
+
+        <div>Current Profesional </div>
+
+        <div>
+          <strong>{{currentProfesional | json}}</strong>
+        </div>
+
+
+      </div>
+      <div class="alert-dismissible">
+        <label> Profesional Scheduling</label>
+
+        <div>
+          <strong>{{currentResourceSchedulingList | json}}</strong>
+        </div>
+      </div>
+      <!-- <div class="alert-dismissible">
       <label>Usuario</label>
       <div>{{currentUser | json}}</div>
     </div>
@@ -77,41 +75,37 @@
       <div>{{globalError | json}}</div>
     </div>
   </div> -->
-    <div class="alert-warning">
-      <legend>currentResourceSchedulingList</legend>
-      <div>{{currentResourceSchedulingList | json}}</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- show resourse sheduling modal dialog -->
-<div class="modal fade" id="resouceShedulingModal" tabindex="-1" role="dialog" aria-labelledby="resouceShedulingModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="resouceShedulingModalLabel">Plan de turnos</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-
-      </div>
-      <div class="modal-body">
-        <app-resource-scheduling-manage #resourceSchedulingManageComponent1 
-          [currentResourceScheduling]="currentResourceScheduling"
-          [isEditMode]="isEditMode_resource_scheduling" 
-          (OnComponentError)="OnComponentError">
-        </app-resource-scheduling-manage>
-      </div>
-      <div class="modal-footer">
-        <button #closeBtn type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_Acept()">Aceptar</button>
-     
+      <div class="alert-warning">
+        <legend>currentResourceSchedulingList</legend>
+        <div>{{currentResourceSchedulingList | json}}</div>
       </div>
     </div>
+
   </div>
-</div>
+
+  <!-- show resourse sheduling modal dialog -->
+  <div class="modal fade" id="resouceShedulingModal" tabindex="-1" role="dialog" aria-labelledby="resouceShedulingModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="resouceShedulingModalLabel">Plan de turnos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+          <app-resource-scheduling-manage #resourceSchedulingManageComponent1 [currentResourceScheduling]="currentResourceScheduling"
+            [isEditMode]="isEditMode_resource_scheduling" (OnComponentError)="OnComponentError">
+          </app-resource-scheduling-manage>
+        </div>
+        <div class="modal-footer">
+          <button #closeBtn type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_Acept()">Aceptar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
-
-
