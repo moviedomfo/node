@@ -49,7 +49,7 @@ import { ResourceSchedulingManageComponent } from './functionalComponents/profes
 import { WeekDaysCheckEditComponent } from './commonComponents/week-days-check-edit/week-days-check-edit.component';
 import { FormsComponent } from './prueba/forms/forms.component';
 import { ChildComponent } from './prueba/forms/child/child.component';
-import { ValidateEmailDirective } from './common-componets/validate-email.directive';
+ import { EmailValidator } from './common-componets/validate-email.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +68,8 @@ import { ValidateEmailDirective } from './common-componets/validate-email.direct
     ErrorBoxContainerComponent,
     AlertBlockComponent,
     ProfesionalManageComponent,
-    ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent, WeekDaysCheckEditComponent, FormsComponent, ChildComponent, ValidateEmailDirective
+    ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent, WeekDaysCheckEditComponent, FormsComponent, ChildComponent
+    , EmailValidator
   ],
   imports: [
     AgmCoreModule.forRoot({

@@ -51,7 +51,11 @@
         <small [hidden]="nombre.valid || (nombre.pristine)" class="form-text text-danger">
             El nombre es requerido
         </small>
-
+        <!-- <div [hidden]="nombre.valid || nombre.pristine"
+        class="alert alert-danger">
+            <div [hidden]="!nombre.hasError('required')">Name is required</div>
+            <div [hidden]="!nombre.hasError('pattern')">Only alphabetsallowed</div>
+        </div> -->
       </div>
       <div class="form-group">
         <p>Apellido

@@ -83,7 +83,9 @@
 
   </div>
 
-  <!-- show resourse sheduling modal dialog -->
+ 
+</form>
+ <!-- show resourse sheduling modal dialog -->
   <div class="modal fade" id="resouceShedulingModal" tabindex="-1" role="dialog" aria-labelledby="resouceShedulingModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -96,8 +98,11 @@
 
         </div>
         <div class="modal-body">
-          <app-resource-scheduling-manage #resourceSchedulingManageComponent1 [currentResourceScheduling]="currentResourceScheduling"
-            [isEditMode]="isEditMode_resource_scheduling" (OnComponentError)="OnComponentError">
+          <app-resource-scheduling-manage #resourceSchedulingManageComponent1 
+            [currentResourceScheduling]="currentResourceScheduling"
+            [isEditMode]="isEditMode_resource_scheduling" 
+            (OnResourceShedulingCreated)="OnResourceShedulingCreated($newResourceSheduling)"
+            (OnComponentError)="OnComponentError">
           </app-resource-scheduling-manage>
         </div>
         <div class="modal-footer">
@@ -108,4 +113,3 @@
       </div>
     </div>
   </div>
-</form>

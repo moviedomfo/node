@@ -22,7 +22,8 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
  
   @Input()  
   isEditMode:boolean;
-  //@Output() OnResourceCreated = new EventEmitter<ResourceSchedulingBE>();
+  @Output()
+   OnResourceShedulingCreated = new EventEmitter<ResourceSchedulingBE>();
   @Output() OnComponentError = new EventEmitter<ServiceError>();
   @ViewChild('weekDaysCheckEdit') weekDaysCheckEdit: WeekDaysCheckEditComponent;
 
@@ -80,4 +81,19 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
     this.arrayOfTimes = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), time_start, time_end, 30, 'health dates');
   }
 
+
+  onSubmit_resourceShedulingForm(isValid: boolean) {
+
+    this.currentResourceScheduling.Generate_Attributes();
+    var resourceSchedulin_copy: ResourceSchedulingBE = Object.assign({}, this.currentResourceScheduling);
+   // resourceSchedulin_copy.Generate_Attributes();
+    if (this.isEditMode == false && isValid)
+    {   
+      
+      this.OnResourceShedulingCreated.emit(resourceSchedulin_copy) ;
+
+    }
+    this.preinItialize();
+  }
 }
+

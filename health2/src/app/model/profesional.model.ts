@@ -327,9 +327,9 @@ export class ResourceSchedulingBE {
         
         this.weekDays_BinArray= this.Get_WeekDays_BinArray();
         
-        //console.log('this.weekDays_BinArray = ' + this.weekDays_BinArray);
+        console.log('this.weekDays_BinArray = ' + this.weekDays_BinArray);
         this.WeekDays_List = this.getDayNames().join("|");
-        //console.log('this.WeekDays_List = ' + this.WeekDays_List);
+        console.log('this.WeekDays_List = ' + this.WeekDays_List);
         this.timeStart_timesp = new TimeSpan(null);
         this.timeStart_timesp.Set_hhmmss(this.TimeStart);
         

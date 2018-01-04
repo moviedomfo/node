@@ -143,22 +143,13 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
   @ViewChild('closeBtn') closeBtn: ElementRef;
   
-  onSubmit_resourceShedulingForm(){
-  //resource_scheduling_dialog_Acept() {
-
-    this.resourceSchedulingManageComponent.currentResourceScheduling.Generate_Attributes();
-    var resourceSchedulin_copy: ResourceSchedulingBE = Object.assign({}, this.resourceSchedulingManageComponent.currentResourceScheduling);
-
-    //resourceSchedulin_copy.Generate_Attributes();
-    this.currentResourceSchedulingList.push(resourceSchedulin_copy);
-
-    this.resourceSchedulingManageComponent.currentResourceScheduling = new ResourceSchedulingBE();
-
+  OnResourceShedulingCreated(newResourceSheduling:ResourceSchedulingBE){
+    console.log(newResourceSheduling.Description);
+    console.log(JSON.stringify(newResourceSheduling));
+    this.currentResourceSchedulingList.push(newResourceSheduling);
     this.resourceSchedulingGridComponent.showGrid();
-    //this.resourceSchedulingManageComponent.preinItialize();
+    this.resourceSchedulingManageComponent.currentResourceScheduling = new ResourceSchedulingBE();
     this.closeBtn.nativeElement.click();
-
-
   }
   onSubmit(isValid: boolean) {
 

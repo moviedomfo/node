@@ -1,35 +1,74 @@
-    <!--adrress group-->
-    <div ngModelGroup="persona">
-        <!--nombre-->
-        <div>
-            <label>Nombre</label>
-            <input type="text" name="nombre" [(ngModel)]="person.Nombre" #nombre="ngModel" required>
-            <small [hidden]="nombre.valid || (nombre.pristine && !f.submitted)" class="text-danger">
-                Nombre is required.
-            </small>
-        </div>
-
-        <!--apellido-->
-        <div>
-            <label>Apellido</label>
-            <input type="text" name="apellido" [(ngModel)]="person.Apellido" #apellido="ngModel" required maxlength="10">
-            <small [hidden]="apellido.valid || (apellido.pristine && !f.submitted)" class="text-danger">
-                Apellido is required.
-            </small>
-        </div>
-        <div>
-                <label>FechaNacimiento</label>
-                <input type="date" name="FechaNacimiento" [(ngModel)]="person.FechaNacimiento"  #FechaNacimiento="ngModel" required>
-                <small [hidden]="FechaNacimiento.valid" class="text-danger">
-                        FechaNacimiento is required.
-                </small>
-          </div>
-          <div>
-                <label>e-mail</label>
-                <input type="date" name="mail" [(ngModel)]="person.mail"  #mail="ngModel" required >
-                <small [hidden]="mail.valid" class="text-danger">
-                        mail is required.
-                </small>
-          </div>
-        
+<!--adrress group-->
+<fieldset  ngModelGroup="persona">
+    <!--nombre-->
+    <div  [ngClass]="{'form-group':true,  
+        'has-danger': nombre.invalid ,  
+        'has-success': nombre.valid }">
+        <label>Nombre</label>
+        <input type="text" name="nombre" class="form-control" [(ngModel)]="person.Nombre" #nombre="ngModel" required>
+        <small [hidden]="nombre.valid || (nombre.pristine && !f.submitted)" class="text-danger">
+            Nombre is required.
+        </small>
     </div>
+
+    <!--apellido-->
+    <div class="form-group">
+        <label>Apellido</label>
+        <input type="text" name="apellido" class="form-control" [(ngModel)]="person.Apellido" #apellido="ngModel" required maxlength="10">
+        <small [hidden]="apellido.valid || (apellido.pristine && !f.submitted)" class="text-danger">
+            Apellido is required.
+        </small>
+    </div>
+    <div class="form-group" [ngClass]="{  
+        'has-danger': FechaNacimiento.invalid && (FechaNacimiento.dirty || FechaNacimiento.touched),  
+        'has-success': FechaNacimiento.valid && (FechaNacimiento.dirty || FechaNacimiento.touched)}">
+        <label>FechaNacimiento</label>
+        <input type="date" name="FechaNacimiento" class="form-control" [(ngModel)]="person.FechaNacimiento" #FechaNacimiento="ngModel" required>
+        <small [hidden]="FechaNacimiento.valid" class="text-danger">
+            FechaNacimiento is required.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="email">e-mail</label>
+        <input type="text" name="email"  class="form-control" [(ngModel)]="person.mail" #email="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+
+
+        <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+            <div [hidden]="!email.hasError('required')">Email is required</div>
+            <div [hidden]="!email.hasError('pattern')">Email format should be
+                <small>
+                    <b>joe@gmail.com</b>
+                </small>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="mobilenumber">Mobile Number</label>
+        <input type="text" class="form-control" id="mobilenumber"
+        required
+        [(ngModel)]="person.Telefono1" name="mobilenumber"
+        pattern="/^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/"
+        minlength="10"
+        maxlength="10" 
+        #mobile="ngModel">
+        <div [hidden]="mobile.valid" class="text text-danger">
+           <div [hidden]="!mobile.hasError('minlength')">Mobile should be 10 digit</div>
+           <div [hidden]="!mobile.hasError('required')">Mobile is required</div>
+           <div [hidden]="!mobile.hasError('pattern')">Mobile numberr should be only numbers</div>
+        </div>
+     </div>
+
+
+     <div class="form-group" [ngClass]="{  
+        'has-danger': email2.invalid && (email2.dirty || email2.touched),  
+        'has-success': email2.valid && (email2.dirty || email2.touched)}">  
+        <label class="form-control-label" for="email2">Email</label>  
+        <input type="email" class="form-control" emailvalidator id="email2" name="email2" [(ngModel)]="person.mail" required  
+        #email2="ngModel">  
+        <div class="form-control-feedback" *ngIf="email2.errors && (email2.dirty ||email2.touched)">  
+        <p *ngIf="email2.errors.required">Email is required</p>  
+        <p *ngIf="email2.errors.emailvalidator">Please provide a valid email address</p>  
+        </div>  
+        </div>
+</fieldset >
