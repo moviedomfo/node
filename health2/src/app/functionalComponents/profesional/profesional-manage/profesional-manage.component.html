@@ -100,8 +100,9 @@
         <div class="modal-body">
           <app-resource-scheduling-manage #resourceSchedulingManageComponent1 
             [currentResourceScheduling]="currentResourceScheduling"
+            [currentResourceSchedulingList]="currentResourceSchedulingList"
             [isEditMode]="isEditMode_resource_scheduling" 
-            (OnResourceShedulingCreated)="OnResourceShedulingCreated($newResourceSheduling)"
+            (OnResourceShedulingCreated)="OnResourceShedulingCreated($event)"
             (OnComponentError)="OnComponentError">
           </app-resource-scheduling-manage>
         </div>

@@ -143,10 +143,10 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
   @ViewChild('closeBtn') closeBtn: ElementRef;
   
-  OnResourceShedulingCreated(newResourceSheduling:ResourceSchedulingBE){
-    console.log(newResourceSheduling.Description);
-    console.log(JSON.stringify(newResourceSheduling));
-    this.currentResourceSchedulingList.push(newResourceSheduling);
+  OnResourceShedulingCreated(newResourceSheduling){
+   
+
+    //this.currentResourceSchedulingList.push(newResourceSheduling);
     this.resourceSchedulingGridComponent.showGrid();
     this.resourceSchedulingManageComponent.currentResourceScheduling = new ResourceSchedulingBE();
     this.closeBtn.nativeElement.click();

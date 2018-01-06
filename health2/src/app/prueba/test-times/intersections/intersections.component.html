@@ -1,0 +1,110 @@
+<legend>Resource sheduling To Intersect</legend>
+
+
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Resource</th>
+        <th scope="col">Time Start</th>
+        <th scope="col">Time End</th>
+        <th scope="col">Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="text-success" scope="row">{{resource1.Description}}</th>
+        <td><input id="textinput" name="textinput" type="text" placeholder="hh:mm" class="form-control" [(ngModel)]='resource1.TimeStart'></td>
+        <td><input id="textinput" name="textinput" type="text" placeholder="hh:mm" class="form-control" [(ngModel)]='resource1.TimeEnd'></td>
+        <td><input id="textinput" name="textinput" type="text" placeholder="hh:mm" class="form-control" [(ngModel)]='resource1.Duration'></td>
+      </tr>
+      <tr>
+          <th class="text-success" scope="row">{{resource2.Description}}</th>
+          <td><input id="textinput" name="textinput" type="text" placeholder="hh:mm" class="form-control" [(ngModel)]='resource2.TimeStart'></td>
+          <td><input id="textinput" name="textinput" type="text" placeholder="hh:mm" class="form-control" [(ngModel)]='resource2.TimeEnd'></td>
+          <td><input id="textinput" name="textinput" type="text" placeholder="hh:mm" class="form-control" [(ngModel)]='resource2.Duration'></td>
+        </tr>
+      
+    </tbody>
+  </table>
+  <div class="row">
+      <div class="col-md-6">
+
+
+<button type="button" class="btn btn-info" (click)="btnInterset()" >
+    <span aria-hidden="true">&times;</span> Interset
+  </button>
+
+  
+  </div> </div>
+  <!-- <label>Has intersection {{intersetResult}}</label> -->
+<div class="row">
+  <div class="col-md-6">
+      <label>Rango 1</label>
+    <table class="table table-striped table-dark" >
+      <thead class="thead-dark">
+        <th class="text-muted">Time</th>
+        <th class="text-muted">TotalMinutes</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of range1;let i = index">
+            <td>{{i}}</td>
+            <td>{{item.Time.hhmm}}</td>
+          <td>{{item.Time.TotalMinutes}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <label>Rango 2</label>
+    <table class="table table-striped" >
+          <thead class="thead-dark">
+          <th class="text-muted">Time</th>
+          <th class="text-muted">TotalMinutes</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of range2;let i = index">
+              <td>{{i}}</td>
+              <td>{{item.Time.hhmm}}</td>
+            <td>{{item.Time.TotalMinutes}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+<br>
+<!-- <div class="row">
+    <div class="col-md-6">
+  
+        <label class="text-success strong">intersetResult </label>
+      <table>
+        <thead class="thead-dark">
+          <th class="text-muted">Time</th>
+          <th class="text-muted">TotalMinutes</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of range1;let i = index">
+              <td class="text-success">{{i}}</td>
+              <td class="text-success">{{item.Time.hhmm}}</td>
+            <td class="text-success">{{item.Time.TotalMinutes}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+ 
+  
+   
+  </div> -->
+    
+<p>Json</p>
+
+
+<div class="row">
+    <div class="alert alert-warning">
+        <label>intersetResultTotalSecond</label>  {{intersetResultTotalSecond}}
+        <!-- {{range1 | json}} -->
+    </div>
+    <div class="alert alert-info">
+        {{range2 | json}}
+    </div>
+</div>

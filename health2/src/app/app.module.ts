@@ -50,6 +50,8 @@ import { WeekDaysCheckEditComponent } from './commonComponents/week-days-check-e
 import { FormsComponent } from './prueba/forms/forms.component';
 import { ChildComponent } from './prueba/forms/child/child.component';
  import { EmailValidator } from './common-componets/validate-email.directive';
+
+import { IntersectionsComponent } from './prueba/test-times/intersections/intersections.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +71,7 @@ import { ChildComponent } from './prueba/forms/child/child.component';
     AlertBlockComponent,
     ProfesionalManageComponent,
     ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent, WeekDaysCheckEditComponent, FormsComponent, ChildComponent
-    , EmailValidator
+    , EmailValidator, IntersectionsComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

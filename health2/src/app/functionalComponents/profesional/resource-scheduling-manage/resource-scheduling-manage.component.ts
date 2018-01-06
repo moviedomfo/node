@@ -17,9 +17,8 @@ import { ControlContainer, NgForm } from '@angular/forms';
 export class ResourceSchedulingManageComponent implements AfterViewInit {
   globalError: ServiceError;
   arrayOfTimes:TimespamView[];
-  @Input()
-  currentResourceScheduling:ResourceSchedulingBE;
- 
+  @Input()  currentResourceScheduling:ResourceSchedulingBE;
+  @Input()  currentResourceSchedulingList:ResourceSchedulingBE[];
   @Input()  
   isEditMode:boolean;
   @Output()
@@ -69,7 +68,7 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
       this.currentResourceScheduling.HealthInstitutionId = HealtConstants.DefaultHealthInstitutionId;
     }
 
-    if (this.isEditMode == true) {
+    if (this.isEditMode === true) {
       if (!this.currentResourceScheduling) {
         alert('Debe seleccionar una configuracion de turnos');
         return;
@@ -84,16 +83,30 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
 
   onSubmit_resourceShedulingForm(isValid: boolean) {
 
-    this.currentResourceScheduling.Generate_Attributes();
+    this.currentResourceScheduling.Generate_Attributes(true);
     var resourceSchedulin_copy: ResourceSchedulingBE = Object.assign({}, this.currentResourceScheduling);
-   // resourceSchedulin_copy.Generate_Attributes();
+   
     if (this.isEditMode == false && isValid)
     {   
-      
+      this.currentResourceSchedulingList.push(resourceSchedulin_copy);
       this.OnResourceShedulingCreated.emit(resourceSchedulin_copy) ;
-
     }
     this.preinItialize();
+  }
+
+  ValidateIntersection(resourceSchedulin_copy:ResourceSchedulingBE){
+    
+    this.currentResourceSchedulingList.forEach((item)=> {
+     //Si no hay dias en comun no hay problema
+     if (!item.HasDaysInCommon(resourceSchedulin_copy.weekDays_BinArray))
+     {
+         return true;
+     }
+     //Si tienen dias en comun hay que verificar que no se overlapen los horarios
+
+     
+    });
+   
   }
 }
 

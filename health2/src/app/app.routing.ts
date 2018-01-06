@@ -15,6 +15,8 @@ import { PageNotFoundComponent }from './commonComponents/page-not-found/page-not
  import {TestObservablesComponent} from  './prueba/test-observables/test-observables.component';
  import {TestTimesComponent} from  './prueba/test-times/test-times.component';
 import { FormsComponent } from "./prueba/forms/forms.component";
+//import { TestRangeIntersectionComponent } from "./prueba/test-times/test-range-intersection.component";
+import { IntersectionsComponent } from './prueba/test-times/intersections/intersections.component';
  
  
 
@@ -36,7 +38,7 @@ const appRoutes: Routes = [
     
     { path: 'testTimes', component: TestTimesComponent },
    { path: 'testFormsValidations', component: FormsComponent },
-// //    { path: 'testObservables', component: TestObservablesComponent },
+    { path: 'TestIntersection', component: IntersectionsComponent },
     // { path: 'testAlerts', component: TestAlertBlocksComponent },
 
    { path: '**', component: PageNotFoundComponent }

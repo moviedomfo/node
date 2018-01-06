@@ -36,6 +36,7 @@
             <li><a class="dropdown-item" [routerLink]="['profesionalEdit']" routerLinkActive="active">Editar</a></li>
             
             
+            
             <li><a href="#">Acción #6</a></li>
           </ul>
         </li>
@@ -54,7 +55,19 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['persons']" routerLinkActive="active">Personas</a>
         </li>
-        
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Test <b class="caret"></b>
+          </a>
+          <ul class="nav-item dropdown-menu">
+              <li><a class="dropdown-item" [routerLink]="['testTimes']" routerLinkActive="active">Test times</a></li>
+            <li><a class="dropdown-item" [routerLink]="['testFormsValidations']" routerLinkActive="active">Test Forms Validations</a></li>
+            <li><a class="dropdown-item" [routerLink]="['testControles']" routerLinkActive="active">Test Controles</a></li>
+            <li><a class="dropdown-item" [routerLink]="['TestIntersection']" routerLinkActive="active">Test Range Intersection</a></li>
+            
+          </ul>
+        </li>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <li><a href="#"><span class="fa fa-user"></span> Sign Up</a></li>

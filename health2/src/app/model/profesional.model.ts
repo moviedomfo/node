@@ -313,7 +313,7 @@ export class ResourceSchedulingBE {
     get TimeEnd_timesp(): TimeSpan {
         this.timeEnd_timesp = new TimeSpan(null);
         this.timeEnd_timesp.Set_hhmmss(this.TimeEnd);
-        return this.timeStart_timesp;
+        return this.timeEnd_timesp;
     }
     set TimeEnd_timesp(s: TimeSpan) {
         this.timeEnd_timesp = s;
@@ -323,13 +323,14 @@ export class ResourceSchedulingBE {
     //ejemplo "Miercoles|Jueves|Viernes"
     public WeekDays_List: string;
 
-    public Generate_Attributes(){
+    public Generate_Attributes(log?:boolean){
         
         this.weekDays_BinArray= this.Get_WeekDays_BinArray();
-        
-        console.log('this.weekDays_BinArray = ' + this.weekDays_BinArray);
+        if(log)
+            console.log('this.weekDays_BinArray = ' + this.weekDays_BinArray);
         this.WeekDays_List = this.getDayNames().join("|");
-        console.log('this.WeekDays_List = ' + this.WeekDays_List);
+        if(log)
+            console.log('this.WeekDays_List = ' + this.WeekDays_List);
         this.timeStart_timesp = new TimeSpan(null);
         this.timeStart_timesp.Set_hhmmss(this.TimeStart);
         
@@ -430,7 +431,15 @@ export class ResourceSchedulingBE {
         return stackInvertida;
 
     }
+    Get_ArrayOfTimes_TotalMinutes(): number[] {
 
+        var arrayOfSeconds:number[]=[];
+        let array = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), this.timeStart_timesp, this.TimeEnd_timesp, this.Duration, this.Description);
+        for (let i: number = 0; i <= array.length -1; i++) {
+            arrayOfSeconds.push(array[i].Time.TotalMinutes);
+        }
+        return arrayOfSeconds;
+    }
     Get_ArrayOfTimes(date: Date): TimespamView[] {
 
         return ResourceSchedulingBE.Get_ArrayOfTimes(date, this.timeStart_timesp, this.TimeEnd_timesp, this.Duration, this.Description);
@@ -448,16 +457,16 @@ export class ResourceSchedulingBE {
     static Get_ArrayOfTimes(currentDate: Date, start: TimeSpan, end: TimeSpan, duration: number, name: string): TimespamView[] {
         var aux: TimeSpan = new TimeSpan();
 
-        //console.log('---------------------Get_ArrayOfTimes (' + duration+')');
+       //console.log('start ' + start.HHMM + ' | End ' + end.HHMM) ;
         let wTimespamView: TimespamView;
         var times: TimespamView[] = [];
         wTimespamView = new TimespamView(currentDate);
         aux.Set_hhmmss(start.getHHMM());
         wTimespamView.Time = aux;
         wTimespamView.TimeString = wTimespamView.Time.getHHMM();
-        //alert( start.Fecha.toISOString());
+        
         times.push(wTimespamView);
-        //wTimespamView = new TimespamView(currentDate);
+        
 
         var t: TimeSpan = new TimeSpan();//=  Object.assign({}, start); 
         t.Set_hhmmss(start.getHHMM());
@@ -466,8 +475,8 @@ export class ResourceSchedulingBE {
         while (control) {
 
             //Para este algoritmo colaboro el cuero mrenaudo 
-            //if ((end - t).TotalMinutes >= 0)
-
+            
+            //console.log('end TotalMinutes ' + end.TotalMinutes + ' | t TotalMinutes' + t.TotalMinutes) ;
             if ((end.TotalMinutes - t.TotalMinutes) >= duration) {
                 //count = count +1;
                 //console.log(end.TotalMinutes + '-' + t.TotalMinutes + ' = '+ (end.TotalMinutes - t.TotalMinutes));
@@ -488,11 +497,11 @@ export class ResourceSchedulingBE {
                 wTimespamView.Time = aux;
                 wTimespamView.TimeString = aux.getHHMM();
                 times.push(wTimespamView);
-                //console.log('t.addMinutes(duration) = ' + t.TotalMinutes);
+                console.log('t.addMinutes(duration) = ' + t.TotalMinutes);
             }
             else { control = false; }
         }
-        // console.log('------------------------------------------------------------------------');
+         console.log('------------------------------------------------------------------------');
         return times;
     }
 
@@ -570,6 +579,18 @@ export class ResourceSchedulingBE {
 
     }
 
+    HasDaysInCommon(weekDays_array: boolean[]){
+        return ResourceSchedulingBE.Math(weekDays_array, this.weekDays_BinArray);
+    }
+
+    static intersection_totalMinutes(resource1:ResourceSchedulingBE,resource2:ResourceSchedulingBE): number[]{
+
+        var rangoTotal1 = resource1.Get_ArrayOfTimes_TotalMinutes();
+        var rangoTotal2 = resource2.Get_ArrayOfTimes_TotalMinutes();
+    
+        var intersetResult = rangoTotal1.filter(item => rangoTotal2.includes(item));
+        return  intersetResult;
+    }
 }
 
 export class GetProfesionalRes {
