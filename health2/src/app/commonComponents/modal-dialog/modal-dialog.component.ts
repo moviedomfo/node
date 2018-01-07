@@ -6,8 +6,8 @@ export interface ConfirmModel {
 }
 @Component({
   selector: 'app-modal-dialog',
-  templateUrl: './modal-dialog.component.html',
-  styleUrls: ['./modal-dialog.component.css']
+  templateUrl: './modal-dialog.component.html'
+
 })
 
 export class ModalDialogComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel {

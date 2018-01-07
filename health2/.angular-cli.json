@@ -24,8 +24,8 @@
         "../src/app/commonComponents/ag-styles/ag-grid.css",
         "../src/app/commonComponents/ag-styles/theme-fresh.css",
         
-      "styles.css",
-      "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+      "styles.css"
+      
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

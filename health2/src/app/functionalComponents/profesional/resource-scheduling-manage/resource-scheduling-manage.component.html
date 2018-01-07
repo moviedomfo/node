@@ -1,6 +1,8 @@
 <!-- Form levantado como popup que permite generar un ResourceScheduling -->
  <!-- <fieldset  > ngModelGroup="resourceSchedulingManage" -->
+
     <form #resourceShedulingForm="ngForm"  (ngSubmit)="onSubmit_resourceShedulingForm(resourceShedulingForm.valid)" novalidate>
+
       <div class="form-group">
     
         <label for="description">Descripcion de la jornada</label>
@@ -40,6 +42,9 @@
           <select name="cmbTimeEnd" class="" style="width: 200px" #cmbTimeEnd [(ngModel)]="currentResourceScheduling.TimeEnd">
             <option *ngFor="let item of arrayOfTimes" [ngValue]="item.TimeString">{{item.TimeString}}</option>
           </select>
+          <small [hidden]="!(currentResourceScheduling.TimeStart_timesp.TotalMilliseconds > currentResourceScheduling.TimeEnd_timesp.TotalMilliseconds)"   
+           class="form-text text-danger">La hora de inicio debe ser anterior a la hora de finalización del turno
+        </small>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10 ">

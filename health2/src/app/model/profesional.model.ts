@@ -299,43 +299,28 @@ export class ResourceSchedulingBE {
     public HealthInstitutionId?: string;
     public TimeStart: string;
     public TimeEnd: string;
-    private timeStart_timesp: TimeSpan;
-    get TimeStart_timesp(): TimeSpan {
-        this.timeStart_timesp = new TimeSpan(null);
-        this.timeStart_timesp.Set_hhmmss(this.TimeStart);
-        return this.timeStart_timesp;
-    }
-    set TimeStart_timesp(s: TimeSpan) {
-        this.timeStart_timesp = s;
-    }
+    public TimeStart_timesp: TimeSpan;
 
-    private timeEnd_timesp: TimeSpan;
-    get TimeEnd_timesp(): TimeSpan {
-        this.timeEnd_timesp = new TimeSpan(null);
-        this.timeEnd_timesp.Set_hhmmss(this.TimeEnd);
-        return this.timeEnd_timesp;
-    }
-    set TimeEnd_timesp(s: TimeSpan) {
-        this.timeEnd_timesp = s;
-    }
-    public weekDays_BinArray: boolean[];
+    public TimeEnd_timesp: TimeSpan;
+ 
+    public WeekDays_BinArray: boolean[];
 
     //ejemplo "Miercoles|Jueves|Viernes"
     public WeekDays_List: string;
 
     public Generate_Attributes(log?:boolean){
         
-        this.weekDays_BinArray= this.Get_WeekDays_BinArray();
+        this.WeekDays_BinArray= this.Get_WeekDays_BinArray();
         if(log)
-            console.log('this.weekDays_BinArray = ' + this.weekDays_BinArray);
+            console.log('this.WeekDays_BinArray = ' + this.WeekDays_BinArray);
         this.WeekDays_List = this.getDayNames().join("|");
         if(log)
             console.log('this.WeekDays_List = ' + this.WeekDays_List);
-        this.timeStart_timesp = new TimeSpan(null);
-        this.timeStart_timesp.Set_hhmmss(this.TimeStart);
+        this.TimeStart_timesp = new TimeSpan(null);
+        this.TimeStart_timesp.Set_hhmmss(this.TimeStart);
         
-        this.timeEnd_timesp = new TimeSpan(null);
-        this.timeEnd_timesp.Set_hhmmss(this.TimeEnd);
+        this.TimeEnd_timesp = new TimeSpan(null);
+        this.TimeEnd_timesp.Set_hhmmss(this.TimeEnd);
         
     }
     //Retorna un array binario con los dias en comun: 
@@ -353,9 +338,9 @@ export class ResourceSchedulingBE {
 
         if (!this.WeekDays)
             this.WeekDays = 0;
-        //if (!this.weekDays_BinArray)
-        this.weekDays_BinArray = ResourceSchedulingBE.CreateBoolArray(this.WeekDays);
-        return this.weekDays_BinArray;
+        //if (!this.WeekDays_BinArray)
+        this.WeekDays_BinArray = ResourceSchedulingBE.CreateBoolArray(this.WeekDays);
+        return this.WeekDays_BinArray;
 
 
     }
@@ -369,17 +354,17 @@ export class ResourceSchedulingBE {
 
     private getDayNames(): string[] {
         var days: string[] = [];
-        if (!this.weekDays_BinArray)
-            this.weekDays_BinArray = ResourceSchedulingBE.CreateBoolArray(this.WeekDays);
+        if (!this.WeekDays_BinArray)
+            this.WeekDays_BinArray = ResourceSchedulingBE.CreateBoolArray(this.WeekDays);
 
-        for (let i: number = 0; i <= this.weekDays_BinArray.length - 1; i++) {
+        for (let i: number = 0; i <= this.WeekDays_BinArray.length - 1; i++) {
 
             var dayName: string;
 
             // alert('push  ' + this.stackk[i]  + ' to ' + days);
             //console.log('push  ' + this.stackk[i]  + ' to ' + days);
 
-            if (this.weekDays_BinArray[i]) {
+            if (this.WeekDays_BinArray[i]) {
                 dayName = DayNamesIndex_Value_ES.find(d => d.index === i).name;
                 days.push(dayName);
 
@@ -434,7 +419,7 @@ export class ResourceSchedulingBE {
     Get_ArrayOfTimes_TotalMinutes(): number[] {
 
         var arrayOfSeconds:number[]=[];
-        let array = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), this.timeStart_timesp, this.TimeEnd_timesp, this.Duration, this.Description);
+        let array = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), this.TimeStart_timesp, this.TimeEnd_timesp, this.Duration, this.Description);
         for (let i: number = 0; i <= array.length -1; i++) {
             arrayOfSeconds.push(array[i].Time.TotalMinutes);
         }
@@ -442,7 +427,7 @@ export class ResourceSchedulingBE {
     }
     Get_ArrayOfTimes(date: Date): TimespamView[] {
 
-        return ResourceSchedulingBE.Get_ArrayOfTimes(date, this.timeStart_timesp, this.TimeEnd_timesp, this.Duration, this.Description);
+        return ResourceSchedulingBE.Get_ArrayOfTimes(date, this.TimeStart_timesp, this.TimeEnd_timesp, this.Duration, this.Description);
     }
 
     Get_ArrayOfTimes2(date: Date, chekWith: boolean): TimespamView[] {
@@ -451,7 +436,7 @@ export class ResourceSchedulingBE {
             if (!this.Date_IsContained(date))
                 return null;
         }
-        return ResourceSchedulingBE.Get_ArrayOfTimes(date, this.timeStart_timesp, this.TimeEnd_timesp, this.Duration, this.Description);
+        return ResourceSchedulingBE.Get_ArrayOfTimes(date, this.TimeStart_timesp, this.TimeEnd_timesp, this.Duration, this.Description);
     }
 
     static Get_ArrayOfTimes(currentDate: Date, start: TimeSpan, end: TimeSpan, duration: number, name: string): TimespamView[] {
@@ -497,7 +482,7 @@ export class ResourceSchedulingBE {
                 wTimespamView.Time = aux;
                 wTimespamView.TimeString = aux.getHHMM();
                 times.push(wTimespamView);
-                console.log('t.addMinutes(duration) = ' + t.TotalMinutes);
+                //console.log('t.addMinutes(duration) = ' + t.TotalMinutes);
             }
             else { control = false; }
         }
@@ -554,7 +539,7 @@ export class ResourceSchedulingBE {
                 }
         }
         var bin1: boolean[] = ResourceSchedulingBE.CreateBoolArray(weekDay);
-        return ResourceSchedulingBE.Math(bin1, this.weekDays_BinArray);
+        return ResourceSchedulingBE.Math(bin1, this.WeekDays_BinArray);
     }
 
 
@@ -570,17 +555,24 @@ export class ResourceSchedulingBE {
     /// <returns></returns>
     static Math(a: boolean[], b: boolean[]): boolean {
 
+ 
         for (var i = 0; i < a.length; i++) {
-            if (a[i] && b[i])
+           
+            console.log(i + '-->  a=' + a[i] + ' && b=' + b[i] );
+            if (a[i]==true && b[i]==true)
+            {
+                
                 return true;
+            }
         }
 
         return false;
 
     }
 
-    HasDaysInCommon(weekDays_array: boolean[]){
-        return ResourceSchedulingBE.Math(weekDays_array, this.weekDays_BinArray);
+    public HasDaysInCommon(weekDays_array: boolean[]):boolean{
+   
+           return ResourceSchedulingBE.Math(weekDays_array, this.WeekDays_BinArray);
     }
 
     static intersection_totalMinutes(resource1:ResourceSchedulingBE,resource2:ResourceSchedulingBE): number[]{
@@ -590,6 +582,30 @@ export class ResourceSchedulingBE {
     
         var intersetResult = rangoTotal1.filter(item => rangoTotal2.includes(item));
         return  intersetResult;
+    }
+
+    public static Map(item:ResourceSchedulingBE): ResourceSchedulingBE {
+        var x: ResourceSchedulingBE = new ResourceSchedulingBE();
+        x.Duration = item.Duration;
+        x.TimeEnd_timesp = item.TimeEnd_timesp;
+        x.TimeStart_timesp = item.TimeStart_timesp;
+        x.Description = item.Description;
+        x.WeekDays_BinArray = item.WeekDays_BinArray;
+        //alert('Map --> ' + item.WeekDays_BinArray);
+        x.WeekDays_List = item.WeekDays_List;
+        x.WeekDays = item.WeekDays;
+        x.DateEnd = item.DateEnd;
+        x.DateStart = item.DateStart;
+        x.CreationUserId = item.CreationUserId;
+        x.HealthInstitutionId = item.HealthInstitutionId;
+        x.UpdateUserId = item.UpdateUserId;
+        x.CreationUserId = item.CreationUserId;
+        x.WeekOfMonth = item.WeekOfMonth;
+        x.IdSheduler = item.IdSheduler;
+        x.ResourceId = item.ResourceId;
+        x.ResourceType = item.ResourceType;
+
+        return x;
     }
 }
 

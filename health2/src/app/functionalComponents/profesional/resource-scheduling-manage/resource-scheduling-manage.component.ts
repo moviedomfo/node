@@ -17,18 +17,15 @@ import { ControlContainer, NgForm } from '@angular/forms';
 export class ResourceSchedulingManageComponent implements AfterViewInit {
   globalError: ServiceError;
   arrayOfTimes:TimespamView[];
-  @Input()  currentResourceScheduling:ResourceSchedulingBE;
-  @Input()  currentResourceSchedulingList:ResourceSchedulingBE[];
-  @Input()  
-  isEditMode:boolean;
-  @Output()
-   OnResourceShedulingCreated = new EventEmitter<ResourceSchedulingBE>();
+  @Input() currentResourceScheduling:ResourceSchedulingBE;
+  @Input() currentResourceSchedulingList:ResourceSchedulingBE[];
+  @Input() isEditMode:boolean;
+  @Output() OnResourceShedulingCreated = new EventEmitter<ResourceSchedulingBE>();
   @Output() OnComponentError = new EventEmitter<ServiceError>();
   @ViewChild('weekDaysCheckEdit') weekDaysCheckEdit: WeekDaysCheckEditComponent;
-
   private ArrayOfTimes : TimespamView[];
-  constructor() { 
-   
+
+  constructor() {   
  }
 
   ngAfterViewInit() {
@@ -38,15 +35,12 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
     this.preinItialize();
   }
 
-
   on_chkTodos(value:boolean){
       alert('on_chkTodos ' + value);
   }
 
   public preinItialize()
   {
- 
-    
     var time_start: TimeSpan = new TimeSpan();
     var time_end: TimeSpan = new TimeSpan();
     time_start.Set_hhmmss('08:30');
@@ -83,9 +77,25 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
 
   onSubmit_resourceShedulingForm(isValid: boolean) {
 
-    this.currentResourceScheduling.Generate_Attributes(true);
-    var resourceSchedulin_copy: ResourceSchedulingBE = Object.assign({}, this.currentResourceScheduling);
-   
+    this.currentResourceScheduling.Generate_Attributes(false);
+    //var resourceSchedulin_copy: ResourceSchedulingBE = Object.assign({}, this.currentResourceScheduling);
+    var resourceSchedulin_copy = ResourceSchedulingBE.Map(this.currentResourceScheduling);
+    //alert(JSON.stringify(resourceSchedulin_copy));
+    // console.log(JSON.stringify(this.currentResourceScheduling));
+    // console.log(JSON.stringify(resourceSchedulin_copy));
+    //alert(resourceSchedulin_copy.TimeStart_timesp.TotalMilliseconds + ' > ' + resourceSchedulin_copy.TimeEnd_timesp.TotalMilliseconds);
+    if(resourceSchedulin_copy.TimeStart_timesp.TotalMilliseconds > resourceSchedulin_copy.TimeEnd_timesp.TotalMilliseconds)
+    {
+      alert("La hora de inicio debe ser anterior a la hora de finalización del turno");
+      return;
+    }
+    
+    if(!this.ValidateIntersection(resourceSchedulin_copy))
+    {
+      //tittle  "Programación de turnos del profesional"
+      alert("Esta programación de turnos se superpone con turnos existentes");
+      return;
+    }
     if (this.isEditMode == false && isValid)
     {   
       this.currentResourceSchedulingList.push(resourceSchedulin_copy);
@@ -93,20 +103,28 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
     }
     this.preinItialize();
   }
+  
+  //Valida la overlaping de horarios
+  //Si todo esta bien returna True
+  ValidateIntersection(resourceSchedulin_copy: ResourceSchedulingBE):boolean {
 
-  ValidateIntersection(resourceSchedulin_copy:ResourceSchedulingBE){
-    
-    this.currentResourceSchedulingList.forEach((item)=> {
-     //Si no hay dias en comun no hay problema
-     if (!item.HasDaysInCommon(resourceSchedulin_copy.weekDays_BinArray))
-     {
-         return true;
-     }
-     //Si tienen dias en comun hay que verificar que no se overlapen los horarios
-
-     
+    this.currentResourceSchedulingList.forEach((item) => {
+      //alert('ValidateIntersection forEach ' + item.WeekDays_BinArray);
+      let item_clone = ResourceSchedulingBE.Map(item);
+      //alert('item_clone.WeekDays_BinArray ' + item_clone.WeekDays_BinArray);
+      item_clone.Generate_Attributes();
+      //alert('item_clone.WeekDays_BinArray Generate_Attributes()' + item_clone.WeekDays_BinArray);
+      //Si no hay dias en comun no hay problema
+      if (item_clone.HasDaysInCommon(resourceSchedulin_copy.WeekDays_BinArray)==true) {
+        //alert('tienen dias en comun');
+        return false;
+      }
+      //Si tienen dias en comun hay que verificar que no se overlapen los horarios
+      // let intersection = ResourceSchedulingBE.intersection_totalMinutes(resourceSchedulin_copy, item);
+      // if (intersection.length > 0)
+      //   return false;
     });
-   
+    return true; //is valid
   }
 }
 
