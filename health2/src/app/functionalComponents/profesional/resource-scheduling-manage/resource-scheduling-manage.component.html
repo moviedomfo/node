@@ -30,8 +30,12 @@
           <span class="icon-case">
             <i class="fa fa-times"></i>
           </span>
-          <select name="cmbTimeStart" class="" style="width: 200px" #cmbTimeStart [(ngModel)]="currentResourceScheduling.TimeStart">
-            <option *ngFor="let item of arrayOfTimes" [ngValue]="item.TimeString">{{item.TimeString}}</option>
+          <select name="cmbTimeStart" class="" style="width: 200px" #cmbTimeStart 
+          (change)="on_cmbTimeChange()" 
+          [(ngModel)]="currentResourceScheduling_TimeStart">
+            <option *ngFor="let item of arrayOfTimes" [ngValue]="item.TimeString">
+              {{item.TimeString}}
+            </option>
           </select>
         </div>
         <div class="form-group">
@@ -39,7 +43,9 @@
           <span class="icon-case">
             <i class="fa fa-times"></i>
           </span>
-          <select name="cmbTimeEnd" class="" style="width: 200px" #cmbTimeEnd [(ngModel)]="currentResourceScheduling.TimeEnd">
+          <select name="cmbTimeEnd" class="" style="width: 200px" #cmbTimeEnd 
+          (change)="on_cmbTimeChange()" 
+          [(ngModel)]="currentResourceScheduling_TimeEnd">
             <option *ngFor="let item of arrayOfTimes" [ngValue]="item.TimeString">{{item.TimeString}}</option>
           </select>
           <small [hidden]="!(currentResourceScheduling.TimeStart_timesp.TotalMilliseconds > currentResourceScheduling.TimeEnd_timesp.TotalMilliseconds)"   
@@ -52,4 +58,6 @@
           </div>
         
         </div>
+
+        <div>{{currentResourceScheduling | json}}</div>
     </form>

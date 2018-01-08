@@ -109,11 +109,11 @@ export class TimeSpan{
     
     }
     
-    private hhmm: string;
+    public hhmm: string;
 
-    get HHMM(): string {
-        return this.getHHMM();
-    }
+    // get HHMM(): string {
+    //     return this.getHHMM();
+    // }
   
     getHHMM(){
         return moment(this.Fecha).format('HH:mm');

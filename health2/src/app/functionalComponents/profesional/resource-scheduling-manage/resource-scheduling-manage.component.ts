@@ -23,16 +23,27 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
   @Output() OnResourceShedulingCreated = new EventEmitter<ResourceSchedulingBE>();
   @Output() OnComponentError = new EventEmitter<ServiceError>();
   @ViewChild('weekDaysCheckEdit') weekDaysCheckEdit: WeekDaysCheckEditComponent;
-  private ArrayOfTimes : TimespamView[];
 
+  private ArrayOfTimes : TimespamView[];
+  currentResourceScheduling_TimeStart:string;
+  currentResourceScheduling_TimeEnd:string;
   constructor() {   
  }
 
   ngAfterViewInit() {
    
   }
+
   ngOnInit() {
     this.preinItialize();
+  }
+  
+  on_cmbTimeChange(){
+    //alert(JSON.stringify($event));
+    this.currentResourceScheduling.TimeStart = this.currentResourceScheduling_TimeStart;
+    this.currentResourceScheduling.TimeEnd = this.currentResourceScheduling_TimeEnd;
+    this.currentResourceScheduling.Generate_Attributes_TimesPan();
+    
   }
 
   on_chkTodos(value:boolean){
@@ -70,6 +81,8 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
     }
     this.weekDaysCheckEdit.Init();
 
+    this.currentResourceScheduling_TimeStart = this.currentResourceScheduling.TimeStart;
+    this.currentResourceScheduling_TimeEnd = this.currentResourceScheduling.TimeEnd;
 
     this.arrayOfTimes = ResourceSchedulingBE.Get_ArrayOfTimes(new Date(), time_start, time_end, 30, 'health dates');
   }
@@ -80,6 +93,13 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
     this.currentResourceScheduling.Generate_Attributes(false);
     //var resourceSchedulin_copy: ResourceSchedulingBE = Object.assign({}, this.currentResourceScheduling);
     var resourceSchedulin_copy = ResourceSchedulingBE.Map(this.currentResourceScheduling);
+
+    if(this.currentResourceScheduling.WeekDays==0)
+    {
+      
+        alert("Debe seleccionar algun dia de semana");
+        return;
+    }
     //alert(JSON.stringify(resourceSchedulin_copy));
     // console.log(JSON.stringify(this.currentResourceScheduling));
     // console.log(JSON.stringify(resourceSchedulin_copy));
@@ -89,13 +109,15 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
       alert("La hora de inicio debe ser anterior a la hora de finalización del turno");
       return;
     }
-    
+    //alert(this.ValidateIntersection(resourceSchedulin_copy));
+    //console.log('llamada a ValidateIntersection')
     if(!this.ValidateIntersection(resourceSchedulin_copy))
     {
       //tittle  "Programación de turnos del profesional"
       alert("Esta programación de turnos se superpone con turnos existentes");
       return;
     }
+   
     if (this.isEditMode == false && isValid)
     {   
       this.currentResourceSchedulingList.push(resourceSchedulin_copy);
@@ -108,23 +130,31 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
   //Si todo esta bien returna True
   ValidateIntersection(resourceSchedulin_copy: ResourceSchedulingBE):boolean {
 
+    
+    let isValid:boolean = true;
     this.currentResourceSchedulingList.forEach((item) => {
+    
       //alert('ValidateIntersection forEach ' + item.WeekDays_BinArray);
       let item_clone = ResourceSchedulingBE.Map(item);
       //alert('item_clone.WeekDays_BinArray ' + item_clone.WeekDays_BinArray);
       item_clone.Generate_Attributes();
       //alert('item_clone.WeekDays_BinArray Generate_Attributes()' + item_clone.WeekDays_BinArray);
-      //Si no hay dias en comun no hay problema
-      if (item_clone.HasDaysInCommon(resourceSchedulin_copy.WeekDays_BinArray)==true) {
-        //alert('tienen dias en comun');
-        return false;
+
+      //Si  hay dias en comun no hay problema se debe chequear interseccion de horarios
+      if (item_clone.HasDaysInCommon(resourceSchedulin_copy.WeekDays_BinArray) == true) {
+
+        resourceSchedulin_copy.Generate_Attributes();
+
+        //Si tienen dias en comun hay que verificar que no se overlapen los horarios
+        let intersection = ResourceSchedulingBE.intersection_totalMinutes(resourceSchedulin_copy, item_clone);
+        if (intersection.length > 0)
+          isValid = false;
       }
-      //Si tienen dias en comun hay que verificar que no se overlapen los horarios
-      // let intersection = ResourceSchedulingBE.intersection_totalMinutes(resourceSchedulin_copy, item);
-      // if (intersection.length > 0)
-      //   return false;
+
+      
     });
-    return true; //is valid
+    
+    return isValid; //is valid
   }
 }
 
