@@ -52,6 +52,7 @@ import { ChildComponent } from './prueba/forms/child/child.component';
  import { EmailValidator } from './common-componets/validate-email.directive';
 
 import { IntersectionsComponent } from './prueba/test-times/intersections/intersections.component';
+import { SessionSettingComponent } from './functionalComponents/security/sessionSetting.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +72,7 @@ import { IntersectionsComponent } from './prueba/test-times/intersections/inters
     AlertBlockComponent,
     ProfesionalManageComponent,
     ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent, WeekDaysCheckEditComponent, FormsComponent, ChildComponent
-    , EmailValidator, IntersectionsComponent
+    , EmailValidator, IntersectionsComponent, SessionSettingComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

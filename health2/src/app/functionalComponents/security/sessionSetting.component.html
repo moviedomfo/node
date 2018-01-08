@@ -1,0 +1,53 @@
+
+  
+  <fieldset  ngModelGroup="securityCard" class="form-inline" >
+      <div class="form-group2" >
+       <app-alert-block #alertBlock_securityCard></app-alert-block>
+     </div>
+  
+     <div>
+        <label>Username</label>
+        <input type=”text” name=”username” [ngModel]=”user.username” 
+          required minlength="5" maxlength="8" #username=”ngModel”>
+        <small [hidden]=”username.valid || (username.pristine &&  
+          !f.submitted)”>
+          Username is required (minimum 5 characters).
+        </small>
+     </div>
+     <pre *ngIf="username.errors">{{ username.errors | json }}</pre>
+
+
+
+     <div>
+        <label>Email</label>
+        <input type=”email” name=”email” [ngModel]=”user.email” 
+         required pattern=”^[a-zA-Z0–9_.+-]+@[a-zA-Z0–9-]+.[a-zA-Z0–9-.]+$” #email=”ngModel” >
+        <small [hidden]=”email.valid || (email.pristine && !f.submitted)”>
+          Email is required and format should be <i>john@doe.com</i>.
+        </small>
+      </div>
+
+
+  <div>
+   <label>Password</label>
+   <input type=”password” name=”password” [ngModel]=”user.password” 
+     required #password=”ngModel”>
+   <small [hidden]=”password.valid || (password.pristine &&    
+     !f.submitted)”>
+     Password is required
+   </small>
+</div>
+<div>
+   <label>Retype password</label>
+   <input type=”password” name=”confirmPassword”    
+     [ngModel]=”user.confirmPassword” 
+     required validateEqual="password" #confirmPassword=”ngModel”>
+   <small [hidden]=”confirmPassword.valid ||  
+     (confirmPassword.pristine && !f.submitted)”>
+     Password mismatch
+   </small>
+</div>
+  </fieldset >
+  
+ 
+  
