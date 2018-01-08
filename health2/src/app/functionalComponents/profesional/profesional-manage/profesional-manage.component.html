@@ -15,7 +15,10 @@
       <a class="nav-link" href="#sheduling" role="tab" data-toggle="tab">Programación de turnos</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Inicio de sesión</a>
+      <a class="nav-link" href="#session" role="tab" data-toggle="tab">Inicio de sesión</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Contacto</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#profJson" role="tab" data-toggle="tab">json </a>
@@ -44,6 +47,13 @@
       </div>
     </div>
 
+    <div role="tabpanel" class="tab-pane fade" id="session">
+      <section>
+        <app-session-setting
+        [currentUser]="currentUser">
+        </app-session-setting>
+      </section>
+    </div>
     <div role="tabpanel" class="tab-pane fade" id="medioContacto">
       <section>
         <h1>Medio de contacto </h1>

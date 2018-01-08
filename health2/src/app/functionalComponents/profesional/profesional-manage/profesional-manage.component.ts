@@ -39,22 +39,15 @@ export class ProfesionalManageComponent implements AfterViewInit {
     private profesionalService: ProfesionalService,
     private commonService: CommonService,
     private dialogService: DialogService
-  ) {
-
-
-
-  }
+  ) {  }
 
 
   ngAfterViewInit(): void {
-
   }
 
   ngOnInit() {
 
     this.preInitialize();
-
-
 
   }
 

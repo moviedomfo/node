@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { HealtConstants, contextInfo } from "../model/common.constants";
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result } from '../model/common.model';
+import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
 
+
 @Injectable()
 export class AuthenticationService {
+  commonService: any;
   public token: string;
   constructor(private http: Http) {
     // set token if saved in local storage
@@ -35,9 +39,35 @@ export class AuthenticationService {
         }
       });
   }
+
   logout(): void {
     // clear token remove user from local storage to log user out
     this.token = null;
     localStorage.removeItem('currentUser');
-}
+  }
+
+
+  validateUserExist$(username: string): Observable<any> {
+    var bussinesData = {
+      UserName: username
+    };
+    
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("ValidateUserExistService", bussinesData);
+    HealtConstants.httpOptions.search = searchParams;
+
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    .map(function (res: Response) {
+
+      let result: Result= JSON.parse(res.json());
+
+      if (result.Error) {
+        throw  Observable.throw(result.Error);
+      }
+
+      let exist: boolean = result.BusinessData['Exist'] as boolean;
+
+      return exist;
+    }).catch(this.commonService.handleError);
+ 
+  }
 }
