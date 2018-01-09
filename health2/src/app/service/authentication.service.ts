@@ -4,7 +4,7 @@ import { Param, IParam, IContextInformation, IRequest, IResponse, Result } from 
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map'
+//import 'rxjs/add/operator/map'
 
 
 
@@ -47,27 +47,5 @@ export class AuthenticationService {
   }
 
 
-  validateUserExist$(username: string): Observable<any> {
-    var bussinesData = {
-      UserName: username
-    };
-    
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("ValidateUserExistService", bussinesData);
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
-    .map(function (res: Response) {
-
-      let result: Result= JSON.parse(res.json());
-
-      if (result.Error) {
-        throw  Observable.throw(result.Error);
-      }
-
-      let exist: boolean = result.BusinessData['Exist'] as boolean;
-
-      return exist;
-    }).catch(this.commonService.handleError);
  
-  }
 }

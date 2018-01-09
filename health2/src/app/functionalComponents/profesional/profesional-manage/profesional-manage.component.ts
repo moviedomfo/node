@@ -3,7 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { ProfesionalService, CommonService } from '../../../service/index';
-import { ProfesionalBE, PersonBE, GetProfesionalRes, HealthInstitution_ProfesionalBE, ResourceSchedulingBE, User, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants, contextInfo } from '../../../model/index';
+import { ProfesionalBE, PersonBE, GetProfesionalRes, HealthInstitution_ProfesionalBE, ResourceSchedulingBE, User, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants, contextInfo, Rol } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
@@ -106,8 +106,11 @@ export class ProfesionalManageComponent implements AfterViewInit {
       this.currentProfesional.Persona.NroDocumento = "0";
       this.currentUser = new User();
     }
-  }
 
+
+   
+  }
+ 
   OnComponentError_profesionalCard(err: ServiceError) {
     this.globalError = err;
   }
@@ -146,7 +149,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
   }
   onSubmit(isValid: boolean) {
 
-    alert(isValid);
+    
     if (!isValid) return;
 
     if (this.isEdit)
@@ -157,7 +160,32 @@ export class ProfesionalManageComponent implements AfterViewInit {
   }
 
   createProfesional() {
+    alert('Entro en onSubmit createProfesional');
 
+    var crearProfesional = this.profesionalService.crearProfesionalService$(
+      this.currentProfesional,
+      this.currentUser,
+      this.currentHealthInstitution_ProfesionalBE.HealthInstitutionId,true);
+
+
+      crearProfesional.subscribe(
+        res => {
+          if(res)
+          {
+            // int IdProfesional { get; set; }
+            // Guid UserId { get; set; }
+            this.currentProfesional.IdProfesional= res['IdProfesional'];
+            this.currentUser.UserId = res['UserId'];
+            
+           alert('El profesional fue dado de alta correctamente !!');
+          }
+         
+        },
+        err => {
+          this.globalError = err;
+          
+        }
+      );
   }
 
   updateProfesional() {

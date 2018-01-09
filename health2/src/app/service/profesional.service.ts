@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { ProfesionalBE, PersonBE, ResourceSchedulingBE, HealthInstitution_ProfesionalBE, GetProfesionalRes } from '../model/index';
-import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User } from '../model/common.model';
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
@@ -232,5 +232,54 @@ export class ProfesionalService {
         
         return ProfesionalesGridBELis;
       }).catch(this.commonService.handleError);
+  }
+
+  //Si se pasa userName = string.empty se traen todos los roles existentes
+  getAllRoles$(username: string): Observable<Rol[]> {
+    var bussinesData = {
+      UserName: username
+    };
+    
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("SearchAllRolesService", bussinesData);
+    HealtConstants.httpOptions.search = searchParams;
+
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    .map(function (res: Response) {
+     
+      let result: Result= JSON.parse(res.json());
+      
+      if (result.Error) {
+        throw  Observable.throw(result.Error);
+      }
+
+      let rolList: Rol[] = result.BusinessData['RolList'] as Rol[];
+
+      return rolList;
+    }).catch(this.commonService.handleError);
+ 
+  }
+
+  validateUserExist$(username: string): Observable<any> {
+    var bussinesData = {
+      UserName: username
+    };
+
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("ValidateUserExistService", bussinesData);
+    HealtConstants.httpOptions.search = searchParams;
+
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    .map(function (res: Response) {
+     
+      let result: Result= JSON.parse(res.json());
+      
+      if (result.Error) {
+        throw  Observable.throw(result.Error);
+      }
+
+      let exist: boolean = result.BusinessData['Exist'] as boolean;
+
+      return exist;
+    }).catch(this.commonService.handleError);
+ 
   }
 }
