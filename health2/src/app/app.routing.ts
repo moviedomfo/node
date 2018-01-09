@@ -17,6 +17,7 @@ import { PageNotFoundComponent }from './commonComponents/page-not-found/page-not
 import { FormsComponent } from "./prueba/forms/forms.component";
 //import { TestRangeIntersectionComponent } from "./prueba/test-times/test-range-intersection.component";
 import { IntersectionsComponent } from './prueba/test-times/intersections/intersections.component';
+import { CheckBoxListComponent } from "./prueba/check-box-list/check-box-list.component";
  
  
 
@@ -39,7 +40,7 @@ const appRoutes: Routes = [
     { path: 'testTimes', component: TestTimesComponent },
    { path: 'testFormsValidations', component: FormsComponent },
     { path: 'TestIntersection', component: IntersectionsComponent },
-    // { path: 'testAlerts', component: TestAlertBlocksComponent },
+     { path: 'CheckBoxList', component: CheckBoxListComponent },
 
    { path: '**', component: PageNotFoundComponent }
 
