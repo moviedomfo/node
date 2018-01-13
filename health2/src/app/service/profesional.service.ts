@@ -71,6 +71,7 @@ export class ProfesionalService {
 
         response.HealthInstitution_ProfesionalBE = healthInstitution_ProfesionalBE;
         response.User = user;
+        //alert(JSON.stringify( 'getProfesionalService ' + response.User.Roles ));
         response.ResourceSchedulingList = resourceSchedulingList;
         response.HealthInstitution_ProfesionalList = healthInstitution_ProfesionalList;
 

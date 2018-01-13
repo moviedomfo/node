@@ -1,29 +1,39 @@
+<h1 class="titulo" style="display:none">Prueba de chack box</h1>
+<button type="button" (click) = 'toggleTittle()' class="btn btn-primary">Show Tittle</button>
+
 <div class="row">
+
+    <div class="col-sm-6">
+        <div class="card">
+          <div class="card-block">
+            <h3 class="card-title">Listaqdo de roles </h3>
+            <p class="card-text">Seleccione aqui los roles del usuario</p>
+        <div *ngFor="let role of allRoles" class="form-check" style="padding-right:20px;">
+              <label class="form-check-label" >
+                <input type="checkbox" class="form-check-input" 
+                    type="checkbox" name="rolesCheck"
+                   [(ngModel)]="role.isChecked" 
+                   [value]="role.RolName"
+                   >  {{ role.RolName }} 
+              </label>
+            </div>
+          
+        
+          </div>
+        </div>
+      </div>
+
   <div class="col-sm-6">
     <div class="card">
       <div class="card-block">
         <h3 class="card-title">Lista de acciones sobre la lista </h3>
-        
+        <label><input type="checkbox" id="cbox1" value="first_checkbox"> Este es mi primer checkbox</label><br>
         <button type="button" (click) = 'btnGetCheckedList()' class="btn btn-primary">Get checked roles</button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-block">
-        <h3 class="card-title">Listaqdo de roles </h3>
-        <p class="card-text">Seleccione aqui los roles del usuario</p>
-
-        <div *ngFor="let rol of allRoles" class="form-check" style="padding-right:20px;">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" [(ngModel)]="rol.RolName" 
-            (change)='onCmbRolChange($event)' 
-            [value]="rol.RolName">  {{ rol.RolName }} 
-          </label>
+        <div>
+          {{allRoles | json}}
         </div>
-      
-
       </div>
     </div>
   </div>
+  
 </div>

@@ -49,9 +49,10 @@
 
     <div role="tabpanel" class="tab-pane fade" id="session">
       <section>
-        <app-session-setting
-        [currentUser]="currentUser">
+        <app-session-setting #sessionSettingComponent
+            [currentUser]="currentUser">
         </app-session-setting>
+        <button type="button" (click)='btnTestClick()'> test</button>
       </section>
     </div>
     <div role="tabpanel" class="tab-pane fade" id="medioContacto">

@@ -94,12 +94,16 @@
           <h3 class="card-title">Listaqdo de roles </h3>
           <p class="card-text">Seleccione aqui los roles del usuario</p>
 
-          <div *ngFor="let rol of allRoles; " class="form-check" style="padding-right:20px;">
-            <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" [(ngModel)]="rol.RolName" [value]="rol.RolName">  {{ rol.RolName }} 
+        
+          <div *ngFor="let role of allRoles" class="form-check" style="padding-right:20px;">
+            <label class="form-check-label" >
+              <input type="checkbox" class="form-check-input" 
+                  type="checkbox" name="rolesCheck"
+                 [(ngModel)]="role.isChecked" 
+                 [value]="role.RolName"
+                 >  {{ role.RolName }} 
             </label>
           </div>
-        
   
         </div>
       </div>

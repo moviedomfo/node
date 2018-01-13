@@ -15,6 +15,7 @@ import {TestObservablesChildComponent} from './prueba/test-observables/test-obse
 import {TestObservablesComponent} from './prueba/test-observables/test-observables.component';
 
 import { TestTimesComponent } from './prueba/test-times/test-times.component';
+import { AutocompleteComponent } from './prueba/autocomplete/autocomplete.component';
 //import { TestAlertBlocksComponent } from "./prueba/test-alert-blocks/test-alert-blocks.component";
 //import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.component';
 
@@ -34,7 +35,9 @@ import { TestTimesComponent } from './prueba/test-times/test-times.component';
      TestObservablesChildComponent,
      TestObservablesComponent,
      
-     TestTimesComponent
+     TestTimesComponent,
+     
+     AutocompleteComponent
      //TestAlertBlocksComponent,
      //AlertBlockComponent
   ]

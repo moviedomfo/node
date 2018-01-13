@@ -310,6 +310,7 @@ export class Rol{
 
     public  RolName: string;
     public  Description :string;
+    public isChecked : boolean=true;
 
 }
 export class HealthInstitutionBE{

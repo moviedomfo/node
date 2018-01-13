@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter, AfterViewInit, ViewChild } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 
 import { User, ServiceError, Rol } from "../../model/common.model";
@@ -21,8 +21,8 @@ class UserSession
 })
 
 
-export class SessionSettingComponent implements OnInit {
-
+export class SessionSettingComponent implements AfterViewInit {
+  
    
   globalError: ServiceError;
   @Input()    public currentUser: User;
@@ -31,9 +31,14 @@ export class SessionSettingComponent implements OnInit {
    allRoles :Rol[]=[];
 
   constructor(private profesionalService: ProfesionalService) { }
+
+  ngAfterViewInit() {   
+    //alert(' ngAfterViewInit ' +  JSON.stringify (this.currentUser));
+    //this.MachRolesGrid( this.currentUser.Roles);
+  }
   ngOnInit() {
      this.user = new UserSession();
-    
+     
      if(this.currentUser)//if user is {} or null
      {
      
@@ -54,7 +59,7 @@ export class SessionSettingComponent implements OnInit {
      allRoles$.subscribe(
        res => {
          this.allRoles = res;
-         //this.MachRolesGrid( this.currentUser.Roles);
+        
        },
        err => {
  
@@ -63,22 +68,23 @@ export class SessionSettingComponent implements OnInit {
      );
      
   }
+  MachRolesGrid()
+  {  
+    if (!this.currentUser.Roles ) return;
   
-  MachRolesGrid(roles:string[])
-  {
-    if (!roles ) return;
-
     this.allRoles.forEach((item) => {
-      
-     let any= roles.find(r=>r==item.RolName);
-      if(any.length>0){
-        // int i = lstBoxRoles.FindString(lstRol.RolName);
-        // object odj = lstBoxRoles.GetItem(i);
-        // lstBoxRoles.SetItemChecked(i, true);
+      //busca dento de los role del uuario 
+     var any= this.currentUser.Roles.find(r=>r==item.RolName);
+      if(any){
+        item.isChecked = true;
+      }
+      else{
+        item.isChecked = false;
       }
       
     });
   }
+  // }
   btnCheckUserName_Click(){
     //this.authenticationService.
     //bool exist = Fwk.UI.Controller.SecurityController.ValidateUserExist(txtUsername.Text.Trim());

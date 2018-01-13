@@ -14,6 +14,7 @@ import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
 import { ResourceSchedulingManageComponent } from "../resource-scheduling-manage/resource-scheduling-manage.component";
 import { ResourceSchedulingGridComponent } from "../resource-scheduling-grid/resource-scheduling-grid.component";
 import { WeekDaysCheckEditComponent } from "../../../commonComponents/week-days-check-edit/week-days-check-edit.component";
+import { SessionSettingComponent } from "../../security/sessionSetting.component";
 
 @Component({
   selector: 'app-profesional-manage',
@@ -32,8 +33,8 @@ export class ProfesionalManageComponent implements AfterViewInit {
   currentResourceScheduling = new ResourceSchedulingBE();
   @ViewChild('resourceSchedulingManageComponent1') resourceSchedulingManageComponent: ResourceSchedulingManageComponent;
   @ViewChild('resourceSchedulingGrid1') resourceSchedulingGridComponent: ResourceSchedulingGridComponent;
-
-
+  @ViewChild('sessionSettingComponent') sessionSettingComponent: SessionSettingComponent;
+  
 
   constructor(private route: ActivatedRoute,
     private profesionalService: ProfesionalService,
@@ -43,6 +44,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
+ 
   }
 
   ngOnInit() {
@@ -83,6 +85,10 @@ export class ProfesionalManageComponent implements AfterViewInit {
             this.currentResourceSchedulingList = res.ResourceSchedulingList;
             this.currentHealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE;
             this.currentUser = res.User;
+
+            //this.sessionSettingComponent.MachRolesGrid(res.User.Roles);
+            //this.sessionSettingComponent.MachRolesGrid();
+            //alert(' preInitialize roles ' +  JSON.stringify (this.currentUser.Roles));
           }
           else {
             this.globalError = new ServiceError();
@@ -191,4 +197,9 @@ export class ProfesionalManageComponent implements AfterViewInit {
   updateProfesional() {
 
   }
+
+ btnTestClick()
+ {
+  this.sessionSettingComponent.MachRolesGrid();
+ }
 }

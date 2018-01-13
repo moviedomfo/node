@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Rol } from "../../model/index";
 
+declare var jQuery:any;
+declare var $:any;
+
+
 @Component({
   selector: 'app-check-box-list',
   templateUrl: './check-box-list.component.html',
@@ -9,15 +13,16 @@ import { Rol } from "../../model/index";
 })
 export class CheckBoxListComponent implements OnInit {
   allRoles :Rol[]=[];
-  
+  currentRol:Rol;
   constructor() { }
 
   ngOnInit() {
-    let rol :Rol = new Rol();
+    var rol :Rol = new Rol();
     rol.RolName= 'amitis';
     this.allRoles.push(rol);
     rol  = new Rol();
     rol.RolName= 'medico';
+    rol.isChecked= false;
     this.allRoles.push(rol);
     rol  = new Rol();
     rol.RolName= 'secretario';
@@ -27,7 +32,23 @@ export class CheckBoxListComponent implements OnInit {
   btnGetCheckedList(){
 
   }
+
+
   onCmbRolChange($event){
-    alert($event.target.value);
+    
+    //$event.target.value retorna nombre
+    
+    alert(JSON.stringify(this.currentRol));
+    if($event.target.checked)
+    {
+
+      //alert($event.target.value);
+      //role.isChecked = true : role.isChecked = false
+    }
   }
+  toggleTittle(){
+    $('.titulo').slideToggle();
+    jQuery('.titulo').slideToggle();
+  }
+
 }
