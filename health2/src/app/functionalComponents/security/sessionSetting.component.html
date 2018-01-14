@@ -1,110 +1,142 @@
 <fieldset ngModelGroup="securityCard" class="">
 
-    <div class="col-md-6">
-    
+  <div class="row">
+    <div class="col-sm-6">
       <div class="card">
-        <div class="card-block">
-    
-    
-          <div class="form-group2">
-            <!-- <pre *ngIf="username.errors">{{ username.errors | json }}</pre> -->
-            <app-alert-block #alertBlock_securityCard></app-alert-block>
-          </div>
-    
-          <h3 class="card-title">Nombre de usuario</h3>
-          <div class="form-group">
-            
-            
-            <input type='text' name='username' class="form-control" [(ngModel)]='user.username' required #username='ngModel'>
-            <small [hidden]='username.valid || (username.pristine )'>
-              Username is required (minimum 5 characters).
-            </small>
-          </div>
+        <div class="card-block"> </div>
+        <h3 class="card-title">Nombre de usuario</h3>
+        <div class="form-group">
 
-          <button class="btn btn-default" type="button" (click)='btnCheckUserName_Click()'>Ver disponibilidad</button>
+
+          <input type='text' name='username' class="form-control" [(ngModel)]='currentUser.UserName' required #username='ngModel'>
+          <small [hidden]='username.valid || (username.pristine )'>
+            Username is required (minimum 5 characters).
+          </small>
         </div>
       </div>
     </div>
-  
+    <div class="col-md-6">
+
+        <div class="card">
+          <div class="card-block">
+
+            <div class="form-group2">
+              <!-- <pre *ngIf="username.errors">{{ username.errors | json }}</pre> -->
+              <app-alert-block #alertBlock_securityCard></app-alert-block>
+            </div>
+    
+            <br>  <br>  <br>
+    
+            <button class="btn btn-default"  type="button" (click)='btnCheckUserName_Click()'>Ver disponibilidad</button>
+          </div>
+        </div>
+      </div>
+    
+  </div>
+
   <br>
 
 
 
-
-
-
+<div class="row">
   <div class="col-sm-7">
-  <div class="card">
+    <div class="card">
       <div class="card-block">
 
+      
           <h3 class="card-title">Datos de usuario</h3>
-    
-  
-      <div class="form-group">
-        <label for="email">e-mail</label>
-        <input type="text" name="email" class="form-control" [(ngModel)]="user.email" #email="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
 
-        <div [hidden]="email.valid || email.pristine" class="text text-danger">
-          <div [hidden]="!email.hasError('required')">Email is required</div>
-          <div [hidden]="!email.hasError('pattern')">Email format should be
-            <small>
-              <b>joe@gmail.com</b>
-            </small>
-          </div>
-        </div>
-      </div>
+
+          <div class="form-group">
+            <label for="email">e-mail</label>
+            <input type="text" name="email" class="form-control" [(ngModel)]="currentUser.Email" #email="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
   
-      <div class="form-group">
-        <label>Password</label>
-        <input type='password' name='password' class="form-control" #password="ngModel" [(ngModel)]='user.password' required >
-        <small [hidden]='password.valid || (password.pristine )'>
-          Password is required
-        </small>
-      </div>
-      <div class="form-group">
-        <label>Retype password</label>
-        <input type='password' name='confirmPassword' class="form-control" #confirmPassword="ngModel"  [(ngModel)]='user.confirmPassword' required validateEqual="password"          >
-        <div [hidden]="confirmPassword.valid || confirmPassword.pristine" class="text text-danger">
-          <div [hidden]="!confirmPassword.hasError('required')">Confirm password is required</div>
-          <div [hidden]="!confirmPassword.hasError('validateEqual')">  
-            <small>
-              Password mismatch
-            </small>
+            <div [hidden]="email.valid || email.pristine" class="text text-danger">
+              <div [hidden]="!email.hasError('required')">Email is required</div>
+              <div [hidden]="!email.hasError('pattern')">Email format should be
+                <small>
+                  <b>joe@gmail.com</b>
+                </small>
+              </div>
+            </div>
           </div>
-        </div>
-       
+
       </div>
     </div>
-
   </div>
 </div>
+
+  <div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-block">
+
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type='password' name='password' class="form-control" #password="ngModel" [(ngModel)]='currentUser.Password' required>
+          <small [hidden]='password.valid || (password.pristine )'>
+            Password is required
+          </small>
+        </div>
+        <div class="form-group">
+          <label>Reingrese password</label>
+          <input type='password' name='confirmPassword' class="form-control" #confirmPassword="ngModel" [(ngModel)]='currentUser.confirmPassword'
+            required validateEqual="password">
+          <div [hidden]="confirmPassword.valid || confirmPassword.pristine" class="text text-danger">
+            <div [hidden]="!confirmPassword.hasError('required')">Confirm password is required</div>
+            <div [hidden]="!confirmPassword.hasError('validateEqual')">
+              <small>
+                Password mismatch
+              </small>
+            </div>
+          </div>
+
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+  <div class="col-sm-6">
+      <div class="card">
+        <div class="card-block">
+  
+          
+          <button class="btn btn-danger" type="button" (click)='btnResetPwd_Click()' 
+          [disabled]='!confirmPassword.valid || !password.valid || !username.valid'>Resetear password</button>
+        </div>
+  
+      </div>
+    </div>
+</div>
+
   <div class="row">
     <div class="col-sm-6">
       <div class="card">
         <div class="card-block">
-          <h3 class="card-title">Special title treatment</h3>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <!-- <h3 class="card-title">Special title treatment</h3> -->
+          <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          <!-- <p>{{allRoles | json}}</p> -->
         </div>
       </div>
     </div>
     <div class="col-sm-6">
       <div class="card">
         <div class="card-block">
-          <h3 class="card-title">Listaqdo de roles </h3>
+          <h3 class="card-title">Listado de roles </h3>
           <p class="card-text">Seleccione aqui los roles del usuario</p>
 
-        
+
           <div *ngFor="let role of allRoles" class="form-check" style="padding-right:20px;">
-            <label class="form-check-label" >
-              <input type="checkbox" class="form-check-input" 
-                  type="checkbox" name="rolesCheck"
-                 [(ngModel)]="role.isChecked" 
-                 [value]="role.RolName"
-                 >  {{ role.RolName }} 
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" type="checkbox" name="{{ role.RolName }} " [(ngModel)]="role.isChecked" [value]="role.RolName"> {{ role.RolName }}
             </label>
           </div>
-  
+
+
+
         </div>
       </div>
     </div>

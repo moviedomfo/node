@@ -270,8 +270,10 @@ export class FwkEvent{
 }
 
 export class User {
-    public Username: string;
+    public UserName: string;
     public Password: string;
+    public confirmPassword: string;
+    
     public FirstName: string;
     public LastName: string;
     public Email:string;
@@ -308,9 +310,12 @@ export class User {
 
 export class Rol{
 
+    Rol(){
+        this.isChecked = false;
+    }
     public  RolName: string;
     public  Description :string;
-    public isChecked : boolean=true;
+    public isChecked : boolean=false;
 
 }
 export class HealthInstitutionBE{

@@ -44,13 +44,13 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
- 
+    this.sessionSettingComponent.MachRolesGrid();
   }
 
   ngOnInit() {
 
     this.preInitialize();
-
+    
   }
 
   private preInitialize() {
@@ -85,10 +85,12 @@ export class ProfesionalManageComponent implements AfterViewInit {
             this.currentResourceSchedulingList = res.ResourceSchedulingList;
             this.currentHealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE;
             this.currentUser = res.User;
-
+             //alert(JSON.stringify( res.User ));
+            //alert(JSON.stringify(this.currentUser.UserName));
             //this.sessionSettingComponent.MachRolesGrid(res.User.Roles);
             //this.sessionSettingComponent.MachRolesGrid();
             //alert(' preInitialize roles ' +  JSON.stringify (this.currentUser.Roles));
+            
           }
           else {
             this.globalError = new ServiceError();

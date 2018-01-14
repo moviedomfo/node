@@ -58,7 +58,7 @@ export class ProfesionalService {
         }
 
         let profesionalBE: ProfesionalBE = result.BusinessData['profesional'] as ProfesionalBE;
-        //alert(profesionalBE.Persona.Sexo.toString());
+     
         let resourceSchedulingList: ResourceSchedulingBE[] = result.BusinessData['ResourceSchedulerList'] as ResourceSchedulingBE[];
         let user: User = result.BusinessData['User'] as User;
 
@@ -71,6 +71,7 @@ export class ProfesionalService {
 
         response.HealthInstitution_ProfesionalBE = healthInstitution_ProfesionalBE;
         response.User = user;
+        //alert(response.User);
         //alert(JSON.stringify( 'getProfesionalService ' + response.User.Roles ));
         response.ResourceSchedulingList = resourceSchedulingList;
         response.HealthInstitution_ProfesionalList = healthInstitution_ProfesionalList;
@@ -283,4 +284,28 @@ export class ProfesionalService {
     }).catch(this.commonService.handleError);
  
   }
+
+
+  resetUserPassword$(username: string,password: string): Observable<any> {
+    var bussinesData = {
+      UserName: username,
+      NewPassword: password
+    };
+
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("ResetUserPasswordService", bussinesData);
+    HealtConstants.httpOptions.search = searchParams;
+
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    .map(function (res: Response) {
+     
+      let result: Result= JSON.parse(res.json());
+      
+      if (result.Error) {
+        throw  Observable.throw(result.Error);
+      }
+      return true;
+    }).catch(this.commonService.handleError);
+ 
+  }
+
 }

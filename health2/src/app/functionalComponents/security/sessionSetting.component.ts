@@ -7,7 +7,7 @@ import { Observable } from "rxjs/Observable";
 
 class UserSession
 {
- username: string;
+  UserName: string;
  email: string;
  password: string;
  confirmPassword: string;
@@ -26,35 +26,28 @@ export class SessionSettingComponent implements AfterViewInit {
    
   globalError: ServiceError;
   @Input()    public currentUser: User;
-   user: UserSession;
+   
    @Output() OnComponentError = new EventEmitter<ServiceError>();
    allRoles :Rol[]=[];
 
   constructor(private profesionalService: ProfesionalService) { }
 
-  ngAfterViewInit() {   
-    //alert(' ngAfterViewInit ' +  JSON.stringify (this.currentUser));
-    //this.MachRolesGrid( this.currentUser.Roles);
+  ngOnChanges(){
+    this.MachRolesGrid( );
   }
+
+  ngAfterViewInit(){}
+
   ngOnInit() {
-     this.user = new UserSession();
      
-     if(this.currentUser)//if user is {} or null
+    
+     if(!this.currentUser)//if user is not {} or nullr is {} or null
      {
+      this.currentUser= new User();
+      this.currentUser.Roles=[];
+     }
      
-     this.user.username= this.currentUser.Username;
-     this.user.email= this.currentUser.Email;
-     this.user.password= '';
-     this.user.confirmPassword= '';
-     }
-     else
-     {  
-       
-      this.user= new UserSession();
-     }
-
-
-     var allRoles$ :Observable<Rol[]>= this.profesionalService.getAllRoles$(this.user.username);
+    var allRoles$ :Observable<Rol[]>= this.profesionalService.getAllRoles$(this.currentUser.UserName);
 
      allRoles$.subscribe(
        res => {
@@ -68,15 +61,30 @@ export class SessionSettingComponent implements AfterViewInit {
      );
      
   }
+
+  checkRol(rolName){
+    
+    var any= this.allRoles.find(r=>r.RolName==rolName);
+    if(any){
+    
+      any.isChecked=true;
+    }
+    
+  }
   MachRolesGrid()
   {  
-    if (!this.currentUser.Roles ) return;
+   
+    if (!this.currentUser || !this.currentUser.Roles ) {
+      console.log('MachRolesGrid return');
+      return;
+    }
   
     this.allRoles.forEach((item) => {
-      //busca dento de los role del uuario 
+      //busca dento de los role del uario 
      var any= this.currentUser.Roles.find(r=>r==item.RolName);
       if(any){
         item.isChecked = true;
+        console.log(item.RolName + ' isChecked ='  ,  item.isChecked);
       }
       else{
         item.isChecked = false;
@@ -91,7 +99,7 @@ export class SessionSettingComponent implements AfterViewInit {
     //El nombre de usuario ya se encuentra registrado \r\n por favor elija otro
     //Nombre de usuario disponible
 
-    var userExist$=this.profesionalService.validateUserExist$( this.user.username);
+    var userExist$=this.profesionalService.validateUserExist$( this.currentUser.UserName);
 
  
 
@@ -104,6 +112,32 @@ export class SessionSettingComponent implements AfterViewInit {
         else{
           alert('El nombre de usuario esta disponible');
         }
+      },
+      err => {
+
+        this.OnComponentError.emit(err);
+      }
+    );
+  }
+  btnResetPwd_Click(){
+    //mostrar "Esta a punto de reestablacer la clave de inicio de sesión del usuario, esta seguro ?"
+    if(!this.currentUser.UserName || this.currentUser.UserName=='')
+    {
+      alert('falta nombre de usuario');
+    }
+    if(!this.currentUser.Password || this.currentUser.Password=='')
+    {
+      alert('falta nombre de Password');
+      return;
+    }
+    var reset$=this.profesionalService.resetUserPassword$( this.currentUser.UserName,  this.currentUser.Password);
+    reset$.subscribe(
+      res => {
+        if(res===true)
+        {
+         alert('La password se cambio con exito !!');
+        }
+       
       },
       err => {
 
