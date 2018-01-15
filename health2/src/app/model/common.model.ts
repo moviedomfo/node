@@ -297,7 +297,7 @@ export class User {
     public  Roles :string[];
     public  UserId? :number;
     
-    //public void AddRoles(RolList rolList);
+
 
     public  GetRolList():Rol[]{
 

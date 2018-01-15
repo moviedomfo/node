@@ -1,0 +1,55 @@
+<div class="form-group ">
+
+<label for="palce" class="col-lg-2 control-label">Seleccione una ubicación  </label>
+      <app-google-place
+      (onPlaceChanged) = "onPlaceChanged($event)">
+
+      </app-google-place>
+  </div>
+<div class="form-group ">
+
+    
+
+    <label for="Street" class="col-lg-2 control-label">Calle </label>
+    <div class="col-lg-5">
+       <input type="text" class="form-control" name="txtStreet" placeholder="calle" [(ngModel)]="currentPlace.Street">
+    </div>
+  </div>
+  <div class="form-group ">
+    <label for="StreetNumber" class="col-lg-2 control-label">Nro </label>
+    <div class="col-lg-5">
+       <input type="number" class="form-control" name="txtStreetNumber" placeholder="nro" [(ngModel)]="currentPlace.StreetNumber">
+    </div>
+  </div>
+  <div class="form-group ">
+    <label for="Floor" class="col-lg-2 control-label">Piso </label>
+    <div class="col-lg-5">
+       <input type="text" class="form-control" name="txtFloor" placeholder="piso" [(ngModel)]="currentPlace.Floor">
+    </div>
+  </div>
+  <div class="form-group ">
+    <label for="Telefono1" class="col-lg-2 control-label">Telefono1 </label>
+    <div class="col-lg-5">
+       <input type="text" class="form-control" name="txtTelefono1" placeholder="Telefono 1" [(ngModel)]="currentPlace.Telefono1">
+    </div>
+  </div>
+  <div class="form-group ">
+    <label for="Telefono2" class="col-lg-2 control-label">Telefono2 </label>
+    <div class="col-lg-5">
+       <input type="text" class="form-control" name="txtTelefono2" placeholder="telefono 2" [(ngModel)]="currentPlace.Telefono2">
+    </div>  
+  </div>
+  <button class="btn  btn-success" type="button" (click)="btnAddPlace_click()"> Agregar</button>
+
+<ul class="list-group">
+    <li class="list-group-item active" >Ubicaciones </li>
+  <div *ngFor="let item of currentPerson.places" class="">
+      <li class="list-group-item">{{item.formatted_address}}</li>
+  </div>
+</ul>
+
+
+
+<!-- <div class="text-primary">
+  {{currentPerson.places | json}}
+</div> -->

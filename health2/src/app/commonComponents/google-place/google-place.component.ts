@@ -1,7 +1,8 @@
-import { ElementRef, NgZone,  ViewChild ,Component, OnInit } from '@angular/core';
+import { ElementRef, NgZone,  ViewChild ,Component, OnInit ,Output, EventEmitter} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { } from '@types/googlemaps';
 import { MapsAPILoader } from '@agm/core';
+import { PlaceBE } from "../../model/persons.model";
 
 @Component({
   selector: 'app-google-place',
@@ -19,8 +20,9 @@ export class GooglePlaceComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
   ) {}
-  @ViewChild("search")
-  public searchElementRef: ElementRef;
+
+  @Output()  onPlaceChanged= new EventEmitter<PlaceBE>();
+  @ViewChild("search")  public searchElementRef: ElementRef;
   ngOnInit() {
   
     //set google maps defaults
@@ -54,6 +56,12 @@ export class GooglePlaceComponent implements OnInit {
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
+          var placebe :PlaceBE= new PlaceBE();
+          placebe.adr_address= this.place.adr_address;
+          placebe.formatted_address= this.place.formatted_address;
+          placebe.id= this.place.id;
+          placebe.place_id= this.place.place_id;
+          this.onPlaceChanged.emit(placebe);
         });
       });
     });

@@ -85,7 +85,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
             this.currentResourceSchedulingList = res.ResourceSchedulingList;
             this.currentHealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE;
             this.currentUser = res.User;
-             //alert(JSON.stringify( res.User ));
+             //alert(JSON.stringify( res.User.Email ));
             //alert(JSON.stringify(this.currentUser.UserName));
             //this.sessionSettingComponent.MachRolesGrid(res.User.Roles);
             //this.sessionSettingComponent.MachRolesGrid();

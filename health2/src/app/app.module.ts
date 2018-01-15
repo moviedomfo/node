@@ -55,6 +55,7 @@ import { IntersectionsComponent } from './prueba/test-times/intersections/inters
 import { SessionSettingComponent } from './functionalComponents/security/sessionSetting.component';
 import { ValidateEqualDirective } from './commonComponents/validate-equal.directive';
 import { CheckBoxListComponent } from './prueba/check-box-list/check-box-list.component';
+import { ContactComponent } from './functionalComponents/persons/contact/contact.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +75,7 @@ import { CheckBoxListComponent } from './prueba/check-box-list/check-box-list.co
     AlertBlockComponent,
     ProfesionalManageComponent,
     ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent, WeekDaysCheckEditComponent, FormsComponent, ChildComponent
-    , EmailValidator, IntersectionsComponent, SessionSettingComponent, ValidateEqualDirective, CheckBoxListComponent
+    , EmailValidator, IntersectionsComponent, SessionSettingComponent, ValidateEqualDirective, CheckBoxListComponent, ContactComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

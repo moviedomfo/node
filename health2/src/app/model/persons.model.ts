@@ -23,19 +23,19 @@ export class PersonBE {
      FechaAlta: Date;
      Foto: ArrayBuffer;
      IsUserActive: boolean ;
-     Street: string;
-     StreetNumber: number;
+    //  Street: string;
+    //  StreetNumber: number;
      Floor: string;
-     CountryId: number;
-     ProvinceId: number;
-     CityId: number;
-     Neighborhood: string;
-     mail: string;
-     Telefono1: string;
-     Telefono2: string;
-     Province: string;
-     City: string;
-     ZipCode: string;
+    //  CountryId: number;
+    //  ProvinceId: number;
+    //  CityId: number;
+     //Neighborhood: string;
+    //  mail: string;
+    //  Telefono1: string;
+    //  Telefono2: string;
+    //  Province: string;
+    //  City: string;
+    //  ZipCode: string;
      LastHealthInstId: string ;
 
 
@@ -43,5 +43,18 @@ export class PersonBE {
     //  {
     //      return Apellido + Nomnbre;
     //  }
+    places:PlaceBE[];
+}
 
+export class PlaceBE{
+    adr_address:string;
+    formatted_address:string;
+    id:string;
+    place_id:string;
+    Street: string;
+    StreetNumber: number;
+    mail: string;
+    Telefono1: string;
+    Telefono2: string;
+    Floor: string;
 }
