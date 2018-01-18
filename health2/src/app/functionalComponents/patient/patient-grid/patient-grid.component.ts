@@ -11,6 +11,8 @@ import {DateComponent} from "../../../commonComponents/ag-grid/date.component";
 import {HeaderComponent} from "../../../commonComponents/ag-grid/header.component";
 import {HeaderGroupComponent} from "../../../commonComponents/ag-grid/header-group.component";
 import {GridOptions} from "ag-grid/main";
+import { Router, CanActivate ,CanDeactivate} from '@angular/router';
+
 @Component({
   selector: 'app-patient-grid',
   templateUrl: './patient-grid.component.html',
@@ -24,8 +26,11 @@ export class PatientGridComponent implements OnInit {
   currentPatient: PatientBE;
   private columnDefs:any[];
   private gridOptions:GridOptions;
-
-  constructor(private commonService: CommonService, private patientsService: PatientsService) {
+  
+  constructor(
+    private commonService: CommonService,
+    private patientsService: PatientsService,
+    private router: Router) {
     this.patientList = [];
   }
 
@@ -59,6 +64,7 @@ private createColumnDefs() {
   this.columnDefs = [
     { headerName: "Nombre", field: "Persona.Nombre" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Apellido", field: "Persona.Apellido" ,width: 150,pinned: true,filter: 'text'},
+    { headerName: "Documento", field: "Persona.NroDocumento" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Fecha alta", field: "FechaAlta",width: 200,pinned: true }
   ];
 }
@@ -75,8 +81,14 @@ private createColumnDefs() {
     this.patientList$.subscribe(
       res => {
         this.patientList = res;
-        
+        if(this.patientList)
+        {
         this.patientCount = this.patientList.length;
+        }
+        else
+        {
+          this.patientCount = 0;
+        }
 
       }
     );
@@ -86,12 +98,23 @@ private createColumnDefs() {
   onGridReady(params) {
     params.api.sizeColumnsToFit();
   }
+
+  onCellClicked(event){}
   onGridCellDoubleClick(event){
     //alert(event);
   }
+  
   onGridRowDoubleClick(event){
     
-    alert(JSON.stringify(event));
+    console.log(event.node.data);
+    let patienId = event.node.data.PatientId;
+    
+    // http://localhost:4200/patientEdit?id=4350
+    //this.router.navigate(['patientEdit'], { queryParams: { id: patienId }}); 
+    
+    this.router.navigate(['/patientEdit', patienId]); 
+    
+
   }
   onModelUpdated(event){
 

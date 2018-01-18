@@ -94,7 +94,9 @@ export class ProfesionalManageComponent implements AfterViewInit {
           }
           else {
             this.globalError = new ServiceError();
-            this.globalError.message = "El paciente no existe en nuestra base de datos ";
+
+            this.globalError.message = "El profesional no existe en nuestra base de datos ";
+   
           }
         },
         err => {

@@ -2,9 +2,8 @@
   <h3>
     Gestión de profesionales
   </h3>
-  <button class="btn btn-success"  type="submit"   [disabled]='!f.valid'>Actualizar</button>
-  <!-- <button class="btn btn-success" [ngClass]="{hidden: isEdit}" #btnCreate (click)="createProfesionalt()">Crear profesional</button> -->
-
+  <button class="btn btn-success" [ngClass]="{hidden: !isEdit}" type="submit"   [disabled]='!f.valid'>Actualizar</button>
+    <button class="btn btn-success" [ngClass]="{hidden: isEdit}"   [disabled]='!f.valid' (click)="createPatient()">Crear paciente</button>
   <app-error-box-container [globalError]="globalError"></app-error-box-container>
 
   <ul class="nav nav-tabs " role="tablist">

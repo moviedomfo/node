@@ -1,11 +1,14 @@
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { PatientsService, CommonService, MedicalInsuranceService } from '../../../service/index';
 import { PatientBE, PersonBE, MutualPorPacienteBE, MutualPlanGridView, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
-import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
+import { ModalDialogComponent } from '../../../commonComponents/modal-dialog/modal-dialog.component';
+
+import { ViewChild, ElementRef,  AfterContentInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { ServiceError } from '../../../model/common.model';
 import { element } from 'protractor';
@@ -14,7 +17,7 @@ import { PatienMedicalInsuranceGridComponent } from '../patien-medical-insurance
 @Component({
   selector: 'app-patient-manger',
   templateUrl: './patient-manger.component.html',
-  styleUrls: ['./patient-manger.component.css']
+  encapsulation: ViewEncapsulation.None
 })
 export class PatientMangerComponent implements OnInit {
   globalError: ServiceError;
@@ -33,8 +36,8 @@ export class PatientMangerComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private patientService: PatientsService,
     private commonService: CommonService,
-    private medicalInsuranceService: MedicalInsuranceService,
-    private rd: Renderer2) { }
+    private medicalInsuranceService: MedicalInsuranceService
+    ) { }
 
   ngOnInit() {
     this.preInitializePatient();
@@ -69,12 +72,13 @@ export class PatientMangerComponent implements OnInit {
       this.currentPatient$.subscribe(
         res => {
           this.currentPatient = res;
-          if (this.currentPatient == null) {
+          if (this.currentPatient != null) {
             this.mutualPorPacienteAuxList = this.currentPatient.Mutuales;
           }
           else {
             this.globalError = new ServiceError();
             this.globalError.message = "El paciente no existe en nuestra base de datos ";
+            alert(this.globalError.message );
           }
         },
         err => {

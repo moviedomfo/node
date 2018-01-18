@@ -1,15 +1,14 @@
+<form #f="ngForm"  (ngSubmit)="onSubmit(f.valid)" novalidate>
 <h3>
  Alpta de paciente
 </h3>
 
 
-<button class="btn btn-success" #btnActualizar type="submit" (click)="updatePatient()" 
-[ngClass]="{hidden: !isEdit}">Actualizar</button>
-<button class="btn btn-success" [ngClass]="{hidden: isEdit}" 
-#btnCreate (click)="createPatient()">Crear paciente</button>
+<button class="btn btn-success"  type="submit" [disabled]='!f.valid' (click)="updatePatient()" 
+[ngClass]="{hidden: !isEdit}">Actualizar</button> <button class="btn btn-success" [ngClass]="{hidden: isEdit}" 
+[disabled]='!f.valid' (click)="createPatient()">Crear paciente</button>
 
-<app-error-box-container [globalError]="globalError"  
-></app-error-box-container>
+<app-error-box-container [globalError]="globalError"></app-error-box-container>
 
 <ul class="nav nav-tabs" role="tablist">
   <li class="nav-item">
@@ -29,18 +28,7 @@
 <!-- Tab panes -->
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane fade in active" id="profile">
-      <!-- <div class="form-group">
-          <p>Fecha alta
-            <span>*</span>
-          </p>
-          <span class="icon-case">
-            <i class="fa fa-info"></i>
-          </span>
-          <input type="date" [ngModel] ="currentPatient.FechaAlta | date:'yyyy-MM-dd'" 
-          (ngModelChange)="currentPatient.FechaAlta = $event" [value]="datee | date:'yyyy-MM-dd'">
-          {{currentPatient.FechaAlta| date:'yyyy-MM-dd'}}
-          <div class="validation"></div>
-        </div> -->
+    
     <app-person-card
     [currentPerson] = "currentPatient.Persona" 
     (OnComponentError)="OnComponentError_personCard($event)">
@@ -67,7 +55,10 @@
   </div>
   <div role="tabpanel" class="tab-pane fade" id="medioContacto">
     <section>
-        <h1 >Medio de contacto </h1>
+      <h3>Medio de contacto </h3>
+      <app-contact [currentPerson]="currentPatient.Persona">
+
+      </app-contact>
     </section>
   </div>
   <div role="tabpanel" class="tab-pane fade in active" id="patientJson">
@@ -91,3 +82,4 @@
       
     </div>
 </div>
+</form>

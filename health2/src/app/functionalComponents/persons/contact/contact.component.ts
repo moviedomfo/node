@@ -14,8 +14,17 @@ export class ContactComponent implements OnInit {
   currentPlace:PlaceBE;
   constructor() { }
 
-  ngOnInit() {
 
+  ngAfterViewInit(): void {
+   
+  }
+
+  ngOnInit() {
+    if(!this.currentPlace)
+    {
+      this.currentPlace = new PlaceBE();
+    
+    }
   }
 
   onPlaceChanged(placeBE:PlaceBE){
@@ -34,7 +43,7 @@ export class ContactComponent implements OnInit {
       return;
     }
     this.currentPlace= placeBE;
-    //this.currentPerson.places.push(placeBE);
+    
   }
 
 

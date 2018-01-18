@@ -48,15 +48,15 @@ export class PersonAddressComponent implements AfterContentInit {
     
      
      
-     this.currentPerson.Street = "";
-     this.currentPerson.StreetNumber = -1;
-     this.currentPerson.Floor = "";
+    //  this.currentPerson.Street = "";
+    //  this.currentPerson.StreetNumber = -1;
+    //  this.currentPerson.Floor = "";
 
-     this.currentPerson.Telefono1 = "";
-     this.currentPerson.Telefono2 = "";
+    //  this.currentPerson.Telefono1 = "";
+    //  this.currentPerson.Telefono2 = "";
 
-     this.currentPerson.ProvinceId = CommonParams.SeleccioneUnaOpcion.IdParametro;
-     this.currentPerson.CountryId = CommonParams.SeleccioneUnaOpcion.IdParametro;
-     this.currentPerson.CityId = CommonParams.SeleccioneUnaOpcion.IdParametro;
+    //  this.currentPerson.ProvinceId = CommonParams.SeleccioneUnaOpcion.IdParametro;
+    //  this.currentPerson.CountryId = CommonParams.SeleccioneUnaOpcion.IdParametro;
+    //  this.currentPerson.CityId = CommonParams.SeleccioneUnaOpcion.IdParametro;
   }
 }

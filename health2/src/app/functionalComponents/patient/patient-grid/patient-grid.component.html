@@ -1,15 +1,27 @@
 <section>
+<header class="header">
+  <h3>Texto busqueda de pacientes</h3>
 
-  <header class="header">
-    <h4>Texto busqueda de pacientes</h4>
-    <input class="new-todo" placeholder="Nombre o apellido paciente" autofocus="" [(ngModel)]="txtQuery" #txtBox_Query (keyup.enter)="onKey_Enter(txtBox_Query.value)"
-      (blur)="onKey_Enter(txtBox_Query.value)">
-    <p>{{txtQuery}}</p>
 
-    <div class="alert alert-success">
-      <div class="text text-info"> Cantidad de pacientes {{patientCount}}</div>
+  <form class="form-inline" (ngSubmit)="retrivePatients()">
+    <div class="form-group mb-2">
+      <input name="txtBox_Query" type="text" class="form-control" placeholder="Nombre o apellido paciente" [(ngModel)]="txtQuery"
+        aria-describedby="basic-addon1" #txtBox_Query (keyup.enter)="onKey_Enter(txtBox_Query.value)" (blur)="onKey_Enter(txtBox_Query.value)">
+
     </div>
-    <!-- <button class="btn btn-default" (click)=showConfirm()>Buscar  </button> -->
+    <div  class="form-group mx-sm-3 mb-2">
+      <button type="submit" class="btn btn-primary mb-2">Buscar </button>
+    </div>
+
+    <div  *ngIf="patientCount > 0 && patientCount" class="form-group mx-sm-3 mb-2">
+      <span class="badge badge-pill badge-info">Encontrados {{patientCount}}</span>
+    </div>
+
+  </form>
+
+    
+
+  
   </header>
   <div class="container">
     <div class="col-lg-10">
@@ -22,17 +34,12 @@
         <div class="panel-body">
           <div style="clear: both;"></div>
           <ag-grid-angular style="width: 900px; height: 515px;" class="ag-fresh" [rowData]="patientList" [columnDefs]="columnDefs"
-            (modelUpdated)="onModelUpdated()" (cellClicked)="onCellClicked($event)" (cellDoubleClicked)="onGridCellDoubleClick($event)"
+            (modelUpdated)="onModelUpdated($event)" 
+            (cellClicked)="onCellClicked($event)" 
+            (cellDoubleClicked)="onGridCellDoubleClick($event)"
             (rowDoubleClicked)="onGridRowDoubleClick($event)">
           </ag-grid-angular>
-          <!-- <div *ngFor="let patient of patientList">
-                {{patient.Persona.Nombre}}
-                
-                 {{patient.Persona.Apellido}}
-                <label [attr.for]="patient.Persona.FechaAlta">  {{patient.Persona.FechaAlta}}</label>
-              </div>
-            </div> -->
-
+      
 
         </div>
       </div>
