@@ -1,26 +1,83 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 import {PersonBE} from '../../app/model/persons.model'
+import { HealtConstants, contextInfo } from "../model/common.constants";
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol } from '../model/common.model';
+import { CommonService } from '../service/common.service';
 
 @Injectable()
 export class PersonsService {
+  private contextInfo: IContextInformation;
+  
+  constructor(private http: Http,private commonService: CommonService) {
+    this.contextInfo = contextInfo;
+    
+  }
 
-  constructor() { }
-  getPersons() { return Observable.of(PersonaList); }
 
-  getPerson(id: number | string) {
-    return this.getPersons()
-      // (+) before `id` turns the string into a number
-      .map(persona => PersonaList.find(p => p.IdPersona === +id));
+  retrivePersonasService$(
+    nombre: string,
+    apellido: string,
+    motivoConsulta:string
+    nroDocumento?: string,
+    
+
+  ): Observable<PersonBE[]> {
+
+    var bussinesData = {
+      Nombre: nombre,
+      Apellido: apellido,
+      NroDocumento: nroDocumento;
+      MotivoConsulta: motivoConsulta
+
+    };
+
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetrivePersonasService", bussinesData);
+
+    HealtConstants.httpOptions.search = searchParams;
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+      .map(function (res: Response) {
+
+        let result: Result = JSON.parse(res.json());
+        
+        if (result.Error) {
+          throw Observable.throw(result.Error);
+        }
+        var profesionalesGridBEList: PersonBE[] = result.BusinessData as PersonBE[];
+      
+        return profesionalesGridBEList;
+      }).catch(this.commonService.handleError);
+  }
+
+  getPersonaByParamService$(
+    personaId: number,
+    nroDocumento: String): Observable<PersonBE> {
+
+    var bussinesData = {
+      Id: personaId,
+      NroDocumento: nroDocumento,
+    
+
+    };
+
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("GetPersonaByParamService", bussinesData);
+
+    HealtConstants.httpOptions.search = searchParams;
+
+    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+      .map(function (res: Response) {
+
+        let result: Result = JSON.parse(res.json());
+
+        if (result.Error) {
+          throw Observable.throw(result.Error);
+        }
+
+        return result.BusinessData as PersonBE;
+        
+      }).catch(this.commonService.handleError);
   }
 }
 
-const PersonaList = [
-  new PersonBE(11, 'Mr. Nice'),
-  new PersonBE(12, 'Narco'),
-  new PersonBE(13, 'Bombasto'),
-  new PersonBE(14, 'Celeritas'),
-  new PersonBE(15, 'Magneta'),
-  new PersonBE(16, 'RubberMan')
-];

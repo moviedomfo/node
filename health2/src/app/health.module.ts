@@ -11,11 +11,15 @@ import { PersonCardComponent } from './functionalComponents/persons/person-card/
 import { LoginComponent } from './commonComponents/login/login.component';
 import { MedicalInsuranceGridComponent } from './functionalComponents/medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
 import { PatienMedicalInsuranceGridComponent } from './functionalComponents/patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
-import { PatientBE } from './model/patients.model';
-import {IContextInformation, ContextInformation, IRequest, Request, IResponse, Result, ServiceError } from './model/common.model';
 import { PatientGridComponent } from './functionalComponents/patient/patient-grid/patient-grid.component';
+import { ProfesionalGridComponent } from './functionalComponents/profesional/profesionalGrid/profesionalGrid.component';
+
+
+import {IContextInformation, ContextInformation, IRequest, Request, IResponse, Result, ServiceError } from './model/common.model';
+
 import {CommonService, PatientsService, PersonsService, MedicalInsuranceService,AuthenticationService} from './service/index';
-import { ProfesionalComponent } from './functionalComponents/profesional/profesional.component';
+
+
 @NgModule({
   imports: [
     CommonModule,BaseModule
@@ -29,7 +33,7 @@ import { ProfesionalComponent } from './functionalComponents/profesional/profesi
     PatientMangerComponent,PatientCreateComponent,
     MedicalInsuranceGridComponent,
     PatienMedicalInsuranceGridComponent,
-    ProfesionalComponent,
+    ProfesionalGridComponent,
   ],
   providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,AuthenticationService],
 })

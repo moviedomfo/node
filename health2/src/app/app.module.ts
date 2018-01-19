@@ -44,6 +44,7 @@ import { AlertBlockComponent } from './commonComponents/alert-block/alert-block.
 import {ErrorBoxContainerComponent } from './commonComponents/error-box-container/error-box-container.component';
 import { ProfesionalManageComponent } from './functionalComponents/profesional/profesional-manage/profesional-manage.component';
 import { ProfesionalCardComponent } from './functionalComponents/profesional/profesional-card/profesional-card.component';
+import { ProfesionalGridComponent } from './functionalComponents/profesional/profesionalGrid/profesionalGrid.component';
 import { ResourceSchedulingGridComponent } from './functionalComponents/profesional/resource-scheduling-grid/resource-scheduling-grid.component';
 import { ResourceSchedulingManageComponent } from './functionalComponents/profesional/resource-scheduling-manage/resource-scheduling-manage.component';
 import { WeekDaysCheckEditComponent } from './commonComponents/week-days-check-edit/week-days-check-edit.component';
@@ -73,7 +74,7 @@ import { ContactComponent } from './functionalComponents/persons/contact/contact
     GooglePlaceComponent,
     ErrorBoxContainerComponent,
     AlertBlockComponent,
-    ProfesionalManageComponent,
+    ProfesionalManageComponent,ProfesionalGridComponent,
     ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent, WeekDaysCheckEditComponent, FormsComponent, ChildComponent
     , EmailValidator, IntersectionsComponent, SessionSettingComponent, ValidateEqualDirective, CheckBoxListComponent, ContactComponent
   ],

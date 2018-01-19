@@ -247,6 +247,32 @@ export const CommonParams={
 
 };
 
+export const MotivoConsultaEnum =
+    {
+        CrearPaciente: 0,
+        ActualizarPaciente: 1,
+        CrearProfesional: 2,
+        ActualizarProfesional: 3,
+        ConsultarPersona_NoUpdate: 4,
+        /// <summary>
+        /// Asocia a la institucion un profesional ya existente
+        /// </summary>
+        AsociateProfesional: 5,
+
+    }
+
+    export const TipoAlergia =
+    {
+        AnimalAllergy : 10104,
+        ChemicalAllergy : 10108,
+        FoodAllergy : 10103,
+        InsectAllergy : 10106,
+        MedicamentsAllergy : 10105,
+        MiteAllergy : 10102,
+        PollenAllergy : 10101,
+        SunAllergy : 10107
+
+    }
 //module.exports =  HealtConstants;
 //module.exports =  contextInfo;
 // const  CNN_STRING_HEALTH  = {

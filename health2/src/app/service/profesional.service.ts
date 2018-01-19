@@ -1,7 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { ProfesionalBE, PersonBE, ResourceSchedulingBE, HealthInstitution_ProfesionalBE, GetProfesionalRes,ProfesionalesGridBE } from '../model/index';
-import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol } from '../model/common.model';
-import { HealtConstants, contextInfo } from "../model/common.constants";
+
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
 // permmite cambiar la variable obsevada
@@ -10,7 +8,9 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { CommonService } from '../service/common.service';
 import 'rxjs/add/operator/map';
-import { Profesional_FullViewBE, ProfesionalesGridBE } from "../model/profesional.model";
+import { ProfesionalBE, PersonBE, ResourceSchedulingBE, HealthInstitution_ProfesionalBE, GetProfesionalRes,ProfesionalesGridBE,Profesional_FullViewBE} from '../model/index';
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol } from '../model/common.model';
+import { HealtConstants, contextInfo } from "../model/common.constants";
 
 @Injectable()
 export class ProfesionalService {
@@ -184,19 +184,19 @@ export class ProfesionalService {
 
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetriveProfesionalesService", bussinesData);
+    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetriveProfesionalesGridService", bussinesData);
 
     HealtConstants.httpOptions.search = searchParams;
     return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
-
+        
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
         var profesionalesGridBEList: ProfesionalesGridBE[] = result.BusinessData as ProfesionalesGridBE[];
-
+      
         return profesionalesGridBEList;
       }).catch(this.commonService.handleError);
   }

@@ -1,0 +1,49 @@
+<section>
+    <header class="header">
+      <h3>Texto busqueda </h3>
+    
+    
+      <form class="form-inline" (ngSubmit)="retrivePatients()">
+        <div class="form-group mb-2">
+          <input name="txtBox_Query" type="text" class="form-control" placeholder="Nombre o apellido profesional" [(ngModel)]="txtQuery"
+            aria-describedby="basic-addon1" #txtBox_Query (keyup.enter)="onKey_Enter(txtBox_Query.value)" (blur)="onKey_Enter(txtBox_Query.value)">
+    
+        </div>
+        <div  class="form-group mx-sm-3 mb-2">
+          <button type="submit" class="btn btn-primary mb-2">Buscar </button>
+        </div>
+    
+        <div  *ngIf="patientCount > 0 && patientCount" class="form-group mx-sm-3 mb-2">
+          <span class="badge badge-pill badge-info">Encontrados {{patientCount}}</span>
+        </div>
+    
+      </form>
+    
+        
+    
+      
+      </header>
+      <div class="container">
+        <div class="col-lg-10">
+    
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Listado de profesionales</h3>
+    
+            </div>
+            <div class="panel-body">
+              <div style="clear: both;"></div>
+              <ag-grid-angular style="width: 900px; height: 515px;" class="ag-fresh" [rowData]="profesionalList" [columnDefs]="columnDefs"
+                (modelUpdated)="onModelUpdated($event)" 
+                (cellClicked)="onCellClicked($event)" 
+                (cellDoubleClicked)="onGridCellDoubleClick($event)"
+                (rowDoubleClicked)="onGridRowDoubleClick($event)">
+              </ag-grid-angular>
+          
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
