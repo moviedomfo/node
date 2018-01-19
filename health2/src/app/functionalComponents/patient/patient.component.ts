@@ -8,11 +8,7 @@ import {TipoParametroEnum} from '../../model/common.constants'
 import { Subject } from 'rxjs/Subject';
 //permite observar
 import { Observable } from 'rxjs/Observable';
-/*import {Dropdown} from './dropdown.directive';
-import {DropdownMenu} from './dropdown-menu.directive';
-import {DropdownToggle} from './dropdown-toggle.directive';*/
-//  import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
-//  import { DialogService } from "ng2-bootstrap-modal";
+
 
 
 @Component({
@@ -24,13 +20,10 @@ export class PatientComponent implements OnInit {
   patientList$: Observable<PatientBE[]>;
   patientList: PatientBE[];
   currentPatient: PatientBE;
-  private selectedPais: String = '';
-  public paises: Array<String> = ["Afghanistan",
-    "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain",
-    "Bangladesh", "Cote d'Ivoire", "Croatia", "Cuba"];
+  
 
 
-  //constructor(private dialogService:DialogService) { }
+  
   constructor(private patientService: PatientsService) {
     
 
@@ -40,8 +33,7 @@ export class PatientComponent implements OnInit {
     this.patientList = res;
   }
   ngOnInit() {
-    this.currentPatient = new PatientBE();
-    this.currentPatient.FechaAlta = new Date(Date.now());
+ 
     this.patientList$ = this.patientService.retrivePatientsSimple$();
     this.patientList$.subscribe(
       res => {
@@ -51,15 +43,7 @@ export class PatientComponent implements OnInit {
       }
     );
 
-    // this.patientService.retrivePatientsSimple$().subscribe(
-    //   res=>{
-    //     alert('dasdasd');
-    //       this.patientList = res;
-    //       alert(JSON.stringify(this.patientList));
-    //   }
-    // ); 
-
-    //this.patientList$.subscribe(res => this.onCreatePatient(res));
+   
   }
 
 
@@ -70,26 +54,9 @@ export class PatientComponent implements OnInit {
 
   }
 
-  onPaisSelection2(pais) {
-
-    this.selectedPais = pais;
-  }
-
-  onPaisSelection(event) {
-
-    alert(this.selectedPais);
+ 
 
 
-  }
-
-  seMovio(event) {
-    // console.log('llamando retrivePatients');
-
-    // this.patientService.retrivePatients$()
-    //   .subscribe(res => alert("Se encontraron " + res.length + " pacientes"));
-
-
-  }
 
 
 }

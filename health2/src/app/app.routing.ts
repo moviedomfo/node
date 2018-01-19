@@ -18,6 +18,7 @@ import { FormsComponent } from "./prueba/forms/forms.component";
 //import { TestRangeIntersectionComponent } from "./prueba/test-times/test-range-intersection.component";
 import { IntersectionsComponent } from './prueba/test-times/intersections/intersections.component';
 import { CheckBoxListComponent } from "./prueba/check-box-list/check-box-list.component";
+import { ProfesionalComponent } from "./functionalComponents/profesional/profesional.component";
  
  
 
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
     { path: 'testControles', component: TestControlesComponent },
     { path: 'profesionalCreate', component: ProfesionalManageComponent },
     { path: 'profesionalEdit/:id', component: ProfesionalManageComponent },
-    
+    { path: 'profesionalGrid/:id', component: ProfesionalComponent },
     { path: 'testTimes', component: TestTimesComponent },
    { path: 'testFormsValidations', component: FormsComponent },
     { path: 'TestIntersection', component: IntersectionsComponent },

@@ -66,6 +66,9 @@ export class ProfesionalesGridBE {
     public IdProfesion: number;
 
 }
+
+
+
 export class Profesional_FullViewBE {
     constructor() { }
     public IdProfesional: number;

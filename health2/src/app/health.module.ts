@@ -15,6 +15,7 @@ import { PatientBE } from './model/patients.model';
 import {IContextInformation, ContextInformation, IRequest, Request, IResponse, Result, ServiceError } from './model/common.model';
 import { PatientGridComponent } from './functionalComponents/patient/patient-grid/patient-grid.component';
 import {CommonService, PatientsService, PersonsService, MedicalInsuranceService,AuthenticationService} from './service/index';
+import { ProfesionalComponent } from './functionalComponents/profesional/profesional.component';
 @NgModule({
   imports: [
     CommonModule,BaseModule
@@ -28,6 +29,7 @@ import {CommonService, PatientsService, PersonsService, MedicalInsuranceService,
     PatientMangerComponent,PatientCreateComponent,
     MedicalInsuranceGridComponent,
     PatienMedicalInsuranceGridComponent,
+    ProfesionalComponent,
   ],
   providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,AuthenticationService],
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation ,Input,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -19,35 +19,35 @@ import { ControlContainer, NgForm } from '@angular/forms';
   selector: 'app-resource-scheduling-grid',
   templateUrl: './resource-scheduling-grid.component.html',
   encapsulation: ViewEncapsulation.None
-  
+
 })
 
 
 export class ResourceSchedulingGridComponent implements OnInit {
-  
+
   globalError: ServiceError;
-  @Input()   
-  profesionalResourceSchedulingList:ResourceSchedulingBE[];
-  @Output()  onResourceSchedulingChanged= new EventEmitter<ResourceSchedulingBE>();
-  
-  currentResourceScheduling:ResourceSchedulingBE;
-    
+  @Input()
+  profesionalResourceSchedulingList: ResourceSchedulingBE[];
+  @Output() onResourceSchedulingChanged = new EventEmitter<ResourceSchedulingBE>();
+
+  currentResourceScheduling: ResourceSchedulingBE;
+
   private columnDefs: any[];
   private gridOptions: GridOptions;
   private icons: any;
   private api: GridApi;
   private columnApi: ColumnApi;
-  
+
   constructor() { }
 
   ngOnInit() {
     this.gridOptions = <GridOptions>{};
     this.gridOptions.dateComponentFramework = DateComponent;
     this.gridOptions.defaultColDef = {
-        headerComponentFramework: <{ new(): HeaderComponent }>HeaderComponent,
-        headerComponentParams: {
-            menuIcon: 'fa-bars'
-        }
+      headerComponentFramework: <{ new(): HeaderComponent }>HeaderComponent,
+      headerComponentParams: {
+        menuIcon: 'fa-bars'
+      }
 
     }
     this.gridOptions.rowData = this.profesionalResourceSchedulingList;
@@ -61,28 +61,28 @@ export class ResourceSchedulingGridComponent implements OnInit {
 
   private createColumnDefs() {
     this.columnDefs = [
-        { headerName: "Descripción", field: "Description", width: 200, pinned: true, filter: 'text' },
-        { headerName: "Hora inicio", field: "TimeStart", width: 100, pinned: false, filter: 'text' },
-        { headerName: "Hora fin", field: "TimeEnd", width: 100, pinned: false, filter: 'text' },
-        { headerName: "Días fin", field: "WeekDays_List", width: 300, pinned: false },
-        { headerName: "Duración (min)", field: "Duration", width: 100, pinned: false }
+      { headerName: "Descripción", field: "Description", width: 200, pinned: true, filter: 'text' },
+      { headerName: "Hora inicio", field: "TimeStart", width: 100, pinned: false, filter: 'text' },
+      { headerName: "Hora fin", field: "TimeEnd", width: 100, pinned: false, filter: 'text' },
+      { headerName: "Días fin", field: "WeekDays_List", width: 300, pinned: false },
+      { headerName: "Duración (min)", field: "Duration", width: 100, pinned: false }
     ];
-}
+  }
   private onReady(params) {
     this.api = params.api;
     this.columnApi = params.columnApi;
-}
+  }
 
-public showGrid() {
-  
-  this.api.setRowData(this.profesionalResourceSchedulingList);
-}
+  public showGrid() {
 
-onResourceSheduler_cellClicked($event) {
-  this.currentResourceScheduling = $event.node.data;
+    this.api.setRowData(this.profesionalResourceSchedulingList);
+  }
 
-  //document.querySelector('#selectedRows').innerHTML = this.currentMedicalInsuranceByPatient.Nombre;
-  this.onResourceSchedulingChanged.emit(this.currentResourceScheduling);
+  onResourceSheduler_cellClicked($event) {
+    this.currentResourceScheduling = $event.node.data;
 
-}
+    //document.querySelector('#selectedRows').innerHTML = this.currentMedicalInsuranceByPatient.Nombre;
+    this.onResourceSchedulingChanged.emit(this.currentResourceScheduling);
+
+  }
 }
