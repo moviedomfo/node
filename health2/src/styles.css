@@ -32,6 +32,9 @@ info p {
     background-color: #FFFFFF;
     overflow: hidden;
   }
+  label span  {
+    color: #F00;
+  }
   
   p span {
     color: #F00;

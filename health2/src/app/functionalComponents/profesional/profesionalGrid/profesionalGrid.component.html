@@ -4,16 +4,19 @@
     
     
       <form class="form-inline" (ngSubmit)="retrivePatients()">
-        <div class="form-group mb-2">
-          <input name="txtBox_Query" type="text" class="form-control" placeholder="Nombre o apellido profesional" [(ngModel)]="txtQuery"
-            aria-describedby="basic-addon1" #txtBox_Query (keyup.enter)="onKey_Enter(txtBox_Query.value)" (blur)="onKey_Enter(txtBox_Query.value)">
+
+          <div class="form-group has-feedback">
+      
+              <input name="txtBox_Query" type="text" class="form-control" placeholder="Nombre o apellido profesional" [(ngModel)]="txtQuery"
+                #txtBox_Query (keyup.enter)="onKey_Enter(txtBox_Query.value)">
+            
+              <button class="btn btn-default" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+   
     
-        </div>
-        <div  class="form-group mx-sm-3 mb-2">
-          <button type="submit" class="btn btn-primary mb-2">Buscar </button>
-        </div>
-    
-        <div  *ngIf="patientCount > 0 && patientCount" class="form-group mx-sm-3 mb-2">
+        <div  *ngIf="profesionalCount > 0 && profesionalCount" class="form-group mx-sm-3 mb-2">
           <span class="badge badge-pill badge-info">Encontrados {{patientCount}}</span>
         </div>
     

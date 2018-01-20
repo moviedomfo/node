@@ -13,106 +13,100 @@
       </div>
       <div class="form-group ">
         <label class="radio-inline">
-          <input type="radio" [checked]="currentPerson.Sexo===0" (click)="onSexChanged(0)" name="sexo">Hombre
+          <input type="radio" class="" [checked]="currentPerson.Sexo===0" (click)="onSexChanged(0)" name="sexo">Hombre
         </label>
-      
+
         <label class="radio-inline">
           <input type="radio" [checked]="currentPerson.Sexo===1" (click)="onSexChanged(1)" name="sexo">Mujer
         </label>
-      
-      </div>
 
+      </div>
 
       <div class="form-group">
-        <p class="text-primary">Estado civil
-          <span>*</span>
-        </p>
-        <span class="icon-case">
-          <i class="fa fa-user"></i>
-        </span>
-        <select name="cmbEstadoCivil" class="" style="width: 200px" #cmbEstadoCivil [(ngModel)]="currentPerson.IdEstadocivil">
-          <option *ngFor="let item of estadoCivilList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
-        </select>
-
+        <label >Nombre          <span>*</span>        </label >
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-user"></i>
+          </div>
+          <input type="text" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="currentPerson.Nombre" required/>
+          <small [hidden]="nombre.valid || (nombre.pristine)" class="form-text text-danger">
+            El nombre es requerido
+          </small>
+        </div>
       </div>
-
+      <div class="form-group">
+          <label >Apellido          <span>*</span>        </label >
+      
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-user"></i>
+          </div>
+          <input type="text" name="apellido" #apellido="ngModel" class="form-control" [(ngModel)]="currentPerson.Apellido" required/>
+          <small [hidden]="apellido.valid || (apellido.pristine)" class="form-text text-danger">
+            El apellido es requerido
+          </small>
+        </div>
+      </div>
 
       <!-- fin leftcontent -->
     </div>
     <div class="rightcontact">
+
+
+
       <div class="form-group">
-        <p>Nombre
-          <span>*</span>
-        </p>
-        <span class="icon-case">
-          <i class="fa fa-user"></i>
-        </span>
-        <input type="text" name="nombre" data-rule="required" #nombre="ngModel" [(ngModel)]="currentPerson.Nombre" required/>
-        <small [hidden]="nombre.valid || (nombre.pristine)" class="form-text text-danger">
-            El nombre es requerido
-        </small>
-        <!-- <div [hidden]="nombre.valid || nombre.pristine"
-        class="alert alert-danger">
-            <div [hidden]="!nombre.hasError('required')">Name is required</div>
-            <div [hidden]="!nombre.hasError('pattern')">Only alphabetsallowed</div>
-        </div> -->
+        <label>Tipo documento          <span>*</span>        </label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-address-card-o"></i>
+          </div>
+          <select name="cmbTipoDocumento" class="form-control" #cmbTipoDocumento [(ngModel)]="currentPerson.TipoDocumento">
+            <option *ngFor="let item of tipoDocumentoList" [ngValue]="item.IdParametro.toString()">{{item.Nombre}}</option>
+          </select>
+        </div>
       </div>
       <div class="form-group">
-        <p>Apellido
-          <span>*</span>
-        </p>
-        <span class="icon-case">
-          <i class="fa fa-user"></i>
-        </span>
-        <input type="text" name="apellido" #apellido="ngModel" data-rule="required" [(ngModel)]="currentPerson.Apellido" required/>
-        <small [hidden]="apellido.valid || (apellido.pristine)" class="form-text text-danger">
+        <label>Nro Documento          <span>*</span>        </label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-building-o"></i>
+          </div>
+          <input type="text" name="NroDocumento" class="form-control" #NroDocumento="ngModel" placeholder="Nro Documento" [(ngModel)]="currentPerson.NroDocumento"
+            required />
+          <small [hidden]="NroDocumento.valid || (NroDocumento.pristine)" class="form-text text-danger">
             El apellido es requerido
-        </small> 
+          </small>
+        </div>
       </div>
-
 
 
       <div class="form-group">
-        <p>Tipo documento
-          <span>*</span>
-        </p>
-        <span class="icon-case">
-          <i class="fa fa-address-card-o"></i>
-        </span>
-        <select name="cmbTipoDocumento" style="width: 200px" #cmbTipoDocumento [(ngModel)]="currentPerson.TipoDocumento">
-          <option *ngFor="let item of tipoDocumentoList" [ngValue]="item.IdParametro.toString()">{{item.Nombre}}</option>
-        </select>
+        <label>Fecha nacimiento          <span>*</span>        </label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <input type="date" name="FechaNacimiento" class="form-control" [ngModel]="currentPerson.FechaNacimiento | date:'yyyy-MM-dd'"
+            (ngModelChange)="currentPerson.FechaNacimiento = $event" [value]="datee | date:'yyyy-MM-dd'">
+
+        </div>
 
       </div>
-      <div class="form-group">
-        <p>Nro Documento
-          <span>*</span>
-        </p>
-        <span class="icon-case">
-          <i class="fa fa-building-o"></i>
-        </span>
-        <input type="text" name="NroDocumento" #NroDocumento="ngModel"  placeholder="Nro Documento" 
-        [(ngModel)]="currentPerson.NroDocumento" required />
-        <small [hidden]="NroDocumento.valid || (NroDocumento.pristine)" class="form-text text-danger">
-            El apellido es requerido
-        </small> 
-      </div>
-
-
 
       <div class="form-group">
-        <p>Fecha nacimiento
+        <label class="text-primary">Estado civil
           <span>*</span>
-        </p>
-        <span class="icon-case">
-          <i class="fa fa-calendar"></i>
-        </span>
-        <input type="date" name="FechaNacimiento" [ngModel]="currentPerson.FechaNacimiento | date:'yyyy-MM-dd'" (ngModelChange)="currentPerson.FechaNacimiento = $event"
-          [value]="datee | date:'yyyy-MM-dd'">
+        </label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-user"></i>
+          </div>
+          <select name="cmbEstadoCivil" class="form-control" #cmbEstadoCivil [(ngModel)]="currentPerson.IdEstadocivil">
+            <option *ngFor="let item of estadoCivilList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
+          </select>
 
+        </div>
       </div>
-
-
     </div>
   </div>
 </fieldset>

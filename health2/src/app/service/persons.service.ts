@@ -17,23 +17,17 @@ export class PersonsService {
   }
 
 
-  retrivePersonasService$(
-    nombre: string,
-    apellido: string,
-    motivoConsulta:string
-    nroDocumento?: string,
-    
-
-  ): Observable<PersonBE[]> {
+  retrivePersonesGrid$(
+    nombre: string,    apellido: string,    motivoConsulta:string,    nroDocumento?: string     ): Observable<PersonBE[]> {
 
     var bussinesData = {
       Nombre: nombre,
       Apellido: apellido,
-      NroDocumento: nroDocumento;
+      NroDocumento: nroDocumento,
       MotivoConsulta: motivoConsulta
 
     };
-
+  console.log(bussinesData);
     let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetrivePersonasService", bussinesData);
 
     HealtConstants.httpOptions.search = searchParams;

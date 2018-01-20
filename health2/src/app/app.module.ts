@@ -57,6 +57,7 @@ import { SessionSettingComponent } from './functionalComponents/security/session
 import { ValidateEqualDirective } from './commonComponents/validate-equal.directive';
 import { CheckBoxListComponent } from './prueba/check-box-list/check-box-list.component';
 import { ContactComponent } from './functionalComponents/persons/contact/contact.component';
+import { PersonGridComponent } from "./functionalComponents/persons/person-grid/person-grid.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,7 @@ import { ContactComponent } from './functionalComponents/persons/contact/contact
     FontAgComponent,
     ModalDialogComponent, DateComponent, HeaderComponent, HeaderGroupComponent,PageNotFoundComponent,
     PatientComponent,
-    PersonsComponent,
+    PersonsComponent,PersonGridComponent,
     PatientGridComponent,
     PersonCardComponent,
     LoginComponent,

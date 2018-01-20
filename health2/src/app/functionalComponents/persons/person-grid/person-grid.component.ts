@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { PersonsService,CommonService } from '../../../service/index';
-import {   PersonBE,IContextInformation, HealtConstants } from '../../../model/index';
-import {TipoParametroEnum} from '../../../model/common.constants'
+import {   PersonBE,IContextInformation, HealtConstants,TipoParametroEnum, MotivoConsultaEnum } from '../../../model/index';
 
 //permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
@@ -22,23 +21,30 @@ import { Router, CanActivate ,CanDeactivate} from '@angular/router';
   
 })
 export class PersonGridComponent implements OnInit {
-  personBEList$: Observable<PersonBE[]>;
-  personList: PersonBE[];
-  currentperson: PersonBE;
+
+  private personBEList$: Observable<PersonBE[]>;
+  private personList: PersonBE[];
+  private currentperson: PersonBE;
   private txtQuery: string;
   private personCount: number;
   private columnDefs:any[];
   private gridOptions:GridOptions;
-  constructor(
-    private commonService: CommonService,
-    private personsService: PersonsService,
-    private router: Router) {
-    this.personList = [];
+ 
+  @Input() motivoConsulta:string;
+  @Input()tittle:number;
+  @Output() onPersonGridDoubleClick = new EventEmitter<PersonBE>();
+
+  constructor(    private commonService: CommonService,private personsService: PersonsService,private router: Router) {
+        this.personList = [];
     }
 
  
     ngOnInit() {
 
+      if(!this.motivoConsulta)
+      {
+        this.motivoConsulta = MotivoConsultaEnum.ConsultarPersona_NoUpdate.toString();
+      }
       // we pass an empty gridOptions in, so we can grab the api out
       this.gridOptions = <GridOptions>{};
       this.gridOptions.dateComponentFramework = DateComponent;
@@ -53,6 +59,7 @@ export class PersonGridComponent implements OnInit {
  
       this.createColumnDefs();
   }
+
   private getContextMenuItems(): any {
     let result: any = [
         { // custom item
@@ -64,32 +71,33 @@ export class PersonGridComponent implements OnInit {
         }];
     return result;
 }
+
 private createColumnDefs() {
   this.columnDefs = [
     { headerName: "Nombre", field: "Nombre" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Apellido", field: "Apellido" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Documento", field: "NroDocumento" ,width: 150,pinned: true,filter: 'text'},
-    { headerName: "Matricula", field: "Matricula" ,width: 150,pinned: true,filter: 'text'},
-    { headerName: "Especialidad", field: "NombreEspecialidad" ,width: 150,pinned: true,filter: 'text'},
-    { headerName: "NombreProfecion", field: "NombreProfecion" ,width: 150,pinned: true,filter: 'text'},
+    // { headerName: "Matricula", field: "Matricula" ,width: 150,pinned: true,filter: 'text'},
+    // { headerName: "Especialidad", field: "NombreEspecialidad" ,width: 150,pinned: true,filter: 'text'},
+    // { headerName: "NombreProfecion", field: "NombreProfecion" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Fecha alta", field: "FechaAlta",width: 200,pinned: true }
   ];
 }
-  onKey_Enter(value: string) {
-    //this.txtQuery += value + ' | ';
+  onKey_Enter() {
+
     this.retrivePatients();
   }
 
   retrivePatients() {
     
-
-    this.personBEList$ = this.personsService.retrivepersonesGrid$(this.txtQuery,this.txtQuery,HealtConstants.DefaultHealthInstitutionId);
+    this.personBEList$ = this.personsService.retrivePersonesGrid$(this.txtQuery,this.txtQuery,this.motivoConsulta.toString());
     this.personBEList$.subscribe(
       res => {
         this.personList = res;
+    
         if(this.personList)
         {
-        this.personCount = this.personList.length;
+          this.personCount = this.personList.length;
         }
         else
         {
@@ -111,18 +119,16 @@ private createColumnDefs() {
   
   onGridRowDoubleClick(event){
     
-    console.log(event.node.data);
-    let Idperson = event.node.data.Idperson;
-    
+    //console.log(event.node.data);
+    //let Idpersona = event.node.data.IdPersona;
+    this.onPersonGridDoubleClick.emit(event.node.data as PersonBE);
     // http://localhost:4200/patientEdit?id=4350
     //this.router.navigate(['patientEdit'], { queryParams: { id: patienId }}); 
     
-    this.router.navigate(['/personEdit', Idperson]); 
+    //this.router.navigate(['/personEdit', Idpersona]); 
     
 
   }
-  onModelUpdated(event){
-
-  }
+ 
 
 }

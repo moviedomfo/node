@@ -19,14 +19,14 @@ import { FormsComponent } from "./prueba/forms/forms.component";
 import { IntersectionsComponent } from './prueba/test-times/intersections/intersections.component';
 import { CheckBoxListComponent } from "./prueba/check-box-list/check-box-list.component";
 import { ProfesionalGridComponent } from "./functionalComponents/profesional/profesionalGrid/profesionalGrid.component";
- 
+import { PersonGridComponent } from "./functionalComponents/persons/person-grid/person-grid.component";
  
 
 
 const appRoutes: Routes = [
    { path: 'login', component: LoginComponent },
    //  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-// //    { path: 'persons', component: PersonsComponent },
+    { path: 'personsGrid', component: PersonGridComponent },
    
 // //    { path: 'persons/:id', component: PersonsComponent },
 // //    { path: 'patient', component: PatientComponent },

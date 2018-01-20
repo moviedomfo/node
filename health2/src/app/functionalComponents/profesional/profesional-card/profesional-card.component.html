@@ -1,43 +1,45 @@
 <app-person-card [currentPerson]="currentProfesional.Persona" (OnComponentError)="OnComponentError_personCard($event)">
 </app-person-card>
 
-<fieldset  ngModelGroup="profesionalCard" class="form-inline" >
-    <div class="form-group2" >
-     <app-alert-block #alertBlock_profesional_card></app-alert-block>
-   </div>
-  <div class="form-group2">
-    <p class="text-primary">Especialidad
+<fieldset ngModelGroup="profesionalCard" class="form-inline">
+  <div class="form-group">
+    <app-alert-block #alertBlock_profesional_card></app-alert-block>
+  </div>
+  <div class="form-group">
+    <label class="text-primary">Especialidad
       <span>*</span>
-    </p>
+    </label>
     <span class="icon-case">
       <i class="fa fa-user"></i>
     </span>
-    <select name="cmbEspecialidad" class="" style="width: 200px" #cmbEspecialidad [(ngModel)]="currentProfesional.IdEspecialidad">
+    <select name="cmbEspecialidad" class="form-control  border border-success" #cmbEspecialidad [(ngModel)]="currentProfesional.IdEspecialidad">
       <option *ngFor="let item of especialidadList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
     </select>
   </div>
-  <div class="form-group2">
-    <p class="text-primary">Profesion
+  <div class="form-group">
+    <label class="text-primary">Profesion
       <span>*</span>
-    </p>
-    <span class="icon-case">
-      <i class="fa fa-user"></i>
-    </span>
-    <select name="cmbProfesion" class="" style="width: 200px" #cmbProfesion [(ngModel)]="currentProfesional.IdProfesion">
-      <option *ngFor="let item of profesionList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
-    </select>
+    </label>
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-user"></i>
+      </div>
+      <select name="cmbProfesion" class="form-control  border border-success" #cmbProfesion [(ngModel)]="currentProfesional.IdProfesion">
+        <option *ngFor="let item of profesionList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
+      </select>
+    </div>
   </div>
 
-</fieldset >
-
-<fieldset  ngModelGroup="profesionalCard2" >
-    <div class="form-group2">
-        <p>Matrícula </p>
-        <span class="icon-case">
-          <i class="fa fa-user"></i>
-        </span>
-        <input type="text" name="nombre" id="matricula" [(ngModel)]="currentProfesional.Matricula" />
-      
-      </div>
 </fieldset>
 
+<fieldset ngModelGroup="profesionalCard2">
+  <div class="form-group">
+    <label class="text-primary">Matrícula </label>
+    <div class="input-group">
+      <div class="input-group-addon">
+        <i class="fa fa-user"></i>
+      </div>
+      <input type="text" name="matricula" #txtMatricula class="form-control" [(ngModel)]="currentProfesional.Matricula" />
+    </div>
+  </div>
+</fieldset>

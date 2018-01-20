@@ -12,6 +12,7 @@ import { LoginComponent } from './commonComponents/login/login.component';
 import { MedicalInsuranceGridComponent } from './functionalComponents/medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
 import { PatienMedicalInsuranceGridComponent } from './functionalComponents/patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
 import { PatientGridComponent } from './functionalComponents/patient/patient-grid/patient-grid.component';
+import { PersonGridComponent } from "./functionalComponents/persons/person-grid/person-grid.component";
 import { ProfesionalGridComponent } from './functionalComponents/profesional/profesionalGrid/profesionalGrid.component';
 
 
@@ -33,7 +34,7 @@ import {CommonService, PatientsService, PersonsService, MedicalInsuranceService,
     PatientMangerComponent,PatientCreateComponent,
     MedicalInsuranceGridComponent,
     PatienMedicalInsuranceGridComponent,
-    ProfesionalGridComponent,
+    ProfesionalGridComponent,,PersonGridComponent
   ],
   providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,AuthenticationService],
 })
