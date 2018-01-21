@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { PersonsService,CommonService } from '../../../service/index';
-import {   PersonBE,IContextInformation, HealtConstants,TipoParametroEnum, MotivoConsultaEnum } from '../../../model/index';
+import {   PersonBE,IContextInformation, HealtConstants,TipoParametroEnum, MotivoConsultaEnum, ServiceError } from '../../../model/index';
 
 //permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
@@ -30,7 +30,7 @@ export class PersonGridComponent implements OnInit {
   private columnDefs:any[];
   private gridOptions:GridOptions;
  
-  @Input() motivoConsulta:string;
+  @Input() motivoConsulta:number;
   @Input()tittle:number;
   @Output() onPersonGridDoubleClick = new EventEmitter<PersonBE>();
 
@@ -43,7 +43,7 @@ export class PersonGridComponent implements OnInit {
 
       if(!this.motivoConsulta)
       {
-        this.motivoConsulta = MotivoConsultaEnum.ConsultarPersona_NoUpdate.toString();
+        this.motivoConsulta = MotivoConsultaEnum.ConsultarPersona_NoUpdate;
       }
       // we pass an empty gridOptions in, so we can grab the api out
       this.gridOptions = <GridOptions>{};
@@ -77,7 +77,7 @@ private createColumnDefs() {
     { headerName: "Nombre", field: "Nombre" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Apellido", field: "Apellido" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Documento", field: "NroDocumento" ,width: 150,pinned: true,filter: 'text'},
-    // { headerName: "Matricula", field: "Matricula" ,width: 150,pinned: true,filter: 'text'},
+    { headerName: "Sexo", field: "Sexo" ,width: 150,pinned: true,filter: 'text'},
     // { headerName: "Especialidad", field: "NombreEspecialidad" ,width: 150,pinned: true,filter: 'text'},
     // { headerName: "NombreProfecion", field: "NombreProfecion" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Fecha alta", field: "FechaAlta",width: 200,pinned: true }
@@ -87,7 +87,7 @@ private createColumnDefs() {
 
     this.retrivePatients();
   }
-
+  globalError: ServiceError;
   retrivePatients() {
     
     this.personBEList$ = this.personsService.retrivePersonesGrid$(this.txtQuery,this.txtQuery,this.motivoConsulta.toString());
@@ -104,6 +104,10 @@ private createColumnDefs() {
           this.personCount = 0;
         }
 
+      },
+      err => {
+        
+        this.globalError = err;
       }
     );
 

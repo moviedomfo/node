@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProfesionalService,CommonService } from '../../../service/index';
-import { ProfesionalBE, Profesional_FullViewBE, ProfesionalesGridBE,IContextInformation, IParam, Param,HealtConstants } from '../../../model/index';
+import { ProfesionalBE, Profesional_FullViewBE, ProfesionalesGridBE,IContextInformation, IParam, Param,HealtConstants, ServiceError } from '../../../model/index';
 import {TipoParametroEnum} from '../../../model/common.constants'
 
 //permmite cambiar la variable obsevada
@@ -29,7 +29,7 @@ export class ProfesionalGridComponent implements OnInit {
   private profesionalCount: number;
   private columnDefs:any[];
   private gridOptions:GridOptions;
-
+  globalError: ServiceError;
   constructor(
       private commonService: CommonService,
       private profesionalService: ProfesionalService,
@@ -96,6 +96,10 @@ private createColumnDefs() {
           this.profesionalCount = 0;
         }
 
+      },
+      err => {
+        
+        this.globalError = err;
       }
     );
 

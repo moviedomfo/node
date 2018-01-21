@@ -49,6 +49,8 @@ export class PersonsService {
     personaId: number,
     nroDocumento: String): Observable<PersonBE> {
 
+      if(!personaId)
+      personaId=-1;
     var bussinesData = {
       Id: personaId,
       NroDocumento: nroDocumento,
@@ -69,7 +71,7 @@ export class PersonsService {
           throw Observable.throw(result.Error);
         }
 
-        return result.BusinessData as PersonBE;
+        return result.BusinessData["Persona"] as PersonBE;
         
       }).catch(this.commonService.handleError);
   }

@@ -3,7 +3,7 @@
     Gestión de profesionales
   </h3>
   <button class="btn btn-success" [ngClass]="{hidden: !isEdit}" type="submit"   [disabled]='!f.valid'>Actualizar</button>
-    <button class="btn btn-success" [ngClass]="{hidden: isEdit}"   [disabled]='!f.valid' (click)="createPatient()">Crear paciente</button>
+    <button class="btn btn-success" [ngClass]="{hidden: isEdit}"   [disabled]='!f.valid' (click)="createPatient()">Crear profesional</button>
   <app-error-box-container [globalError]="globalError"></app-error-box-container>
 
   <ul class="nav nav-tabs " role="tablist">
@@ -29,7 +29,10 @@
 
     <div role="tabpanel" class="tab-pane fade in active" id="profile">
 
-      <app-profesional-card [currentProfesional]="currentProfesional" (OnComponentError)="OnComponentError_profesionalCard($event)">
+      <app-profesional-card   #profesionalCard
+      [currentProfesional]="currentProfesional"
+      [motivoConsulta] = "motivoConsulta" 
+      (OnComponentError)="OnComponentError_profesionalCard($event)">
       </app-profesional-card>
     </div>
 

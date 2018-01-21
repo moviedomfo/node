@@ -19,7 +19,7 @@
         <div  *ngIf="profesionalCount > 0 && profesionalCount" class="form-group mx-sm-3 mb-2">
           <span class="badge badge-pill badge-info">Encontrados {{patientCount}}</span>
         </div>
-    
+        <app-error-box-container [globalError]="globalError"></app-error-box-container>
       </form>
     
         

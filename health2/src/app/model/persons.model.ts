@@ -39,10 +39,24 @@ export class PersonBE {
      LastHealthInstId: string ;
 
 
-    //   nombreCompleto()
-    //  {
-    //      return Apellido + Nomnbre;
-    //  }
+     public ApellidoNombre():string
+     {
+        return PersonBE.getFullName( this.Apellido , this.Nombre);
+     }
+    public   static   getFullName( firstName:string,  lastName:string):string
+     {
+              if((lastName || lastName!='' ) && (firstName || firstName!='' ))
+                 return lastName.trim(), ", ", firstName.trim();
+
+             if((!lastName || lastName=='' ) && (firstName || firstName!='' ))
+                 return firstName.trim();
+
+              if((lastName || lastName=='' ) && (!firstName || firstName=='' ))
+                 return lastName.trim();
+
+             return '';
+     }
+
     places:PlaceBE[];
 }
 

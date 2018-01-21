@@ -20,6 +20,7 @@ export class ProfesionalCardComponent implements AfterViewInit {
  
   globalError: ServiceError;
   @Input() public currentProfesional: ProfesionalBE;
+  @Input() public motivoConsulta: number;
   @Output() OnComponentError = new EventEmitter<ServiceError>();
   especialidadList: Param[];
   profesionList: Param[];

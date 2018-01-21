@@ -1,11 +1,14 @@
 <fieldset ngModelGroup="personCard">
   <app-alert-block #alertBlock1></app-alert-block>
+
+  <h2>motivoConsulta {{motivoConsulta}} doc =  {{currentNroDocumento}}</h2>
+  <h2>currentPerson.doc =  {{currentPerson.NroDocumento}}</h2>
   <div class="contentform">
     <div class="leftcontact">
 
 
       <div class="form-group">
-        <!-- <img #img1 class="img-rounded" [src]="fullImagePath" alt="Foto" /> -->
+        <button class="btn btn-default" data-toggle="modal"  data-target="#findPersonModal" >Buscar Existente</button>
         <img #img2 class="img-rounded img-thumbnail" Width='110' height='110' [src]="fullImagePath" alt="Foto" />
         <!-- 'unsafe:data:image/jpg;base64,' + -->
         <!-- <img #img3  [src]="loadImage()" /> -->
@@ -71,8 +74,12 @@
           <div class="input-group-addon">
             <i class="fa fa-building-o"></i>
           </div>
-          <input type="text" name="NroDocumento" class="form-control" #NroDocumento="ngModel" placeholder="Nro Documento" [(ngModel)]="currentPerson.NroDocumento"
-            required />
+          <input type="text" name="NroDocumento" 
+                class="form-control" #NroDocumento="ngModel" 
+                placeholder="Nro Documento" 
+                (blur)="txtBox_NroDocumento_onBlur()"
+                [(ngModel)]="currentPerson.NroDocumento"
+                  required />
           <small [hidden]="NroDocumento.valid || (NroDocumento.pristine)" class="form-text text-danger">
             El apellido es requerido
           </small>
@@ -110,3 +117,53 @@
     </div>
   </div>
 </fieldset>
+
+<!-- show resourse sheduling modal dialog -->
+<div class="modal fade" id="findPersonModal" tabindex="-1" role="dialog" aria-labelledby="findPersonModalLabel" >
+<div class="modal-dialog  modal-lg" >
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="findPersongModalLabel">Busqueda de personas</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    </div>
+    <div class="modal-body">
+      <app-person-grid #appPersonGrid 
+        [motivoConsulta]="motivoConsulta"
+        
+        (onPersonGridDoubleClick)="onPersonGridDoubleClick($event)">
+      </app-person-grid>
+    </div>
+    <div class="modal-footer">
+      <button #closeBtn type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <!-- <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_Acept()">Aceptar</button> -->
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="findPersonModal" tabindex="-1" role="dialog" aria-labelledby="findPersonModalLabel" >
+    <div class="modal-dialog  modal-lg" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="findPersongModalLabel">Busqueda de personas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    
+        </div>
+        <div class="modal-body">
+      
+        </div>
+        <div class="modal-footer">
+          <button #closeBtn type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_Acept()">Si</button> 
+    
+        </div>
+      </div>
+    </div>
+    </div>

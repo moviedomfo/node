@@ -15,6 +15,7 @@ import { ResourceSchedulingManageComponent } from "../resource-scheduling-manage
 import { ResourceSchedulingGridComponent } from "../resource-scheduling-grid/resource-scheduling-grid.component";
 import { WeekDaysCheckEditComponent } from "../../../commonComponents/week-days-check-edit/week-days-check-edit.component";
 import { SessionSettingComponent } from "../../security/sessionSetting.component";
+import { MotivoConsultaEnum } from "../../../model/common.constants";
 
 @Component({
   selector: 'app-profesional-manage',
@@ -22,6 +23,7 @@ import { SessionSettingComponent } from "../../security/sessionSetting.component
   encapsulation: ViewEncapsulation.None
 })
 export class ProfesionalManageComponent implements AfterViewInit {
+
   globalError: ServiceError;
   public currentProfesional: ProfesionalBE;
   currentResourceSchedulingList: ResourceSchedulingBE[];
@@ -31,6 +33,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
   isEdit: boolean;
   isEditMode_resource_scheduling: boolean;
   currentResourceScheduling = new ResourceSchedulingBE();
+  motivoConsulta: number;
   @ViewChild('resourceSchedulingManageComponent1') resourceSchedulingManageComponent: ResourceSchedulingManageComponent;
   @ViewChild('resourceSchedulingGrid1') resourceSchedulingGridComponent: ResourceSchedulingGridComponent;
   @ViewChild('sessionSettingComponent') sessionSettingComponent: SessionSettingComponent;
@@ -45,12 +48,18 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.sessionSettingComponent.MachRolesGrid();
+   
   }
 
   ngOnInit() {
 
     this.preInitialize();
-    
+    if (this.isEdit) {
+      this.motivoConsulta = MotivoConsultaEnum.ActualizarProfesional;
+    }
+    else {
+      this.motivoConsulta = MotivoConsultaEnum.CrearProfesional;
+    }
   }
 
   private preInitialize() {
@@ -71,7 +80,8 @@ export class ProfesionalManageComponent implements AfterViewInit {
     });
 
     if (this.isEdit) {
-
+//      this.motivoConsulta = MotivoConsultaEnum.ActualizarProfesional;
+      
       //Busco el paciente
       this.getProfesionalRes$ = this.profesionalService.getProfesionalService$(true, true, id.id, contextInfo.UserId, HealtConstants.DefaultHealthInstitutionId, true);
 
@@ -79,18 +89,13 @@ export class ProfesionalManageComponent implements AfterViewInit {
         res => {
 
           this.currentProfesional = res.ProfesionalBE;
-
+          
           if (this.currentProfesional != null) {
 
             this.currentResourceSchedulingList = res.ResourceSchedulingList;
             this.currentHealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE;
             this.currentUser = res.User;
-             //alert(JSON.stringify( res.User.Email ));
-            //alert(JSON.stringify(this.currentUser.UserName));
-            //this.sessionSettingComponent.MachRolesGrid(res.User.Roles);
-            //this.sessionSettingComponent.MachRolesGrid();
-            //alert(' preInitialize roles ' +  JSON.stringify (this.currentUser.Roles));
-            
+           
           }
           else {
             this.globalError = new ServiceError();
@@ -108,7 +113,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
     //if is create 
     if (this.isEdit == false) {
-
+      //this.motivoConsulta = MotivoConsultaEnum.CrearProfesional;
       this.currentProfesional.IdEspecialidad = CommonParams.SeleccioneUnaOpcion.IdParametro;
       this.currentProfesional.IdProfesion = CommonParams.SeleccioneUnaOpcion.IdParametro;
       this.currentProfesional.FechaAlta = new Date();

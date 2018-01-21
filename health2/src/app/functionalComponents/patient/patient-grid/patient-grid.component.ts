@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PatientBE } from '../../../model/index';
+import { PatientBE, ServiceError } from '../../../model/index';
 import { PatientsService,CommonService } from '../../../service/index';
 //permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
@@ -19,6 +19,7 @@ import { Router, CanActivate ,CanDeactivate} from '@angular/router';
   styleUrls: ['../../../commonComponents/ag-grid/rich-grid.css', '../../../commonComponents/ag-grid/proficiency-renderer.css'],
 })
 export class PatientGridComponent implements OnInit {
+  globalError: ServiceError;
   private txtQuery: string;
   private patientCount: number;
   private patientList$: Observable<PatientBE[]>;
@@ -90,6 +91,10 @@ private createColumnDefs() {
           this.patientCount = 0;
         }
 
+      },
+      err => {
+        
+        this.globalError = err;
       }
     );
 
