@@ -7,12 +7,12 @@ import { ServiceError } from '../../../model/common.model';
 import { ResourceSchedulingBE } from "../../../model/profesional.model";
 
 // rich grid and rich grid declarative
-import { DateComponent } from "../../../commonComponents/ag-grid/date.component";
-import { HeaderComponent } from "../../../commonComponents/ag-grid/header.component";
-import { HeaderGroupComponent } from "../../../commonComponents/ag-grid/header-group.component";
+import { DateComponent } from "../../../common-components/ag-grid/date.component";
+import { HeaderComponent } from "../../../common-components/ag-grid/header.component";
+import { HeaderGroupComponent } from "../../../common-components/ag-grid/header-group.component";
 import { ColumnApi, GridApi, GridOptions } from "ag-grid/main";
 import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
-import { WeekDaysCheckEditComponent } from "../../../commonComponents/week-days-check-edit/week-days-check-edit.component";
+import { WeekDaysCheckEditComponent } from "../../../common-components/week-days-check-edit/week-days-check-edit.component";
 import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({

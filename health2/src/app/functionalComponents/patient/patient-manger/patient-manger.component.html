@@ -1,36 +1,34 @@
 <form #f="ngForm"  (ngSubmit)="onSubmit(f.valid)" novalidate>
-<h3>
- Alpta de paciente
-</h3>
-
-
-<button class="btn btn-success"  type="submit" [disabled]='!f.valid' (click)="updatePatient()" 
-[ngClass]="{hidden: !isEdit}">Actualizar</button> <button class="btn btn-success" [ngClass]="{hidden: isEdit}" 
-[disabled]='!f.valid' (click)="createPatient()">Crear paciente</button>
-
-<app-error-box-container [globalError]="globalError"></app-error-box-container>
-
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Datos principales</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#medicalInsuranceTab" role="tab" data-toggle="tab">Obra social</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Medio de contacto</a>
-  </li>
-  <li class="nav-item">
-      <a class="nav-link" href="#patientJson" role="tab" data-toggle="tab">JSON </a>
+  <h3 [ngClass]="{hidden: isEdit}">    Alta de paciente   </h3>
+  <h3 [ngClass]="{hidden: !isEdit}">    Actualizacion de paciente   </h3>
+  
+   <button class="btn btn-success"  type="submit" [disabled]='!f.valid' (click)="updatePatient()" 
+    [ngClass]="{hidden: !isEdit}">Actualizar</button> 
+   <button class="btn btn-success" [ngClass]="{hidden: isEdit}" 
+   [disabled]='!f.valid' (click)="createPatient()">Crear paciente</button>
+   
+   <app-error-box-container [globalError]="globalError"></app-error-box-container>
+   <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Datos principales</a>
     </li>
-</ul>
-
+    <li class="nav-item">
+      <a class="nav-link" href="#medicalInsuranceTab" role="tab" data-toggle="tab">Obra social</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Medio de contacto</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#patientJson" role="tab" data-toggle="tab">JSON </a>
+      </li>
+  </ul>
+  
 <!-- Tab panes -->
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane fade in active" id="profile">
     
     <app-person-card
-    [motivoConsulta = "motivoConsulta";
+    [motivoConsulta] = "motivoConsulta"
     [currentPerson] = "currentPatient.Persona" 
     (OnComponentError)="OnComponentError_personCard($event)">
   </app-person-card>

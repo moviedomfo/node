@@ -8,12 +8,12 @@ import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { ServiceError } from '../../../model/common.model';
-import { ModalDialogComponent } from '../../../commonComponents/modal-dialog/modal-dialog.component';
+import { ModalDialogComponent } from '../../../common-components/modal-dialog/modal-dialog.component';
 
 import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
 import { ResourceSchedulingManageComponent } from "../resource-scheduling-manage/resource-scheduling-manage.component";
 import { ResourceSchedulingGridComponent } from "../resource-scheduling-grid/resource-scheduling-grid.component";
-import { WeekDaysCheckEditComponent } from "../../../commonComponents/week-days-check-edit/week-days-check-edit.component";
+import { WeekDaysCheckEditComponent } from "../../../common-components/week-days-check-edit/week-days-check-edit.component";
 import { SessionSettingComponent } from "../../security/sessionSetting.component";
 import { MotivoConsultaEnum } from "../../../model/common.constants";
 

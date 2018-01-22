@@ -7,16 +7,16 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 // rich grid and rich grid declarative
-import {DateComponent} from "../../../commonComponents/ag-grid/date.component";
-import {HeaderComponent} from "../../../commonComponents/ag-grid/header.component";
-import {HeaderGroupComponent} from "../../../commonComponents/ag-grid/header-group.component";
+import {DateComponent} from "../../../common-components/ag-grid/date.component";
+import {HeaderComponent} from "../../../common-components/ag-grid/header.component";
+import {HeaderGroupComponent} from "../../../common-components/ag-grid/header-group.component";
 import {GridOptions} from "ag-grid/main";
 import { Router, CanActivate ,CanDeactivate} from '@angular/router';
 
 @Component({
   selector: 'app-patient-grid',
   templateUrl: './patient-grid.component.html',
-  styleUrls: ['../../../commonComponents/ag-grid/rich-grid.css', '../../../commonComponents/ag-grid/proficiency-renderer.css'],
+  styleUrls: ['../../../common-components/ag-grid/rich-grid.css', '../../../common-components/ag-grid/proficiency-renderer.css'],
 })
 export class PatientGridComponent implements OnInit {
   globalError: ServiceError;
@@ -111,7 +111,7 @@ private createColumnDefs() {
   
   onGridRowDoubleClick(event){
     
-    console.log(event.node.data);
+    
     let patienId = event.node.data.PatientId;
     
     // http://localhost:4200/patientEdit?id=4350

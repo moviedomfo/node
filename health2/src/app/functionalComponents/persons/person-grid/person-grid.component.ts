@@ -9,9 +9,9 @@ import { Observable } from 'rxjs/Observable';
 
 
 // rich grid and rich grid declarative
-import {DateComponent} from "../../../commonComponents/ag-grid/date.component";
-import {HeaderComponent} from "../../../commonComponents/ag-grid/header.component";
-import {HeaderGroupComponent} from "../../../commonComponents/ag-grid/header-group.component";
+import {DateComponent} from "../../../common-components/ag-grid/date.component";
+import {HeaderComponent} from "../../../common-components/ag-grid/header.component";
+import {HeaderGroupComponent} from "../../../common-components/ag-grid/header-group.component";
 import {GridOptions} from "ag-grid/main";
 import { Router, CanActivate ,CanDeactivate} from '@angular/router';
 

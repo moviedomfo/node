@@ -1,16 +1,13 @@
-
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
+import { Component, OnInit, ViewEncapsulation ,ViewChild, ElementRef,  AfterContentInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { PatientsService, CommonService, MedicalInsuranceService } from '../../../service/index';
 import { PatientBE, PersonBE, MutualPorPacienteBE, MutualPlanGridView, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants, MotivoConsultaEnum } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
-
-import { ViewChild, ElementRef,  AfterContentInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { ServiceError } from '../../../model/common.model';
-import { element } from 'protractor';
+
+
 import { PatienMedicalInsuranceGridComponent } from '../patien-medical-insurance-grid/patien-medical-insurance-grid.component';
 
 @Component({
@@ -18,19 +15,21 @@ import { PatienMedicalInsuranceGridComponent } from '../patien-medical-insurance
   templateUrl: './patient-manger.component.html',
   encapsulation: ViewEncapsulation.None
 })
+
 export class PatientMangerComponent implements OnInit {
+
   globalError: ServiceError;
   isEdit: boolean;
   currentPatient: PatientBE;
   currentPatient$: Observable<PatientBE>;
   currentMutual_toAdd: MutualPlanGridView;
-  //currentMedicalInsuranceByPatient: MutualPlanGridView;
   currentMedicalInsuranceByPatient: MutualPorPacienteBE;
   mutualPorPacienteAuxList: MutualPorPacienteBE[];
-  //private addItem_mutualPorPacienteAuxList_Source = new Subject<MutualPorPacienteBE[]>();
   private medicalInsuranceByPatientList$: Observable<MutualPorPacienteBE[]>;
   motivoConsulta :number;
+
   @ViewChild('patienMedicalInsuranceGridComponent') patienMedicalInsuranceGridComponent: PatienMedicalInsuranceGridComponent;
+  
 
   constructor(private route: ActivatedRoute,
     private patientService: PatientsService,
@@ -40,10 +39,7 @@ export class PatientMangerComponent implements OnInit {
 
   ngOnInit() {
     this.preInitializePatient();
-
-    //this.medicalInsuranceByPatientList$ = this.addItem_mutualPorPacienteAuxList_Source.asObservable();
-
-  }
+ }
 
   medicalInsuranceByPatientList(item: any) {
 
@@ -79,7 +75,7 @@ export class PatientMangerComponent implements OnInit {
           else {
             this.globalError = new ServiceError();
             this.globalError.message = "El paciente no existe en nuestra base de datos ";
-            alert(this.globalError.message );
+           
           }
         },
         err => {
@@ -92,7 +88,7 @@ export class PatientMangerComponent implements OnInit {
     //if is create 
     if (this.isEdit == false) {
       this.motivoConsulta = MotivoConsultaEnum.CrearPaciente;
-      //this.currentPerson.TipoDocumento=613;
+
       this.currentPatient.FechaAlta = new Date();
       this.currentPatient.Persona.FechaNacimiento = new Date();
       this.currentPatient.Persona.NroDocumento = "0";
@@ -103,12 +99,7 @@ export class PatientMangerComponent implements OnInit {
       
        this.globalError = err;
      }
-  // OnComponentError_personCard($event) {
-  //   console.log($event.Message + ' --> OnComponentError_personCard');
-  //     this.globalError = $event;
-     
-    
-  // }
+ 
   OnComponentError_MedidalInsurance($event){
     this.globalError = $event;
   
@@ -124,7 +115,7 @@ export class PatientMangerComponent implements OnInit {
  
   onMedicalInsuranceByPatientChanged($event) {
     this.currentMedicalInsuranceByPatient = $event;
-    alert(JSON.stringify(this.currentMedicalInsuranceByPatient));
+    
   }
 
   addMedicalInsurance() {
@@ -141,7 +132,7 @@ export class PatientMangerComponent implements OnInit {
       m.IsActive = true;
       m.PlanId = this.currentMutual_toAdd.PlanId;
       m.EntityState = 'Changed';
-      //gridControl_MutualXPatient.RefreshDataSource();
+  
       return;
     }
 

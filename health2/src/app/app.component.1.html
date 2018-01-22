@@ -1,0 +1,115 @@
+
+
+
+
+<nav class="navbar navbar-inverse navbar-toggleable-md ">
+    <div class="container-fluid">
+  
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Healt 32</a>
+          </div>
+  
+    
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/patient">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Pacientes <b class="caret"></b>
+          </a>
+          <ul class="nav-item dropdown-menu">
+            <li> <a class="dropdown-item" [routerLink]="['patientList']" routerLinkActive="active">Consultar</a></li>
+     
+            <li><a class="dropdown-item" [routerLink]="['patientCreate']" routerLinkActive="active">Nuevo</a></li>
+            <li class="divider"></li>
+            <li><a class="dropdown-item" [routerLink]="['patientCreate']" routerLinkActive="active">Turnos</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Acción #5</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Profesionales <b class="caret"></b>
+          </a>
+          <ul class="nav-item dropdown-menu">
+              <li><a class="dropdown-item" [routerLink]="['profesionalCreate']" routerLinkActive="active">Nuevo</a></li>
+            <li><a class="dropdown-item" [routerLink]="['profesionalGrid']" routerLinkActive="active">Consultar</a></li>
+            
+            
+            
+            
+           
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Atención
+            <b class="caret"></b>
+          </a>
+          <ul class="nav-item dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="['profesionalCreate']" routerLinkActive="active">Agendas</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['profesionalGrid']" routerLinkActive="active">Consultar profesionales</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['profesionalCreate']" routerLinkActive="active">Alta profesionale</a>
+            </li>
+        
+          </ul>
+          <ul class="nav-item dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="['patientList']" routerLinkActive="active">Consultar pacientes</a>
+            </li>
+        
+            <li>
+              <a class="dropdown-item" [routerLink]="['patientCreate']" routerLinkActive="active">Alta paciente</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['patientCreate']" routerLinkActive="active">Turnos</a>
+            </li>
+            <li class="divider"></li>
+        
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['persons']" routerLinkActive="active">Personas</a>
+        </li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Test <b class="caret"></b>
+          </a>
+          <ul class="nav-item dropdown-menu">
+              <li><a class="dropdown-item" [routerLink]="['testTimes']" routerLinkActive="active">Test times</a></li>
+            <li><a class="dropdown-item" [routerLink]="['testFormsValidations']" routerLinkActive="active">Test Forms Validations</a></li>
+            <li><a class="dropdown-item" [routerLink]="['testControles']" routerLinkActive="active">Test Controles</a></li>
+            <li><a class="dropdown-item" [routerLink]="['TestIntersection']" routerLinkActive="active">Test Range Intersection</a></li>
+            <li><a class="dropdown-item" [routerLink]="['CheckBoxList']" routerLinkActive="active">CheckBox List</a></li>
+
+            <li><a class="dropdown-item" [routerLink]="['personsGrid']" routerLinkActive="active">persons Grid test</a></li> 
+          </ul>
+        </li>
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="fa fa-user"></span> Sign Up</a></li>
+          <li><a href="#"><span class="fa fa-sign-in"></span> Login</a></li>
+        </ul>
+    </div>
+
+</nav>
+
+<!-- <div id="content"> -->
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+<!-- </div> -->
+
+
+
+

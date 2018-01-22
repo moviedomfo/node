@@ -8,7 +8,7 @@ import { } from '@angular/core';
 // Base 64 IMage display issues with unsafe image
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { AlertBlockComponent } from '../../../commonComponents/alert-block/alert-block.component';
+import { AlertBlockComponent } from '../../../common-components/alert-block/alert-block.component';
 import { ServiceError } from '../../../model/common.model';
 import { ControlContainer, NgForm } from '@angular/forms';
 declare var jQuery: any;

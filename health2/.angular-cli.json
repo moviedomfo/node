@@ -21,8 +21,8 @@
       "styles": [
         
         "../node_modules/font-awesome/css/font-awesome.css",
-        "../src/app/commonComponents/ag-styles/ag-grid.css",
-        "../src/app/commonComponents/ag-styles/theme-fresh.css",
+        "../src/app/common-components/ag-styles/ag-grid.css",
+        "../src/app/common-components/ag-styles/theme-fresh.css",
         
       "styles.css"
       

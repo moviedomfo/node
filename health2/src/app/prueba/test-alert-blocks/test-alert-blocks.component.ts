@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterContentInit, ViewChild, AfterViewInit } from '@angular/core';
-import { AlertBlockComponent } from '../../commonComponents/alert-block/alert-block.component';
+import { AlertBlockComponent } from '../../common-components/alert-block/alert-block.component';
 import { EventType } from '../../model';
 
 @Component({

@@ -1,0 +1,86 @@
+<form #f="ngForm"  (ngSubmit)="onSubmit(f.valid)" novalidate>
+<h3>
+ Alta de paciente
+</h3>
+
+
+<button class="btn btn-success"  type="submit" [disabled]='!f.valid' (click)="updatePatient()" 
+[ngClass]="{hidden: !isEdit}">Actualizar</button> <button class="btn btn-success" [ngClass]="{hidden: isEdit}" 
+[disabled]='!f.valid' (click)="createPatient()">Crear paciente</button>
+
+<app-error-box-container [globalError]="globalError"></app-error-box-container>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Datos principales</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#medicalInsuranceTab" role="tab" data-toggle="tab">Obra social</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#medioContacto" role="tab" data-toggle="tab">Medio de contacto</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="#patientJson" role="tab" data-toggle="tab">JSON </a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="profile">
+    
+    <app-person-card
+    [motivoConsulta = "motivoConsulta";
+    [currentPerson] = "currentPatient.Persona" 
+    (OnComponentError)="OnComponentError_personCard($event)">
+  </app-person-card>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="medicalInsuranceTab">
+    <div class="col-lg-5">
+      <app-medical-insurance-grid 
+          (onMedicalInsuranceChanged)="onMedicalInsuranceChanged($event)"
+          (OnComponentError)="OnComponentError_MedidalInsurance($event)">
+      </app-medical-insurance-grid>
+    </div>
+    <div class="col-lg-2">
+        <button class="btn btn-default"  type="button" (click)='addMedicalInsurance()'
+         >Agregar --></button>
+        <div class="label label-info">Mutual {{currentMutual_toAdd | json}}</div>
+    </div>
+    <div class="col-lg-5">
+      <app-patien-medical-insurance-grid #patienMedicalInsuranceGridComponent
+      [medicalInsuranceByPatientList]="mutualPorPacienteAuxList" 
+      (onMedicalInsuranceChanged)="onMedicalInsuranceByPatientChanged($event)">
+      </app-patien-medical-insurance-grid>
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="medioContacto">
+    <section>
+      <h3>Medio de contacto </h3>
+      <app-contact [currentPerson]="currentPatient.Persona">
+
+      </app-contact>
+    </section>
+  </div>
+  <div role="tabpanel" class="tab-pane fade in active" id="patientJson">
+      
+          
+      <section>
+            
+              <div class="alert-info">
+                  
+                <div>Current Person </div>
+                <div>{{currentPatient | json}}</div>
+
+                              </div>
+                              <div class="alert-warning">
+                                <div>{{globalError | json}}</div>
+                              </div>
+                                
+                              
+          </section>
+            
+      
+    </div>
+</div>
+</form>

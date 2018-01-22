@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalDialogComponent } from './commonComponents/modal-dialog/modal-dialog.component';
+import { ModalDialogComponent } from './common-components/modal-dialog/modal-dialog.component';
 
 import { DialogService } from "ng2-bootstrap-modal";
 
