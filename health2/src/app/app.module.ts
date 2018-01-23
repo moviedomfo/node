@@ -62,6 +62,8 @@ import { AppmenuComponent } from './common-components/layout/appmenu/appmenu.com
 import { AppfooterComponent } from './common-components/layout/appfooter/appfooter.component';
 import { AppheaderComponent } from './common-components/layout/appheader/appheader.component';
 import { PersonGridComponent } from "./functionalComponents/persons/person-grid/person-grid.component";
+import { FormControlsComponent } from './prueba/forms/form-controls/form-controls.component';
+import { FormControlsAdminLteComponent } from './prueba/forms/form-controls-admin-lte/form-controls-admin-lte.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +87,7 @@ import { PersonGridComponent } from "./functionalComponents/persons/person-grid/
     ProfesionalGridComponent,
     ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent, WeekDaysCheckEditComponent, FormsComponent, ChildComponent
     , EmailValidator, IntersectionsComponent, SessionSettingComponent, ValidateEqualDirective, CheckBoxListComponent, ContactComponent,
-    AppsettingComponent, AppmenuComponent, AppfooterComponent, AppheaderComponent
+    AppsettingComponent, AppmenuComponent, AppfooterComponent, AppheaderComponent, FormControlsComponent, FormControlsAdminLteComponent
   ],
   imports: [
     AgmCoreModule.forRoot({

@@ -27,7 +27,11 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-
+## Themes 
+    In this project we was used AdminLTE Dashboar https://adminlte.io/
+## Theme for analisys gentelella 
+    https://colorlib.com/polygon/gentelella/form_buttons.html
+    Dispone de muy buenos formatos para forms
 
 ##Para descargas sin node_modules
 1- run npm install
@@ -79,3 +83,4 @@ npm install moment
 
             `Import Examples:`
                 import Enumerable from "typescript-dotnet-es6/System.Linq/Linq"
+

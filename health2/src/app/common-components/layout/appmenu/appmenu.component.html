@@ -29,29 +29,40 @@
           <li class="header">MAIN NAVIGATION</li>
           <li class="active treeview menu-open">
             <a href="#">
-              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+              <i class="fa fa-dashboard"></i> <span>Atención</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-              <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                
+                <li><a  [routerLink]="['profesionalGrid']" ><i class="fa fa-circle-o"></i>Agendas</a></li>
+
+              <li><a  [routerLink]="['profesionalGrid']" routerLinkActive="active"><i class="fa fa-circle-o"></i> Consultar profesionales</a></li>
+
+              <li class="active"><a [routerLink]="['profesionalCreate']" routerLinkActive="active"><i class="fa fa-circle-o"></i> Alta profesional</a></li>
             </ul>
           </li>
           <li class="treeview">
             <a href="#">
               <i class="fa fa-files-o"></i>
-              <span>Layout Options</span>
+              <span>Test </span>
               <span class="pull-right-container">
                 <span class="label label-primary pull-right">4</span>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-              <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-              <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-              <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+              <li><a [routerLink]="['testFormsControls']" routerLinkActive="active"><i class="fa fa-circle-o"></i> Test  form controls: inputs</a></li>
+              <li><a [routerLink]="['testFormsControlsAdminLTE']" routerLinkActive="active"><i class="fa fa-circle-o"></i> Test form controls: inputs AdminLTE</a></li>
+              <li><a [routerLink]="['testFormsValidations']"><i class="fa fa-circle-o"></i> Test Forms Validations</a></li>
+              <li><a [routerLink]="['testTimes']"><i class="fa fa-circle-o"></i> Test times</a></li>
+              <li><a [routerLink]="['testControles']"><i class="fa fa-circle-o"></i> test Controles</a></li>
+              <li><a [routerLink]="['TestIntersection']"><i class="fa fa-circle-o"></i> Test Range Intersection</a></li>
+
+
+              <li><a [routerLink]="CheckBoxList"><i class="fa fa-circle-o"></i> checkBox List</a></li>
+              <li><a [routerLink]="TespersonsGridtIntersection"><i class="fa fa-circle-o"></i> persons Grid test</a></li>
+
             </ul>
           </li>
           <li>

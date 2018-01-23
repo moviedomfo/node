@@ -21,6 +21,8 @@ import { CheckBoxListComponent } from "./prueba/check-box-list/check-box-list.co
 import { ProfesionalGridComponent } from "./functionalComponents/profesional/profesionalGrid/profesionalGrid.component";
 import { PersonGridComponent } from "./functionalComponents/persons/person-grid/person-grid.component";
 import { PatientGridComponent } from "./functionalComponents/patient/patient-grid/patient-grid.component";
+import { FormControlsComponent } from "./prueba/forms/form-controls/form-controls.component";
+import { FormControlsAdminLteComponent } from "./prueba/forms/form-controls-admin-lte/form-controls-admin-lte.component";
  
 
 
@@ -29,12 +31,11 @@ const appRoutes: Routes = [
    //  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'personsGrid', component: PersonGridComponent },
    
-// //    { path: 'persons/:id', component: PersonsComponent },
-// //    { path: 'patient', component: PatientComponent },
+
    { path: 'patientEdit/:id', component: PatientMangerComponent },
    { path: 'patientCreate', component: PatientMangerComponent },
    { path: 'patientList', component: PatientGridComponent },
-// //    { path: 'prueba', component: PruebaComponent },
+   
     { path: 'testControles', component: TestControlesComponent },
     
     { path: 'profesionalCreate', component: ProfesionalManageComponent },
@@ -43,7 +44,9 @@ const appRoutes: Routes = [
 
     { path: 'testTimes', component: TestTimesComponent },
    { path: 'testFormsValidations', component: FormsComponent },
+   { path: 'testFormsControls', component: FormControlsComponent },
     { path: 'TestIntersection', component: IntersectionsComponent },
+    { path: 'testFormsControlsAdminLTE', component: FormControlsAdminLteComponent },
      { path: 'CheckBoxList', component: CheckBoxListComponent },
 
    { path: '**', component: PageNotFoundComponent }
@@ -53,3 +56,4 @@ const appRoutes: Routes = [
 //TODO:Ver por que en otros desarrollos se usa esto 
 //export const rutesModule : ModuleWithProviders = RouterModule.forRoot(appRoutes);
 export const rutesModule = RouterModule.forRoot(appRoutes);
+
