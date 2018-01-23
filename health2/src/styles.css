@@ -24,14 +24,8 @@ info p {
     text-align:left
   }
   
-  form {
-    border-radius: 5px;
-    /* max-width:800px; */
-    width:100%;
-    margin: 0% auto;
-    background-color: #FFFFFF;
-    overflow: hidden;
-  }
+
+
   label span  {
     color: #F00;
   }
@@ -47,57 +41,15 @@ info p {
     color:#333;
   }
   
-  
-  input {
-    border-radius: 0px 5px 5px 0px;
-    border: 1px solid #eee;
-    margin-bottom: 1px;
-   
-    padding: 0px 3px;
-  }
-  select,option{
-    border-radius: 0px 5px 5px 0px;
-    border: 1px solid #eee;
-    margin-bottom: 15px;
-   
-  }
-  
-  a {
-    text-decoration:inherit
-  }
-  
-  
-  .form-group {
-    overflow: hidden;
-    clear: both;
-  }
-  
+
+
   
   
   i {
     color:rgb(114, 54, 54);
   }
-  
-  .contentform {
-    padding: 10px 10px;
-  }
-  
-  
-  
-  .leftcontact {
-    width:49.5%; 
-    float:left;
-    border-right: 1px dotted #CCC;
-    box-sizing: border-box;
-    padding: 0px 15px 0px 0px;
-  }
-  
-  .rightcontact {
-    width:49.5%;
-    float:right;
-    box-sizing: border-box;
-    padding: 0px 0px 0px 15px;
-  }
+
+
   
   .validation {
     display:none;

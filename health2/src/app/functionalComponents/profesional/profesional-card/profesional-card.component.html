@@ -1,49 +1,57 @@
-<app-person-card #personCard
-  [currentPerson]="currentProfesional.Persona" 
-  [motivoConsulta]="motivoConsulta" 
-  (OnComponentError)="OnComponentError_personCard($event)">
+<app-person-card #personCard [currentPerson]="currentProfesional.Persona" [motivoConsulta]="motivoConsulta" (OnComponentError)="OnComponentError_personCard($event)">
 </app-person-card>
 
-<fieldset ngModelGroup="profesionalCard" class="form-inline">
-  <div class="form-group">
-    <app-alert-block #alertBlock_profesional_card></app-alert-block>
-  </div>
-  <div class="form-group">
-    <label class="text-primary">Especialidad
-      <span>*</span>
-    </label>
-    <div class="input-group">
-      <div class="input-group-addon">
-        <i class="fa fa-user"></i>
+<section class="content" ngModelGroup="profesionalCard" class="form-inline">
+    <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Datos del profesional</h3>
+        </div>
+  
+  <div class="box-body"> <!-- /.box-header -->
+    <div class="row">
+      <div class="col-md-10">
+
+        <div class="form-group">
+          <app-alert-block #alertBlock_profesional_card></app-alert-block>
+        </div>
+        <div class="form-group">
+          <label class="text-primary">Especialidad
+            <span>*</span>
+          </label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-user"></i>
+            </div>
+            <select name="cmbEspecialidad" class="form-control  border border-success" #cmbEspecialidad [(ngModel)]="currentProfesional.IdEspecialidad">
+              <option *ngFor="let item of especialidadList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="text-primary">Profesion
+            <span>*</span>
+          </label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-user"></i>
+            </div>
+            <select name="cmbProfesion" class="form-control  border border-success" #cmbProfesion [(ngModel)]="currentProfesional.IdProfesion">
+              <option *ngFor="let item of profesionList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="text-primary">Matrícula </label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-user"></i>
+            </div>
+            <input type="text" name="matricula" #txtMatricula class="form-control" [(ngModel)]="currentProfesional.Matricula" />
+          </div>
+        </div>
+
       </div>
-    <select name="cmbEspecialidad" class="form-control  border border-success" #cmbEspecialidad [(ngModel)]="currentProfesional.IdEspecialidad">
-      <option *ngFor="let item of especialidadList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
-    </select>
-  </div>  </div>
-  <div class="form-group">
-    <label class="text-primary">Profesion
-      <span>*</span>
-    </label>
-    <div class="input-group">
-      <div class="input-group-addon">
-        <i class="fa fa-user"></i>
-      </div>
-      <select name="cmbProfesion" class="form-control  border border-success" #cmbProfesion [(ngModel)]="currentProfesional.IdProfesion">
-        <option *ngFor="let item of profesionList" [ngValue]="item.IdParametro">{{item.Nombre}}</option>
-      </select>
     </div>
   </div>
-  <div class="form-group">
-    <label class="text-primary">Matrícula </label>
-    <div class="input-group">
-      <div class="input-group-addon">
-        <i class="fa fa-user"></i>
-      </div>
-      <input type="text" name="matricula" #txtMatricula class="form-control" [(ngModel)]="currentProfesional.Matricula" />
-    </div>
-  </div>
-</fieldset>
-
-<fieldset ngModelGroup="profesionalCard2">
-
-</fieldset>
+</div>
+</section>
