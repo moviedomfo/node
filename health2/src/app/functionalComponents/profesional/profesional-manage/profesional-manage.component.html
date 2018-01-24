@@ -1,9 +1,10 @@
-<form #f="ngForm"  (ngSubmit)="onSubmit(f.valid)" novalidate>
+<section class="content">
+<form #f="ngForm" (ngSubmit)="onSubmit(f.valid)" novalidate>
   <h3>
     Gestión de profesionales
   </h3>
-  <button class="btn btn-success" [ngClass]="{hidden: !isEdit}" type="submit"   [disabled]='!f.valid'>Actualizar</button>
-    <button class="btn btn-success" [ngClass]="{hidden: isEdit}"   [disabled]='!f.valid' (click)="createPatient()">Crear profesional</button>
+  <button class="btn btn-success" [ngClass]="{hidden: !isEdit}" type="submit" [disabled]='!f.valid'>Actualizar</button>
+  <button class="btn btn-success" [ngClass]="{hidden: isEdit}" [disabled]='!f.valid' (click)="createPatient()">Crear profesional</button>
   <app-error-box-container [globalError]="globalError"></app-error-box-container>
 
   <ul class="nav nav-tabs " role="tablist">
@@ -28,16 +29,12 @@
   <div class="tab-content">
 
     <div role="tabpanel" class="tab-pane fade in active" id="profile">
-
-      <app-profesional-card   #profesionalCard
-      [currentProfesional]="currentProfesional"
-      [motivoConsulta] = "motivoConsulta" 
-      (OnComponentError)="OnComponentError_profesionalCard($event)">
+      <app-profesional-card #profesionalCard [currentProfesional]="currentProfesional" [motivoConsulta]="motivoConsulta" (OnComponentError)="OnComponentError_profesionalCard($event)">
       </app-profesional-card>
     </div>
 
     <div role="tabpanel" class="tab-pane fade" id="sheduling">
-      <div class="col-lg-10">
+      
 
         <button type="button" class="btn btn-primary" data-toggle="modal" (click)='show_resource_scheduling_dialog(false)' data-target="#resouceShedulingModal">
           Agregar nueva programación de turnos
@@ -46,25 +43,23 @@
         <app-resource-scheduling-grid #resourceSchedulingGrid1 [profesionalResourceSchedulingList]="currentResourceSchedulingList"
           (onResourceSchedulingChanged)="onResourceSchedulingChanged">
         </app-resource-scheduling-grid>
-      </div>
+      
     </div>
 
     <div role="tabpanel" class="tab-pane fade" id="session">
-      <section>
-        <app-session-setting #sessionSettingComponent
-            [currentUser]="currentUser">
+ 
+        <app-session-setting #sessionSettingComponent [currentUser]="currentUser">
         </app-session-setting>
         <button type="button" (click)='btnTestClick()'> test</button>
-      </section>
+      
     </div>
-    <div role="tabpanel" class="tab-pane fade" id="medioContacto">
-      <section>
-        <h1>Medio de contacto </h1>
-        <app-contact [currentPerson]="currentProfesional.Persona">
 
-        </app-contact>
-      </section>
+    <div role="tabpanel" class="tab-pane fade" id="medioContacto">
+
+      <app-contact [currentPerson]="currentProfesional.Persona">
+      </app-contact>
     </div>
+
     <div role="tabpanel" class="tab-pane fade" id="profJson">
       <div class="alert-info">
 
@@ -78,55 +73,41 @@
       </div>
       <div class="alert-dismissible">
         <label> Profesional Scheduling</label>
-
         <div>
           <strong>{{currentResourceSchedulingList | json}}</strong>
         </div>
       </div>
-      <!-- <div class="alert-dismissible">
-      <label>Usuario</label>
-      <div>{{currentUser | json}}</div>
+
+
     </div>
-    <div class="alert-warning">
-      <div>{{globalError | json}}</div>
-    </div>
-  </div> -->
-      <div class="alert-warning">
-        <legend>currentResourceSchedulingList</legend>
-        <div>{{currentResourceSchedulingList | json}}</div>
+
+
+  </div></form>
+
+<!-- show resourse sheduling modal dialog -->
+<div class="modal fade" id="resouceShedulingModal" tabindex="-1" role="dialog" aria-labelledby="resouceShedulingModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resouceShedulingModalLabel">Plan de turnos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
       </div>
-    </div>
+      <div class="modal-body">
+        <app-resource-scheduling-manage #resourceSchedulingManageComponent1 [currentResourceScheduling]="currentResourceScheduling"
+          [currentResourceSchedulingList]="currentResourceSchedulingList" [isEditMode]="isEditMode_resource_scheduling" (OnResourceShedulingCreated)="OnResourceShedulingCreated($event)"
+          (OnComponentError)="OnComponentError">
+        </app-resource-scheduling-manage>
+      </div>
+      <div class="modal-footer">
+        <button #closeBtn type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_Acept()">Aceptar</button> -->
 
-  </div>
-
- 
-</form>
- <!-- show resourse sheduling modal dialog -->
-  <div class="modal fade" id="resouceShedulingModal" tabindex="-1" role="dialog" aria-labelledby="resouceShedulingModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="resouceShedulingModalLabel">Plan de turnos</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-
-        </div>
-        <div class="modal-body">
-          <app-resource-scheduling-manage #resourceSchedulingManageComponent1 
-            [currentResourceScheduling]="currentResourceScheduling"
-            [currentResourceSchedulingList]="currentResourceSchedulingList"
-            [isEditMode]="isEditMode_resource_scheduling" 
-            (OnResourceShedulingCreated)="OnResourceShedulingCreated($event)"
-            (OnComponentError)="OnComponentError">
-          </app-resource-scheduling-manage>
-        </div>
-        <div class="modal-footer">
-          <button #closeBtn type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <!-- <button type="button" class="btn btn-primary" (click)="resource_scheduling_dialog_Acept()">Aceptar</button> -->
-
-        </div>
       </div>
     </div>
   </div>
+</div>
+</section>

@@ -36,11 +36,13 @@
             </a>
             <ul class="treeview-menu">
                 
-                <li><a  [routerLink]="['profesionalGrid']" ><i class="fa fa-circle-o"></i>Agendas</a></li>
-
-              <li><a  [routerLink]="['profesionalGrid']" routerLinkActive="active"><i class="fa fa-circle-o"></i> Consultar profesionales</a></li>
-
-              <li class="active"><a [routerLink]="['profesionalCreate']" routerLinkActive="active"><i class="fa fa-circle-o"></i> Alta profesional</a></li>
+                <li><a [routerLink]="['profesionalGrid']" ><i class="fa fa-book"></i>Agendas</a></li>
+                <li><a [routerLink]="['profesionalGrid']" routerLinkActive="active"><i class="fa fa-list"></i> Consultar profesionales</a></li>
+                <li><a [routerLink]="['profesionalCreate']" routerLinkActive="active"><i class="fa fa-user-circle"></i> Alta profesional</a></li>
+                <li class="divider"></li>
+                <li><a [routerLink]="['patientList']" routerLinkActive="active"><i class="fa fa-list"></i> Consultar pacientes</a></li>
+                <li><a [routerLink]="['patientCreate']" routerLinkActive="active"><i class="fa fa-circle-o"></i> Alta paciente</a></li>
+                
             </ul>
           </li>
           <li class="treeview">
@@ -52,8 +54,8 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a [routerLink]="['testFormsControls']" routerLinkActive="active"><i class="fa fa-circle-o"></i> Test  form controls: inputs</a></li>
-              <li><a [routerLink]="['testFormsControlsAdminLTE']" routerLinkActive="active"><i class="fa fa-circle-o"></i> Test form controls: inputs AdminLTE</a></li>
+              <li><a [routerLink]="['testFormsControls']" routerLinkActive="active"><i class="fa fa-user-md"></i> Test  form controls: inputs</a></li>
+              <li><a [routerLink]="['testFormsControlsAdminLTE']" routerLinkActive="active"><i class="fa fa-user-md"></i> Test form controls: inputs AdminLTE</a></li>
               <li><a [routerLink]="['testFormsValidations']"><i class="fa fa-circle-o"></i> Test Forms Validations</a></li>
               <li><a [routerLink]="['testTimes']"><i class="fa fa-circle-o"></i> Test times</a></li>
               <li><a [routerLink]="['testControles']"><i class="fa fa-circle-o"></i> test Controles</a></li>

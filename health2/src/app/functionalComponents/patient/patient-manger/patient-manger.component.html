@@ -1,3 +1,4 @@
+<section class="content">
 <form #f="ngForm"  (ngSubmit)="onSubmit(f.valid)" novalidate>
   <h3 [ngClass]="{hidden: isEdit}">    Alta de paciente   </h3>
   <h3 [ngClass]="{hidden: !isEdit}">    Actualizacion de paciente   </h3>
@@ -82,3 +83,5 @@
     </div>
 </div>
 </form>
+
+</section>
