@@ -26,59 +26,131 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-          <li class="header">MAIN NAVIGATION</li>
+          <li class="header">Gestion</li>
           <li class="active treeview menu-open">
-            <a href="#">
-              <i class="fa fa-dashboard"></i> <span>Atención</span>
+            <a href="#" class="text-bold">
+              <i class="fa fa-dashboard"></i> <span class="text-orange ">Atención (agendas)</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-                
-                <li><a [routerLink]="['profesionalGrid']" ><i class="fa fa-book"></i>Agendas</a></li>
-                <li><a [routerLink]="['profesionalGrid']" routerLinkActive="active"><i class="fa fa-list"></i> Consultar profesionales</a></li>
-                <li><a [routerLink]="['profesionalCreate']" routerLinkActive="active"><i class="fa fa-user-circle"></i> Alta profesional</a></li>
-                <li class="divider"></li>
-                <li><a [routerLink]="['patientList']" routerLinkActive="active"><i class="fa fa-list"></i> Consultar pacientes</a></li>
-                <li><a [routerLink]="['patientCreate']" routerLinkActive="active"><i class="fa fa-circle-o"></i> Alta paciente</a></li>
-                
+                  
+                <li class="treeview">
+                    <a href="#">
+                      <i class="fa fa-caret-right text-success "></i> Pacientes
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li>
+                        <a [routerLink]="['patientList']" routerLinkActive="active">
+                          <i class="fa fa-user-circle text-primary "></i> Listar pacientes </a>
+                      </li>
+                      <li>
+                        <a [routerLink]="['patientCreate']" routerLinkActive="active">
+                          <i class="fa fa-user-circle text-primary "></i>turnos por paciente</a>
+                      </li>
+                      <li>
+
+                          <a [routerLink]="['patientCreate']" routerLinkActive="active">
+                            <i class="fa fa-user-circle text-primary "></i>Todos los turnos</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['patientCreate']" routerLinkActive="active">
+                              <i class="fa fa-user-circle text-primary "></i>Calendario general</a>
+                          </li>
+                    </ul>
+                  </li>
+                  <li><a [routerLink]="['profesionalGrid']" routerLinkActive="active" class="text-success"><i class="fa fa-list text-success"></i> Agenda de profesionales</a></li>
+
+            
             </ul>
           </li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-files-o"></i>
-              <span>Test </span>
-              <span class="pull-right-container">
-                <span class="label label-primary pull-right">4</span>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a [routerLink]="['testFormsControls']" routerLinkActive="active"><i class="fa fa-user-md"></i> Test  form controls: inputs</a></li>
-              <li><a [routerLink]="['testFormsControlsAdminLTE']" routerLinkActive="active"><i class="fa fa-user-md"></i> Test form controls: inputs AdminLTE</a></li>
-              <li><a [routerLink]="['testFormsValidations']"><i class="fa fa-circle-o"></i> Test Forms Validations</a></li>
-              <li><a [routerLink]="['testTimes']"><i class="fa fa-circle-o"></i> Test times</a></li>
-              <li><a [routerLink]="['testControles']"><i class="fa fa-circle-o"></i> test Controles</a></li>
-              <li><a [routerLink]="['TestIntersection']"><i class="fa fa-circle-o"></i> Test Range Intersection</a></li>
-
-
-              <li><a [routerLink]="CheckBoxList"><i class="fa fa-circle-o"></i> checkBox List</a></li>
-              <li><a [routerLink]="TespersonsGridtIntersection"><i class="fa fa-circle-o"></i> persons Grid test</a></li>
-
-            </ul>
-          </li>
-          <li>
-            <a href="pages/widgets.html">
-              <i class="fa fa-th"></i> <span>Administración</span>
-              <span class="pull-right-container">
-                <small class="label pull-right bg-green">new</small>
-              </span>
-            </a>
-          </li>
+     
+        
        
-        
-        
-        
+          <li class="treeview">
+              <a href="#" class="text-bold">
+                <i class="fa fa-share "></i> <span class="text-orange ">Administracion</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                  
+                  <li class="treeview">
+                      <a href="#">
+                        <i class="fa fa-caret-right text-success "></i> Altas
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                        <li>
+                          <a [routerLink]="['profesionalCreate']" routerLinkActive="active">
+                            <i class="fa fa-user-circle text-primary "></i> Alta profesional</a>
+                        </li>
+                        <li>
+                          <a [routerLink]="['patientCreate']" routerLinkActive="active">
+                            <i class="fa fa-user-circle text-primary "></i>Alta paciente</a>
+                        </li>
+      
+                      </ul>
+                    </li>
+
+                <li class="treeview">
+                  <a href="#"><i class="fa fa-caret-right text-success"></i> Consultas
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      <li><a [routerLink]="['profesionalGrid']" routerLinkActive="active"><i class="fa fa-list "></i> Consultar profesionales</a></li>
+                      <li><a [routerLink]="['patientList']" routerLinkActive="active"><i class="fa fa-list"></i> Consultar pacientes</a></li>
+                    <!-- <li class="treeview">
+                      <a href="#"><i class="fa fa-circle-o"></i> Level Two
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                          <li><a [routerLink]="['profesionalGrid']" routerLinkActive="active"><i class="fa fa-list "></i> Consultar profesionales</a></li>
+                          <li><a [routerLink]="['patientList']" routerLinkActive="active"><i class="fa fa-list"></i> Consultar pacientes</a></li>
+                          
+                      </ul>
+                    </li> -->
+                  </ul>
+                </li>
+               
+                
+                <li><a [routerLink]="['profesionalGrid']" ><i class="fa fa-book text-green"></i>Agendas</a></li>
+              </ul>
+            </li>
+          <li class="header">Testings </li>
+          <li class="treeview">
+              <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span>Test </span>
+                <span class="pull-right-container">
+                  <span class="label label-primary pull-right">4</span>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a [routerLink]="['testFormsControls']" routerLinkActive="active"><i class="fa fa-user-md"></i> Test  form controls: inputs</a></li>
+                <li><a [routerLink]="['testFormsControlsAdminLTE']" routerLinkActive="active"><i class="fa fa-user-md"></i> Test form controls: inputs AdminLTE</a></li>
+                <li><a [routerLink]="['testFormsValidations']"><i class="fa fa-circle-o"></i> Test Forms Validations</a></li>
+                <li><a [routerLink]="['testTimes']"><i class="fa fa-circle-o"></i> Test times</a></li>
+                <li><a [routerLink]="['testControles']"><i class="fa fa-circle-o"></i> test Controles</a></li>
+                <li><a [routerLink]="['TestIntersection']"><i class="fa fa-circle-o"></i> Test Range Intersection</a></li>
+  
+  
+                <li><a [routerLink]="CheckBoxList"><i class="fa fa-circle-o"></i> checkBox List</a></li>
+                <li><a [routerLink]="TespersonsGridtIntersection"><i class="fa fa-circle-o"></i> persons Grid test</a></li>
+  
+              </ul>
+            </li>
           
           <li class="header">LABELS</li>
           <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
