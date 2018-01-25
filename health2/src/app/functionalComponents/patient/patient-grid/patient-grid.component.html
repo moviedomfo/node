@@ -1,36 +1,36 @@
-<section>
-<header class="header">
-  <h3>Texto busqueda de pacientes</h3>
+<section class="content">
+  <div class="row">
+    <div class="box box-success">
+      <div class="box-header with-border">
+       
+        <form class="form-inline" (ngSubmit)="retrivePatients()">
 
 
-  <form class="form-inline" (ngSubmit)="retrivePatients()">
+          <div class="form-group has-feedback">
+
+            <input name="txtBox_Query" type="text" class="form-control font-weight-bold border border-success" placeholder="Nombre o apellido paciente"
+              [(ngModel)]="txtQuery" #txtBox_Query (keyup.enter)="onKey_Enter(txtBox_Query.value)">
+
+            <button class="btn btn-default" type="submit">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
 
 
-      <div class="form-group has-feedback">
-      
-        <input name="txtBox_Query" type="text" class="form-control font-weight-bold border border-success" placeholder="Nombre o apellido paciente" [(ngModel)]="txtQuery"
-          #txtBox_Query (keyup.enter)="onKey_Enter(txtBox_Query.value)">
-      
-        <button class="btn btn-default" type="submit">
-          <i class="fa fa-search"></i>
-        </button>
+
+
+          <div *ngIf="patientCount > 0 && patientCount" class="form-group mx-sm-3 mb-2">
+            <span class="badge badge-pill badge-info">Encontrados {{patientCount}}</span>
+          </div>
+          <app-error-box-container [globalError]="globalError"></app-error-box-container>
+        </form>
+
       </div>
-   
 
- 
-
-    <div  *ngIf="patientCount > 0 && patientCount" class="form-group mx-sm-3 mb-2">
-      <span class="badge badge-pill badge-info">Encontrados {{patientCount}}</span>
     </div>
-    <app-error-box-container [globalError]="globalError"></app-error-box-container>
-  </form>
+    <!-- /.box-header -->
+    <div class="box-body no-padding">
 
-    
-
-  
-  </header>
-  <div class="container">
-    <div class="col-lg-10">
 
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -40,15 +40,17 @@
         <div class="panel-body">
           <div style="clear: both;"></div>
           <ag-grid-angular style="width: 900px; height: 515px;" class="ag-fresh" [rowData]="patientList" [columnDefs]="columnDefs"
-            (modelUpdated)="onModelUpdated($event)" 
-            (cellClicked)="onCellClicked($event)" 
-            (cellDoubleClicked)="onGridCellDoubleClick($event)"
+            (modelUpdated)="onModelUpdated($event)" (cellClicked)="onCellClicked($event)" (cellDoubleClicked)="onGridCellDoubleClick($event)"
             (rowDoubleClicked)="onGridRowDoubleClick($event)">
           </ag-grid-angular>
-      
 
         </div>
       </div>
+
     </div>
+    <!-- /.box-body  -->
+
   </div>
+  <!-- /.main row  -->
+
 </section>

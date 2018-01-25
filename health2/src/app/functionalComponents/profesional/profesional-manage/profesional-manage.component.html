@@ -1,10 +1,8 @@
 <section class="content">
 <form #f="ngForm" (ngSubmit)="onSubmit(f.valid)" novalidate>
-  <h3>
-    Gestión de profesionales
-  </h3>
-  <button class="btn btn-success" [ngClass]="{hidden: !isEdit}" type="submit" [disabled]='!f.valid'>Actualizar</button>
-  <button class="btn btn-success" [ngClass]="{hidden: isEdit}" [disabled]='!f.valid' (click)="createPatient()">Crear profesional</button>
+
+  <!-- <button class="btn btn-success" [ngClass]="{hidden: !isEdit}" type="submit" [disabled]='!f.valid'>Actualizar</button>
+  <button class="btn btn-success" [ngClass]="{hidden: isEdit}" [disabled]='!f.valid' (click)="createPatient()">Crear profesional</button> -->
   <app-error-box-container [globalError]="globalError"></app-error-box-container>
 
   <ul class="nav nav-tabs " role="tablist">

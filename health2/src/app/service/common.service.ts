@@ -13,9 +13,22 @@ import { element } from 'protractor';
 export class CommonService {
   public paramList: Param[] = [];
   public paramList$: Subject<Param[]> = new Subject<Param[]>();
-  constructor(private http: Http) {
-    
+  
+  public mainComponentTitle_subject:Subject<string> = new Subject<string>();
+
+  constructor(private http: Http) {  }
+
+   //permite subscripcion añl Subject con el titulo
+   get_mainComponentTitle$(): Observable<string>
+   {
+    return this.mainComponentTitle_subject.asObservable();
    }
+   //permite q un componente cualquiera emita cambio de titulo y este altere el header del dasboard
+   Set_mainComponentTitle(tittle:string){
+   
+    this.mainComponentTitle_subject.next(tittle);
+   }
+
 
    parseDate(dateString: string): Date {
      

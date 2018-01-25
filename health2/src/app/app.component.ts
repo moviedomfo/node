@@ -2,15 +2,29 @@ import { Component } from '@angular/core';
 import { ModalDialogComponent } from './common-components/modal-dialog/modal-dialog.component';
 
 import { DialogService } from "ng2-bootstrap-modal";
-
+import { CommonService } from "./service/index";
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    constructor(private dialogService: DialogService) { }
+    mainComponentTitle:string;
+    
     title = 'app works!';
+
+    constructor(private dialogService: DialogService,private commonService :CommonService) { 
+
+        //Escrive el titulo en e l header prinsipal del dasboard
+        this.commonService.get_mainComponentTitle$().subscribe(d => {
+            if(d){
+                this.mainComponentTitle = d;
+            }
+        });
+    }
+    
 
 
     showConfirm() {

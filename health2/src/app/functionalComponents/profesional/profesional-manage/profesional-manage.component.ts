@@ -23,14 +23,14 @@ import { MotivoConsultaEnum } from "../../../model/common.constants";
   encapsulation: ViewEncapsulation.None
 })
 export class ProfesionalManageComponent implements AfterViewInit {
-
+  
   globalError: ServiceError;
   public currentProfesional: ProfesionalBE;
   currentResourceSchedulingList: ResourceSchedulingBE[];
   currentHealthInstitution_ProfesionalBE: HealthInstitution_ProfesionalBE;
   currentUser: User;
   getProfesionalRes$: Observable<GetProfesionalRes>;
-  isEdit: boolean;
+  isEdit: boolean=false;
   isEditMode_resource_scheduling: boolean;
   currentResourceScheduling = new ResourceSchedulingBE();
   motivoConsulta: number;
@@ -48,16 +48,19 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.sessionSettingComponent.MachRolesGrid();
-   
+
   }
 
   ngOnInit() {
-
+    
+    
     this.preInitialize();
     if (this.isEdit) {
+      this.commonService.Set_mainComponentTitle("Gestión de profesionales [Edición]");
       this.motivoConsulta = MotivoConsultaEnum.ActualizarProfesional;
     }
     else {
+      this.commonService.Set_mainComponentTitle("Gestión de profesionales [Alta]");
       this.motivoConsulta = MotivoConsultaEnum.CrearProfesional;
     }
   }

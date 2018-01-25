@@ -38,7 +38,7 @@ export class ProfesionalGridComponent implements OnInit {
       }
 
   ngOnInit() {
-
+    this.commonService.Set_mainComponentTitle("Consulta de profesionales");
       // we pass an empty gridOptions in, so we can grab the api out
       this.gridOptions = <GridOptions>{};
       this.gridOptions.dateComponentFramework = DateComponent;
@@ -68,10 +68,10 @@ private createColumnDefs() {
   this.columnDefs = [
     { headerName: "Nombre", field: "Nombre" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Apellido", field: "Apellido" ,width: 150,pinned: true,filter: 'text'},
-    { headerName: "Documento", field: "NroDocumento" ,width: 150,pinned: true,filter: 'text'},
+    { headerName: "Documento", field: "Nro Documento" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Matricula", field: "Matricula" ,width: 150,pinned: true,filter: 'text'},
-    { headerName: "Especialidad", field: "NombreEspecialidad" ,width: 150,pinned: true,filter: 'text'},
-    { headerName: "NombreProfecion", field: "NombreProfecion" ,width: 150,pinned: true,filter: 'text'},
+    { headerName: "Especialidad", field: "Especialidad" ,width: 150,pinned: true,filter: 'text'},
+    { headerName: "NombreProfecion", field: "profesión" ,width: 150,pinned: true,filter: 'text'},
     { headerName: "Fecha alta", field: "FechaAlta",width: 200,pinned: true }
   ];
 }

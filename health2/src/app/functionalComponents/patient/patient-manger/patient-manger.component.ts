@@ -19,7 +19,7 @@ import { PatienMedicalInsuranceGridComponent } from '../patien-medical-insurance
 export class PatientMangerComponent implements OnInit {
 
   globalError: ServiceError;
-  isEdit: boolean;
+  isEdit: boolean=false;
   currentPatient: PatientBE;
   currentPatient$: Observable<PatientBE>;
   currentMutual_toAdd: MutualPlanGridView;
@@ -38,7 +38,11 @@ export class PatientMangerComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    
     this.preInitializePatient();
+   
+   
+    
  }
 
   medicalInsuranceByPatientList(item: any) {
@@ -48,6 +52,7 @@ export class PatientMangerComponent implements OnInit {
 
 
   private preInitializePatient() {
+
     this.currentPatient = new PatientBE();
     this.currentPatient.Persona = new PersonBE();
     this.currentPatient.Mutuales = [];
@@ -61,6 +66,7 @@ export class PatientMangerComponent implements OnInit {
     });
 
     if (this.isEdit) {
+      this.commonService.Set_mainComponentTitle("Gestión de pacientes  [Edición]" );
       //Busco el paciente
       this.currentPatient$ = this.patientService.getPatientById(id.id);
 
@@ -92,6 +98,7 @@ export class PatientMangerComponent implements OnInit {
       this.currentPatient.FechaAlta = new Date();
       this.currentPatient.Persona.FechaNacimiento = new Date();
       this.currentPatient.Persona.NroDocumento = "0";
+      this.commonService.Set_mainComponentTitle("Gestión de pacientes  [Alta]" );
     }
   }
   OnComponentError_personCard(err: ServiceError) {

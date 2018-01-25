@@ -36,6 +36,7 @@ export class PatientGridComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.commonService.Set_mainComponentTitle("Consulta de pacientes");
     // we pass an empty gridOptions in, so we can grab the api out
      this.gridOptions = <GridOptions>{};
      this.gridOptions.dateComponentFramework = DateComponent;
