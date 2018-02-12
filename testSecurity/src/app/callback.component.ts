@@ -23,6 +23,7 @@ export class CallbackComponent implements OnInit {
     //and our CallbackComponent will make sure to properly process and store those tokens in localStorage.
     //If all is well, meaning we recieved an id_token and an access_token, 
     //we will be redirected back to the homepage and will be in a logged in state.
+
     this.authService.handleAuth();
   }
 

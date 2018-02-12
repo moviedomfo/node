@@ -32,7 +32,7 @@ const routes: Routes = [
     component: CommentCreateComponent
   },
   {
-    path: 'commentCreate',
+    path: 'commentList',
     component: CommentListComponent
   },
   {

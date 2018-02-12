@@ -9,14 +9,14 @@ export class AuthService {
 
   // Create Auth0 web auth instance
   auth0 = new auth0.WebAuth({
-    clientID: AUTH_CONFIG.CLIENT_ID,
-    domain: AUTH_CONFIG.CLIENT_DOMAIN,
+    clientID: 'AlHia91wIeqUreq3P8krl7t2zsc1R9FO',
+    domain: 'pelsoftmfo.auth0.com',
     responseType: 'token id_token',
-    redirectUri: AUTH_CONFIG.REDIRECT,
-    audience: AUTH_CONFIG.AUDIENCE,
-    scope: AUTH_CONFIG.SCOPE
+    audience: 'https://pelsoftmfo.auth0.com/userinfo',
+    redirectUri: 'http://localhost:3000/callback',
+    scope: 'openid'
   });
-
+  
   userProfile: any;
   //Create a stream of logged in status to communicate throughout app
   loggedIn: boolean;

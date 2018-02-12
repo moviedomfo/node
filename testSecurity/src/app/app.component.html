@@ -5,10 +5,21 @@
     </div>
     <ul class="nav navbar-nav">
       <li>
-        <a routerLink="/postlist" routerLinkActive="active">Posts</a>
+        <a routerLink="/postList" routerLinkActive="active">Posts</a>
       </li>
       <li>
         <a routerLink="/postCreate"  *ngIf="authService.authenticated" routerLinkActive="active">Create new post</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav">
+      <li>
+        <a routerLink="/commentList" routerLinkActive="active">Comments</a>
+      </li>
+      <li>
+        <a routerLink="/callback" routerLinkActive="active">callbacks</a>
+      </li>
+      <li>
+        <a routerLink="/commentCreate"  *ngIf="authService.authenticated" routerLinkActive="active">Create new comment</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
