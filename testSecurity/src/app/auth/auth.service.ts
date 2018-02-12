@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as auth0 from 'auth0-js';
-import { AUTH_CONFIG } from './authConfig';
+/* import { AUTH_CONFIG } from './authConfig'; */
 import { Router } from '@angular/router';;
 
 @Injectable()
