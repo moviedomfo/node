@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as auth0 from 'auth0-js';
-import { AUTH_CONFIG } from './authConfig';
+
 import { Router } from '@angular/router';;
 
 @Injectable()
@@ -13,10 +13,10 @@ export class AuthService {
     domain: 'pelsoftmfo.auth0.com',
     responseType: 'token id_token',
     audience: 'https://pelsoftmfo.auth0.com/userinfo',
-    redirectUri: 'http://localhost:3000/callback',
+    redirectUri: 'http://localhost:8080/callback',
     scope: 'openid'
   });
-  
+
   userProfile: any;
   //Create a stream of logged in status to communicate throughout app
   loggedIn: boolean;

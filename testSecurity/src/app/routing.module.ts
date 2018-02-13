@@ -16,7 +16,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'postlist',
+    path: 'postList',
     component: PostListComponent
   },
   {

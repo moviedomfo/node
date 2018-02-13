@@ -36,7 +36,7 @@ import { PersonCardComponent } from './functionalComponents/persons/person-card/
 import { LoginComponent } from './common-components/login/login.component';
 import { MedicalInsuranceGridComponent } from './functionalComponents/medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
 import { PatienMedicalInsuranceGridComponent } from './functionalComponents/patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
-import { PatientBE } from './model/patients.model';
+
 import {IContextInformation, ContextInformation, IRequest, Request, IResponse, Result, ServiceError } from './model/common.model';
 import { PatientGridComponent } from './functionalComponents/patient/patient-grid/patient-grid.component';
 import {CommonService, PatientsService, PersonsService, MedicalInsuranceService,ProfesionalService} from './service/index';

@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './routing.module';
-
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { CommentListComponent } from './comments/comment-list/comment-list.component';
 import { CommentCreateComponent } from './comments/comment-create/comment-create.component';
@@ -26,10 +27,12 @@ import { PostsAndCommentsService } from "./service/posts-and-comments.service";
     
   ],
   imports: [
-    BrowserModule,AppRoutingModule
+    BrowserModule,AppRoutingModule,HttpClientModule,HttpModule
   ],
-  providers: [AuthService,
+  providers: [
+    AuthService,
     PostsAndCommentsService],
-  bootstrap: [AppComponent]
+  bootstrap:
+   [AppComponent]
 })
 export class AppModule { }

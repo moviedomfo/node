@@ -7,8 +7,11 @@ var jwks = require('jwks-rsa');
 var clc = require('cli-color');
 const fetch = require("node-fetch");
 
+const cors = require('cors');
 
 var port = process.env.PORT || 8080;
+const bodyParser = require('body-parser')
+
 
 var jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
@@ -22,7 +25,10 @@ var jwtCheck = jwt({
     algorithms: ['RS256']
 });
 console.log(clc.yellow('initilizing server ' ));
-//app.use(jwtCheck);
+app.use(jwtCheck);
+
+// Permite llamadas desde otros dominios o puertos
+app.use(cors());
 
 app.get('/authorized', function (req, res) {
   res.send('Secured Resource');
@@ -38,6 +44,23 @@ app.get('/', function(req, res) {
     console.log(item);
     res.send(item);
  });
+
+ app.get('/commentList2', function (req, res) {
+  console.log(clc.blue("GET to  /postList" ));
+  var url = 'https://jsonplaceholder.typicode.com/comments';
+
+  fetch(url)
+      .then(response => {
+        response.json().then(json => {
+          res.json(json);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        res.send("Error");
+      });
+      
+});
 
  app.get('/commentList', jwtCheck,function (req, res) {
   console.log(clc.blue("GET to  /postList" ));

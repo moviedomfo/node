@@ -1,3 +1,24 @@
-<p>
-  comment-list works!
-</p>
+<h3 class="text-center">Special (Public) comments</h3>
+
+<div class="col-sm-4" *ngFor="let comment of comments">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ comment.name }}</h3>
+    </div>
+    <div class="panel-body">
+      {{ comment.body }}
+    </div>
+    
+  </div>
+</div>
+
+<div class="col-sm-12">
+  <div class="jumbotron text-center">
+    <h2>View Public comments</h2>
+    <a class="btn btn-lg btn-success" commentList="/comments">Public comments</a>
+  </div>
+</div>
+
+<div class="col-sm-12 alert alert-danger" *ngIf="error">
+  <strong>Oops!</strong> An error occurred fetching data. Please try again.
+</div>
