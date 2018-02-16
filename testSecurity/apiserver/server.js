@@ -1,38 +1,34 @@
 // library that will validate the access tokens in your API
 
-var express = require('express');
-var app = express();
-var jwt = require('express-jwt');
-var jwks = require('jwks-rsa');
+/** Carga de módulos de librerías estándar */
+// express
+const express = require('express');
+// aplicación express
+const app = express();
+/** Carga de módulos propios */
+const middleware = require('./middleware');
 var clc = require('cli-color');
-const fetch = require("node-fetch");
+console.log(clc.yellow('initilizing server ' ));
+middleware.useMiddleware(app);
 
-const cors = require('cors');
 
 var port = process.env.PORT || 8080;
 const bodyParser = require('body-parser')
+// Configuración de rutas
+require('./api/serviceIndex')(app);
+
+app.listen(port,function(){
+  console.log(clc.yellow("API server started on PORT " + port));
+})
 
 
-var jwtCheck = jwt({
-    secret: jwks.expressJwtSecret({
-        cache: true,
-        rateLimit: true,
-        jwksRequestsPerMinute: 5,
-        jwksUri: "https://pelsoftmfo.auth0.com/.well-known/jwks.json"
-    }),
-    audience: 'https://celamltda.com.ar',
-    issuer: "https://pelsoftmfo.auth0.com/",
-    algorithms: ['RS256']
-});
-console.log(clc.yellow('initilizing server ' ));
-app.use(jwtCheck);
 
-// Permite llamadas desde otros dominios o puertos
-app.use(cors());
 
-app.get('/authorized', function (req, res) {
-  res.send('Secured Resource');
-});
+
+
+// app.get('/authorized', function (req, res) {
+//   res.send('Secured Resource');
+// });
 
 app.get('/', function(req, res) {
     var item = {
@@ -45,58 +41,8 @@ app.get('/', function(req, res) {
     res.send(item);
  });
 
- app.get('/commentList2', function (req, res) {
-  console.log(clc.blue("GET to  /postList" ));
-  var url = 'https://jsonplaceholder.typicode.com/comments';
-
-  fetch(url)
-      .then(response => {
-        response.json().then(json => {
-          res.json(json);
-        });
-      })
-      .catch(error => {
-        console.log(error);
-        res.send("Error");
-      });
-      
-});
-
- app.get('/commentList', jwtCheck,function (req, res) {
-  console.log(clc.blue("GET to  /postList" ));
-  var url = 'https://jsonplaceholder.typicode.com/comments';
-
-  fetch(url)
-      .then(response => {
-        response.json().then(json => {
-          res.json(json);
-        });
-      })
-      .catch(error => {
-        console.log(error);
-        res.send("Error");
-      });
-      
-});
-
-app.get('/postList', function (req, res) {
-    console.log(clc.blue("GET to  /postList" ));
-    var url = 'https://jsonplaceholder.typicode.com/posts';
  
-    fetch(url)
-        .then(response => {
-          response.json().then(json => {
-            res.json(json);
-          });
-        })
-        .catch(error => {
-          console.log(error);
-          res.send("Error");
-        });
-        
-  });
 
- app.listen(port,function(){
-    console.log(clc.yellow("Started on PORT " + port));
-  })
 
+
+  

@@ -7,6 +7,7 @@ import { Subject } from 'rxjs/Subject';
 //permite observar
 import { Observable } from 'rxjs/Observable';
 import { element } from 'protractor';
+import { Router } from '@angular/router'
 
 //var colors = require('colors/safe');
 @Injectable()
@@ -16,7 +17,7 @@ export class CommonService {
   
   public mainComponentTitle_subject:Subject<string> = new Subject<string>();
 
-  constructor(private http: Http) {  }
+  constructor(private http: Http,private router: Router) {  }
 
    //permite subscripcion añl Subject con el titulo
    get_mainComponentTitle$(): Observable<string>
@@ -194,7 +195,7 @@ export class CommonService {
     return req;
   }
 
-
+  createHttpHeader
 
   public handleErrorService(serviceError: ServiceError) {
     if (serviceError) {
@@ -229,6 +230,17 @@ export class CommonService {
     return Promise.reject(error.message || error);
   }
 
+  public handleHttpError(error){
+    console.log(JSON.stringify(error));
+    if(error.status=='401'){
+      //Error de permisos
+      this.router.navigate(['login']);
+    }else{
+      console.log('Oto error status : ' + error.status);
+    }
+
+    return Observable.throw(error._body) 
+  }
   //cuando se le pasa un byte[] retorna su base64 string
   public convert_byteArrayTobase64(arrayBuffer:ArrayBuffer):string
   {

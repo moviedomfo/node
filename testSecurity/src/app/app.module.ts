@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { CommentListComponent } from './comments/comment-list/comment-list.component';
 import { CommentCreateComponent } from './comments/comment-create/comment-create.component';
@@ -13,8 +14,8 @@ import { CallbackComponent } from './callback.component';
 
 import {AuthService} from './auth/auth.service';
 import { PostsAndCommentsService } from "./service/posts-and-comments.service";
-
-
+import {HttpHelpersService} from "./service/http-helpers.service";
+import {LoginService} from "./login/login.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,11 +28,12 @@ import { PostsAndCommentsService } from "./service/posts-and-comments.service";
     
   ],
   imports: [
-    BrowserModule,AppRoutingModule,HttpClientModule,HttpModule
+    BrowserModule,AppRoutingModule,HttpClientModule,HttpModule,FormsModule
   ],
   providers: [
     AuthService,
-    PostsAndCommentsService],
+    PostsAndCommentsService,LoginService,
+    HttpHelpersService],
   bootstrap:
    [AppComponent]
 })

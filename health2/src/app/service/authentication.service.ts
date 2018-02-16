@@ -4,6 +4,7 @@ import { Param, IParam, IContextInformation, IRequest, IResponse, Result } from 
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs';
+import { Router } from "@angular/router/src";
 //import 'rxjs/add/operator/map'
 
 
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 export class AuthenticationService {
   commonService: any;
   public token: string;
-  constructor(private http: Http) {
+  constructor(private http: Http,private router: Router) {
     // set token if saved in local storage
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
@@ -38,6 +39,10 @@ export class AuthenticationService {
           return false;
         }
       });
+
+
+    
+
   }
 
   logout(): void {

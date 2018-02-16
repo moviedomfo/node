@@ -4,3 +4,4 @@ import { Observable }  from 'rxjs/Observable';
 // importación de funciones Rx una a una
 import 'rxjs/add/observable/throw'
 import { Router } from '@angular/router'
+

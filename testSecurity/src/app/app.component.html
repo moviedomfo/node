@@ -22,14 +22,22 @@
         <a routerLink="/commentCreate"  *ngIf="authService.authenticated" routerLinkActive="active">Create new comment</a>
       </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
+     <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a *ngIf="!authService.authenticated" routerLink="/login" >Log In</a>
+      </li>
+      <li>
+        <a  *ngIf="authService.authenticated">Log Out</a>
+      </li>
+    </ul>
+    <!-- <ul class="nav navbar-nav navbar-right">
       <li>
         <a (click)="authService.login()" *ngIf="!authService.authenticated" >Log In</a>
       </li>
       <li>
         <a (click)="authService.logout()" *ngIf="authService.authenticated">Log Out</a>
       </li>
-    </ul>
+    </ul> -->
   </nav>
   <div class="col-sm-12">
     <router-outlet></router-outlet>

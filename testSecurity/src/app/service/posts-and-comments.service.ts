@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class PostsAndCommentsService {
 // Define the routes we are going to interact with
-private publicDealsUrl = 'http://localhost:8080/postList';
+private baseUrl = 'http://localhost:8080';
 private privateDealsUrl = 'http://localhost:8080/commentList';
 
   constructor(private http: Http) { }
@@ -60,7 +60,7 @@ private privateDealsUrl = 'http://localhost:8080/commentList';
 
   retriveAllCommentsService():Observable<Comment[]>{
 
-    return this.http.get(`${'http://localhost:8080/commentList'}`, HealtConstants.httpOptions)
+    return this.http.get(`${this.baseUrl}/commentList`, HealtConstants.httpOptions)
     .map(function (res: Response) {
 
       let reuslt :Comment[] = res.json();

@@ -43,7 +43,7 @@ export class AuthService {
     this.auth0.authorize();
   }
 
-
+//handleAuthentication from https://manage.auth0.com/#/clients/AlHia91wIeqUreq3P8krl7t2zsc1R9FO/quickstart
   handleAuth() {
     // When Auth0 hash parsed, get profile
     this.auth0.parseHash(window.location.hash, (err, authResult) => {
@@ -67,7 +67,7 @@ export class AuthService {
   /// Save session data and update login status subject
   private _setSession(authResult, profile) {
     const expTime = authResult.expiresIn * 1000 + Date.now();
-    
+    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('profile', JSON.stringify(profile));
@@ -92,5 +92,13 @@ export class AuthService {
   get authenticated(): boolean {
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return Date.now() < expiresAt;
+  }
+  
+  //Este metodo viene de la pagina de https://manage.auth0.com/#/clients/AlHia91wIeqUreq3P8krl7t2zsc1R9FO/quickstart
+  public isAuthenticated(): boolean {
+    // Check whether the current time is past the
+    // Access Token's expiry time
+    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    return new Date().getTime() < expiresAt;
   }
 }
