@@ -52,6 +52,19 @@ export class LoginComponent implements OnInit {
 
        
     }
+    registry(){
+        console.log('Enviando credenciales para registrar: ' + JSON.stringify(this.user));
+        this.mensaje="validando...";
+        this.loginService
+            .registry(this.user)
+            .subscribe(
+                result=>{
+                    console.log(result);
+                }, 
+                e=>{
+                    this.mostrarError(e);
+                })
+    }
 
     mostrarError(e){
         this.mensaje="ERROR";

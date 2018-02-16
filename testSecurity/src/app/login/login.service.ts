@@ -11,31 +11,33 @@ import 'rxjs/add/operator/catch'
  * Importación del servicicio de utilidad
  */
 import { HttpHelpersService } from '../service/http-helpers.service'
-
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class LoginService {
 
   urlBase: string = 'http://localhost:8080/api';
-  
+
   constructor(   private http: Http, private httpHelpersService: HttpHelpersService) { }
 
-  registry(credenciales) {
+  registry(user) {
     let ruta = `${this.urlBase}/pub/users`;
-    return this.comunicar(credenciales, ruta);
+    return this.comunicar(user, ruta);
   }
 
-  logIn(credenciales) {
+  logIn(user) {
+  
     let ruta = `${this.urlBase}/pub/sessions`;
-    return this.comunicar(credenciales, ruta);
+    return this.comunicar(user, ruta);
   }
 
 
-  comunicar(credenciales, ruta) {
+  comunicar(user, ruta) {
     // la llamada de seguridad debería devolvernos credenciales
     // parte de nuestra labor será guardarla para futuros usos
-    let body = JSON.stringify(credenciales);
-    console.log(body);
+    let body = JSON.stringify(user);
+
+    console.log('post to ' + ruta);
     let options = this.httpHelpersService.setHeader();
     
     return this.http

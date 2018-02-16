@@ -4,13 +4,15 @@
  */
 // Usa la librería de seguridad
 const seguridad = require('./../security/security.js')
-//ruta = '/api/pub/sesiones'
+const clc = require('cli-color');
+//ruta = '/api/pub/sessions'  y como es un post en el body vendria el user sesion
 module.exports = (app, ruta) => {
     // Gestión de sesiones:  login
+    console.log(clc.bgRed("Permite que un usuario haga login  "));
     app.route(ruta)
         .post((req, res) => {
             // inserción de un registro de sesión
-            let sesion = req.body
+            let sesion = req.body; 
             seguridad.esUsuarioValido(sesion)
                 .then(result => {
                     if (result.length > 0) {
