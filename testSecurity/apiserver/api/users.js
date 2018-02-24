@@ -5,13 +5,13 @@
 // Usa la librería de seguridad
 const seguridad = require('./../security/security.js')
 const clc = require('cli-color');
-//ruta = '/api/pub/sesiones'
+//ruta = '/api/pub/users'
 module.exports = (app, ruta) => {
 
-    app.route(ruta)
+ app.route(ruta)
     .post((req, res) => {
         // inserción de un registro de usuario
-        let usuario = req.body
+        let usuario = req.body;
         seguridad.existeUsuario(usuario)
             .then(result => {
                 if (result.length > 0) {
@@ -22,13 +22,22 @@ module.exports = (app, ruta) => {
                     console.log(`ok registrando: ${usuario.email}`)
                     seguridad.crearUsuario(usuario)
                         .then(() => {
-                            let nuevoSessionId = seguridad.nuevaSesion(usuario)
-                            res.status(201).json(nuevoSessionId)
-                        })
+                            let nuevoSessionId = seguridad.nuevaSesion(usuario);
+                            res.status(201).json(nuevoSessionId);
+                        });
                 }
-            })
-    })
+            });
+    });
 
+app.route(`${ruta}/metodosGet1`)
+    .get((req, res) => {
+       res.send('llamaste al metodo ' + `${ruta}/metodosGet1` );
+    });
+app.route(`${ruta}/metodosGet2`)
+    .get(function (req, res) {
+       res.send('llamaste al metodo ' + `${ruta}/metodosGet2` );
+    });
+    
 
     app.route(`${ruta}/list`)
         .get(function (req, res) {

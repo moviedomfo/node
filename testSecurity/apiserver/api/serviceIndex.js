@@ -7,12 +7,15 @@
 const jsonPlaceHolder = require('./jsonPlaceHolderService.js');
 const sessions = require('./sessions.js');
 const users = require('./users.js');
+const common = require('./common.js');
 /** Función que configura las rutas de una aplicación */
 module.exports = app => {
    // users(app, '/api/public/users');
-
+    common(app, '/');
     //patients(app, '/api/public/patients');
     users(app, '/api/pub/users');
     sessions(app, '/api/pub/sessions');
     jsonPlaceHolder(app, '/api/placeHolders');
+
+
 }

@@ -9,23 +9,28 @@ const clc = require('cli-color');
 module.exports = (app, ruta) => {
     // Gestión de sesiones:  login
     console.log(clc.bgRed("Permite que un usuario haga login  "));
+    
     app.route(ruta)
         .post((req, res) => {
             // inserción de un registro de sesión
+          
             let sesion = req.body; 
-            seguridad.esUsuarioValido(sesion)
-                .then(result => {
-                    if (result.length > 0) {
-                        console.log(`aceptado: ${sesion.email}`)
-                        let nuevoSessionId = seguridad.nuevaSesion(sesion)
-                        res.status(201).json(nuevoSessionId)
-                    } else {
-                        console.log(`Credencial inválida: ${sesion.email}`)
-                        res.status(401).send('Credencial inválida')
-                        res.send()
-                    }
-                })
+            console.log(clc.red(JSON.stringify( sesion )));
+            // seguridad.esUsuarioValido(sesion)
+            //     .then(result => {
+            //         if (result.length > 0) {
+            //             console.log(`aceptado: ${sesion.email}`);
+            //             let nuevoSessionId = seguridad.nuevaSesion(sesion);
+            //             res.status(201).json(nuevoSessionId);
+            //         } else {
+            //             console.log(`Credencial inválida: ${sesion.email}`);
+            //             res.status(401).send('Credencial inválida');
+            //             res.send();
+            //         }
+            //     })
+            //res.json( req.body.session);
+            res.json( "TOdo okissss");
 
-        })
+        });
 
 }

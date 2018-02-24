@@ -21,6 +21,8 @@ module.exports = (app, ruta) => {
   });
 
 
+
+
   app.use('/api', jwt({
     secret: 'cat',
     credentialsRequired: false,
@@ -43,7 +45,7 @@ app.route(`${ruta}`).get( function (req, res) {
 
 app.route(`${ruta}/commentList2`)
   .get(function (req, res) {
-        console.log(clc.bgRed("GET to  /commentList2" ));
+        console.log(clc.red("GET to  /commentList2" ));
         var url = 'https://jsonplaceholder.typicode.com/comments';
       
         fetch(url)

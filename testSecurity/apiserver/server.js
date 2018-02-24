@@ -14,6 +14,7 @@ middleware.useMiddleware(app);
 
 var port = process.env.PORT || 8080;
 const bodyParser = require('body-parser')
+
 // Configuración de rutas
 require('./api/serviceIndex')(app);
 
@@ -25,23 +26,6 @@ app.listen(port,function(){
 
 
 
-
-// app.get('/authorized', function (req, res) {
-//   res.send('Secured Resource');
-// });
-
-app.get('/', function(req, res) {
-    var item = {
-        saludo:"El server funciona OK",
-        name:"server http://localhost:8080/",
-        ip:"10.255.102.1"
-    }
-    
-    console.log(item);
-    res.send(item);
- });
-
- 
 
 
 
