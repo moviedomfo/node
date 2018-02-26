@@ -6,8 +6,8 @@ import { Comment } from "../../model/post";
 
 @Component({
   selector: 'app-comment-list',
-  templateUrl: './comment-list.component.html',
-  styleUrls: ['./comment-list.component.css']
+  templateUrl: './comment-list.component.html'
+
 })
 export class CommentListComponent implements OnInit {
  //aqui podria haber usado un Observable : ej :  commentsSub$ : Observable<comment[]>;

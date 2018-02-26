@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class PostsAndCommentsService {
 // Define the routes we are going to interact with
-private baseUrl = 'http://localhost:8080';
+private baseUrl = 'http://localhost:8080/api/placeHolders/';
 private privateDealsUrl = 'http://localhost:8080/commentList';
 
   constructor(private http: Http) { }
@@ -25,6 +25,7 @@ private privateDealsUrl = 'http://localhost:8080/commentList';
     //     catchError(this.handleError)
     //   );
    
+
       return this.http.get(`${'http://localhost:8080/postList'}`, HealtConstants.httpOptions)
       .map(function (res: Response) {
        // console.log(res.json());
@@ -36,25 +37,29 @@ private privateDealsUrl = 'http://localhost:8080/commentList';
       });
   
   }
+ createPostService(comment:Comment):Observable<Comment[]>{
 
-  // retriveAllPostService_2():Observable<Post[]>{
-  //   return this.http2.get(this.publicDealsUrl)
-  //   .map(function (res: Response) {
+  let url = 'http://localhost:8080/api/placeHolders/addComment';
+ 
 
-  //     let resToObject: Post[];
-  //     resToObject = JSON.parse(res.json());
-
+    let params1 = {
+        "comment" : JSON.stringify(comment)
+    };
+    let params = {
+      "comment" : comment
+  };
+      return this.http.post(`${url}`,params, HealtConstants.httpOptions)
+      .map(function (res: Response) {
+         
+        let comments :Comment[] = res.json() as Comment[];
     
-      
-
-  //     return resToObject;
-  //   }).catch(this.handleError);
-  //   // .pipe(
-  //   //   catchError(this.handleError)
-  //   // );
-
-  // }
-
+        
+        console.log(comments);
+        return comments;
+      });
+  
+  }
+  
 
 
 

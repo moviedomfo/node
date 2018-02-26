@@ -1,3 +1,80 @@
-<p>
-  comment-create works!
-</p>
+<h2>
+  View Public comments</h2>
+<div class="row">
+  <div class="col-sm-12">
+    <!-- <button (click)='addComment()' class="btn btn-lg btn-success">Crear comment </button> -->
+  </div>
+</div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Datos del comentariomasks</h3>
+        </div>
+        <div class="box-body">
+
+          <div class="form-group">
+            <label>Post Id</label>
+            <div class="input-group">
+              <input type="number" name="postId" class="form-control" [(ngModel)]="comment.postId" />
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Name</label>
+            <div class="input-group">
+              <input type="text" name="name" class="form-control" [(ngModel)]="comment.name" />
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Body</label>
+            <div class="input-group">
+              <input type="text" name="body" class="form-control" [(ngModel)]="comment.body" />
+
+            </div>
+          </div>
+          <div class="form-group">
+            <label>email</label>
+            <div class="input-group">
+              <input type="text" name="email" class="form-control" [(ngModel)]="comment.email" />
+
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+    <button  (click)='addComment()' class="btn btn-lg btn-success">Submit </button>
+ <div class="row">
+<div class="col-sm-4" *ngFor="let comment of comments">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ comment.postId }} {{ comment.name }}</h3>
+    </div>
+    <div class="panel-body">
+      {{ comment.body }}
+    
+      <div>
+        <!-- {{comment | json}} -->
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+<div class="col-sm-12 alert alert-danger" *ngIf="error">
+  <strong>Oops!</strong> An error occurred fetching data. Please try again.
+</div>
