@@ -42,16 +42,44 @@ function checkSecurity(app, ruta) {
     app.use(ruta, (req, res, next) => {
         // la validación de la sesión es en memoria
         // jwt descifra y valida un token
-        let token = req.get('sessionId');
-        let sesion = verify(token,app);
-        if (sesion) {
-            req.usuario = sesion.email;
-            next();
+        var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+        // decode token
+        if (token) {
+
+            // verifies secret and checks exp
+            jwt.verify(token, app.get('superSecret'), function(err, decoded) {			
+                if (err) {
+                    res.status(401).send({ success: false, message: 'Failed to authenticate token.' });
+                    //res.json({ success: false, message: 'Failed to authenticate token.' });		
+                } else {
+                    // if everything is good, save to request for use in other routes
+                    req.decoded = decoded;	
+                    next();
+                }
+            });
+
         } else {
-            res.status(401).send('Credencial inválida')
+
+            // if there is no token
+            // return an error
+            return res.status(403).send({ 
+                success: false, 
+                message: 'No token provided.'
+            });
+            
         }
+
+        // let sesion = verify(token,app);
+        // if (sesion) {
+        //     req.usuario = sesion.email;
+        //     next();
+        // } else {
+        //     res.status(401).send('Invalid credential')
+        // }
     })
 }
+
+
 
 function verify(token,app) {
     try {
