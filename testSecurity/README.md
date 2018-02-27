@@ -33,7 +33,7 @@ http://expressjs.com/es/guide/using-middleware.html
 
 ## URL to test:
 
-user.js
+user.jsng 
 		http://localhost:8080/api/pub/users/metodosGet2
 		http://localhost:8080/api/pub/users/metodosGet1 
 data:

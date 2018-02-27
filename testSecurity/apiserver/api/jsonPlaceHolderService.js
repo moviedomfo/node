@@ -46,12 +46,10 @@ app.route(`${ruta}`).get( function (req, res) {
 
 app.route(`${ruta}/addComment`)
   .post(function (req, res) {
-        console.log(clc.red("POST to  /addComment" ));
-        console.log(clc.yellow(JSON.stringify( req.body)));
+        
         var comment = req.body.comment; //req.params.comment;
         if(comment)
         {
-          //comments.push(JSON.parse( comment));
           comments.push(comment);
         }
         res.send(comments);
@@ -61,12 +59,11 @@ app.route(`${ruta}/addComment`)
 
      app.route(`${ruta}/commentList2`)
       .get(function (req, res) {
-            console.log(clc.red("GET to  /commentList2" ));
+            
             var url = 'https://jsonplaceholder.typicode.com/comments';
           
             var postIdFilter = req.query.postId;
-                        
-            console.log(clc.yellowBright(postIdFilter));
+           
             if(postIdFilter)
             {
               url = url + "?postId=" +  postIdFilter;

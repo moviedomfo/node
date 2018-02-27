@@ -13,10 +13,12 @@ module.exports.useMiddleware = app => {
     const bodyParser = require('body-parser')
     const seguridad = require('./security/security.js')
     
+    var config = require('./config.js'); 
     // Permite llamadas desde otros dominios o puertos
     app.use(cors());
-
-
+    
+    app.set('superSecret', config.SECRET); // secret variable
+    
     // Permite recuperar como objetos JavaScript el contenido emitido por el cliente
     // tanto en parámetros
     app.use(bodyParser.urlencoded({
@@ -35,5 +37,5 @@ module.exports.useMiddleware = app => {
     });
 
     // este middleware se encargará de vigilar la entrada    
-    seguridad.usarSeguridad(app, '/api/priv/');
+    seguridad.checkSecurity(app, '/api/priv/');
 }
