@@ -17,7 +17,7 @@ export class HttpHelpersService {
   setHeader() {
     let headers = new Headers({
       'Content-Type': 'application/json',
-      'sessionId': HttpHelpersService._token
+      'token': HttpHelpersService._token
     });
     // llamar a este método en cada llamda, equivale a los interceptores de Angular1
     let options = new RequestOptions({ headers: headers });

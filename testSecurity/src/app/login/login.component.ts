@@ -23,14 +23,15 @@ export class LoginComponent implements OnInit {
         private loginService:LoginService) { }
 
     ngOnInit() {
-        // reset login status
-        //this.authenticationService.logout();
+     
 
         this.user=new  User();
+        this.user.userName="moviedo";
+        this.user.password="1234";
     }
 
     login() {
-        console.log('Enviando credenciales para entrada: ' + JSON.stringify(this.user));
+        
         this.mensaje="validando...";
         this.loginService.logIn(this.user)
             .subscribe(
@@ -40,12 +41,12 @@ export class LoginComponent implements OnInit {
                 e=>{
                     this.mostrarError(e);
                 });
-        // this.authenticationService.login(this.currentUser.UserName, this.currentUser.Password)
+        // this.authenticationService.login(this.currentUser.userName, this.currentUser.Password)
         //     .subscribe(result => {
         //         if (result === true) {
         //             this.router.navigate(['/']);
         //         } else {
-        //             this.error = 'Username or password is incorrect';
+        //             this.error = 'userName or password is incorrect';
         //             this.loading = false;
         //         }
         //     });

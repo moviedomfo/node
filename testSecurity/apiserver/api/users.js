@@ -39,13 +39,14 @@ app.route(`${ruta}/authenticate`)
     
 
      let userToAuthenticate = req.body.user;
+     console.log(clc.yellow('req.body.user ' + JSON.stringify(req.body.user)));
     console.log(clc.yellow('authenticate ' + userToAuthenticate.userName));
-
+    console.log(clc.yellow('authenticate ' + JSON.stringify(userToAuthenticate)));
     seguridad.existeUsuario_byname(userToAuthenticate.userName)
     .then(resultUser => {
         //console.log("usuario encontrado " +  JSON.stringify(resultUser));
         if (resultUser) {
-            //console.log(`El usuario existe: ${result.email}`)
+            
             if (resultUser.password != userToAuthenticate.password) {
                 //res.json({ success: false, message: 'Authentication failed. Wrong password.' });
                 res.send({ success: false, message: 'Authentication failed. Wrong password.' });

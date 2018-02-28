@@ -11,44 +11,33 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class PostsAndCommentsService {
 // Define the routes we are going to interact with
-private baseUrl = 'http://localhost:8080/api/placeHolders/';
-private privateDealsUrl = 'http://localhost:8080/commentList';
+private baseUrl = 'http://localhost:8080/api/placeHolders';
+private privateDealsUrl = this.baseUrl + 'priv';
 
   constructor(private http: Http) { }
 
 
   retriveAllPostService():Observable<Post[]>{
 
-    // return this.http
-    //   .get(this.publicDealsUrl,HealtConstants.httpOptions)
-    //   .pipe(
-    //     catchError(this.handleError)
-    //   );
    
 
-      return this.http.get(`${'http://localhost:8080/postList'}`, HealtConstants.httpOptions)
+      return this.http.get(`${this.baseUrl}/postList'}`, HealtConstants.httpOptions)
       .map(function (res: Response) {
-       // console.log(res.json());
-     //alert(JSON.parse(res.json()));
-        //let posts :Post[] = JSON.parse(res.json());
+
         let posts :Post[] = res.json();
-        console.log(JSON.stringify(posts));
+     
         return posts;
       });
   
   }
  createPostService(comment:Comment):Observable<Comment[]>{
 
-  let url = 'http://localhost:8080/api/placeHolders/addComment';
+ //'http://localhost:8080/api/placeHolders/addComment';
  
-
-    let params1 = {
-        "comment" : JSON.stringify(comment)
-    };
     let params = {
       "comment" : comment
   };
-      return this.http.post(`${url}`,params, HealtConstants.httpOptions)
+      return this.http.post(`${this.baseUrl}/addComment`,params, HealtConstants.httpOptions)
       .map(function (res: Response) {
          
         let comments :Comment[] = res.json() as Comment[];
