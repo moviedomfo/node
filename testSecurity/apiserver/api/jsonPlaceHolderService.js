@@ -5,37 +5,37 @@ const clc = require('cli-color');
 var comments= [];
 module.exports = (app, ruta) => {
 
-  var jwks = require('jwks-rsa');
+  //var jwks = require('jwks-rsa');
 
 
-  var jwt = require('express-jwt');
-  var jwtCheck = jwt({
-      secret: jwks.expressJwtSecret({
-          cache: true,
-          rateLimit: true,
-          jwksRequestsPerMinute: 5,
-          jwksUri: "https://pelsoftmfo.auth0.com/.well-known/jwks.json"
-      }),
-      audience: 'https://celamltda.com.ar',
-      issuer: "https://pelsoftmfo.auth0.com/",
-      algorithms: ['RS256']
-  });
+  // var jwt = require('express-jwt');
+  // var jwtCheck = jwt({
+  //     secret: jwks.expressJwtSecret({
+  //         cache: true,
+  //         rateLimit: true,
+  //         jwksRequestsPerMinute: 5,
+  //         jwksUri: "https://pelsoftmfo.auth0.com/.well-known/jwks.json"
+  //     }),
+  //     audience: 'https://celamltda.com.ar',
+  //     issuer: "https://pelsoftmfo.auth0.com/",
+  //     algorithms: ['RS256']
+  // });
 
 
 
 
-  app.use('/api', jwt({
-    secret: 'cat',
-    credentialsRequired: false,
-    getToken: function fromHeaderOrQuerystring (req) {
-      if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-          return req.headers.authorization.split(' ')[1];
-      } else if (req.query && req.query.token) {
-        return req.query.token;
-      }
-      return null;
-    }
-  }));
+  // app.use('/api', jwt({
+  //   secret: 'cat',
+  //   credentialsRequired: false,
+  //   getToken: function fromHeaderOrQuerystring (req) {
+  //     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+  //         return req.headers.authorization.split(' ')[1];
+  //     } else if (req.query && req.query.token) {
+  //       return req.query.token;
+  //     }
+  //     return null;
+  //   }
+  // }));
 
 //app.use(jwtCheck);
 
@@ -57,11 +57,10 @@ app.route(`${ruta}/addComment`)
       });
   
 
-     app.route(`${ruta}/commentList2`)
-      .get(function (req, res) {
+     app.route(`${ruta}/priv/commentList2`).get(function (req, res) {
             
             var url = 'https://jsonplaceholder.typicode.com/comments';
-          
+            console.log(clc.blue(req.decoded));
             var postIdFilter = req.query.postId;
            
             if(postIdFilter)
@@ -83,8 +82,8 @@ app.route(`${ruta}/addComment`)
 
 
 
-    app.get(`${ruta}/commentList`, jwtCheck,function (req, res) {
-        console.log(clc.bgRed("GET to  /commentList" ));
+    app.get(`${ruta}/commentList`,function (req, res) {
+        
         var url = 'https://jsonplaceholder.typicode.com/comments';
       
         fetch(url)

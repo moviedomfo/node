@@ -10,7 +10,7 @@ const clc = require('cli-color');
  */
 module.exports = {
     /** determina si una ruta debe usar seguirdad o no */
-    usarSeguridad: usarSeguridad,
+    checkSecurity: checkSecurity,
     /** comprueba si exite un usuario */
     existeUsuario: existeUsuario,
     existeUsuario_byname,
@@ -28,44 +28,60 @@ module.exports = {
 function newSession(app, user) {
     console.log("Creando session token " + JSON.stringify(user.userName));
     var options = {
-        expiresIn: 60
+        expiresIn:  1440 // expires in 24 hours
     };
     let secret = app.get('superSecret');
 
     var token = jwt.sign(user, secret, options);
-    console.log("token is " + token);
+    
     return token;
     //return jwt.generaToken(app,user);
 }
 
+
+//Esto lo usa el middleware para intersectar llamadas a la api
+///api/priv
 function checkSecurity(app, ruta) {
     app.use(ruta, (req, res, next) => {
         // la validación de la sesión es en memoria
         // jwt descifra y valida un token
-        var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+        //var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+        console.log(clc.yellow('---------------checkSecurity-----------------------------'));
+        console.log(clc.yellow('token = ' + token));
+        console.log(clc.yellow('superSecret = ' +  app.get('superSecret')));
+        console.log(clc.yellow('-----------------------------------------------------'));
+        let secret = app.get('superSecret');
         // decode token
         if (token) {
+            try {
+                req.decoded  = jwt.verify(token, secret);
+                next();
+            }
+            catch(err){
+                console.log(clc.red(err));
+               return res.status(401).send({ success: false, message: 'Failed to authenticate token. \n'  + err});
+            }
 
             // verifies secret and checks exp
-            jwt.verify(token, app.get('superSecret'), function(err, decoded) {			
-                if (err) {
-                    res.status(401).send({ success: false, message: 'Failed to authenticate token.' });
-                    //res.json({ success: false, message: 'Failed to authenticate token.' });		
-                } else {
-                    // if everything is good, save to request for use in other routes
-                    req.decoded = decoded;	
-                    next();
-                }
-            });
+            // // jwt.verify(token, secret , function(err, decoded) {			
+            // //     if (err) {
+                    
+            // //         console.log(clc.red(err));
+            // //         return res.status(401).send({ success: false, message: 'Failed to authenticate token. \n'  + err});
+            // //         //res.json({ success: false, message: 'Failed to authenticate token.' });		
+            // //     } else {
+            // //         // if everything is good, save to request for use in other routes
+            // //         req.decoded = decoded;	
+            // //         next();
+            // //     }
+            // // });
 
         } else {
 
-            // if there is no token
-            // return an error
-            return res.status(403).send({ 
-                success: false, 
-                message: 'No token provided.'
-            });
+            // if there is no token/ return an error
+            return res.status(403).send({ success: false, message: 'No token provided.' });
             
         }
 
@@ -81,15 +97,7 @@ function checkSecurity(app, ruta) {
 
 
 
-function verify(token,app) {
-    try {
-        let secret = app.get('superSecret');
-        return jwt.verify(token, secret)
-    }
-    catch(err){
-        return false
-    }
-}
+
 
 /**
  * los registros de usuario se crean físicamente en base de datos

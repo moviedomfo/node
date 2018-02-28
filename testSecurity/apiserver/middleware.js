@@ -38,4 +38,5 @@ module.exports.useMiddleware = app => {
 
     // este middleware se encargará de vigilar la entrada    
     seguridad.checkSecurity(app, '/api/priv/');
+    seguridad.checkSecurity(app, '/api/placeHolders/priv/');
 }
