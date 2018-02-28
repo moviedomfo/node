@@ -32,8 +32,10 @@ Utilización del middleware
 http://expressjs.com/es/guide/using-middleware.html
 
 ## URL to test:
+placeholders
+http://localhost:8080/api/placeHolders/commentList2?postId=3
 
-user.jsng 
+user.js  
 		http://localhost:8080/api/pub/users/metodosGet2
 		http://localhost:8080/api/pub/users/metodosGet1 
 data:
@@ -44,16 +46,27 @@ common.js
 	http://localhost:8080
 	
 	
-	sessions:
-	
-	http://localhost:8080/api/pub/sessions
-	
-		body.session 
-			{
-            userName: 'marcelo0',
-           password: '1234',
-            email: 'marcelo@gmail.com'
-			}
+## user api
+
+POST 
+    http://localhost:8080/api/pub/users/authenticate
+
+    Enviar en el BODY  un raw JSON (application /json)
+
+    {
+    "user" :{
+        "userName": "moviedo",
+        "password": "1234",
+        "email": "moviedo@pelsoft.ar" 
+        }
+    }
+
+GET Obtener un usuario :
+    http://localhost:8080/api/pub/users/mrenaudo
+
+    El parametro es http://localhost:8080/api/pub/users/{{ID}}
+
+
 
 
 
