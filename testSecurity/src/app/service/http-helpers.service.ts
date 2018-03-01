@@ -65,6 +65,7 @@ export class HttpHelpersService {
     localStorage.removeItem('profile');
     localStorage.removeItem('expires_at');
     this.userProfile = undefined;
+    
     this.setLoggedIn(false);
   }
 
@@ -103,7 +104,7 @@ export class HttpHelpersService {
     if(!error) return;
     if (error.status == 401) {
       console.log("Error de permisos");
-      HttpHelpersService._router.navigate(['login']);
+      this.router.navigate(['login']);
     }
     else {
       console.log("Otro Error");

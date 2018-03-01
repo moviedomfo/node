@@ -10,6 +10,7 @@ let headers = new Headers({ 'Content-Type': 'application/json' });
      export  const HealtConstants={
        
         
-          httpOptions:options
+          httpOptions:options,
+           baseUrl_placeHolders : 'http://localhost:8080/api/placeHolders'
 
      }

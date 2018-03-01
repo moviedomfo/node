@@ -3,6 +3,7 @@ import {PostsAndCommentsService} from './../../service/posts-and-comments.servic
 import { AuthService } from './../../auth/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Post } from "../../model/post";
+import { HttpHelpersService } from "../../service/http-helpers.service";
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -15,7 +16,7 @@ export class PostListComponent implements OnInit,OnDestroy {
  private posts :Post[];
   
  error: any;
-  constructor(private postService :PostsAndCommentsService,authService:AuthService) { }
+  constructor(private postService :PostsAndCommentsService,authService:HttpHelpersService) { }
 
   ngOnInit() {
     

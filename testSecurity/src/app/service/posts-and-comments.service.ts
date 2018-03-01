@@ -12,8 +12,8 @@ import { HttpHelpersService } from "./http-helpers.service";
 @Injectable()
 export class PostsAndCommentsService {
   // Define the routes we are going to interact with
-  private baseUrl = 'http://localhost:8080/api/placeHolders';
-  private privateDealsUrl = this.baseUrl + 'priv';
+  private baseUrl = HealtConstants.baseUrl_placeHolders;// 'http://localhost:8080/api/placeHolders';
+  private privateUrl = this.baseUrl + '/priv';
 
   constructor(private http: Http, private httpHelpersService: HttpHelpersService) { }
 
@@ -31,7 +31,8 @@ export class PostsAndCommentsService {
       });
 
   }
-  createPostService(comment: Comment): Observable<Comment[]> {
+
+  createCommentService(comment: Comment): Observable<Comment[]> {
 
     //'http://localhost:8080/api/placeHolders/addComment';
 
@@ -39,7 +40,7 @@ export class PostsAndCommentsService {
       "comment": comment
     };
     var httpOptions = this.httpHelpersService.setHeader();
-    return this.http.post(`${this.baseUrl}/addComment`, params, httpOptions)
+    return this.http.post(`${this.privateUrl}/addComment`, params, httpOptions)
       .map(function (res: Response) {
         let comments: Comment[] = res.json() as Comment[];
         console.log(comments);
@@ -70,13 +71,6 @@ export class PostsAndCommentsService {
   }
 
 
-  // Implement a method to handle errors if any
-  // private handleError(err: HttpErrorResponse | any) {
-  //   console.error('An error occurred', err);
-  //   return Observable.throw(err.message || err);
-  // }
+ 
 
-  purchase(item) {
-    alert(`You bought the: ${item.name}`);
-  }
 }
