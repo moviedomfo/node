@@ -8,7 +8,7 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 @Injectable()
 export class HttpHelpersService {
 
-  private static _router: Router;
+
   private static _token: any;
   private static _authenticated :boolean;
   private static _expiresIn:number;
@@ -18,7 +18,7 @@ export class HttpHelpersService {
   loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
   
   constructor(private router: Router ) {
-    HttpHelpersService._router=this.router;
+   
     HttpHelpersService._token="";
     HttpHelpersService._expiresIn=60;
 
@@ -42,9 +42,8 @@ export class HttpHelpersService {
     // despues de obtener credenciales  
     saveCredentials(session) {
       const expTime = HttpHelpersService._expiresIn  * 1000 + Date.now();
-      const expiresAt = JSON.stringify((HttpHelpersService._expiresIn * 1000) + new Date().getTime());
+      //const expiresAt = JSON.stringify((HttpHelpersService._expiresIn * 1000) + new Date().getTime());
       localStorage.setItem('token', session.token);
-
       localStorage.setItem('profile', JSON.stringify(session.user));
       localStorage.setItem('expires_at', JSON.stringify(expTime));
       this.userProfile = session.user;
@@ -55,8 +54,8 @@ export class HttpHelpersService {
       
       // ir a la página principal
       
-      HttpHelpersService._router.navigate(['']);
-      console.log('navigate');
+      this.router.navigate(['']);
+    
     }
   // Remove tokens and profile and update login status subject
   logout() {
