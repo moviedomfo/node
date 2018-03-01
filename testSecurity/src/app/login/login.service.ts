@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 /**
  * La libreria RxJS viene desglosada en operaciones
  * Hay que importarlas de forma individual
@@ -21,29 +21,23 @@ export class LoginService {
   urlBase: string = 'http://localhost:8080/api/pub/users';
 
 
-  constructor(   private http: Http, private httpHelpersService: HttpHelpersService) { }
+  constructor(private http: Http, private httpService: HttpHelpersService) { }
 
   registry(user) {
     let ruta = `${this.urlBase}/newSession`;
     return this.comunicar(user, ruta);
   }
 
-  logIn(user:User) {
-  
-    
-    var params = {"user" :  user}
-    console.log('Enviando credenciales para entrada: ' + JSON.stringify(user));
-    
-      return this.http.post(`${this.urlBase}/authenticate`,params, HealtConstants.httpOptions)
-      .map(function (res: Response) {
-         
-        let session  = res.json();
-        //this.httpHelpersService.saveCredentials(session);
-    
-        
-         console.log(JSON.stringify(session));
-        return session;
-      });
+  logIn(user: User) {
+
+
+    var params = { "user": user }
+    // console.log('Enviando credenciales para entrada: ' + JSON.stringify(user));
+    return this.http.post(`${this.urlBase}/authenticate`, params, HealtConstants.httpOptions)
+      .map(this.httpService.getData)
+      .map(this.httpService.saveCredentials)
+      .catch(this.httpService.handleError);
+
 
   }
 
@@ -54,13 +48,13 @@ export class LoginService {
     let body = JSON.stringify(user);
 
     console.log('post to ' + ruta);
-    let options = this.httpHelpersService.setHeader();
-    
+    let options = this.httpService.setHeader();
+
     return this.http
-        .post(ruta, body, options)
-        .map(this.httpHelpersService.getData)
-        .map(this.httpHelpersService.saveCredentials)
-        .catch(this.httpHelpersService.handleError);
+      .post(ruta, body, options)
+      .map(this.httpService.getData)
+      .map(this.httpService.saveCredentials)
+      .catch(this.httpService.handleError);
   }
 
 

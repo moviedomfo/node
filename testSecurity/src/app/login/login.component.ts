@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
 import { LoginService } from "./login.service";
 import { User } from "../model/user";
+import { HttpHelpersService } from "../service/http-helpers.service";
 
 @Component({
     templateUrl: 'login.component.html',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
     user:User;//:any = { email:'', password:''}
     mensaje = "";
     constructor(
-        private router: Router,
+        private router: Router,private httpService : HttpHelpersService,
         private authenticationService: AuthService,
         private loginService:LoginService) { }
 
@@ -36,10 +37,10 @@ export class LoginComponent implements OnInit {
         this.loginService.logIn(this.user)
             .subscribe(
                 result=>{
-                    console.log(result);
+                    //console.log(result);
                 }, 
                 e=>{
-                    this.mostrarError(e);
+                    this.httpService.handleError(e);
                 });
         // this.authenticationService.login(this.currentUser.userName, this.currentUser.Password)
         //     .subscribe(result => {

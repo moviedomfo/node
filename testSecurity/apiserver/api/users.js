@@ -33,15 +33,12 @@ module.exports = (app, ruta) => {
 
 
 //ruta = '/api/pub/users/authenticate'
-app.route(`${ruta}/authenticate`)
-.post((req, res) => {
-
-    
+app.route(`${ruta}/authenticate`).post((req, res) => {
 
      let userToAuthenticate = req.body.user;
-     console.log(clc.yellow('req.body.user ' + JSON.stringify(req.body.user)));
+     //console.log(clc.yellow('req.body.user ' + JSON.stringify(req.body.user)));
     console.log(clc.yellow('authenticate ' + userToAuthenticate.userName));
-    console.log(clc.yellow('authenticate ' + JSON.stringify(userToAuthenticate)));
+    //console.log(clc.yellow('authenticate ' + JSON.stringify(userToAuthenticate)));
     seguridad.existeUsuario_byname(userToAuthenticate.userName)
     .then(resultUser => {
         //console.log("usuario encontrado " +  JSON.stringify(resultUser));
@@ -61,12 +58,8 @@ app.route(`${ruta}/authenticate`)
                     token: token };
 
               res.send(JSON.stringify(result));
-            //   res.json({ 
-            //       user: resultUser, 
-            //     token: token });
         }
         else{
-         //res.send('');
          res.json({ success: false, message: 'Authentication failed. User not found.' });
         }
     });

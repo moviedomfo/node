@@ -85,13 +85,6 @@ function checkSecurity(app, ruta) {
             
         }
 
-        // let sesion = verify(token,app);
-        // if (sesion) {
-        //     req.usuario = sesion.email;
-        //     next();
-        // } else {
-        //     res.status(401).send('Invalid credential')
-        // }
     })
 }
 
@@ -100,28 +93,25 @@ function checkSecurity(app, ruta) {
 
 
 /**
- * los registros de usuario se crean físicamente en base de datos
+ * los registros de usuario se crean físicamente en base de datos pero en este ejemplo 
+ * se hacen en un array local
  */
 
 function existeUsuario(user) {
     //return mongodb.finding(colName, { email: usuario.email })
-
     return new Promise(function (resolve, reject) {
-
         var userInDatabase = users.find(x => x.userName === user.userName);
-
         resolve(userInDatabase);
     });
 }
+
 function existeUsuario_byname(userName) {
-
-
-
     return new Promise(function (resolve, reject) {
         var user = users.find(x => x.userName === userName);
         resolve(user);
     });
 }
+
 function getAll() {
     //return mongodb.finding(colName, { email: usuario.email })
     var dfd = Q.defer();
@@ -130,6 +120,7 @@ function getAll() {
         resolve(users);
     });
 }
+
 function creandoUsuario(usuario) {
     //return mongodb.inserting(colName, usuario)
     return new Promise(function (resolve, reject) {
@@ -147,11 +138,8 @@ function creandoUsuario(usuario) {
 
 function esUsuarioValido(usuario) {
     //return mongodb.finding(colName, { email: usuario.email, password: usuario.password })
-
     return new Promise(function (resolve, reject) {
-
         var user = users.find(x => x.userName === usuario.userName);
-        //console.log(user);
         resolve(user);
     });
 }
