@@ -62,7 +62,7 @@ export class HttpHelpersService {
   logout() {
     
     localStorage.removeItem('token');
-    localStorage.removeItem('id_token');
+    
     localStorage.removeItem('profile');
     localStorage.removeItem('expires_at');
     this.userProfile = undefined;
@@ -79,7 +79,8 @@ export class HttpHelpersService {
   setHeader() {
     let headers = new Headers({
       'Content-Type': 'application/json',
-      'token': HttpHelpersService._token
+      //'token': HttpHelpersService._token
+      'token': localStorage.getItem('token')
     });
 
     headers.append('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
