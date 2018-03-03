@@ -16,6 +16,8 @@ import {AuthService} from './auth/auth.service';
 import { PostsAndCommentsService } from "./service/posts-and-comments.service";
 import {HttpHelpersService} from "./service/http-helpers.service";
 import {LoginService} from "./login/login.service";
+import { LoginDataComponent } from './login/login-data/login-data.component';
+import { PrivateCommentsComponent } from './comments/private-comments/private-comments.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,9 @@ import {LoginService} from "./login/login.service";
     PostCreateComponent,
     PostListComponent,
     LoginComponent,
-    CallbackComponent
+    CallbackComponent,
+    LoginDataComponent,
+    PrivateCommentsComponent
     
   ],
   imports: [

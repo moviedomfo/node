@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {PostsAndCommentsService} from './../../service/posts-and-comments.service'
-import { AuthService } from './../../auth/auth.service';
+
 import { Subscription } from 'rxjs/Subscription';
 import { Post } from "../../model/post";
 import { HttpHelpersService } from "../../service/http-helpers.service";

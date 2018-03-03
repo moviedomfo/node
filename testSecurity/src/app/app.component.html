@@ -13,11 +13,12 @@
     </ul>
     <ul class="nav navbar-nav">
       <li>
-        <a routerLink="/commentList" routerLinkActive="active">Comments</a>
+        <a routerLink="/commentList" routerLinkActive="active">All Comments</a>
       </li>
       <li>
-        <a routerLink="/callback" routerLinkActive="active">callbacks</a>
-      </li>
+          <a routerLink="/privCommentList" routerLinkActive="active">Private comments</a>
+        </li>
+      
       <li>
         <a routerLink="/commentCreate"  *ngIf="authService.authenticated" routerLinkActive="active">Create new comment</a>
       </li>
@@ -28,6 +29,9 @@
       </li>
       <li>
         <a  *ngIf="authService.authenticated">Log Out</a>
+      </li>
+      <li>
+        <a routerLink="/loginData" routerLinkActive="active">Login Data</a>
       </li>
     </ul>
     <!-- <ul class="nav navbar-nav navbar-right">

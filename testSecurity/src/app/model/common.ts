@@ -11,6 +11,8 @@ let headers = new Headers({ 'Content-Type': 'application/json' });
        
         
           httpOptions:options,
-           baseUrl_placeHolders : 'http://localhost:8080/api/placeHolders'
+           baseUrl_placeHolders : 'http://localhost:8080/api/placeHolders',
+         baseUrl_security : 'http://localhost:8080/api/pub/users',
+
 
      }

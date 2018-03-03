@@ -3,8 +3,12 @@
 const fetch = require("node-fetch");
 const clc = require('cli-color');
 var comments= [];
-module.exports = (app, ruta) => {
 
+module.exports = (app, ruta) => {
+  
+  const clc_error = clc.xterm(161);
+  const clc_log_green_Gray = clc.xterm(116);
+  var clc_Orange  = clc.xterm(202);
   //var jwks = require('jwks-rsa');
 
 
@@ -44,7 +48,8 @@ app.route(`${ruta}`).get( function (req, res) {
    res.send('Holaaaaaaaaaaaaaaaaaaaaaaa' )
 });
 
-app.route(`${ruta}/addComment`)
+//http://localhost:8080/api/placeHolders/priv/addComment
+app.route(`${ruta}/priv/addComment`)
   .post(function (req, res) {
         
         var comment = req.body.comment; //req.params.comment;
@@ -55,9 +60,16 @@ app.route(`${ruta}/addComment`)
         res.send(comments);
             
       });
-  
+    //API privada retorna los comentatios agregados de forma privada
+      app.route(`${ruta}/priv/commentList`).get(function (req, res) {
+        
+        console.log(clc.yellow(JSON.stringify( req.decoded)));
 
-     app.route(`${ruta}/priv/commentList2`).get(function (req, res) {
+        res.send(comments);
+ 
+    });
+    //API que recive filtro publica
+     app.route(`${ruta}/commentList2`).get(function (req, res) {
             
             var url = 'https://jsonplaceholder.typicode.com/comments';
             console.log(clc.blue(req.decoded));
@@ -83,7 +95,9 @@ app.route(`${ruta}/addComment`)
 
 
     app.get(`${ruta}/commentList`,function (req, res) {
-        
+      console.log(clc_log_green_Gray('get to commentList'));
+      // console.log(clc_error('get to commentList'));
+      // console.log(clc_Orange('get to commentList'));
         var url = 'https://jsonplaceholder.typicode.com/comments';
       
         fetch(url)
@@ -100,7 +114,7 @@ app.route(`${ruta}/addComment`)
       });
       
       app.get(`${ruta}/postList`, function (req, res) {
-          console.log(clc.blue("GET to  /postList" ));
+          console.log(clc.yellow("GET to  /postList" ));
           var url = 'https://jsonplaceholder.typicode.com/posts';
        
           fetch(url)

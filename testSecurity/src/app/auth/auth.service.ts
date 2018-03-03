@@ -68,7 +68,7 @@ export class AuthService {
   private _setSession(authResult, profile) {
     const expTime = authResult.expiresIn * 1000 + Date.now();
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-    localStorage.setItem('token', authResult.accessToken);
+    localStorage.setItem('x-access-token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('profile', JSON.stringify(profile));
     localStorage.setItem('expires_at', JSON.stringify(expTime));
@@ -79,7 +79,7 @@ export class AuthService {
   // Remove tokens and profile and update login status subject
   logout() {
     
-    localStorage.removeItem('token');
+    localStorage.removeItem('x-access-token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
     localStorage.removeItem('expires_at');

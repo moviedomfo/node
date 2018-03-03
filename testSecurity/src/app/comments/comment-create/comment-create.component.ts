@@ -22,7 +22,7 @@ export class CommentCreateComponent implements OnInit {
 
   addComment (){
 
-    var createPostService$ = this.commentService.createPostService(this.comment);
+    var createPostService$ = this.commentService.createCommentService(this.comment);
     createPostService$.subscribe(res=>{
       
       this.comments = res as Comment[]; 

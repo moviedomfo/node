@@ -20,16 +20,16 @@ export class PostsAndCommentsService {
 
   retriveAllPostService(): Observable<Post[]> {
 
-
-
-    return this.http.get(`${this.baseUrl}/postList'}`, HealtConstants.httpOptions)
+   console.log(`${this.baseUrl}/postList`);
+ 
+    return this.http.get(`${this.baseUrl}/postList`, HealtConstants.httpOptions)
       .map(function (res: Response) {
 
         let posts: Post[] = res.json();
 
         return posts;
       });
-
+ 
   }
 
   createCommentService(comment: Comment): Observable<Comment[]> {
@@ -58,19 +58,29 @@ export class PostsAndCommentsService {
       .map(function (res: Response) {
 
         let reuslt: Comment[] = res.json();
-        console.log(JSON.stringify(res));
+        //console.log(JSON.stringify(res));
+        return reuslt;
+      });
+
+  }
+
+
+  retriveAllPrivateCommentsService(): Observable<Comment[]> {
+    var httpOptions = this.httpHelpersService.setHeader();
+    return this.http.get(`${this.baseUrl}/priv/commentList`, httpOptions)
+      .map(function (res: Response) {
+
+        let reuslt: Comment[] = res.json();
         return reuslt;
       });
 
     // return this.http.get(this.privateDealsUrl, {
-    //   headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+    //   headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('x-access-token')}`)
     // })
     // .pipe(
     //   catchError(this.handleError)
     // );
   }
 
-
- 
 
 }

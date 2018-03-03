@@ -4,11 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { CommentListComponent } from './comments/comment-list/comment-list.component';
+
 import { CommentCreateComponent } from './comments/comment-create/comment-create.component';
 import { CallbackComponent } from './callback.component';
 // Import the AuthGuard
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from "./login/login.component";
+import { LoginDataComponent } from "./login/login-data/login-data.component";
+import { PrivateCommentsComponent } from "./comments/private-comments/private-comments.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'postList', pathMatch: 'full' },
@@ -22,8 +25,9 @@ const routes: Routes = [
 
   { path: 'commentCreate', component: CommentCreateComponent },
   { path: 'commentList', component: CommentListComponent },
+  { path: 'privCommentList', component: PrivateCommentsComponent },
   {
-    path: 'callback', component: CallbackComponent
+    path: 'loginData', component: LoginDataComponent
   }
 ];
 
