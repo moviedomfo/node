@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './auth/auth.service';
+import { HttpHelpersService } from "./service/http-helpers.service";
+
 @Component({
   selector: 'app-callback',
   template: `
@@ -14,7 +15,7 @@ import { AuthService } from './auth/auth.service';
 //the right data back in the hash after a successful authentication
 export class CallbackComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: HttpHelpersService) { }
 
   ngOnInit() {
     //Once a user is authenticated, 
@@ -24,7 +25,7 @@ export class CallbackComponent implements OnInit {
     //If all is well, meaning we recieved an id_token and an access_token, 
     //we will be redirected back to the homepage and will be in a logged in state.
 
-    this.authService.handleAuth();
+    //this.authService.handleAuth();
   }
 
 }

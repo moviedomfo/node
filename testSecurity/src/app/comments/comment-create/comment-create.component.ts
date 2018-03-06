@@ -31,6 +31,6 @@ export class CommentCreateComponent implements OnInit {
       //do anything ehitc any item    
       });
    
-    }, err => error => this.error = err);
+    }, err => this.error = err);
   }
 }

@@ -36,8 +36,8 @@ placeholders
 http://localhost:8080/api/placeHolders/commentList2?postId=3
 
 user.js  
-		http://localhost:8080/api/pub/users/metodosGet2
-		http://localhost:8080/api/pub/users/metodosGet1 
+		http://localhost:8080/api/users/metodosGet2
+		http://localhost:8080/api/users/metodosGet1 
 data:
     http://localhost:8080/api/placeHolders/commentList2
     params : 
@@ -49,7 +49,7 @@ common.js
 ## user api
 
 POST 
-    http://localhost:8080/api/pub/users/authenticate
+    http://localhost:8080/api/users/authenticate
 
     Enviar en el BODY  un raw JSON (application /json)
 
@@ -62,9 +62,9 @@ POST
     }
 
 GET Obtener un usuario :
-    http://localhost:8080/api/pub/users/mrenaudo
+    http://localhost:8080/api/users/mrenaudo
 
-    El parametro es http://localhost:8080/api/pub/users/{{ID}}
+    El parametro es http://localhost:8080/api/users/{{ID}}
 
 
 

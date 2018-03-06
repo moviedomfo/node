@@ -13,10 +13,10 @@ module.exports = {
   checkSecurity: checkSecurity,
   checkToken: checkToken,
   /** comprueba si exite un usuario */
-  existeUsuario: existeUsuario,
-  existeUsuario_byname,
+  userExist: userExist,
+  userExist_byname,
   /** crea un nuevo usuario */
-  crearUsuario: creandoUsuario,
+  crearUsuario: ceateUser,
   /** determina si unas credenciales son válidas */
   esUsuarioValido: esUsuarioValido,
 
@@ -103,17 +103,19 @@ function checkSecurity(app, ruta) {
         };
         console.log(clc.red(errorResponse));
         //401 Unauthorized
-        return res.status(401).send(errorResponse);
+        console.log(clc.red(JSON.stringify(errorResponse)));
       }
 
 
     } else {
         //403 Forbidden
       // if there is no token/ return an error
-      return res.status(403).send({
+      let errorResponse = {
         success: false,
-        message: 'No token provided.'
-      });
+        message: 'No token provided. \n' 
+      };
+      console.log(clc.red(JSON.stringify(errorResponse)));
+      return res.status(403).send(errorResponse);
 
     }
 
@@ -129,7 +131,7 @@ function checkSecurity(app, ruta) {
  * se hacen en un array local
  */
 
-function existeUsuario(user) {
+function userExist(user) {
   //return mongodb.finding(colName, { email: usuario.email })
   return new Promise(function (resolve, reject) {
     var userInDatabase = users.find(x => x.userName === user.userName);
@@ -137,7 +139,7 @@ function existeUsuario(user) {
   });
 }
 
-function existeUsuario_byname(userName) {
+function userExist_byname(userName) {
   return new Promise(function (resolve, reject) {
     var user = users.find(x => x.userName === userName);
     resolve(user);
@@ -153,7 +155,7 @@ function getAll() {
   });
 }
 
-function creandoUsuario(usuario) {
+function ceateUser(usuario) {
   //return mongodb.inserting(colName, usuario)
   return new Promise(function (resolve, reject) {
     var user = {

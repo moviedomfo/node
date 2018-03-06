@@ -5,14 +5,14 @@
 // Usa la librería de seguridad
 const seguridad = require('./../security/security.js')
 const clc = require('cli-color');
-//ruta = '/api/pub/users'
+//ruta = '/api/users'
 module.exports = (app, ruta) => {
 
     app.route(`${ruta}/registry`)
         .post((req, res) => {
             // inserción de un registro de usuario
             let usuario = req.body;
-            seguridad.existeUsuario(usuario)
+            seguridad.userExist(usuario)
                 .then(result => {
                     if (result.length > 0) {
                         console.log(`email ya registrado: ${usuario.email}`)
@@ -45,14 +45,14 @@ module.exports = (app, ruta) => {
 
     });
 
-    //ruta = '/api/pub/users/authenticate'
+    //ruta = '/api/users/authenticate'
     app.route(`${ruta}/authenticate`).post((req, res) => {
 
         let userToAuthenticate = req.body.user;
         
         console.log(clc.yellow('authenticate ' + userToAuthenticate.userName));
         
-        seguridad.existeUsuario_byname(userToAuthenticate.userName)
+        seguridad.userExist_byname(userToAuthenticate.userName)
             .then(resultUser => {
                 //console.log("usuario encontrado " +  JSON.stringify(resultUser));
                 if (resultUser) {
@@ -73,30 +73,32 @@ module.exports = (app, ruta) => {
 
     });
 
-    ///	http://localhost:8080/api/pub/users/1555
-    app.route(`${ruta}/:id`)
+    ///	http://localhost:8080/api/users/1555
+    //app.route(`${ruta}/user:id`)
+    app.route(`/api/users/user`)
         .get((req, res) => {
-            var userName = req.params.id;
+            var userName = req.query.Id;
             //console.log(clc.yellow('buscando ' + userName));
-            seguridad.existeUsuario_byname(userName)
+            seguridad.userExist_byname(userName)
                 .then(result => {
                     if (result) {
                         console.log(`El usuario existe: ${result.email}`)
                         res.send(JSON.stringify(result));
                     }
                     else {
-                        res.send('el usuario ' + req.params.id + ' no existe ');
+                        res.send('el usuario ' + req.query.Id + ' no existe ');
                     }
                 });
 
         });
-    app.route(`${ruta}/metodosGet2`)
+    //http://localhost:8080/api/users/get
+    app.route(`${ruta}/get`)
         .get(function (req, res) {
-            res.send('llamaste al metodo ' + `${ruta}/metodosGet2`);
+            res.send('llamaste al metodo ' + `${ruta}/searchAll1`);
         });
 
-
-    app.route(`${ruta}/list`)
+ //http://localhost:8080/api/users/searchAll
+    app.route(`${ruta}/searchAll`)
         .get(function (req, res) {
             console.log(clc.bgRed("GET to" + `${ruta}/list`));
 

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from './auth/auth.service';
 import { HttpHelpersService } from "./service/http-helpers.service";
 @Component({
   selector: 'app-root',
@@ -8,7 +7,6 @@ import { HttpHelpersService } from "./service/http-helpers.service";
 })
 export class AppComponent {
   title = 'app';
-  //We imported the AuthService and made it publicly available in our constructor
-  //constructor(public authService: AuthService) {}
+  //We imported the HttpHelpersService and made it publicly available in our constructor
   constructor(public authService: HttpHelpersService) {}
 }

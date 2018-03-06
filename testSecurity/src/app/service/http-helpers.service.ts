@@ -6,27 +6,25 @@ import { Router } from "@angular/router";
 import 'rxjs/add/observable/throw';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Session } from "../model/user";
-import { HealtConstants } from "../model/common";
+import { AppConstants } from "../model/common";
 @Injectable()
 export class HttpHelpersService {
 
 
   private  currentSession: Session;
-
-  private static _expiresIn: number;
-
+  //Se declaran static para q sean accedidas desde callbacks cuando se hacen pop y/o gets a servicios 
+  private static router: Router;
   //Create a stream of logged in status to communicate throughout app
-  loggedIn: boolean;
-  loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
+  static loggedIn: boolean;
+  static loggedIn$ = new BehaviorSubject<boolean>(HttpHelpersService.loggedIn);
 
   constructor(private router: Router, private http: Http) {
-
+    HttpHelpersService.router=this.router;
     this.currentSession = new Session();
-    HttpHelpersService._expiresIn = 60;
+    
 
     if (this.authenticated) {
-      //this.userProfile = JSON.parse(localStorage.getItem('profile'));
-      this.setLoggedIn(true);
+       HttpHelpersService.setLoggedIn(true);
     } else {
       this.logout();
     }
@@ -57,16 +55,16 @@ export class HttpHelpersService {
   
   // despues de obtener credenciales  
   saveCredentials(session) {
-    const expTime = HttpHelpersService._expiresIn * 1000 + Date.now();
+    const expTime = AppConstants.expiresIn * 1000 + Date.now();
     localStorage.setItem('x-access-token', session.token);
     localStorage.setItem('profile', JSON.stringify(session.user));
     localStorage.setItem('expires_at', JSON.stringify(expTime));
     //this.userProfile = session.user;
-    this.setLoggedIn(true);
+    HttpHelpersService.setLoggedIn(true);
 
 
     // ir a la página principal
-    this.router.navigate(['']);
+    HttpHelpersService.router.navigate(['']);
 
   }
 
@@ -78,28 +76,30 @@ export class HttpHelpersService {
     localStorage.removeItem('profile');
     localStorage.removeItem('expires_at');
 
-    this.setLoggedIn(false);
+    HttpHelpersService.setLoggedIn(false);
   }
-
-  setLoggedIn(value: boolean) {
+  //Se declaran static para q sean accedidas desde callbacks cuando se hacen pop y/o gets a servicios 
+  public static setLoggedIn(value: boolean) {
     // Update login status subject
-    this.loggedIn$.next(value);
-    this.loggedIn = value;
+    HttpHelpersService.loggedIn$.next(value);
+    HttpHelpersService.loggedIn = value;
   }
 
-  // puesto que los envíos requieren siempre la misma configuración
+
+
   setHeader() {
-    let headers = new Headers({
-      'Content-Type': 'application/json',
-      //'token': HttpHelpersService._token
-      'x-access-token': localStorage.getItem('x-access-token')
-    });
-
-    headers.append('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
-    headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-    headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
-
-    // llamar a este método en cada llamda, equivale a los interceptores de Angular1
+    
+    console.log('Set header--------------------------------------' ); 
+    //console.log( headers);
+    //headers.append(   'x-access-token', localStorage.getItem('x-access-token'));
+    //let headers = new Headers({'x-access-token': localStorage.getItem('x-access-token') });
+    let headers = new Headers();
+    headers.append(  'x-access-token', localStorage.getItem('x-access-token'));
+    AppConstants.httpHeaders.forEach(item=>{
+      console.log(item[0]  + ' ' + AppConstants.httpHeaders.get(item[0]));
+      //headers.append(  item[0] , AppConstants.httpHeaders.get(item[0]));
+    }); 
+    
     let options = new RequestOptions({ headers: headers });
     return options;
   }
@@ -118,10 +118,10 @@ export class HttpHelpersService {
       console.log("Error de permisos");
       this.router.navigate(['login']);
     }
-    else {
-      console.log("Otro Error");
+    if (error.status == 404) {
+      console.log("Not found url " + error.url);
     }
-    return Observable.throw(error._body);
+    return Observable.throw(error);
   }
 
 
@@ -132,7 +132,7 @@ export class HttpHelpersService {
 
     };
 
-    return this.http.post(`${HealtConstants.baseUrl_security}/checkSession`, params, httpOptions)
+    return this.http.post(`${AppConstants.baseUrl_security}/checkSession`, params, httpOptions)
       .map(function (res: Response) {
 
         return res.json();

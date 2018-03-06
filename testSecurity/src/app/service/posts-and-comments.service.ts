@@ -5,14 +5,14 @@ import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 import { Post, Comment } from "../model/post";
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
-import { HealtConstants } from "../model/common";
+import { AppConstants } from "../model/common";
 
 import 'rxjs/add/operator/map'
 import { HttpHelpersService } from "./http-helpers.service";
 @Injectable()
 export class PostsAndCommentsService {
   // Define the routes we are going to interact with
-  private baseUrl = HealtConstants.baseUrl_placeHolders;// 'http://localhost:8080/api/placeHolders';
+  private baseUrl = AppConstants.baseUrl_placeHolders;// 'http://localhost:8080/api/placeHolders';
   private privateUrl = this.baseUrl + '/priv';
 
   constructor(private http: Http, private httpHelpersService: HttpHelpersService) { }
@@ -22,7 +22,7 @@ export class PostsAndCommentsService {
 
    console.log(`${this.baseUrl}/postList`);
  
-    return this.http.get(`${this.baseUrl}/postList`, HealtConstants.httpOptions)
+    return this.http.get(`${this.baseUrl}/postList`, AppConstants.httpOptions)
       .map(function (res: Response) {
 
         let posts: Post[] = res.json();
@@ -54,7 +54,7 @@ export class PostsAndCommentsService {
 
   retriveAllCommentsService(): Observable<Comment[]> {
 
-    return this.http.get(`${this.baseUrl}/commentList`, HealtConstants.httpOptions)
+    return this.http.get(`${this.baseUrl}/commentList`, AppConstants.httpOptions)
       .map(function (res: Response) {
 
         let reuslt: Comment[] = res.json();
@@ -72,7 +72,15 @@ export class PostsAndCommentsService {
 
         let reuslt: Comment[] = res.json();
         return reuslt;
-      });
+      }).catch((e)=> this.httpHelpersService.handleError(e));
+      
+      // .catch((ex)=>{
+      //   alert(ex);
+      //   return Observable.throw(
+          
+      //     new Error(`${ ex.status } ${ ex.statusText }`)
+      //   );
+      // });
 
     // return this.http.get(this.privateDealsUrl, {
     //   headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('x-access-token')}`)

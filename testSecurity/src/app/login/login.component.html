@@ -17,6 +17,6 @@
           <button (click)="registry()" class="btn btn-warning">Registrar nuevo usuario</button>
           
       </div>
-      <div *ngIf="error" class="alert alert-danger">{{mensaje}}</div>
+      <div *ngIf="error" class="alert alert-danger">{{ error.message ||  error._body}}</div>
   </form>
 </div>

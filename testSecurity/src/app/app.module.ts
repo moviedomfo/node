@@ -12,7 +12,7 @@ import { PostListComponent } from './posts/post-list/post-list.component';
 import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './callback.component';
 
-import {AuthService} from './auth/auth.service';
+
 import { PostsAndCommentsService } from "./service/posts-and-comments.service";
 import {HttpHelpersService} from "./service/http-helpers.service";
 import {LoginService} from "./login/login.service";
@@ -35,7 +35,6 @@ import { PrivateCommentsComponent } from './comments/private-comments/private-co
     BrowserModule,AppRoutingModule,HttpClientModule,HttpModule,FormsModule
   ],
   providers: [
-    AuthService,
     PostsAndCommentsService,LoginService,
     HttpHelpersService],
   bootstrap:

@@ -13,7 +13,7 @@ module.exports = app => {
    // users(app, '/api/public/users');
     common(app, '/');
     //patients(app, '/api/public/patients');
-    users(app, '/api/pub/users');
+    users(app, '/api/users');
 
     jsonPlaceHolder(app, '/api/placeHolders');
 

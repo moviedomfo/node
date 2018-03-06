@@ -27,7 +27,7 @@ export class PostListComponent implements OnInit,OnDestroy {
       posts => {
         this.posts = posts;
       },
-      err => error => this.error = err
+      err => this.error = err
     );
 
   }

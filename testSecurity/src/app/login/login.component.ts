@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-//import {User} from '../../model/index'
-import { AuthService } from './../auth/auth.service';
 import { LoginService } from "./login.service";
 import { User } from "../model/user";
 import { HttpHelpersService } from "../service/http-helpers.service";
@@ -40,7 +38,7 @@ export class LoginComponent implements OnInit {
                     //console.log(result);
                 }, 
                 e=>{
-                    this.httpService.handleError(e);
+                    this.error = e;
                 });
         // this.authenticationService.login(this.currentUser.userName, this.currentUser.Password)
         //     .subscribe(result => {

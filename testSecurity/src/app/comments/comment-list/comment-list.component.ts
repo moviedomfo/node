@@ -25,7 +25,7 @@ export class CommentListComponent implements OnInit {
       comments => {
         this.comments = comments;
       },
-      err => error => this.error = err
+      err => this.error = err
     );
 
   }

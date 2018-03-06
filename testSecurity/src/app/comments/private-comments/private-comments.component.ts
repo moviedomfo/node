@@ -24,9 +24,13 @@ export class PrivateCommentsComponent implements OnInit {
     this.commentsSub$ = this.commentService.retriveAllPrivateCommentsService()
      .subscribe(
       comments => {
+        
         this.comments = comments;
       },
-      err => error => this.error = err
+      err => { 
+        
+        this.error = err;
+      }
     );
   }
   ngOnDestroy() {
