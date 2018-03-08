@@ -9,6 +9,7 @@ const app = express();
 const middleware = require('./middleware');
 var clc = require('cli-color');
 console.log(clc.yellow('initilizing server ' ));
+
 middleware.useMiddleware(app);
 
 

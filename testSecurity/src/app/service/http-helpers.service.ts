@@ -59,9 +59,8 @@ export class HttpHelpersService {
     localStorage.setItem('x-access-token', session.token);
     localStorage.setItem('profile', JSON.stringify(session.user));
     localStorage.setItem('expires_at', JSON.stringify(expTime));
-    //this.userProfile = session.user;
-    HttpHelpersService.setLoggedIn(true);
 
+    HttpHelpersService.setLoggedIn(true);
 
     // ir a la página principal
     HttpHelpersService.router.navigate(['']);
