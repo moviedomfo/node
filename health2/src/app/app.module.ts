@@ -67,7 +67,6 @@ import { FormControlsAdminLteComponent } from './prueba/forms/form-controls-admi
 @NgModule({
   declarations: [
     AppComponent,
-    
     FontAgComponent,
     ModalDialogComponent, DateComponent, HeaderComponent, HeaderGroupComponent,PageNotFoundComponent,
     PatientComponent,
@@ -99,7 +98,7 @@ import { FormControlsAdminLteComponent } from './prueba/forms/form-controls-admi
     AgGridModule.withComponents([
       DateComponent,
       HeaderComponent,
-      HeaderGroupComponent,
+      HeaderGroupComponent
       
   ]),
   //HealthModule,
