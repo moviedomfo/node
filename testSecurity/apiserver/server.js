@@ -5,6 +5,7 @@
 const express = require('express');
 // aplicación express
 const app = express();
+
 /** Carga de módulos propios */
 const middleware = require('./middleware');
 var clc = require('cli-color');
@@ -18,6 +19,16 @@ const bodyParser = require('body-parser')
 
 // Configuración de rutas
 require('./api/serviceIndex')(app);
+
+
+// const route = app.Router();
+
+// route.post(`${ruta}/uploadfile`,(req, res,next)=>{
+
+//   console.log(clc.bgRed("upload file to " + ruta ));
+//   res.send('cccccccccccccccccccccc');
+// });
+
 
 app.listen(port,function(){
   console.log(clc.yellow("API server started on PORT " + port));

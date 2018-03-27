@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 
 var Promise = require('promise');
-var Q = require("q");
+//var Q = require("q");
 
 const clc = require('cli-color');
 /**

@@ -8,8 +8,7 @@ const clc = require('cli-color');
 //ruta = '/api/users'
 module.exports = (app, ruta) => {
 
-    app.route(`${ruta}/registry`)
-        .post((req, res) => {
+    app.route(`${ruta}/registry`).post((req, res) => {
             // inserción de un registro de usuario
             let usuario = req.body;
             seguridad.userExist(usuario)

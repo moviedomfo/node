@@ -12,7 +12,9 @@ module.exports.useMiddleware = app => {
     const cors = require('cors');
     const bodyParser = require('body-parser')
     const seguridad = require('./security/security.js')
-    
+
+ 
+
     var config = require('./config.js'); 
     // Permite llamadas desde otros dominios o puertos
     app.use(cors());
@@ -36,6 +38,9 @@ module.exports.useMiddleware = app => {
         // En caso de no hacerlo, se colgaría la llamada
     });
 
+
+
+      
     // este middleware se encargará de vigilar la entrada    
     seguridad.checkSecurity(app, '/api/priv/');
     seguridad.checkSecurity(app, '/api/placeHolders/priv/');
