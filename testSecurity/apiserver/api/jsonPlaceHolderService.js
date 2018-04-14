@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 const clc = require('cli-color');
 
 var comments = [];
-
+//prefijo '/api/placeHolders'
 module.exports = (app, ruta) => {
   const multer = require('multer')
 

@@ -32,6 +32,7 @@ require('./api/serviceIndex')(app);
 
 app.listen(port,function(){
   console.log(clc.yellow("API server started on PORT " + port));
+  console.log(clc.yellow("http://localhost:" + port));
 })
 
 
