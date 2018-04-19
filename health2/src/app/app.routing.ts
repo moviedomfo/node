@@ -23,6 +23,7 @@ import { PersonGridComponent } from "./functionalComponents/persons/person-grid/
 import { PatientGridComponent } from "./functionalComponents/patient/patient-grid/patient-grid.component";
 import { FormControlsComponent } from "./prueba/forms/form-controls/form-controls.component";
 import { FormControlsAdminLteComponent } from "./prueba/forms/form-controls-admin-lte/form-controls-admin-lte.component";
+import { TestServiceCallComponent } from './prueba/test-service-call/test-service-call.component';
  
 
 
@@ -48,7 +49,7 @@ const appRoutes: Routes = [
     { path: 'TestIntersection', component: IntersectionsComponent },
     { path: 'testFormsControlsAdminLTE', component: FormControlsAdminLteComponent },
      { path: 'CheckBoxList', component: CheckBoxListComponent },
-
+     { path: 'testServiceCalls', component: TestServiceCallComponent },
    { path: '**', component: PageNotFoundComponent }
 
 ];

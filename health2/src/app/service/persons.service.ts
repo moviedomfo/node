@@ -18,7 +18,7 @@ export class PersonsService {
 
 
   retrivePersonesGrid$(
-    nombre: string,    apellido: string,    motivoConsulta:string,    nroDocumento?: string     ): Observable<PersonBE[]> {
+    nombre: string,apellido: string,motivoConsulta:string,nroDocumento?: string): Observable<PersonBE[]> {
 
     var bussinesData = {
       Nombre: nombre,

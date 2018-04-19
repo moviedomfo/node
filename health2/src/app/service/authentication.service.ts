@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HealtConstants, contextInfo } from "../model/common.constants";
-import { Param, IParam, IContextInformation, IRequest, IResponse, Result } from '../model/common.model';
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result, AuthenticationOAutResponse } from '../model/common.model';
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { CommonService } from '../service/common.service';
+import 'rxjs/add/operator/map';
+import { HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
+
 
 //import 'rxjs/add/operator/map'
 
@@ -12,14 +16,35 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
-  commonService: any;
+
   public token: string;
-  constructor(private http: Http,private router: Router) {
+  constructor(private commonService: CommonService, private http: HttpClient, private router: Router) {
     // set token if saved in local storage
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
 
   }
+
+  //Este método de autenticacion usa jwk contra un rest asp api
+  public oauthToken(userName: string, password: string): Observable< AuthenticationOAutResponse> {
+
+
+    const bodyParams = new HttpParams()
+      .set(`username`, userName)
+      .set(`password`, "password")
+      .set(`grant_type`, 'password')
+      .set(`client_id`, HealtConstants.oaut_client_id)
+      .set(`client_secret`, HealtConstants.oaut_client_secret);
+
+    return this.http.post<AuthenticationOAutResponse>(`${HealtConstants.HealthOAuth_URL}`,
+     bodyParams,HealtConstants.httpClientOption).map((res) => {
+      return res;
+    }).catch(this.commonService.handleError);
+
+    
+  }
+
+
 
   login(username: string, password: string): Observable<boolean> {
     return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
@@ -42,7 +67,7 @@ export class AuthenticationService {
       });
 
 
-    
+
 
   }
 
@@ -53,5 +78,5 @@ export class AuthenticationService {
   }
 
 
- 
+
 }

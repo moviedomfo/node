@@ -187,6 +187,8 @@ export class ContextInformation implements IContextInformation  {
     AppId: string;
     ProviderName: string;
 }
+
+
 export interface IRequest{
     
     SecurityProviderName?: string;
@@ -197,7 +199,12 @@ export interface IRequest{
     CacheSettings?:object;
     ContextInformation:IContextInformation;
 }
-
+export  class ExecuteReq
+{
+      serviceProviderName?: string;
+  serviceName?: string;
+  jsonRequest  ?: string;
+}
 export interface IResponse{
     
     SecurityProviderName?: string;
@@ -267,6 +274,15 @@ export class FwkEvent{
     LogDate : Date;
     Type : string;  
     User:string;
+}
+export class AuthenticationOAutResponse {
+
+
+    expires_in: number;
+    access_token:string;
+    token_type:string;
+    refresh_token:number;
+    
 }
 
 export class User {

@@ -1,0 +1,62 @@
+<p>
+  test-service-call works!
+</p>
+<div class="row">
+  <div class="col-md-6">
+
+
+      <div class="form-group">
+          <button type="button" class="btn btn-facebook" (click)="btnOAuth()">
+              <span aria-hidden="true">&times;</span> authenticate & JWT generation ( POST)
+            </button>
+      </div>
+
+
+      <div class="form-group">
+          <button type="button" class="btn btn-warning" (click)="btnExecute_POST()">
+              <span aria-hidden="true">&times;</span> Execute Service POST
+            </button>
+      </div>
+
+      <div class="form-group">
+          <button type="button" class="btn btn-info" (click)="btnExecute_GET()">
+              <span aria-hidden="true">&times;</span> Execute Service GET
+            </button>
+          </div>
+      <div class="form-group">
+      <button type="button" class="btn btn-google" (click)="btnExecute_test_execute()">
+        <span aria-hidden="true">&times;</span> call Execute  GET http://localhost:63251/api/test/execute/
+      </button>
+    </div>
+  
+  </div>
+
+  
+</div>
+<div class="row">
+
+  <div class="col-md-6">
+  
+      <div class="form-group">
+    <app-error-box-container [globalError]="globalError"></app-error-box-container>
+      </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-10">
+
+    <div *ngIf="result_message" class="alert alert-warning alert-dismissible show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      
+      <h4 class="alert-heading">{{result_tittle}}</h4>
+
+      <p>{{result_message}}</p>
+      <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+    </div>  
+
+    </div>
+  </div>

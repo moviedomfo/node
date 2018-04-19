@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
  
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { TestModule } from './test.module';
 
 import { AppComponent } from './app.component';
@@ -64,6 +65,10 @@ import { AppheaderComponent } from './common-components/layout/appheader/apphead
 import { PersonGridComponent } from "./functionalComponents/persons/person-grid/person-grid.component";
 import { FormControlsComponent } from './prueba/forms/form-controls/form-controls.component';
 import { FormControlsAdminLteComponent } from './prueba/forms/form-controls-admin-lte/form-controls-admin-lte.component';
+import { TestServiceCallComponent } from './prueba/test-service-call/test-service-call.component';
+import { TestService } from './service/test-service';
+import {AuthenticationService} from './service/authentication.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,7 +91,7 @@ import { FormControlsAdminLteComponent } from './prueba/forms/form-controls-admi
     ProfesionalGridComponent,
     ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent, WeekDaysCheckEditComponent, FormsComponent, ChildComponent
     , EmailValidator, IntersectionsComponent, SessionSettingComponent, ValidateEqualDirective, CheckBoxListComponent, ContactComponent,
-    AppsettingComponent, AppmenuComponent, AppfooterComponent, AppheaderComponent, FormControlsComponent, FormControlsAdminLteComponent
+    AppsettingComponent, AppmenuComponent, AppfooterComponent, AppheaderComponent, FormControlsComponent, FormControlsAdminLteComponent, TestServiceCallComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -106,11 +111,12 @@ import { FormControlsAdminLteComponent } from './prueba/forms/form-controls-admi
   FormsModule,
   
   HttpModule,
+  HttpClientModule,
   rutesModule,
   TestModule
   
   ],
-   providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,ProfesionalService,AuthGuard],
+   providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,ProfesionalService,AuthGuard, TestService,AuthenticationService],
   
   bootstrap: [AppComponent]
 })

@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
 import { PatientBE,MutualPorPacienteBE,PersonBE } from '../model/index';
-import { Param, IParam, IContextInformation, IRequest, IResponse, Result } from '../model/common.model';
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
-import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
-
+import { Http, Response, RequestOptions, Headers, URLSearchParams, RequestOptionsArgs } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 // permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
 // permite observar
@@ -39,6 +39,26 @@ export class PatientsService {
         return res.json();
       });
 
+
+  }
+  retrivePatientsSimple_post$(): Observable<PatientBE[]> {
+    var bussinesData = {
+      Id: 123
+    };
+    let ExecuteReq: ExecuteReq = this.commonService.generete_post_Params("getPatientService", bussinesData);
+
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, ExecuteReq, HealtConstants.httpOptions).map(function (res: Response) {
+
+      let result: Result = JSON.parse(res.json());
+      console.log(res.json());
+      if (result.Error) {
+        throw Observable.throw(result.Error);
+      }
+     
+      let patient: PatientBE = result.BusinessData as PatientBE;
+
+      return patient;
+    }).catch(this.commonService.handleError);
 
   }
 

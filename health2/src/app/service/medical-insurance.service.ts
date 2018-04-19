@@ -16,7 +16,9 @@ export class MedicalInsuranceService {
 
   private contextInfo: IContextInformation;
   private commonService: CommonService;
-  constructor(private http: Http, @Inject(CommonService) commonService: CommonService) {
+  constructor(
+     private http: Http,
+     @Inject(CommonService) commonService: CommonService) {
     this.contextInfo = contextInfo;
     this.commonService = commonService;
   }

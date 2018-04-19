@@ -1,11 +1,16 @@
 
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Param, IParam, IContextInformation ,IRequest} from '../model/common.model';
+import { HttpHeaders } from '@angular/common/http';
 let headers = new Headers({ 'Content-Type': 'application/json' });
      headers.append('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
      headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-     headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+     headers.append('Access-Control-Allow-Origin', '*');
 
+let header_httpClient = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    header_httpClient.append('Access-Control-Allow-Methods', '*');
+     header_httpClient.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+     header_httpClient.append('Access-Control-Allow-Origin', '*');
 let options = new RequestOptions({ headers: headers });
 export  const HealtConstants={
      CNN_STRING_HEALTH: {
@@ -20,10 +25,14 @@ export  const HealtConstants={
             },
      HealthAPI_URL:"http://localhost:63251/api/",
      HealthExecuteAPI_URL:"http://localhost:63251/api/patients/execute",
+     HealthOAuth_URL:"http://localhost:63251/oauth/token",
      ImagesSrc_Woman:'assets/images/User_Famele.bmp',
      ImagesSrc_Man:'assets/images/User_Male.bmp',
      httpOptions:options,
-     DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A'
+     httpClientOption:{headers:header_httpClient},
+     DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A',
+     oaut_client_id:'olecram',
+     oaut_client_secret:'1234'
 }
 
 export const Sexo =
