@@ -43,7 +43,7 @@ result_message:string;
   }
   
   btnRefreshOAuth(){
-    var authResult$:Observable<boolean> = this.authenticationService.refreshoauthToken();
+    var authResult$:Observable<AuthenticationOAutResponse> = this.authenticationService.refreshoauthToken();
     authResult$.subscribe(
       res => {
         this.result_tittle = "llamada a Refresh authenticationService.oauthToke";

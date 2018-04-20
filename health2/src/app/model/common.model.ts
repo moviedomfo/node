@@ -262,7 +262,7 @@ export class ServiceError extends Error{
    StackTrace:string;
    Type:string;
    Machine:string;
-
+Status:number;
 
 }
 

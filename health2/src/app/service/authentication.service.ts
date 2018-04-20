@@ -37,7 +37,7 @@ export class AuthenticationService {
       .set(`client_secret`, HealtConstants.oaut_client_secret);
 
     return this.http.post<AuthenticationOAutResponse>(`${HealtConstants.HealthOAuth_URL}`,
-     bodyParams,HealtConstants.httpClientOption).map((res) => {
+     bodyParams,HealtConstants.httpClientOption_form_urlencoded).map((res) => {
 
       localStorage.setItem('currentLogin', JSON.stringify({ userName: userName, oAuth: res }));
 
@@ -60,7 +60,7 @@ export class AuthenticationService {
 
 
     return this.http.post<AuthenticationOAutResponse>(`${HealtConstants.HealthOAuth_URL}`,
-     bodyParams,HealtConstants.httpClientOption).map((res) => {
+     bodyParams,HealtConstants.httpClientOption_form_urlencoded).map((res) => {
       
       currentLogin.oAuth=res;
       localStorage.setItem('currentLogin', JSON.stringify({ userName: currentLogin.username, oAuth: res }));

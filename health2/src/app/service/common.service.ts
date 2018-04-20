@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HealtConstants, contextInfo, CommonParams } from "../model/common.constants";
-import { Param, IParam, IContextInformation, ContextInformation, ExecuteReq, Request, IRequest, IResponse, Result, ServiceError } from '../model/common.model';
+import { Param, IParam, IContextInformation, ContextInformation, ExecuteReq, Request, IRequest, IResponse, Result, ServiceError, CurrentLogin } from '../model/common.model';
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 //permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { element } from 'protractor';
 import { Router } from '@angular/router'
+import { HttpHeaders } from '@angular/common/http';
 
 //var colors = require('colors/safe');
 @Injectable()
@@ -182,6 +183,8 @@ export class CommonService {
 
     return executeReq;
   }
+  
+
 
   createFwk_SOA_REQ(bussinesData: any): Request {
     let contextInfo: ContextInformation = new ContextInformation();
@@ -207,7 +210,14 @@ export class CommonService {
     return req;
   }
 
-  createHttpHeader
+  public get_AuthorizedHeader():HttpHeaders{
+    let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
+    let headers = new HttpHeaders({ 'Authorization': "Bearer " + currentLogin.oAuth.access_token });
+    headers.append('Access-Control-Allow-Methods', '*');
+    headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+    headers.append('Access-Control-Allow-Origin', '*');
+     return headers;
+  }
 
   public handleErrorService(serviceError: ServiceError) {
     if (serviceError) {
@@ -224,6 +234,14 @@ export class CommonService {
 
     let ex: ServiceError = new ServiceError();
     ex.Message = 'Despachador de servicio no responde .-';
+    ex.Status= error.status;
+    if(error.statusText){
+      ex.Message = ex.Message + "\r\n" + error.statusText;
+    }
+    if(error._body){
+      ex.Message = ex.Message + "\r\n" + error._body;
+    }
+
     if(error.message){
       ex.Message = ex.Message + "\r\n" + error.message;
     }

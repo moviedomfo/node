@@ -1,23 +1,40 @@
 import { Injectable, Inject } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import {  Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 import {PersonBE} from '../../app/model/persons.model'
 import { HealtConstants, contextInfo } from "../model/common.constants";
-import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol } from '../model/common.model';
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol, ExecuteReq, CurrentLogin } from '../model/common.model';
 import { CommonService } from '../service/common.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable()
 export class TestService {
 
-  constructor(private http: Http,private commonService: CommonService) { }
+  constructor(private http: HttpClient,private commonService: CommonService) { }
 
 
 
   public execute(){
-    let url ='http://localhost:63251/api/test/execute/'
-    return this.http.get(url, HealtConstants.httpOptions)
+
+    let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
+    var bussinesData = {
+      Id: 123
+    };
+    let ExecuteReq: ExecuteReq = this.commonService.generete_post_Params("getPatientService", bussinesData);
+    //console.log(JSON.stringify(params));
+    let url ='http://localhost:63251/api/test/execute/';
+    
+     let headders = this.commonService.get_AuthorizedHeader();
+    //  header_httpClient_contentTypeJson.append('Access-Control-Allow-Methods', '*');
+    //  header_httpClient_contentTypeJson.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+    //  header_httpClient_contentTypeJson.append('Access-Control-Allow-Origin', '*');
+    
+    console.log(currentLogin.oAuth.access_token);
+
+    
+    return this.http.post(url,ExecuteReq,{headers:headders} )
     .map(function (res: Response) {
 
       let result: Result = JSON.parse(res.json());
