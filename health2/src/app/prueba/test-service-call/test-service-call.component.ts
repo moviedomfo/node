@@ -42,6 +42,21 @@ result_message:string;
 
   }
   
+  btnRefreshOAuth(){
+    var authResult$:Observable<boolean> = this.authenticationService.refreshoauthToken();
+    authResult$.subscribe(
+      res => {
+        this.result_tittle = "llamada a Refresh authenticationService.oauthToke";
+        this.result_message = JSON.stringify(res);
+        
+
+      },
+      err => {
+
+        this.globalError = err;
+      }
+    );
+  }
   btnOAuth(){
     var authResult$:Observable<AuthenticationOAutResponse> = this.authenticationService.oauthToken('moviedo','Lince21+');
     authResult$.subscribe(

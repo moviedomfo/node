@@ -281,10 +281,15 @@ export class AuthenticationOAutResponse {
     expires_in: number;
     access_token:string;
     token_type:string;
-    refresh_token:number;
+    refresh_token:string;
     
-}
+    
 
+}
+export class CurrentLogin{
+    username:string;
+    oAuth:AuthenticationOAutResponse;
+}
 export class User {
     public UserName: string;
     public Password: string;

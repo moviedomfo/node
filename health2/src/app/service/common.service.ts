@@ -216,26 +216,27 @@ export class CommonService {
   }
   public handleError(error: Response | any) {
 
-    console.log('----------------------------------------');
+    console.log('-------------------Error---------------------');
+    console.log(error);
     console.log(error.status);
-    console.log(error.ok);
+    console.log(error.message);
     console.log('----------------------------------------');
 
     let ex: ServiceError = new ServiceError();
     ex.Message = 'Despachador de servicio no responde .-';
-    ex.Machine = 'PC-Desarrollo-Santana';
-    if (error.status === 0) {
-
-      // return Observable.throw(new Error('Despachador de servicio no responde .-'));
-      return Observable.throw(ex);
+    if(error.message){
+      ex.Message = ex.Message + "\r\n" + error.message;
     }
-    ex.Message = ex.Message + "\n" + error;
+   
+
+    ex.Machine = 'PC-Desarrollo-Santana';
+
     return Observable.throw(ex); // <= B
   }
   public handleErrorObservable(error: ServiceError) {
 
     console.error(error.Message || error);
-    return Observable.throw(error.Message);
+    return Observable.throw(error.message);
   }
   public handleErrorPromise(error: Response | any) {
 

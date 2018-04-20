@@ -12,6 +12,7 @@ let header_httpClient = new HttpHeaders({ 'Content-Type': 'application/x-www-for
      header_httpClient.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
      header_httpClient.append('Access-Control-Allow-Origin', '*');
 let options = new RequestOptions({ headers: headers });
+
 export  const HealtConstants={
      CNN_STRING_HEALTH: {
             user: 'sa',
