@@ -27,9 +27,6 @@ export class TestService {
     let url ='http://localhost:63251/api/test/execute/';
     
      let headders = this.commonService.get_AuthorizedHeader();
-    //  header_httpClient_contentTypeJson.append('Access-Control-Allow-Methods', '*');
-    //  header_httpClient_contentTypeJson.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-    //  header_httpClient_contentTypeJson.append('Access-Control-Allow-Origin', '*');
     
     console.log(currentLogin.oAuth.access_token);
 

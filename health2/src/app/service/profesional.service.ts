@@ -1,6 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-
-import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import {  Response, RequestOptions } from '@angular/http';
 
 // permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
@@ -14,6 +13,7 @@ import { ProfesionalBE, PersonBE, ResourceSchedulingBE,
   Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol} from '../model/index';
 
 import { HealtConstants, contextInfo } from "../model/common.constants";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ProfesionalService {
@@ -21,7 +21,7 @@ export class ProfesionalService {
   private contextInfo: IContextInformation;
   private commonService: CommonService;
 
-  constructor(private http: Http, @Inject(CommonService) commonService: CommonService) {
+  constructor(private http: HttpClient, @Inject(CommonService) commonService: CommonService) {
     this.contextInfo = contextInfo;
     this.commonService = commonService;
   }
@@ -47,11 +47,9 @@ export class ProfesionalService {
 
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("GetProfesionalService", bussinesData);
-
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+  
+    let executeReq=  this.commonService.generete_post_Params("GetProfesionalService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -93,11 +91,8 @@ export class ProfesionalService {
       HealthInstitutionId: healthInstitutionId,
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("DesvincularProfesionalService", bussinesData);
-
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("DesvincularProfesionalService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -124,11 +119,8 @@ export class ProfesionalService {
       SoloAsociarProfesionalAinst:soloAsociarProfesionalAinst
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("CrearProfesionalService", bussinesData);
-
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("CrearProfesionalService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -157,11 +149,9 @@ export class ProfesionalService {
    
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("UpdateProfesionalService", bussinesData);
-
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+   
+    let executeReq=  this.commonService.generete_post_Params("UpdateProfesionalService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -187,10 +177,8 @@ export class ProfesionalService {
 
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetriveProfesionalesGridService", bussinesData);
-
-    HealtConstants.httpOptions.search = searchParams;
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesGridService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -220,11 +208,9 @@ export class ProfesionalService {
       
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetriveProfesionalesService", bussinesData);
+    let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesService", bussinesData);
 
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -253,11 +239,9 @@ export class ProfesionalService {
       
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetriveProfesionalesGridService", bussinesData);
 
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesGridService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -277,10 +261,9 @@ export class ProfesionalService {
       UserName: username
     };
     
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("SearchAllRolesService", bussinesData);
-    HealtConstants.httpOptions.search = searchParams;
 
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("SearchAllRolesService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
     .map(function (res: Response) {
      
       let result: Result= JSON.parse(res.json());
@@ -301,10 +284,9 @@ export class ProfesionalService {
       UserName: username
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("ValidateUserExistService", bussinesData);
-    HealtConstants.httpOptions.search = searchParams;
 
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("ValidateUserExistService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
     .map(function (res: Response) {
      
       let result: Result= JSON.parse(res.json());
@@ -327,10 +309,8 @@ export class ProfesionalService {
       NewPassword: password
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("ResetUserPasswordService", bussinesData);
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("ResetUserPasswordService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
     .map(function (res: Response) {
      
       let result: Result= JSON.parse(res.json());

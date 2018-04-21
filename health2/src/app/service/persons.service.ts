@@ -1,17 +1,18 @@
 import { Injectable, Inject } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import {  Response, RequestOptions, Headers } from '@angular/http';
 import {PersonBE} from '../../app/model/persons.model'
 import { HealtConstants, contextInfo } from "../model/common.constants";
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol } from '../model/common.model';
 import { CommonService } from '../service/common.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class PersonsService {
   private contextInfo: IContextInformation;
   
-  constructor(private http: Http,private commonService: CommonService) {
+  constructor(private http: HttpClient,private commonService: CommonService) {
     this.contextInfo = contextInfo;
     
   }
@@ -28,10 +29,9 @@ export class PersonsService {
 
     };
   console.log(bussinesData);
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetrivePersonasService", bussinesData);
-
-    HealtConstants.httpOptions.search = searchParams;
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("RetrivePersonasService", bussinesData);
+    
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -58,11 +58,9 @@ export class PersonsService {
 
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("GetPersonaByParamService", bussinesData);
-
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("GetPersonaByParamService", bussinesData);
+    
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());

@@ -8,7 +8,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { element } from 'protractor';
 import { Router } from '@angular/router'
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 //var colors = require('colors/safe');
 @Injectable()
@@ -18,7 +18,7 @@ export class CommonService {
 
   public mainComponentTitle_subject$: Subject<string> = new Subject<string>();
 
-  constructor(private http: Http, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   //permite subscripcion añl Subject con el titulo
   get_mainComponentTitle$(): Observable<string> {
@@ -44,13 +44,13 @@ export class CommonService {
 
   }
   serarPlaces_google_place_api(input: string) {
-    console.log('Ejecutando serarPlaces_google_place_api()');
+    //console.log('Ejecutando serarPlaces_google_place_api()');
     var api_url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=[input]&types=geocode&key=AIzaSyAEBn6XjDRlouhZP-nQHSU4equHUeR2wEc';
 
     api_url = api_url.replace('[input]', input);
     api_url = api_url.replace('[input]', input);
 
-    return this.http.get(`${api_url}`, HealtConstants.httpOptions)
+    return this.http.get(`${api_url}`, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
         let places = JSON.parse(res.json());
         console.log(places);
@@ -68,10 +68,9 @@ export class CommonService {
       Vigente: true
     };
 
-    let searchParams: URLSearchParams = this.generete_get_searchParams("SearchParametroByParamsService", bussinesData);
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+   
+    let executeReq=  this.generete_post_Params("SearchParametroByParamsService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let resToObject: Result;
@@ -153,6 +152,8 @@ export class CommonService {
     //alert(JSON.stringify(context));
     return REQ;
   }
+
+  
   generete_get_searchParams(serviceName, bussinesData): URLSearchParams {
     let searchParams: URLSearchParams = new URLSearchParams();
     var req = this.createFwk_SOA_REQ(bussinesData);
@@ -189,16 +190,20 @@ export class CommonService {
   createFwk_SOA_REQ(bussinesData: any): Request {
     let contextInfo: ContextInformation = new ContextInformation();
     let req: Request = new Request();
-
+    let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
     contextInfo.Culture = "ES-AR";
     contextInfo.ProviderNameWithCultureInfo = "";
     contextInfo.HostName = 'localhost';
     contextInfo.HostIp = '10.10.200.168';
     contextInfo.HostTime = new Date(),
-      contextInfo.ServerName = 'WebAPIDispatcherClienteWeb';
+    contextInfo.ServerName = 'WebAPIDispatcherClienteWeb';
     contextInfo.ServerTime = new Date();
-    contextInfo.UserName = 'moviedo',
-      contextInfo.UserId = '';
+
+    if(currentLogin.username)
+      {contextInfo.UserName = currentLogin.username;}
+      else{contextInfo.UserName = 'moviedo';}
+      
+    contextInfo.UserId = '';
     contextInfo.AppId = 'Healt';
     contextInfo.ProviderName = 'health';
     req.ContextInformation = contextInfo;
@@ -210,6 +215,7 @@ export class CommonService {
     return req;
   }
 
+  //Retorna un HttpHeaders con CORS y 'Authorization': "Bearer + TOKEN"
   public get_AuthorizedHeader():HttpHeaders{
     let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
     let headers = new HttpHeaders({ 'Authorization': "Bearer " + currentLogin.oAuth.access_token });

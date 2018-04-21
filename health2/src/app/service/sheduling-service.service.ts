@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { ProfesionalBE, PersonBE, ResourceSchedulingBE, HealthInstitution_ProfesionalBE, GetProfesionalRes } from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
-import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import {  Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
 // permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Observable';
 import { CommonService } from '../service/common.service';
 import 'rxjs/add/operator/map';
 import { Profesional_FullViewBE, ProfesionalesGridBE, AppointmentsBE } from "../model/profesional.model";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ShedulingServiceService {
@@ -18,7 +19,7 @@ export class ShedulingServiceService {
   private contextInfo: IContextInformation;
   private commonService: CommonService;
 
-  constructor(private http: Http, @Inject(CommonService) commonService: CommonService) {
+  constructor(private http: HttpClient, @Inject(CommonService) commonService: CommonService) {
     this.contextInfo = contextInfo;
     this.commonService = commonService;
   }
@@ -31,11 +32,11 @@ export class ShedulingServiceService {
       AppointmentsList: AppointmentsList
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("CreateAppointmentsService", bussinesData);
+    
 
-    HealtConstants.httpOptions.search = searchParams;
-
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("CreateAppointmentsService", bussinesData);
+    
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -57,11 +58,11 @@ export class ShedulingServiceService {
       AppointmentId: AppointmentId
     };
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("GetAppoinmentByParamsService", bussinesData);
+    
 
-    HealtConstants.httpOptions.search = searchParams;
+    let executeReq=  this.commonService.generete_post_Params("GetAppoinmentByParamsService", bussinesData);
 
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());

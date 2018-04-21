@@ -2,13 +2,14 @@ import { Injectable, Inject } from '@angular/core';
 import { PatientBE,MutualPorPacienteBE,PersonBE ,MutualBE} from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
-import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+import {  Response, RequestOptions, Headers } from '@angular/http';
 
 //permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
 //permite observar
 import { Observable } from 'rxjs/Observable';
 import { CommonService } from '../service/common.service';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -16,13 +17,15 @@ export class MedicalInsuranceService {
 
   private contextInfo: IContextInformation;
   private commonService: CommonService;
-  constructor(
-     private http: Http,
-     @Inject(CommonService) commonService: CommonService) {
-    this.contextInfo = contextInfo;
-    this.commonService = commonService;
-  }
-
+  
+  constructor(private http: HttpClient, @Inject(CommonService) commonService: CommonService) {
+    
+        this.contextInfo = contextInfo;
+        this.commonService = commonService;
+    }
+      
+ 
+    
   retriveAllObraSocialService$(status:string): Observable<MutualBE[]> {
     
         var bussinesData = {
@@ -31,13 +34,10 @@ export class MedicalInsuranceService {
           
         };
     
-       
-        let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("RetriveAllObraSocialService", bussinesData);
-        
-        HealtConstants.httpOptions.search = searchParams;
+        let executeReq=  this.commonService.generete_post_Params("RetriveAllObraSocialService", bussinesData);
     
         
-        return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+        return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
           .map(function (res: Response) {
     
             let result: Result = JSON.parse(res.json());
@@ -60,9 +60,9 @@ export class MedicalInsuranceService {
               Status: status,
               StartDate: startDate
             };
-            HealtConstants.httpOptions.search = this.commonService.generete_get_searchParams("GetObraSocialPorPatientService", bussinesData);
             
-            return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+            let executeReq=  this.commonService.generete_post_Params("GetObraSocialPorPatientService", bussinesData);
+            return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
               .map(function (res: Response) {
         
                 let result: Result = JSON.parse(res.json());
@@ -81,9 +81,9 @@ export class MedicalInsuranceService {
             
                 var bussinesData = mutualBE;
                
-                HealtConstants.httpOptions.search = this.commonService.generete_get_searchParams("UpdateObraSocialService", bussinesData);
                 
-                return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+                let executeReq=  this.commonService.generete_post_Params("UpdateObraSocialService", bussinesData);
+                return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
                   .map(function (res: Response) {
             
                     let result: Result = JSON.parse(res.json());
@@ -98,10 +98,8 @@ export class MedicalInsuranceService {
               createObraSocialService$(mutualBE:MutualBE): Observable<number> {
             
                 var bussinesData =    {Mutual:mutualBE};
-               
-                HealtConstants.httpOptions.search = this.commonService.generete_get_searchParams("CreateObraSocialService", bussinesData);
-                
-                return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+                let executeReq=  this.commonService.generete_post_Params("CreateObraSocialService", bussinesData);
+                return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq ,HealtConstants.httpClientOption_contenttype_json)
                   .map(function (res: Response) {
             
                     let result: Result = JSON.parse(res.json());

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { PatientBE,MutualPorPacienteBE,PersonBE } from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
-import { Http, Response, RequestOptions, Headers, URLSearchParams, RequestOptionsArgs } from '@angular/http';
+import {  Response, RequestOptions, Headers, URLSearchParams, RequestOptionsArgs } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // permmite cambiar la variable obsevada
 import { Subject } from 'rxjs/Subject';
@@ -23,7 +23,8 @@ export class PatientsService {
   private patient: PatientBE;
   private contextInfo: IContextInformation;
   private commonService: CommonService;
-  constructor(private http: Http, @Inject(CommonService) commonService: CommonService) {
+  
+  constructor(private http: HttpClient, @Inject(CommonService) commonService: CommonService) {
     this.contextInfo = contextInfo;
     this.commonService = commonService;
   }
@@ -34,7 +35,7 @@ export class PatientsService {
 
 
     //map retorna el mapeo de un json que viene del servicio que tiene la misma estructura que  PatientBE
-    return this.http.get(`${HealtConstants.HealthAPI_URL}patients/RetrivePatientsSimple`, HealtConstants.httpOptions)
+    return this.http.get(`${HealtConstants.HealthAPI_URL}patients/RetrivePatientsSimple`, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
         return res.json();
       });
@@ -47,7 +48,7 @@ export class PatientsService {
     };
     let ExecuteReq: ExecuteReq = this.commonService.generete_post_Params("getPatientService", bussinesData);
 
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, ExecuteReq, HealtConstants.httpOptions).map(function (res: Response) {
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, ExecuteReq, HealtConstants.httpClientOption_contenttype_json).map(function (res: Response) {
 
       let result: Result = JSON.parse(res.json());
       console.log(res.json());
@@ -75,10 +76,10 @@ export class PatientsService {
       Id: id
     };
     
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("getPatientService", bussinesData);
-    HealtConstants.httpOptions.search = searchParams;
+    let ExecuteReq=  this.commonService.generete_post_Params("getPatientService", bussinesData);
+    //HealtConstants.httpOptions.search = searchParams;
 
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,ExecuteReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result= JSON.parse(res.json());
@@ -97,8 +98,6 @@ export class PatientsService {
   //retrivePatients
   retrivePatients$(txtQuery:string): Observable<PatientBE[]> {
 
-
-    
     var bussinesData = {
       nombre: txtQuery,
       apellido: txtQuery,
@@ -107,14 +106,9 @@ export class PatientsService {
       ReturnGrid:false,
     };
 
-
-    let searchParams: URLSearchParams =
-    this.commonService.generete_get_searchParams("RetrivePatientsService",  bussinesData);
-    
-    HealtConstants.httpOptions.search = searchParams;
-
-    //console.log('trying to execute ' + `${HealtConstants.HealthExecuteAPI_URL}`);
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
+  
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -143,8 +137,9 @@ export class PatientsService {
       Mutuales: mutuales
     
     };
-    HealtConstants.httpOptions.search = this.commonService.generete_get_searchParams("CrearPatientService", bussinesData);;
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    let executeReq=  this.commonService.generete_post_Params("CrearPatientService", bussinesData);
+    
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
     .map(function (res: Response) {
 
       let result: Result = JSON.parse(res.json());
@@ -169,8 +164,9 @@ export class PatientsService {
       AnteriorFechaNacimiento: Date
 
     };
-    HealtConstants.httpOptions.search = this.commonService.generete_get_searchParams("UpdatePatientService", bussinesData);;
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+
+    let executeReq=  this.commonService.generete_post_Params("UpdatePatientService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
@@ -199,11 +195,10 @@ export class PatientsService {
     };
 
 
+    let executeReq=  this.commonService.generete_post_Params("GetPatientService", bussinesData);
 
-    let searchParams: URLSearchParams = this.commonService.generete_get_searchParams("GetPatientService", bussinesData);
-    HealtConstants.httpOptions.search = searchParams;
     
-    return this.http.get(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpOptions)
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
         let result: Result = JSON.parse(res.json());
