@@ -34,7 +34,7 @@ export class PersonsService {
     return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
-        let result: Result = JSON.parse(res.json());
+        let result: Result = JSON.parse(res.toString());
         
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -63,7 +63,7 @@ export class PersonsService {
     return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpClientOption_contenttype_json)
       .map(function (res: Response) {
 
-        let result: Result = JSON.parse(res.json());
+        let result: Result = JSON.parse(res.toString());
 
         if (result.Error) {
           throw Observable.throw(result.Error);

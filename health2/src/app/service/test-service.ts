@@ -34,7 +34,7 @@ export class TestService {
     return this.http.post(url,ExecuteReq,{headers:headders} )
     .map(function (res: Response) {
 
-      let result: Result = JSON.parse(res.json());
+      let result: Result = JSON.parse(res.toString());
 
       if (result.Error) {
         console.log(result.Error);

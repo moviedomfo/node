@@ -28,7 +28,7 @@ export  const HealtConstants={
                 }
             },
      HealthAPI_URL:"http://localhost:63251/api/",
-     HealthExecuteAPI_URL:"http://localhost:63251/api/patients/execute",
+     HealthExecuteAPI_URL:"http://localhost:63251/api/health/execute",
      HealthOAuth_URL:"http://localhost:63251/oauth/token",
      ImagesSrc_Woman:'assets/images/User_Famele.bmp',
      ImagesSrc_Man:'assets/images/User_Male.bmp',

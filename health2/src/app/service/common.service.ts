@@ -74,7 +74,7 @@ export class CommonService {
       .map(function (res: Response) {
 
         let resToObject: Result;
-        resToObject = JSON.parse(res.json());
+        resToObject = JSON.parse(res.toString());
 
         if (resToObject.Error) {
 
