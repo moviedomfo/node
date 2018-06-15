@@ -1,0 +1,170 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "health2": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "polyfills": "src/polyfills.ts",
+            "assets": [
+              "src/assets",
+              "src/favicon.ico"
+            ],
+            "styles": [
+              "node_modules/font-awesome/css/font-awesome.css",
+              "src/app/common-components/ag-styles/ag-grid.css",
+              "src/app/common-components/ag-styles/theme-fresh.css",
+              "src/styles.css",
+              "src/assets/bower_components/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/bower_components/font-awesome/css/font-awesome.min.css",
+              "src/assets/bower_components/Ionicons/css/ionicons.min.css",
+              "src/assets/bower_components/jvectormap/jquery-jvectormap.css",
+              "src/assets/dist/css/AdminLTE.min.css",
+              "src/assets/dist/css/skins/_all-skins.min.css"
+            ],
+            "scripts": [
+              "src/assets/bower_components/jquery/dist/jquery.min.js",
+              "src/assets/bower_components/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/bower_components/fastclick/lib/fastclick.js",
+              "src/assets/dist/js/adminlte.min.js",
+              "src/assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js",
+              "src/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
+              "src/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js",
+              "src/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js",
+              "src/assets/bower_components/chart.js/Chart.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "health2:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "health2:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "health2:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "scripts": [
+              "src/assets/bower_components/jquery/dist/jquery.min.js",
+              "src/assets/bower_components/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/bower_components/fastclick/lib/fastclick.js",
+              "src/assets/dist/js/adminlte.min.js",
+              "src/assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js",
+              "src/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
+              "src/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js",
+              "src/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js",
+              "src/assets/bower_components/chart.js/Chart.js"
+            ],
+            "styles": [
+              "node_modules/font-awesome/css/font-awesome.css",
+              "src/app/common-components/ag-styles/ag-grid.css",
+              "src/app/common-components/ag-styles/theme-fresh.css",
+              "src/styles.css",
+              "src/assets/bower_components/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/bower_components/font-awesome/css/font-awesome.min.css",
+              "src/assets/bower_components/Ionicons/css/ionicons.min.css",
+              "src/assets/bower_components/jvectormap/jquery-jvectormap.css",
+              "src/assets/dist/css/AdminLTE.min.css",
+              "src/assets/dist/css/skins/_all-skins.min.css"
+            ],
+            "assets": [
+              "src/assets",
+              "src/favicon.ico"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "health2-e2e": {
+      "root": "",
+      "sourceRoot": "e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "./protractor.conf.js",
+            "devServerTarget": "health2:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "health2",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "styleext": "css"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  }
+}

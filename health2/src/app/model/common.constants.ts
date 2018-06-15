@@ -20,7 +20,7 @@ export  const HealtConstants={
      CNN_STRING_HEALTH: {
             user: 'sa',
             password: 'as',
-            server: 'SANTANA\\SQLEXPRESS2008',
+            server: 'SANTANA\\SQLEXPRESS2012',
             database: 'health3',
 
             options: {
@@ -28,7 +28,8 @@ export  const HealtConstants={
                 }
             },
      HealthAPI_URL:"http://localhost:63251/api/",
-     HealthExecuteAPI_URL:"http://localhost:63251/api/health/execute",
+     HealthExecuteAPI_URL:"http://localhost:63251/api/fwk/execute",
+     HealthExecuteService_allowedAuthAPI_URL:"http://localhost:63251/api/fwk/execute",
      HealthOAuth_URL:"http://localhost:63251/oauth/token",
      ImagesSrc_Woman:'assets/images/User_Famele.bmp',
      ImagesSrc_Man:'assets/images/User_Male.bmp',
@@ -36,8 +37,8 @@ export  const HealtConstants={
      httpClientOption_form_urlencoded:{headers:header_httpClient_form_urlencoded},
      httpClientOption_contenttype_json:{headers:header_httpClient_contentTypeJson},
      DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A',
-     oaut_client_id:'olecram',
-     oaut_client_secret:'1234'
+     oaut_client_id:'nodeJSClient',
+     oaut_client_secret:'pletorico28'
 }
 
 export const Sexo =
