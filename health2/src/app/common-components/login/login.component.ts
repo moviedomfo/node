@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {User} from '../../model/index'
 import { AuthenticationService } from './../../service/index';
+import { CurrentLogin } from '../../model/common.model';
 
 @Component({
     templateUrl: 'login.component.html',
@@ -11,6 +12,7 @@ import { AuthenticationService } from './../../service/index';
 
 export class LoginComponent implements OnInit {
     currentUser: User = new User();
+ 
     loading = false;
     error = '';
 
@@ -24,6 +26,12 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
+
+        this.authenticationService.oauthToken(this.currentUser.UserName, this.currentUser.Password)
+        .subscribe(res=>{
+
+
+        });
         this.loading = true;
         this.authenticationService.login(this.currentUser.UserName, this.currentUser.Password)
             .subscribe(result => {
