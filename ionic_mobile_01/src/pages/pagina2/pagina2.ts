@@ -15,7 +15,7 @@ export class Pagina2Page {
 
   public newsList: childrenBE[] = [];
   
-
+  public defaultImg: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL24woWmytp2XdstksagUYcMF5wBhuIwCHqA90ztNeC9fUr_-L';
   PermitirDuplicados:Boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams,private http: HttpClient) {
   }
@@ -25,7 +25,9 @@ export class Pagina2Page {
     this.PermitirDuplicados = false;
   }
 
-
+  setDefaultPic() {
+  return this.defaultImg;
+  }
   retriveNews():void{
 
 

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Esta es la pagina II</ion-title>
+    <ion-title>Lista de news konecta</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,27 +15,40 @@
 
 <ion-content padding>
  
- <ion-label>Settings </ion-label>
+ <ion-label>Konecta settings </ion-label>
  <ion-item>
   <ion-label>Permitir Duplicados </ion-label>
   <ion-checkbox color="dark" checked="true" [(ngModel)]="PermitirDuplicados"></ion-checkbox>
 </ion-item>
 
-<ion-label>Valor del  </ion-label>
-<div strong>{{PermitirDuplicados}}</div>  
-<button (click)="retriveNews()" outline ion-button color="secondary" icon-only>
+
+
+<button (click)="retriveNews()" outline ion-button color="primary" icon-only>
     Mostrar data
  </button>
  <ion-list>
 <div *ngFor="let item of newsList; let i = index">
-    <ion-item>
-        <ion-avatar item-start>
-            <img src="{{item.data.thumbnail}}">
-          </ion-avatar>
-      <h3>{{item.data.title}}</h3>
-      <p>I{{item.data.selftext}}</p>
+    <ion-item-sliding>
+        <ion-item>
+            <ion-avatar item-start  *ngIf="item.data.url.indexOf('http')===0">
+              <!-- <img src="{{item.data.thumbnail}}" (error)="setDefaultPic()"> -->
+              <img src=" {{item.data.thumbnail}}" (error)="setDefaultPic()">
+            </ion-avatar>
+            
+            <h2>Tiene imagen = {{item.data.url.indexOf('thumbs')}}</h2>
+            
+            <h2>{{item.data.title}}</h2>
+
+            <a   href="{{item.data.url}}" target="_blank">{{item.data.title}}</a>
+            <p>{{item.data.selftext}} </p>
+            <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.data.created"></ion-datetime> -->
+
+          </ion-item>
+
+     
+    
       
-    </ion-item>
+    </ion-item-sliding>
   </div>
 </ion-list>
 
