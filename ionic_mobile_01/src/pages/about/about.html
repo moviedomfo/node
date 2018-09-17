@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Mi aplicacion Musicaly
+     
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <label>Ingresa tu carta del dia</label>
+  <textarea ion-text>
+        
+  </textarea>
+  <button  (click)="goPagina2()" ion-button outline >
+     Aceptar
+  </button>
+
+  <button (click)="saludo()" outline ion-button color="secondary" icon-only>
+      Cancelar
+   </button>
+
+
+   <ion-buttons start>
+      <button ion-button icon-only>
+        <ion-icon name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
+</ion-content>

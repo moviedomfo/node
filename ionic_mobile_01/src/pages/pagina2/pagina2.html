@@ -1,0 +1,42 @@
+<!--
+  Generated template for the Pagina2Page page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Esta es la pagina II</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ 
+ <ion-label>Settings </ion-label>
+ <ion-item>
+  <ion-label>Permitir Duplicados </ion-label>
+  <ion-checkbox color="dark" checked="true" [(ngModel)]="PermitirDuplicados"></ion-checkbox>
+</ion-item>
+
+<ion-label>Valor del  </ion-label>
+<div strong>{{PermitirDuplicados}}</div>  
+<button (click)="retriveNews()" outline ion-button color="secondary" icon-only>
+    Mostrar data
+ </button>
+ <ion-list>
+<div *ngFor="let item of newsList; let i = index">
+    <ion-item>
+        <ion-avatar item-start>
+            <img src="{{item.data.thumbnail}}">
+          </ion-avatar>
+      <h3>{{item.data.title}}</h3>
+      <p>I{{item.data.selftext}}</p>
+      
+    </ion-item>
+  </div>
+</ion-list>
+
+</ion-content>
