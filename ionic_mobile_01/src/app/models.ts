@@ -41,6 +41,7 @@ export class childrenBE{
 
 export class NewsBE {//implements IPatient {
     constructor(){}
+    public name: string;
     public thumbnail: string;
     public title: string;
     public selftext :string;

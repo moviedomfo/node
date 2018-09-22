@@ -14,42 +14,50 @@
 
 
 <ion-content padding>
- 
- <ion-label>Konecta settings </ion-label>
- <ion-item>
-  <ion-label>Permitir Duplicados </ion-label>
-  <ion-checkbox color="dark" checked="true" [(ngModel)]="PermitirDuplicados"></ion-checkbox>
-</ion-item>
+
+  <ion-label>Konecta settings </ion-label>
+  <ion-item>
+    <ion-label>Permitir Duplicados </ion-label>
+    <ion-checkbox color="dark" checked="true" [(ngModel)]="PermitirDuplicados"></ion-checkbox>
+  </ion-item>
 
 
 
-<button (click)="retriveNews()" outline ion-button color="primary" icon-only>
+  <button (click)="retriveNews()" outline ion-button color="primary" icon-only>
     Mostrar data
- </button>
- <ion-list>
-<div *ngFor="let item of newsList; let i = index">
-    <ion-item-sliding>
+  </button>
+  <ion-list>
+    <div *ngFor="let item of newsList; let i = index">
+      <ion-item-sliding>
         <ion-item>
-            <ion-avatar item-start  *ngIf="item.data.url.indexOf('http')===0">
-              <!-- <img src="{{item.data.thumbnail}}" (error)="setDefaultPic()"> -->
-              <img src=" {{item.data.thumbnail}}" (error)="setDefaultPic()">
-            </ion-avatar>
-            
-            <h2>Tiene imagen = {{item.data.url.indexOf('thumbs')}}</h2>
-            
-            <h2>{{item.data.title}}</h2>
+          <ion-avatar item-start>
+            <!-- <img src="{{item.data.thumbnail}}" (error)="setDefaultPic()"> -->
+            <img src="{{item.data.thumbnail}}">
+          </ion-avatar>
 
-            <a   href="{{item.data.url}}" target="_blank">{{item.data.title}}</a>
-            <p>{{item.data.selftext}} </p>
-            <!-- <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="item.data.created"></ion-datetime> -->
 
-          </ion-item>
 
-     
-    
-      
-    </ion-item-sliding>
-  </div>
-</ion-list>
+          <h2 class="postTitle">{{item.data.title}}</h2>
 
+          <a href="{{item.data.url}}" target="_blank">{{item.data.title}}</a>
+          <p class="postTitle">{{item.data.selftext}}</p>
+
+          <!-- <p>{{ item.data.created | amFromUnix }}</p> -->
+          <!-- <p>{{ (1456263980 | amFromUnix) | amDateFormat:'hh:mmA'}}</p> -->
+          <!-- <p>{{(1456263980 | amTimeAgo)}}</p> -->
+          <span am-time-ago="item.data.created"></span>
+
+
+        </ion-item>
+
+
+
+
+
+      </ion-item-sliding>
+    </div>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

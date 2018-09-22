@@ -15,6 +15,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {Pagina2PageModule} from '../pages/pagina2/pagina2.module';
+
+import { MomentModule } from 'ngx-moment';
+
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -27,7 +32,8 @@ import {Pagina2PageModule} from '../pages/pagina2/pagina2.module';
     BrowserModule,
     Pagina2PageModule,
     HttpModule,
-  HttpClientModule,
+    HttpClientModule,
+    MomentModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
