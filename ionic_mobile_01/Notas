@@ -1,5 +1,98 @@
 
+Tutoriales en la web 
+Video https://www.youtube.com/watch?v=3iJ0WFzkAV4
+Documentos q usa el video https://www.uno-de-piera.com/instalar-phonegap-en-windows/
 
+ phonegap es un framework que nos permite crear aplicaciones móviles haciendo uso de html, css y javascript para prácticamente cualquier plataforma sin la necesidad de conocer el lenguaje nativo de cada una de ellas.
+----------------------------------------------------------------------------------
+Lo primero es tener todo el entorno instalado 
+    Instalación del JDK de Java
+    Descargar el SDK de Android
+    Configurar las rutas en variables de entorno
+    Descargar Apache Ant (esto es para phonegap) + configurar Variables de entorno
+
+    Tambien se requiere instalar  gradle Ver Gradle Tutorial - How to install Gradle on Windows
+            https://bryanlor.com/blog/gradle-tutorial-how-install-gradle-windows
+
+            descargue el binadio y lo descomprimi en  de c:\gradle\gradle-4.10.2\bin\
+            Tambien agregue el path c:\gradle\gradle-4.10.2\bin\
+            reiniciar y hacer gradle --version: 
+                Si responde------------------------------------------------------------
+                                                Gradle 4.10.2
+                                        ------------------------------------------------------------
+
+                Es por que esta instalado OK
+
+    
+----------------------------------------------------------
 Para generar el app para subir al App store
-Añadir plataforma android a nuestra solucion. 
- --> ionic platform add android
+1 Añadir plataforma android a nuestra solucion. 
+ --> ionic platform add android (este comando esta pdeprecado)
+    hay qu eusar este otro y te crea todo el contenido de dentra platforms \android
+    --> ionic cordova platform add android
+----------------------------------------------------------
+
+2 -  generar la [appname].apk Build 
+    
+    ionic build --release --android (este comando no funciona)
+  
+    
+    For production release --> ionic cordova build android --prod --release
+
+    hay que hacer ionic build y ver si se genero el apk en platforms\andorid\build
+
+    Errores que pueden surgir
+    ******************************
+A problem occurred evaluating project ':CordovaLib'
+    No installed build tools found. Install the Android build tools version 19.1.0 or higher.
+  
+  puede hacer lo siguiente para detectar que hace falta
+        cordova requirements
+        y si dice No android targets (SDKs) installed!
+
+        pruebe instalar alguna plataforma android
+        cd 
+        c:\Android\tools\bin\sdkmanager "platforms;android-26"
+    -*******************************
+
+3-Emiminar los recursos de resourses\android
+    icons
+    splas
+    4-generarlos nuevamente
+    --> ionic resourses --icon
+    --> ionic resourses --splash
+    saltara error The resources command has been renamed
+
+    hay q ejecutar solo este comando
+    -->ionic cordova resources android
+
+4- Generate Keystore file 
+
+   keytool -genkey -v -keystore pelsoft_mobile.keystore -alias pelsoft_mobile -keyalg RSA -keysize 2048 -validity 10000
+
+
+        Posible error: 'keytool' is not recognized as an internal or external command,operable program or batch file.
+        Hay que instalar el SDK de java Hay que Reiniciar
+
+        Al ejecutar se le haran ciertas preguntas utiles similares a las que se hacen cuando se genera un certificado x500
+
+
+        RESULT: 
+        Generating 2,048 bit RSA key pair and self-signed certificate (SHA256withRSA) with a validity of 10,000 days
+        for: CN=Marcelo Oviedo, OU=PL, O=Pelsoft, L=Adelia Maria, ST=Cordoba, C=AR
+    platforms\android\pelsoft_mobile.keystore
+
+5-
+  
+
+
+6 -   Sign the apk 
+    ionic cordova build android --release
+    
+7- Si todo va bien BUILD SUCCESSFUL
+hay que firmar el apk
+    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore 
+    e:\projects\GitHub-sourcetree\node\ionic_mobile_01\platforms\android\pelsoft_mobile.keystore 
+      e:\projects\GitHub-sourcetree\node\ionic_mobile_01\platforms\android\build\outputs\apk\android-release-unsigned.apk some_name
+
+6- subirla a AppStore

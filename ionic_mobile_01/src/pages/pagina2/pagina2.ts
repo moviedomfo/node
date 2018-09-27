@@ -28,8 +28,8 @@ export class Pagina2Page {
     console.log('ionViewDidLoad Pagina2Page');
     this.PermitirDuplicados = false;
 
-    let fecha = 1456263980;
-    // this.duration= moment. 
+    
+    
   }
  
   ///Esta es otra forma de llamar al scroll infinito
