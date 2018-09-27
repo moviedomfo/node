@@ -50,3 +50,17 @@ export class NewsBE {//implements IPatient {
 
 
 }
+
+
+  /// Contiene informacion del error de un servicio.-
+  // if(e instanceof EvalError)
+  export class ServiceError extends Error{
+
+
+    Message:string;
+    StackTrace:string;
+    Type:string;
+    Machine:string;
+ Status:number;
+ 
+ }

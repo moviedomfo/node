@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
-import { NewsBE, HealtConstants, childrenList, childrenBE, resultRedditNews } from '../../app/models';
+import { NewsBE, HealtConstants, childrenList, childrenBE, resultRedditNews, ServiceError } from '../../app/models';
 import { HttpClient } from '@angular/common/http';
 import { resolveDefinition } from '@angular/core/src/view/util';
 
@@ -31,12 +31,10 @@ export class Pagina2Page {
     let fecha = 1456263980;
     // this.duration= moment. 
   }
-
+ 
   ///Esta es otra forma de llamar al scroll infinito
-  doInfinite(infiniteScroll): Oservable<childrenBE> {
-    console.log('Begin async infiniteScroll operation');
-
-    setTimeout(() => {
+  doInfinite(): Promise<any> {
+    console.log('Begin async infiniteScroll operation -->(Promise)');
 
       var param2 = {};
       param2['after'] = '';
@@ -44,17 +42,26 @@ export class Pagina2Page {
         param2['after'] = this.newsList[this.newsList.length - 1].data.name;
       }
       var url = 'https://www.reddit.com/new/.json?before=' + param2['after'];
-      let news$ = this.http.get('https://www.reddit.com/new/.json?before = ' + param2['after'], HealtConstants.httpClientOption_contenttype_json);
+      let news$ =  this.http.get(url, HealtConstants.httpClientOption_contenttype_json);
+      console.log('calling ' + url); 
+      return new Promise<any>((resolve) => {
 
-      console.log('llamando a ' + url);
-      return news$.subscribe(res => {
+        setTimeout(() => {
 
-        this.maping_date(res);
+          
+          news$.subscribe(res => {
+             this.maping_date(res);
+            });
+          
+          console.log('Async operation has ended -->(Promise)');
+          resolve();
+        }, 500);     
+        
+     
       });
 
 
-      infiniteScroll.complete();
-    }, 500);
+
   }
 
   ///Esta puede ser una de las formas
@@ -123,5 +130,33 @@ export class Pagina2Page {
       });
     }
 
+  }
+
+  public handleError(error: Response | any) {
+
+    console.log('-------------------Error---------------------');
+    console.log(error);
+    console.log(error.status);
+    console.log(error.message);
+    console.log('----------------------------------------');
+
+    let ex: ServiceError = new ServiceError();
+    ex.Message = 'Despachador de servicio no responde .-';
+    ex.Status= error.status;
+    if(error.statusText){
+      ex.Message = ex.Message + "\r\n" + error.statusText;
+    }
+    if(error._body){
+      ex.Message = ex.Message + "\r\n" + error._body;
+    }
+
+    if(error.message){
+      ex.Message = ex.Message + "\r\n" + error.message;
+    }
+   
+
+    ex.Machine = 'PC-Desarrollo-Santana';
+
+    return Observable.throw(ex); // <= B
   }
 }

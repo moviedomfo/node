@@ -1,0 +1,5 @@
+
+
+Para generar el app para subir al App store
+Añadir plataforma android a nuestra solucion. 
+ --> ionic platform add android
