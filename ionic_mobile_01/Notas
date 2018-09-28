@@ -91,8 +91,6 @@ A problem occurred evaluating project ':CordovaLib'
     
 7- Si todo va bien BUILD SUCCESSFUL
 hay que firmar el apk
-    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore 
-    e:\projects\GitHub-sourcetree\node\ionic_mobile_01\platforms\android\pelsoft_mobile.keystore 
-      e:\projects\GitHub-sourcetree\node\ionic_mobile_01\platforms\android\build\outputs\apk\android-release-unsigned.apk some_name
+    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore     e:\projects\GitHub-sourcetree\node\ionic_mobile_01\platforms\android\pelsoft_mobile.keystore       e:\projects\GitHub-sourcetree\node\ionic_mobile_01\platforms\android\app\build\outputs\apk\release\android-release-unsigned.apk pelsoft_mobile
 
 6- subirla a AppStore
