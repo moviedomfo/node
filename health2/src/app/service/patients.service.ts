@@ -56,7 +56,7 @@ export class PatientsService {
         throw Observable.throw(result.Error);
       }
      
-      let patient: PatientBE = result.BusinessData as PatientBE;
+      let patient: PatientBE[] = result.BusinessData as PatientBE[];
 
       return patient;
     }).catch(this.commonService.handleError);
