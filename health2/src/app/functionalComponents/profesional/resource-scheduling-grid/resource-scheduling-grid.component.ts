@@ -10,10 +10,11 @@ import { ResourceSchedulingBE } from "../../../model/profesional.model";
 import { DateComponent } from "../../../common-components/ag-grid/date.component";
 import { HeaderComponent } from "../../../common-components/ag-grid/header.component";
 import { HeaderGroupComponent } from "../../../common-components/ag-grid/header-group.component";
-import { ColumnApi, GridApi, GridOptions } from "ag-grid/main";
-import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
+
+
 import { WeekDaysCheckEditComponent } from "../../../common-components/week-days-check-edit/week-days-check-edit.component";
 import { ControlContainer, NgForm } from '@angular/forms';
+import { GridOptions, ColumnApi } from 'ag-grid-community';
 
 @Component({
   selector: 'app-resource-scheduling-grid',
@@ -35,7 +36,7 @@ export class ResourceSchedulingGridComponent implements OnInit {
   private columnDefs: any[];
   private gridOptions: GridOptions;
   private icons: any;
-  private api: GridApi;
+  
   private columnApi: ColumnApi;
 
   constructor() { }
@@ -69,13 +70,13 @@ export class ResourceSchedulingGridComponent implements OnInit {
     ];
   }
   private onReady(params) {
-    this.api = params.api;
+    this.gridOptions.api = params.api;
     this.columnApi = params.columnApi;
   }
 
   public showGrid() {
 
-    this.api.setRowData(this.profesionalResourceSchedulingList);
+    this.gridOptions.api.setRowData(this.profesionalResourceSchedulingList);
   }
 
   onResourceSheduler_cellClicked($event) {

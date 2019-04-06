@@ -36,7 +36,7 @@ http://brianflove.com/2016/10/18/angular-2-google-maps-places-autocomplete/
     Errores: error TS2304: Cannot find name 'google'
         solucion: instalar  @types/googlemaps 
         npm install @types/googlemaps --save --dev
-        luego onde se uce google.maps ....
+        luego donde se dice google.maps ....
         poner  import { } from '@types/googlemaps';
 
 4- Librerias UI PrimeNG (ultima instalada ^4.1.0) 

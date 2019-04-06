@@ -9,9 +9,9 @@ import { PatientsService, CommonService, MedicalInsuranceService } from '../../.
 import { DateComponent } from "../../../common-components/ag-grid/date.component";
 import { HeaderComponent } from "../../../common-components/ag-grid/header.component";
 import { HeaderGroupComponent } from "../../../common-components/ag-grid/header-group.component";
-import { GridOptions } from "ag-grid/main";
-import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
+
 import { ServiceError } from '../../../model/common.model';
+import { GridOptions } from 'ag-grid-community';
 
 @Component({
     selector: 'app-medical-insurance-grid',

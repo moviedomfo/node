@@ -5,11 +5,12 @@ import { Observable } from 'rxjs/Observable';
 import { DateComponent } from "../../../common-components/ag-grid/date.component";
 import { HeaderComponent } from "../../../common-components/ag-grid/header.component";
 import { HeaderGroupComponent } from "../../../common-components/ag-grid/header-group.component";
-import { ColumnApi, GridApi, GridOptions } from "ag-grid/main";
-import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
+
+
 
 import { MutualBE, MutualPorPacienteBE } from '../../../model/index';
 import { Subscription }   from 'rxjs/Subscription';
+import { GridOptions, ColumnApi } from 'ag-grid-community';
 @Component({
     selector: 'app-patien-medical-insurance-grid',
     templateUrl: './patien-medical-insurance-grid.component.html'
@@ -22,7 +23,7 @@ export class PatienMedicalInsuranceGridComponent implements OnInit {
     private columnDefs: any[];
     private gridOptions: GridOptions;
     private icons: any;
-    private api: GridApi;
+ 
     private columnApi: ColumnApi;
     @Output() onMedicalInsuranceByPatientChanged = new EventEmitter<MutualPorPacienteBE>();
     public currentMedicalInsuranceByPatient: MutualPorPacienteBE;
@@ -51,12 +52,12 @@ export class PatienMedicalInsuranceGridComponent implements OnInit {
 
     }
     private onReady(params) {
-        this.api = params.api;
+        this.gridOptions.api = params.api;
         this.columnApi = params.columnApi;
     }
     public showMedicalInsuranceByPatientList() {
         
-        this.api.setRowData(this.medicalInsuranceByPatientList);
+        this.gridOptions.api.setRowData(this.medicalInsuranceByPatientList);
     }
 
     private createColumnDefs() {

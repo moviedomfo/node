@@ -1,13 +1,11 @@
 import { Component, OnInit ,Input,Output,EventEmitter} from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-// rich grid and rich grid declarative
 import { DateComponent } from "../../../common-components/ag-grid/date.component";
 import { HeaderComponent } from "../../../common-components/ag-grid/header.component";
 import { HeaderGroupComponent } from "../../../common-components/ag-grid/header-group.component";
-import {ColumnApi, GridApi, GridOptions} from "ag-grid/main";
-import { RowNode } from 'ag-grid/dist/lib/entities/rowNode';
 import {MutualPorPacienteBE } from '../../../model/index';
+import { GridOptions } from 'ag-grid-community';
 
 @Component({
   selector: 'app-aggrid-test',
@@ -21,7 +19,7 @@ export class AggridTestComponent implements OnInit {
   
   private columnDefs: any[];
   private gridOptions: GridOptions = <GridOptions>{};
-  private api: GridApi;
+  //private api: GridApi;
   
   constructor() { }
 
@@ -54,8 +52,9 @@ export class AggridTestComponent implements OnInit {
 
  ///Este metodo solo tiene validez luego de que onReady suceda
  public Refresh() {
-     if (this.api === undefined) return;
-     this.api.setRowData(this.patientList)
+     if (this.gridOptions.api === undefined) return;
+     //this.api.setRowData(this.patientList)
+     this.gridOptions.api.setRowData(this.patientList);
  }
  
   private createColumnDefs() {
@@ -70,7 +69,7 @@ export class AggridTestComponent implements OnInit {
 
 ///Determina que la grilla esta lista y la api puede ser creada
 private onReady(params) {
-    this.api = params.api;
+    this.gridOptions.api = params.api;
     //this.columnApi = params.columnApi;
 }
 

@@ -1,6 +1,7 @@
 import { ElementRef, NgZone,  ViewChild ,Component, OnInit ,Output, EventEmitter} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { } from '@types/googlemaps';
+//import { } from '@types/googlemaps';
+import {} from '@agm/core/services/google-maps-types';
 import { MapsAPILoader } from '@agm/core';
 import { PlaceBE } from "../../model/persons.model";
 
@@ -11,6 +12,7 @@ import { PlaceBE } from "../../model/persons.model";
 })
 
 export class GooglePlaceComponent implements OnInit {
+
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
