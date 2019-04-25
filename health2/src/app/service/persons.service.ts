@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import {  Response, RequestOptions, Headers } from '@angular/http';
 import {PersonBE} from '../../app/model/persons.model'
 import { HealtConstants, contextInfo } from "../model/common.constants";
