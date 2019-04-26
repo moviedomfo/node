@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { PatientBE,MutualPorPacienteBE,PersonBE } from '../model/index';
-import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq } from '../model/common.model';
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq, ApiResult } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -34,31 +34,11 @@ export class PatientsService {
 
 
   
-  retrivePatientsSimple_post$(): Observable<PatientBE[]> {
-    var bussinesData = {
-      Id: 123
-    };
-    let ExecuteReq: ExecuteReq = this.commonService.generete_post_Params("getPatientService", bussinesData);
-
-    return this.http.post<PatientBE[]>(`${HealtConstants.HealthExecuteAPI_URL}`, ExecuteReq, HealtConstants.httpClientOption_contenttype_json).pipe(
-      map(res => {
-
-        let result: Result = JSON.parse(res.toString());
-        console.log(res.toString());
-        if (result.Error) {
-          throw Observable.throw(result.Error);
-        }
-       
-        let patient: PatientBE[] = result.BusinessData as PatientBE[];
-  
-        return patient;
-      })
-      
-    ).pipe( catchError(this.commonService.handleError));
+ 
     
    
 
-  }
+  
 
   //Request header field Access-Control-Allow-Origin is not allowed by 
   //Access-Control-Allow-Headers in preflight response.
@@ -72,7 +52,7 @@ export class PatientsService {
     var bussinesData = {
       Id: id
     };
-    alert('');
+
     let ExecuteReq=  this.commonService.generete_post_Params("getPatientService", bussinesData);
     //HealtConstants.httpOptions.search = searchParams;
 
@@ -107,13 +87,15 @@ export class PatientsService {
     let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
   
     return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
-      map(function (res: Response) {
+      map(function (res: ApiResult) {
 
         
-        let result: Result = JSON.parse(res.toString());
+       // let apiResult: ApiResult;
+        //apiResult = res;
 
+        let result= JSON.parse(res.Result.toString());
         if (result.Error) {
-          throw  Observable.throw(result.Error);
+          throw  Observable.throw(result.Result.Error);
         }
 
         let patientlist: PatientBE[] = result.BusinessData["PatientList"] as PatientBE[];
@@ -177,12 +159,6 @@ export class PatientsService {
   }
 
 
-
-  // getPatientById(patintId: number): IPatient {
-  //   let patient: IPatient;
-  //   patient = this.patientList.filter(p => p.PatientId === patintId)[0];
-  //   return patient;
-  // }
 
   getPatientById(patientId: number): Observable<PatientBE> {
       

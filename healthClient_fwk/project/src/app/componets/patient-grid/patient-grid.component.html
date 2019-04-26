@@ -8,6 +8,64 @@
 
 
   </div>
+  <!-- <div style="height: 95%; overflow: auto;">
+    <table class="">
+      <thead>
+        <tr>
+          <td>Id</td>
+          <td>Nombre</td>
+          <td>FechaAlta</td>
+          <td>NroDocumento</td>
+        </tr>
+      </thead>
+      <tr *ngFor="let data of patientList">
+        <td>{{data.PatientId}}</td>
+        <td>{{data.Persona.Apellido}} {{data.Persona.Nombre}}</td>
+        <td>{{data.FechaAlta}}</td>
+        <td>{{data.Persona.NroDocumento}}</td>
+        
+    </table>
+  </div> -->
 
+  
+  <table mat-table [dataSource]="dataSourse" class="mat-elevation-z8">
+
+   
+  
+          <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            
+            <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef> Name </th> 
+           <td mat-cell *matCellDef="let element"> {{element.Nombre}}</td>
+         </ng-container>
+         <ng-container matColumnDef="NroDocumento">
+          <th mat-header-cell *matHeaderCellDef> NroDocumento </th>
+          <td mat-cell *matCellDef="let element"> {{element.NroDocumento}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaAlta">
+          <th mat-header-cell *matHeaderCellDef> FechaAlta </th>
+          <td mat-cell *matCellDef="let element"> {{element.FechaAlta}} </td>
+        </ng-container>
+    <!-- 
+    
+  
+    
+    
+  
+    
+    <ng-container matColumnDef="NroDocumento">
+      <th mat-header-cell *matHeaderCellDef> NroDocumento </th>
+      <td mat-cell *matCellDef="let element"> {{element.NroDocumento}} </td>
+    </ng-container>
+  -->
+  
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> 
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+  </table>
+
+  <!-- <div>{{this.patientList | json}}</div> -->
 
 <section>

@@ -1,25 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HealtConstants, contextInfo, CommonParams } from "../model/common.constants";
-import { Param, IParam, IContextInformation, ContextInformation, ExecuteReq, Request, IRequest, IResponse, Result, ServiceError, CurrentLogin } from '../model/common.model';
+import { Param, IParam, IContextInformation, ContextInformation, ExecuteReq, Request, IRequest, IResponse, Result, ServiceError, CurrentLogin, IpInfo } from '../model/common.model';
 //import { Http, RequestOptions } from 'rxjs/header';
 //permmite cambiar la variable obsevada
 import { Subject, throwError } from 'rxjs';
-//permite observar
-
 import { Router } from '@angular/router'
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-
 import { map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 //var colors = require('colors/safe');
+
+
 @Injectable()
 export class CommonService {
   public paramList: Param[] = [];
   public paramList$: Subject<Param[]> = new Subject<Param[]>();
-
+  private ipinfo:IpInfo;
   public mainComponentTitle_subject$: Subject<string> = new Subject<string>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+
+    this.ipinfo = new IpInfo();
+    this.getIP().subscribe(res=>{
+      this.ipinfo = res;
+      
+    });
+   }
 
   //permite subscripcion añl Subject con el titulo
   get_mainComponentTitle$(): Observable<string> {
@@ -45,6 +51,8 @@ export class CommonService {
     }
 
   }
+
+
   serarPlaces_google_place_api(input: string) {
     //console.log('Ejecutando serarPlaces_google_place_api()');
     var api_url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=[input]&types=geocode&key=AIzaSyAEBn6XjDRlouhZP-nQHSU4equHUeR2wEc';
@@ -58,6 +66,7 @@ export class CommonService {
         console.log(res);
       }));
   }
+
   /**
    * @idTipoParametro : Nombre de tabla
    * @idParametroRef : Subnombre , subcategoria
@@ -69,8 +78,7 @@ export class CommonService {
       IdTipoParametro: idTipoParametro,
       Vigente: true
     };
-
-   
+  
     let executeReq=  this.generete_post_Params("SearchParametroByParamsService", bussinesData);
 
     return this.http.post<Param[]>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
@@ -203,8 +211,8 @@ export class CommonService {
     let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
     contextInfo.Culture = "ES-AR";
     contextInfo.ProviderNameWithCultureInfo = "";
-    contextInfo.HostName = 'localhost';
-    contextInfo.HostIp = '10.10.200.168';
+    contextInfo.HostName = this.ipinfo.city + this.ipinfo.country;
+    contextInfo.HostIp =  this.ipinfo.ip;
     contextInfo.HostTime = new Date(),
     contextInfo.ServerName = '';
     contextInfo.ServerTime = new Date();
@@ -253,7 +261,7 @@ export class CommonService {
     
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.log('An error occurred:', error.error.message);
+      console.log('Client-side error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
@@ -261,9 +269,8 @@ export class CommonService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
-    // return an observable with a user-facing error message
-    //return throwError(
-      //'Something bad happened; please try again later.');
+   
+
 
 
     let ex: ServiceError = new ServiceError();
@@ -275,18 +282,16 @@ export class CommonService {
     if(error.error.message){
       ex.Message = ex.Message + "\r\n" + error.error.message;
     }
-    if(error._body){
-      ex.Message = ex.Message + "\r\n" + error._body;
-    }
+   
 
     if(error.message){
       ex.Message = ex.Message + "\r\n" + error.message;
     }
    
+    ex.Machine = 'PC-Desarrollo';
 
-    ex.Machine = 'PC-Desarrollo-Santana';
-    return throwError(ex);
-    //return Observable.throw(ex); // <= B
+    return throwError(ex);  // return an observable with a user-facing error message
+    //return Observable.throw(ex); // <= B // se comenta para la version 7
   }
   public handleErrorObservable(error: ServiceError) {
 
@@ -314,4 +319,16 @@ export class CommonService {
     var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
     return base64String;
   }
+
+
+  getIP(): Observable<any> {
+
+    return this.http.get<string[]>('http://ipinfo.io?token=21ea63fe5267b3').pipe(
+      map(function (res) {
+         return res;
+      })).pipe( catchError(this.handleError));
+
+
+      
+}
 }

@@ -19,7 +19,7 @@ export class PatientBE {//implements IPatient {
     public LastAccessTime: Date;
     public LastAccessUserId: string;
     public LastHealthInstId: string;
-    public Persona:PersonBE;
+    public Persona: PersonBE;
     public Mutuales : MutualPorPacienteBE[];
 }
 export class PlanVacunacion_FullViewBE {

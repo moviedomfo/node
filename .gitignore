@@ -4180,3 +4180,5 @@ testSecurity/apiserver/node_modules/promise/core.js
 testSecurity/apiserver/node_modules/promise/build.js
 testSecurity/apiserver/uploads/
 testSecurity/apiserver/node_modules/form-data/README.md.bak
+spec.ts
+*spec.ts
