@@ -14,7 +14,7 @@ export class PersonBE {
      TipoDocumento: string;
      NroDocumento: string;
      Apellido: string;
-    Nombre: string;
+     Nombre: string;
      Sexo: number;  
      IdEstadocivil: number;
      FechaNacimiento?: Date;

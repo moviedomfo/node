@@ -11,24 +11,40 @@ import { PatientsService } from 'src/app/service/patients.service';
   styleUrls: ['./patient-grid.component.css']
 })
 export class PatientGridComponent implements OnInit {
-  private displayedColumns: string[] = [];
+  private displayedColumns: string[]  =['position', 'name', 'weight', 'symbol'];
   globalError: ServiceError;
   private patientList$: Observable<PatientBE[]>;
   private patientList: PatientBE[];
- private dataSourse :IPerson[];
+ private dataSourse2 :IPerson[];
+ private dataSourse :PeriodicElement[];
   private txtQuery: string;
-  private patientCount:Number;
+ 
   
   constructor(
-    private commonService: CommonService,
-    private patientsService: PatientsService) {
-      this.displayedColumns = ['Id', 'Nombre', 'NroDocumento','FechaAlta'];
+    private commonService: CommonService,    private patientsService: PatientsService) {
+      //this.displayedColumns :string[]= ['Id', 'Nombre', 'NroDocumento','FechaAlta'];
       this.dataSourse =[];
-      //this.patientList =[  {PatientId: 1, Persona.Nombre: 'Hydrogen', NroDocumento: 1.0079}];
+      this.dataSourse2 =[];
+      this.displayedColumns= ['position', 'name', 'weight', 'symbol'];
+
+      let ELEMENT_DATA : PeriodicElement[] = [
+        {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+        {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+        {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+        {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+        {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+        {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+        {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+        {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+        {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+        {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+      ];
+      
+      this.dataSourse = ELEMENT_DATA;
     }
 
   ngOnInit() {
-    this.displayedColumns = ['Id', 'Nombre', 'NroDocumento','FechaAlta'];
+    
     this.patientList = [];
     this.retrivePatients();
   }
@@ -39,22 +55,26 @@ retrivePatients() {
     this.patientList$.subscribe((res:PatientBE[]) =>
       {
         this.patientList= res;
-        this.patientList.forEach(p=>{
-          
-      this.dataSourse.push(
-               {
-                  Id :p.PatientId,
-                  Nombre: p.Persona.Apellido + ',' + p.Persona.Nombre, 
-                  NroDocumento:p.Persona.NroDocumento,
-                  FechaAlta:p.FechaAlta}
-            );
-        });
+        this.parceToIPerson();
         
       },
       err => {this.globalError = err;}
     );
     
   }
+
+ parceToIPerson(){
+  this.patientList.forEach(p=>{
+          
+    this.dataSourse2.push(
+       {
+          Id :p.PatientId,
+          Nombre: p.Persona.Apellido + ',' + p.Persona.Nombre, 
+          NroDocumento:p.Persona.NroDocumento,
+          FechaAlta:p.FechaAlta}
+       );
+    });
+ }
 
 }
 export interface IPerson {
@@ -63,3 +83,21 @@ export interface IPerson {
   Nombre: string;
   FechaAlta: Date;
 }
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+];

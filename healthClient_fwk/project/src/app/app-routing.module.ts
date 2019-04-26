@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MapsService } from './service/maps.service';
+
 
 
 const routes: Routes = [];
@@ -11,15 +11,7 @@ const routes: Routes = [];
 })
 export class AppRoutingModule {
 
-   lat: string ='';
-   lng: string ='';
-   constructor(private map:MapsService){}
+   constructor(){}
 
-   ngOnInit(){
-
-    this.map.getLocation().subscribe(data=>{
-  
-    });
-
-   }
+   ngOnInit(){  }
  }

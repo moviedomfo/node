@@ -10,8 +10,9 @@ import { CommonService } from './service/common.service';
 import { PatientsService } from './service/patients.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from './material-module';
-
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatNativeDateModule, MatTableModule, MatPaginatorModule, MatSortModule} from '@angular/material';
+import { FwkDataTableComponent } from './fwk-data-table/fwk-data-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,16 +21,27 @@ import {DemoMaterialModule} from './material-module';
     
     
     ErrorBoxContainerComponent,
+    
+    
+    
+    FwkDataTableComponent,
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     DemoMaterialModule,
-    HttpClientModule,BrowserAnimationsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
       libraries: ['places']
-    })
+    }),
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
 
   ],
   providers: [PatientsService,CommonService],
