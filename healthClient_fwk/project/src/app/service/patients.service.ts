@@ -89,9 +89,6 @@ export class PatientsService {
     return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
       map(function (res: ApiResult) {
 
-        
-       // let apiResult: ApiResult;
-        //apiResult = res;
 
         let result= JSON.parse(res.Result.toString());
         if (result.Error) {
@@ -99,9 +96,7 @@ export class PatientsService {
         }
 
         let patientlist: PatientBE[] = result.BusinessData["PatientList"] as PatientBE[];
-        //let lita :any[]=retrivePatientsRes.BusinessData["PatientList"];
-        //patientlist = retrivePatientsRes.BusinessData["PatientList"] as PatientBE[];
-        //alert(JSON.stringify(patientlist));
+     
 
         return patientlist;
       })) .pipe( catchError(this.commonService.handleError));
@@ -118,9 +113,9 @@ export class PatientsService {
     let executeReq=  this.commonService.generete_post_Params("CrearPatientService", bussinesData);
     
     return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
-    map(function (res: Response) {
+    map(function (res: ApiResult) {
 
-      let result: Result = JSON.parse(res.toString());
+      let result= JSON.parse(res.Result.toString());
 
       if (result.Error) {
         throw  Observable.throw(result.Error);
@@ -133,7 +128,7 @@ export class PatientsService {
 
   }
 
-  //AnteriorFechaNacimiento Vacunas
+  
   updatePatientsService$(patient: PatientBE, mutuales: MutualPorPacienteBE[], AnteriorFechaNacimiento: Date): Observable<any> {
 
     var bussinesData = {
@@ -145,14 +140,13 @@ export class PatientsService {
 
     let executeReq=  this.commonService.generete_post_Params("UpdatePatientService", bussinesData);
     return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
-      map(function (res: Response) {
-
-        let result: Result = JSON.parse(res.toString());
+      map(function (res: ApiResult) {
+        let result= JSON.parse(res.Result.toString());
 
         if (result.Error) {
           throw  Observable.throw(result.Error);
-          
         }
+
         return "the patient was updated";
       })) .pipe( catchError(this.commonService.handleError));
 
@@ -171,9 +165,9 @@ export class PatientsService {
 
     
     return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
-      map(function (res: Response) {
+      map(function (res: ApiResult) {
 
-        let result: Result = JSON.parse(res.toString());
+        let result= JSON.parse(res.Result.toString());
       
         if (result.Error) {
           throw  Observable.throw(result.Error);
@@ -186,7 +180,7 @@ export class PatientsService {
 
 
         return patient;
-      })) .pipe( catchError(this.commonService.handleError));
+      })).pipe( catchError(this.commonService.handleError));
    }
 }
 

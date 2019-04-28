@@ -5,32 +5,18 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface FwkDataTableItem {
-  name: string;
-  id: number;
+  Id: number;
+  NroDocumento: string;
+  Nombre: string;
+  FechaAlta: Date;
 }
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: FwkDataTableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
+  {Id: 1, Nombre: 'Hydrogen', NroDocumento: "1.0079", FechaAlta: new Date('2016-04-26T18:09:16Z')},
+  {Id: 2, Nombre: 'Helium', NroDocumento: "4.0026", FechaAlta: new Date('2016-04-26T18:09:16Z')},
+  {Id: 3, Nombre: 'Lithium', NroDocumento: "6.941", FechaAlta: new Date('2016-04-26T18:09:16Z')},
+  
 ];
 
 /**
@@ -94,8 +80,8 @@ export class FwkDataTableDataSource extends DataSource<FwkDataTableItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'Nombre': return compare(a.Nombre, b.Nombre, isAsc);
+        case 'Id': return compare(+a.Id, +b.Id, isAsc);
         default: return 0;
       }
     });
