@@ -1,4 +1,11 @@
 # Project
+#en express
+npm i express socket.io @types/socket.io --save
+
+ #en angular
+    npm i ngx-socket-io --save 
+install material
+ng add @angular/material
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
 

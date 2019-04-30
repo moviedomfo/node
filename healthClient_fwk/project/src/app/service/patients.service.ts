@@ -74,7 +74,7 @@ export class PatientsService {
 
 
   //retrivePatients
-  retrivePatients$(txtQuery:string): Observable<PatientBE[]> {
+  retrivePatients$(txtQuery:string,pageIndex:number,pageSize:number): Observable<PatientBE[]> {
 
     var bussinesData = {
       nombre: txtQuery,
@@ -82,8 +82,11 @@ export class PatientsService {
       nroDocumento:null,
       id:null,
       ReturnGrid:false,
+      pageIndex:pageIndex,
+      pageSize:pageSize,
     };
 
+   
     let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
   
     return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(

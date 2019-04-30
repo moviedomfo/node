@@ -26,7 +26,7 @@ import {
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
-  MatPaginatorModule,
+  MatPaginatorModule, //*
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatRadioModule,
@@ -91,7 +91,7 @@ import {
     ScrollingModule,
   ]
 })
-export class DemoMaterialModule {}
+export class MaterialModule {}
 
 
 /**  Copyright 2019 Google Inc. All Rights Reserved.

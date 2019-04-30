@@ -1,0 +1,68 @@
+<section class="">
+  <div class="">
+    <app-error-box-container [globalError]="globalError"></app-error-box-container>
+    <div  class="mat-elevation-z8">
+
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+          
+      <mat-table [dataSource]="dataSource" >
+
+
+
+        <ng-container matColumnDef="Id">
+          <mat-header-cell *matHeaderCellDef> Patient Id </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Nombre">
+          <mat-header-cell *matHeaderCellDef > Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Nombre}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="NroDocumento">
+          <mat-header-cell *matHeaderCellDef> NroDocumento </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.NroDocumento}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="FechaAlta">
+          <mat-header-cell *matHeaderCellDef > FechaAlta </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.FechaAlta}} </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> 
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons  [pageIndex]="0" [pageSize]="10" [length]="dataSource.data.length"></mat-paginator>
+
+      
+  
+    </div>
+  </div>
+
+  <!-- <div style="height: 95%; overflow: auto;">
+    <table class="">
+      <thead>
+        <tr>
+          <td>Id</td>
+          <td>Nombre</td>
+          <td>FechaAlta</td>
+          <td>NroDocumento</td>
+        </tr>
+      </thead>
+      <tr *ngFor="let data of patientList">
+        <td>{{data.PatientId}}</td>
+        <td>{{data.Persona.Apellido}} {{data.Persona.Nombre}}</td>
+        <td>{{data.FechaAlta}}</td>
+        <td>{{data.Persona.NroDocumento}}</td>
+        
+    </table>
+  </div> -->
+
+
+
+  <!-- <div>{{this.patientList | json}}</div>  -->
+
+  <section>

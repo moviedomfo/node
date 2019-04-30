@@ -25,6 +25,7 @@ const EXAMPLE_DATA: FwkDataTableItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class FwkDataTableDataSource extends DataSource<FwkDataTableItem> {
+  
   data: FwkDataTableItem[] = EXAMPLE_DATA;
 
   constructor(private paginator: MatPaginator, private sort: MatSort) {
