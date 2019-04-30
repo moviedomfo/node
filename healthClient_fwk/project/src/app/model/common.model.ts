@@ -385,3 +385,7 @@ export class HelperBE{
 }
 
 
+export class fwkDocument {
+	id: string;
+	doc: string;
+}
