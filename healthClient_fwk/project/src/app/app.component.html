@@ -1,8 +1,16 @@
-<!--The content below is only a placeholder and can be replaced.-->
+
+    
+<mat-toolbar color="principal" class="">
+
+   
+    <button mat-menu-item [routerLink]="['patientGrid']">Patient grid</button>
+    
+    <button mat-menu-item  [routerLink]="['patientInfo']" class="ma">Patient info</button>
+</mat-toolbar>
+
 
 <router-outlet></router-outlet>
 
 
-<h1>Test web api dispatcher </h1>
 
-<app-patient-grid></app-patient-grid>
+

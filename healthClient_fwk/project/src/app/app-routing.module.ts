@@ -1,14 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PatientGridComponent } from './components/patient-grid/patient-grid.component';
+import { LogingComponent } from './components/loging/loging.component';
+import { PatientInfoComponent } from './components/patient-info/patient-info.component';
+import { Page404NotFoundComponent } from './components/page404-not-found/page404-not-found.component';
 
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  
+  { path: '', component: Page404NotFoundComponent },
+  { path: 'login', component: LogingComponent },
+  { path: 'patientGrid', component: PatientGridComponent },
+  { path: 'patientGrid:/id', component: PatientInfoComponent },
+  { path: '**', component: Page404NotFoundComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
+
 export class AppRoutingModule {
 
    constructor(){}

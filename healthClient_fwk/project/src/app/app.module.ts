@@ -12,9 +12,17 @@ import {FwkDocumentService} from './service/fwkSvcAlerts.service'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material-module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatNativeDateModule} from '@angular/material';
+import {MatNativeDateModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule} from '@angular/material';
 import { PatientAlertsComponent } from './components/patient-alerts/patient-alerts.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { LogingComponent } from './components/loging/loging.component';
+import { PatientInfoComponent } from './components/patient-info/patient-info.component';
+import { Page404NotFoundComponent } from './components/page404-not-found/page404-not-found.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+
+
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 
@@ -24,6 +32,12 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     PatientGridComponent,
     ErrorBoxContainerComponent,
     PatientAlertsComponent,
+    LogingComponent,
+    PatientInfoComponent,
+    Page404NotFoundComponent,
+    MainNavComponent
+    
+
   ],
   imports: [
     FormsModule,
@@ -38,7 +52,14 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
       libraries: ['places']
-    })
+    }),
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    NgxSpinnerModule
 
   ],
   providers: [PatientsService,CommonService,FwkDocumentService],

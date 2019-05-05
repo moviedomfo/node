@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ServiceError, PatientBE, IPatient } from 'src/app/model';
 import { Observable } from 'rxjs';
 import { CommonService } from 'src/app/service/common.service';
 import { PatientsService } from 'src/app/service/patients.service';
 import { MatTableDataSource,MatPaginator, MatSort } from '@angular/material';
-
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-patient-grid',
   templateUrl: './patient-grid.component.html',
   styleUrls: ['./patient-grid.component.css']
 })
-export class PatientGridComponent implements OnInit {
+export class PatientGridComponent implements AfterViewInit {
+  
   displayedColumns :string[] = ['Id', 'Nombre','NroDocumento','FechaAlta'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -24,33 +24,38 @@ export class PatientGridComponent implements OnInit {
  
   
   constructor(
-    private commonService: CommonService,    private patientsService: PatientsService) {
-      
-     
+    private commonService: CommonService,   
+     private patientsService: PatientsService,
+    private spinner: NgxSpinnerService) {    }
+
+
+
+    ngAfterViewInit(): void {
+      this.retrivePatients();
     }
+  ngOnInit():void {
 
-  ngOnInit() {
-
-    
+  
     this.IPersonlist=[];
     this.patientList = [];
     this.dataSource = new MatTableDataSource<IPerson>(this.IPersonlist);
     this.dataSource.paginator = this.paginator;
     this.paginator.pageSize = 20;
-    this.retrivePatients();
+ 
   }
 
 
 retrivePatients() {
     let  patientList$: Observable<PatientBE[]>;
-
+    //this.spinner.show('spinner1');
+    this.showSpinner('spinner1');
     //patientList$ = this.patientsService.retrivePatients$(this.txtQuery,this.paginator.pageIndex,this.paginator.pageSize);
     patientList$ = this.patientsService.retrivePatients$(this.txtQuery,null,null);
     patientList$.subscribe((res:PatientBE[]) =>
       {
         this.patientList= res;
         this.parceToIPerson();
-        
+        this.hideSpinner('spinner1');
       },
       err => {this.globalError = err;}
     );
@@ -66,6 +71,16 @@ retrivePatients() {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     
   }
+
+
+  showSpinner(name: string) {
+    this.spinner.show(name);
+  }
+
+  hideSpinner(name: string) {
+    this.spinner.hide(name);
+  }
+
  parceToIPerson(){
 
  
