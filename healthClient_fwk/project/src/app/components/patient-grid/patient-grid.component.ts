@@ -31,11 +31,12 @@ export class PatientGridComponent implements AfterViewInit {
 
 
     ngAfterViewInit(): void {
+
       this.retrivePatients();
     }
   ngOnInit():void {
 
-  
+
     this.IPersonlist=[];
     this.patientList = [];
     this.dataSource = new MatTableDataSource<IPerson>(this.IPersonlist);
@@ -48,14 +49,14 @@ export class PatientGridComponent implements AfterViewInit {
 retrivePatients() {
     let  patientList$: Observable<PatientBE[]>;
     //this.spinner.show('spinner1');
-    this.showSpinner('spinner1');
+    this.showSpinner('spinner2');
     //patientList$ = this.patientsService.retrivePatients$(this.txtQuery,this.paginator.pageIndex,this.paginator.pageSize);
     patientList$ = this.patientsService.retrivePatients$(this.txtQuery,null,null);
     patientList$.subscribe((res:PatientBE[]) =>
       {
         this.patientList= res;
         this.parceToIPerson();
-        this.hideSpinner('spinner1');
+        this.hideSpinner('spinner2');
       },
       err => {this.globalError = err;}
     );
@@ -72,14 +73,6 @@ retrivePatients() {
     
   }
 
-
-  showSpinner(name: string) {
-    this.spinner.show(name);
-  }
-
-  hideSpinner(name: string) {
-    this.spinner.hide(name);
-  }
 
  parceToIPerson(){
 
@@ -99,6 +92,25 @@ retrivePatients() {
     this.dataSource = new MatTableDataSource(data);
 
  }
+
+ showSpinner(name: string) {
+  //this.spinner.show(name);
+  this.spinner.show(name,
+    {
+      type: 'ball-clip-rotate-multiple',//'square-spin',
+      size: 'medium',
+      bdColor: 'rgba(100,149,237, .8)',
+      color: 'white',
+      fullScreen: false
+    }
+  );
+}
+
+hideSpinner(name: string) {
+  this.spinner.hide(name);
+}
+
+
 
 }
 export interface IPerson {

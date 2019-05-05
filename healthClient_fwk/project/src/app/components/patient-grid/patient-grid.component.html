@@ -4,10 +4,16 @@
   <div class="">
       <div accent="primary">
           
-          <div>
-            <ngx-spinner name="spinner1" [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium"></ngx-spinner>
-          </div>
-        </div>
+          <ngx-spinner name="spinner2"></ngx-spinner>
+            <ngx-spinner name="spinner1" 
+            [fullScreen]="false" 
+          
+            type="ball-clip-rotate-multiple"  
+            size="medium">
+            <p style="font-size: 20px; color: white">Loading...</p>
+          </ngx-spinner>
+    </div>
+      
     <app-error-box-container [globalError]="globalError"></app-error-box-container>
     <div  class="mat-elevation-z8">
 
