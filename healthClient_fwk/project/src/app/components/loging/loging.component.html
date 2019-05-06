@@ -1,11 +1,5 @@
 <!-- <fieldset ngModelGroup="securityCard" class=""> -->
 <fieldset class="">
-
- 
-
- 
-
-
   <div class="row">
     <div class="col-sm-6">
       <div class="box box-primary">
@@ -51,20 +45,6 @@
   
           </div>
   
-          <div class="form-group">
-            <label for="email">e-mail</label>
-            <input type="text" name="email" class="form-control" [(ngModel)]="currentUser.Email" #email="ngModel" required
-              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
-  
-            <div [hidden]="email.valid || email.pristine" class="text text-danger">
-              <div [hidden]="!email.hasError('required')">Email is required</div>
-              <div [hidden]="!email.hasError('pattern')">Email format should be
-                <small>
-                  <b>joe@gmail.com</b>
-                </small>
-              </div>
-            </div>
-          </div>
         </div>
 
       </div>
