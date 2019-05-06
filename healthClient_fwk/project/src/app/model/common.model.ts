@@ -290,15 +290,10 @@ export class FwkEvent{
     User:string;
 }
 export class AuthenticationOAutResponse {
-
-
     expires_in: number;
     access_token:string;
     token_type:string;
     refresh_token:string;
-    
-    
-
 }
 export class CurrentLogin{
     username:string;

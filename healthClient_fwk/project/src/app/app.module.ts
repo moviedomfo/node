@@ -23,6 +23,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 
 
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AlertBlockComponent } from './components/alert-block/alert-block.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 
@@ -35,7 +36,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     LogingComponent,
     PatientInfoComponent,
     Page404NotFoundComponent,
-    MainNavComponent
+    MainNavComponent,AlertBlockComponent
     
 
   ],
@@ -60,6 +61,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     MatIconModule,
     MatListModule,
     NgxSpinnerModule
+   
 
   ],
   providers: [PatientsService,CommonService,FwkDocumentService],

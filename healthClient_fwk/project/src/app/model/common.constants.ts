@@ -20,7 +20,7 @@ export  const HealtConstants={
      CNN_STRING_HEALTH: {
             user: 'sa',
             password: 'as',
-            server: 'SANTANA\\SQLEXPRESS2012',
+            server: 'SANTANA\\SQLEXPRESS2014',
             database: 'health3',
 
             options: {
@@ -38,7 +38,8 @@ export  const HealtConstants={
      httpClientOption_contenttype_json:{headers:header_httpClient_contentTypeJson},
      DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A',
      oaut_client_id:'nodeJSClient',
-     oaut_client_secret:'pletorico28'
+     oaut_client_secret:'pletorico28',
+     oaut_securityProviderName:'healthTesting'
 }
 
 export const Sexo =

@@ -1,16 +1,44 @@
 
-    
-<mat-toolbar color="principal" class="">
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" routerLink="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link active" [routerLink]="patientGrid">atient grid <span class="sr-only">(current)</span></a>
+              </div>
+              <div class="navbar-nav">
+                    <a class="nav-item nav-link active" [routerLink]="login">Login  <span class="sr-only">(current)</span></a>
+                  </div>
+            </div>
+          </nav>
+<!-- <mat-toolbar color="principal" class="">
    
     <button mat-menu-item [routerLink]="['patientGrid']">Patient grid</button>
     
     <button mat-menu-item  [routerLink]="['patientInfo']" class="ma">Patient info</button>
-</mat-toolbar>
+    <button mat-menu-item  [routerLink]="['login']" class="ma">Loging</button>
+</mat-toolbar> -->
 
-
-<router-outlet></router-outlet>
-
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+             {{mainComponentTitle}}
+            <small>Version 2.0</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+          </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+                <router-outlet></router-outlet>
+        </section>
+    </div>
 
 
 
