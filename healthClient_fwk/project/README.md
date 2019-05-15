@@ -28,4 +28,10 @@ ng generate @angular/material:materialDashboard --name myDashboard
 ng generate @angular/material:materialTable -- name myTable
 
 ## Installing Bootstrap 4
-npm install bootstrap jquery popper
+    npm install bootstrap jquery popper
+    ng add ngx-bootstrap  --component componentName
+
+   To enable bootstrap 4 theme templates in ngx-bootstrap, please read here
+   <!-- index.html En este caso no se hizo esto-->
+
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">

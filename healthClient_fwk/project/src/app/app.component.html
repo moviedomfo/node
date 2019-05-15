@@ -6,7 +6,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav">
-                <a class="nav-item nav-link active" [routerLink]="['patientGrid']">atient grid <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" [routerLink]="['patientGrid']">Patient grid <span class="sr-only">(current)</span></a>
               </div>
               <div class="navbar-nav">
                     <a class="nav-item nav-link active" [routerLink]="['login']">Login  <span class="sr-only">(current)</span></a>
@@ -24,7 +24,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
+        <!-- <section class="content-header">
           <h1>
              {{mainComponentTitle}}
             <small>Version 2.0</small>
@@ -33,9 +33,9 @@
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
           </ol>
-        </section>
+        </section> -->
         <!-- Main content -->
-        <section class="content">
+        <section class="container-fluid">
                 <router-outlet></router-outlet>
         </section>
     </div>

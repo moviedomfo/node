@@ -24,6 +24,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AlertBlockComponent } from './components/alert-block/alert-block.component';
+import {AlertModule} from "ngx-bootstrap";
+import { JwtModule } from '@auth0/angular-jwt';
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 
@@ -60,9 +62,10 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AlertModule,
    
-
+    
   ],
   providers: [PatientsService,CommonService,FwkDocumentService],
   bootstrap: [AppComponent]
