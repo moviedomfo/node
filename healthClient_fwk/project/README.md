@@ -35,3 +35,26 @@ ng generate @angular/material:materialTable -- name myTable
    <!-- index.html En este caso no se hizo esto-->
 
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+   ##Para que funcione accordion collapsed de bootstrap 4
+
+   **Mirar si trenemos  package.json
+
+    {
+        "bootstrap": "^4.1.3",
+        "popper.js": "^1.14.3",
+        "jquery": "3.3.1"
+        }
+
+   Y en 
+Luego instalar:angular.json
+        "styles": [
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+
+   npm install --save popper.js

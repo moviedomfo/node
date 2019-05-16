@@ -9,17 +9,18 @@ import { FwkDocumentService } from 'src/app/service/fwkSvcAlerts.service';
   styleUrls: ['./patient-alerts.component.css']
 })
 export class PatientAlertsComponent implements OnInit {
-
+  //constructor(private fwkDocumentService: FwkDocumentService) { }
+  constructor() { }
  
 
 
-  constructor(private fwkDocumentService: FwkDocumentService) { }
+
 
   ngOnInit() {
 
-    this.fwkDocumentService.newMessage.subscribe(p=>{
-      alert(p.doc);
-    });
+    // this.fwkDocumentService.newMessage.subscribe(p=>{
+    //   alert(p.doc);
+    // });
   }
   
 }

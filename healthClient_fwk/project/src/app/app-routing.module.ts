@@ -4,6 +4,7 @@ import { PatientGridComponent } from './components/patient-grid/patient-grid.com
 import { LogingComponent } from './components/loging/loging.component';
 import { PatientInfoComponent } from './components/patient-info/patient-info.component';
 import { Page404NotFoundComponent } from './components/page404-not-found/page404-not-found.component';
+import { PatientAlertsComponent } from './components/patient-alerts/patient-alerts.component';
 
 
 
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LogingComponent },
   { path: 'patientGrid', component: PatientGridComponent },
   { path: 'patientGrid:/id', component: PatientInfoComponent },
+  { path: 'patient', component: PatientAlertsComponent },
   { path: '**', component: Page404NotFoundComponent },
 ];
 
