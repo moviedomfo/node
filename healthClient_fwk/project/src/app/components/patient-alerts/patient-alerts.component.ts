@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChildren,AfterViewInit } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { Socket } from 'ngx-socket-io';
 import { FwkDocumentService } from 'src/app/service/fwkSvcAlerts.service';
+
 
 @Component({
   selector: 'app-patient-alerts',
@@ -9,13 +10,16 @@ import { FwkDocumentService } from 'src/app/service/fwkSvcAlerts.service';
   styleUrls: ['./patient-alerts.component.css']
 })
 export class PatientAlertsComponent implements OnInit {
+
   //constructor(private fwkDocumentService: FwkDocumentService) { }
   constructor() { }
  
 
 
 
-
+  ngAfterViewInit() {
+   
+}
   ngOnInit() {
 
     // this.fwkDocumentService.newMessage.subscribe(p=>{

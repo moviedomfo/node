@@ -27,14 +27,14 @@ ng generate @angular/material:material-nav -name =main-nav
 ng generate @angular/material:materialDashboard --name myDashboard
 ng generate @angular/material:materialTable -- name myTable
 
-## Installing Bootstrap 4
+## Installing Bootstrap 4 https://www.youtube.com/watch?v=yjQsFVzujck&t=69s
     npm install bootstrap jquery popper
-    ng add ngx-bootstrap  --component componentName
-
+    
+   
    To enable bootstrap 4 theme templates in ngx-bootstrap, please read here
    <!-- index.html En este caso no se hizo esto-->
 
-   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+ 
 
    ##Para que funcione accordion collapsed de bootstrap 4
 
@@ -47,14 +47,17 @@ ng generate @angular/material:materialTable -- name myTable
         }
 
    Y en 
-Luego instalar:angular.json
-        "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+Luego instalar:angular.json !!CUIDADO DE NO AGREGARLO SOLO A "test": {..}!!
+       "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/popper.js/dist/umd/popper.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
 
    npm install --save popper.js

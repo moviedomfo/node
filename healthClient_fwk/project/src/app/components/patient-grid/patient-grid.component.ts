@@ -36,13 +36,14 @@ export class PatientGridComponent implements AfterViewInit {
     }
   ngOnInit():void {
 
-
+ 
     this.IPersonlist=[];
     this.patientList = [];
     this.dataSource = new MatTableDataSource<IPerson>(this.IPersonlist);
     this.dataSource.paginator = this.paginator;
     this.paginator.pageSize = 20;
- 
+  
+    
   }
 
 
@@ -58,7 +59,10 @@ retrivePatients() {
         this.parceToIPerson();
         this.hideSpinner('spinner2');
       },
-      err => {this.globalError = err;}
+      err => {   
+         this.hideSpinner('spinner2');
+        this.globalError = err;
+      }
     );
     
   }

@@ -237,11 +237,14 @@ export class CommonService {
   //Retorna un HttpHeaders con CORS y 'Authorization': "Bearer + TOKEN"
   public get_AuthorizedHeader():HttpHeaders{
     let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
+    alert(currentLogin.oAuth.access_token );
     let headers = new HttpHeaders({ 'Authorization': "Bearer " + currentLogin.oAuth.access_token });
     headers.append('Access-Control-Allow-Methods', '*');
     headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
     headers.append('Access-Control-Allow-Origin', '*');
-     return headers;
+    //let headerOptions = {headers:headers} ;
+    alert(JSON.stringify(headers));
+    return headers;
   }
 
   public handleErrorService(serviceError: ServiceError) {

@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { PatientBE,MutualPorPacienteBE,PersonBE } from '../model/index';
-import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq, ApiResult } from '../model/common.model';
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq, ApiResult, CurrentLogin } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -55,7 +55,8 @@ export class PatientsService {
 
     let ExecuteReq=  this.commonService.generete_post_Params("getPatientService", bussinesData);
     //HealtConstants.httpOptions.search = searchParams;
-
+    
+   
     return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,ExecuteReq, HealtConstants.httpClientOption_contenttype_json).pipe(
       map(res => {
 
@@ -88,8 +89,16 @@ export class PatientsService {
 
    
     let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
-  
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+    let headers = this.commonService.get_AuthorizedHeader();
+    let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
+    let header_httpClient_contentTypeJson = new HttpHeaders({ 'Content-Type': 'application/json' });
+    
+    header_httpClient_contentTypeJson.append('Authorization', "Bearer "+ currentLogin.oAuth.access_token);
+    header_httpClient_contentTypeJson.append('Access-Control-Allow-Methods', '*');
+    header_httpClient_contentTypeJson.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+    header_httpClient_contentTypeJson.append('Access-Control-Allow-Origin', '*');
+    //return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+      return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,  {headers : header_httpClient_contentTypeJson}).pipe(
       map(function (res: ApiResult) {
 
 

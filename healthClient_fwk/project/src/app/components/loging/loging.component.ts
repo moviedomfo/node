@@ -43,6 +43,7 @@ export class LogingComponent implements OnInit {
         //console.log(JSON.stringify(res));
      
         this.currentLogin = JSON.parse(localStorage.getItem('currentLogin'));
+        
         let tokenInfo = jwt_decode(this.currentLogin.oAuth.access_token); // decode token
         //alert(tokenInfo.exp);
         this.jwt_decode = tokenInfo;
