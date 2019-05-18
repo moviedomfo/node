@@ -236,15 +236,21 @@ export class CommonService {
 
   //Retorna un HttpHeaders con CORS y 'Authorization': "Bearer + TOKEN"
   public get_AuthorizedHeader():HttpHeaders{
+    
+    
     let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
-    alert(currentLogin.oAuth.access_token );
-    let headers = new HttpHeaders({ 'Authorization': "Bearer " + currentLogin.oAuth.access_token });
-    headers.append('Access-Control-Allow-Methods', '*');
-    headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-    headers.append('Access-Control-Allow-Origin', '*');
+
+    let header_httpClient_contentTypeJson = new HttpHeaders({ 'Authorization': 'Bearer ' + currentLogin.oAuth.access_token });
+    header_httpClient_contentTypeJson.append('Content-Type','application/json');
+    
+     
+    header_httpClient_contentTypeJson.append('Access-Control-Allow-Methods', '*');
+    header_httpClient_contentTypeJson.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+    header_httpClient_contentTypeJson.append('Access-Control-Allow-Origin', '*');
+
     //let headerOptions = {headers:headers} ;
-    alert(JSON.stringify(headers));
-    return headers;
+    //alert(JSON.stringify(headers));
+    return header_httpClient_contentTypeJson;
   }
 
   public handleErrorService(serviceError: ServiceError) {
@@ -272,24 +278,34 @@ export class CommonService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
-   
-
-
-
     let ex: ServiceError = new ServiceError();
-    ex.Message = 'Despachador de servicio no responde .-';
-    ex.Status= error.error.status;
-    if(error.message){
-      ex.Message = ex.Message + "\r\n" + error.message;
+
+    if (error instanceof HttpErrorResponse    ) {
+      //alert(error.error);
+      ex.Status= error.status;
+      if(error.error){
+        ex.Message = error.error;
+      }
+      if(error.message){
+        ex.Message = ex.Message + "\r\n" + error.message;
+      }
     }
-    if(error.error.message){
-      ex.Message = ex.Message + "\r\n" + error.error.message;
-    }
+
+
+    
+    //ex.Message = 'Despachador de servicio no responde .-';
+   
+    // if(error.message){
+    //   ex.Message = ex.Message + "\r\n" + error.message;
+    // }
+    // if(error.error.message){
+    //   ex.Message = ex.Message + "\r\n" + error.error.message;
+    // }
    
 
-    if(error.message){
-      ex.Message = ex.Message + "\r\n" + error.message;
-    }
+    // if(error.message){
+    //   ex.Message = error + "\r\n" + error.message;
+    // }
    
     ex.Machine = 'PC-Desarrollo';
 

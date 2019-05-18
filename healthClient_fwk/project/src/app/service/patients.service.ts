@@ -89,16 +89,11 @@ export class PatientsService {
 
    
     let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
-    let headers = this.commonService.get_AuthorizedHeader();
-    let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
-    let header_httpClient_contentTypeJson = new HttpHeaders({ 'Content-Type': 'application/json' });
-    
-    header_httpClient_contentTypeJson.append('Authorization', "Bearer "+ currentLogin.oAuth.access_token);
-    header_httpClient_contentTypeJson.append('Access-Control-Allow-Methods', '*');
-    header_httpClient_contentTypeJson.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-    header_httpClient_contentTypeJson.append('Access-Control-Allow-Origin', '*');
+    let header_httpClient = this.commonService.get_AuthorizedHeader();
+
+
     //return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
-      return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,  {headers : header_httpClient_contentTypeJson}).pipe(
+      return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,  {headers : header_httpClient}).pipe(
       map(function (res: ApiResult) {
 
 
