@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PatientGridComponent } from './components/patient-grid/patient-grid.component';
 import { LogingComponent } from './components/loging/loging.component';
 import { PatientInfoComponent } from './components/patient-info/patient-info.component';
-import { Page404NotFoundComponent } from './components/page404-not-found/page404-not-found.component';
+import { Page404NotFoundComponent } from './commonComponets/page404-not-found/page404-not-found.component';
 import { PatientAlertsComponent } from './components/patient-alerts/patient-alerts.component';
 
 

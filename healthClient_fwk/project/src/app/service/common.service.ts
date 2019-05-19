@@ -15,17 +15,17 @@ import { Observable } from 'rxjs';
 export class CommonService {
   public paramList: Param[] = [];
   public paramList$: Subject<Param[]> = new Subject<Param[]>();
-  private ipinfo:IpInfo;
+  private ipinfo: IpInfo;
   public mainComponentTitle_subject$: Subject<string> = new Subject<string>();
 
   constructor(private http: HttpClient, private router: Router) {
 
     this.ipinfo = new IpInfo();
-    this.getIP().subscribe(res=>{
+    this.getIP().subscribe(res => {
       this.ipinfo = res;
-      
+
     });
-   }
+  }
 
   //permite subscripcion añl Subject con el titulo
   get_mainComponentTitle$(): Observable<string> {
@@ -39,8 +39,8 @@ export class CommonService {
 
 
   parseDate(dateString: string): Date {
-    
-    
+
+
     let f: Date;
     if (dateString) {
       f = new Date(dateString);
@@ -78,10 +78,10 @@ export class CommonService {
       IdTipoParametro: idTipoParametro,
       Vigente: true
     };
-  
-    let executeReq=  this.generete_post_Params("SearchParametroByParamsService", bussinesData);
 
-    return this.http.post<Param[]>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+    let executeReq = this.generete_post_Params("SearchParametroByParamsService", bussinesData);
+
+    return this.http.post<Param[]>(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
       map(function (res) {
 
         let resToObject: Result;
@@ -96,14 +96,14 @@ export class CommonService {
 
         return params;
       })
-      
-      ).pipe( catchError(this.handleError));
 
-    }  
+    ).pipe(catchError(this.handleError));
+
+  }
 
 
 
-  
+
   /**
   * @params : parametros 
   * @parameterToAppend : CommonParam.Id
@@ -171,7 +171,7 @@ export class CommonService {
     return REQ;
   }
 
-  
+
   generete_get_searchParams(serviceName, bussinesData): URLSearchParams {
     let searchParams: URLSearchParams = new URLSearchParams();
     var req = this.createFwk_SOA_REQ(bussinesData);
@@ -202,26 +202,25 @@ export class CommonService {
 
     return executeReq;
   }
-  
+
 
 
   createFwk_SOA_REQ(bussinesData: any): Request {
     let contextInfo: ContextInformation = new ContextInformation();
     let req: Request = new Request();
-    let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
+    let currentLogin: CurrentLogin = JSON.parse(localStorage.getItem('currentLogin'));
     contextInfo.Culture = "ES-AR";
     contextInfo.ProviderNameWithCultureInfo = "";
     contextInfo.HostName = this.ipinfo.city + this.ipinfo.country;
-    contextInfo.HostIp =  this.ipinfo.ip;
+    contextInfo.HostIp = this.ipinfo.ip;
     contextInfo.HostTime = new Date(),
-    contextInfo.ServerName = '';
+      contextInfo.ServerName = '';
     contextInfo.ServerTime = new Date();
 
 
-    if(currentLogin && currentLogin.username)
-      {contextInfo.UserName = currentLogin.username;}
-      else{contextInfo.UserName = 'mrenaudo';}
-      
+    if (currentLogin && currentLogin.username) { contextInfo.UserName = currentLogin.username; }
+    else { contextInfo.UserName = 'mrenaudo'; }
+
     contextInfo.UserId = 'mrenaudo';
     contextInfo.AppId = 'Health';
     contextInfo.ProviderName = 'healthTesting';
@@ -235,15 +234,13 @@ export class CommonService {
   }
 
   //Retorna un HttpHeaders con CORS y 'Authorization': "Bearer + TOKEN"
-  public get_AuthorizedHeader():HttpHeaders{
-    
-    
-    let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
+  public get_AuthorizedHeader(): HttpHeaders {
+
+
+    let currentLogin: CurrentLogin = JSON.parse(localStorage.getItem('currentLogin'));
 
     let header_httpClient_contentTypeJson = new HttpHeaders({ 'Authorization': 'Bearer ' + currentLogin.oAuth.access_token });
-    header_httpClient_contentTypeJson.append('Content-Type','application/json');
-    
-     
+    header_httpClient_contentTypeJson.append('Content-Type', 'application/json');
     header_httpClient_contentTypeJson.append('Access-Control-Allow-Methods', '*');
     header_httpClient_contentTypeJson.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
     header_httpClient_contentTypeJson.append('Access-Control-Allow-Origin', '*');
@@ -261,55 +258,41 @@ export class CommonService {
 
   ///Error inspection, interpretation, and resolution is something you want to do in the service, not in the component.
   public handleError(error: HttpErrorResponse | any) {
-
-    console.log('-------------------Error---------------------');
-    console.log(error.message);
-    //console.log(error.status);
-    //console.log(error.message);
-    console.log('----------------------------------------');
-    
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.log('Client-side error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.log(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
     let ex: ServiceError = new ServiceError();
+    ex.Machine = 'PC-Desarrollo';
+    // A client-side or network error occurred. Handle it accordingly.
+    if (error.error instanceof ProgressEvent) {
+      ex.Message = 'Client-side error occurred: ' + error.message;
+      ex.Status = error.status;
+      return throwError(ex);
+    }
 
-    if (error instanceof HttpErrorResponse    ) {
+    // The backend returned an unsuccessful response code.
+    // The response body may contain clues as to what went wrong,
+    if (error instanceof HttpErrorResponse) {
       //alert(error.error);
-      ex.Status= error.status;
-      if(error.error){
+      ex.Status = error.status;
+      if (error.error) {
         ex.Message = error.error;
       }
-      if(error.message){
+      if (error.message) {
         ex.Message = ex.Message + "\r\n" + error.message;
       }
+      return throwError(ex);
     }
 
 
-    
-    //ex.Message = 'Despachador de servicio no responde .-';
-   
-    // if(error.message){
-    //   ex.Message = ex.Message + "\r\n" + error.message;
-    // }
-    // if(error.error.message){
-    //   ex.Message = ex.Message + "\r\n" + error.error.message;
-    // }
-   
+    ex.Message= error.message;
 
-    // if(error.message){
-    //   ex.Message = error + "\r\n" + error.message;
-    // }
-   
-    ex.Machine = 'PC-Desarrollo';
+    return throwError(ex);
 
-    return throwError(ex);  // return an observable with a user-facing error message
+
+
+
+
+
+
+    // return an observable with a user-facing error message
     //return Observable.throw(ex); // <= B // se comenta para la version 7
   }
   public handleErrorObservable(error: ServiceError) {
@@ -344,10 +327,10 @@ export class CommonService {
 
     return this.http.get<string[]>('http://ipinfo.io?token=21ea63fe5267b3').pipe(
       map(function (res) {
-         return res;
-      })).pipe( catchError(this.handleError));
+        return res;
+      })).pipe(catchError(this.handleError));
 
 
-      
-}
+
+  }
 }

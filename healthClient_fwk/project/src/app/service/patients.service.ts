@@ -90,10 +90,8 @@ export class PatientsService {
    
     let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
     let header_httpClient = this.commonService.get_AuthorizedHeader();
-
-
-    //return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
-      return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,  {headers : header_httpClient}).pipe(
+    
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,  {headers : header_httpClient}).pipe(
       map(function (res: ApiResult) {
 
 
