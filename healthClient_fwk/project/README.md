@@ -5,7 +5,14 @@
  #en angular
     npm i ngx-socket-io --save 
 install material
-ng add @angular/material
+Alternative 1:
+  npm install --save @angular/material @angular/cdk @angular/animations
+
+Alternative 2: Angular Devkit 6+
+    ng add @angular/material
+
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
 

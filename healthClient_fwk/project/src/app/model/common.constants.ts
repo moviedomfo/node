@@ -27,19 +27,19 @@ export  const HealtConstants={
                 encrypt: true // Use this if you're on Windows Azure 
                 }
             },
-     HealthAPI_URL:"http://localhost:52000/api/",
-     HealthExecuteAPI_URL:"http://localhost:52000/api/fwk/execute",
-     HealthExecuteService_allowedAuthAPI_URL:"http://localhost:52000/api/fwk/execute",
-     HealthOAuth_URL:"http://localhost:51000/oauth/token",
-     ImagesSrc_Woman:'assets/images/User_Famele.bmp',
-     ImagesSrc_Man:'assets/images/User_Male.bmp',
-     //httpOptions:options,
-     httpClientOption_form_urlencoded:{headers:header_httpClient_form_urlencoded},
-     httpClientOption_contenttype_json:{headers:header_httpClient_contentTypeJson},
-     DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A',
-     oaut_client_id:'nodeJSClient',
-     oaut_client_secret:'pletorico28',
-     oaut_securityProviderName:'healthTesting'
+            HealthAPI_URL:"http://localhost:52000/api/",
+            HealthExecuteAPI_URL:"http://localhost:52000/api/fwk/execute",
+            HealthExecuteService_allowedAuthAPI_URL:"http://localhost:52000/api/fwk/execute",
+            HealthOAuth_URL:"http://localhost:51000/oauth/token",
+            ImagesSrc_Woman:'assets/images/User_Famele.bmp',
+            ImagesSrc_Man:'assets/images/User_Male.bmp',
+            //httpOptions:options,
+            httpClientOption_form_urlencoded:{headers:header_httpClient_form_urlencoded},
+            httpClientOption_contenttype_json:{headers:header_httpClient_contentTypeJson},
+            DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A',
+            oaut_client_id:'nodeJSClient',
+            oaut_client_secret:'pletorico28',
+            oaut_securityProviderName:'healthTesting'
 }
 
 export const Sexo =
