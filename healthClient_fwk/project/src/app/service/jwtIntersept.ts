@@ -9,7 +9,7 @@ export class JwtAuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>,
               next: HttpHandler): Observable<HttpEvent<any>> {
 
-                alert('interseted by JwtAuthInterceptor');
+                
         //const idToken = localStorage.getItem("id_token");
         let currentLogin: CurrentLogin = JSON.parse(localStorage.getItem('currentLogin'));
         const idToken =  currentLogin.oAuth.access_token;

@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { ServiceError, PatientBE, IPatient } from 'src/app/model';
+import { ServiceError, PatientBE, IPatient, IPerson } from 'src/app/model';
 import { Observable } from 'rxjs';
 import { CommonService } from 'src/app/service/common.service';
 import { PatientsService } from 'src/app/service/patients.service';
 import { MatTableDataSource,MatPaginator, MatSort } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-patient-grid',
@@ -21,22 +22,26 @@ export class PatientGridComponent implements AfterViewInit {
   private globalError: ServiceError;
    private patientList: PatientBE[];
    private txtQuery: string;
- 
+   pageActual: number = 1;
   
   constructor(
     private commonService: CommonService,   
      private patientsService: PatientsService,
-    private spinner: NgxSpinnerService) {    }
+     private spinner: NgxSpinnerService) {    }
 
 
 
     ngAfterViewInit(): void {
-
       this.retrivePatients();
+     // this.showSpinner('spinner2');
+      // this.paginator.page
+      // .pipe(
+      //     tap(() => this.dataSource)
+      // ).subscribe();
     }
   ngOnInit():void {
-
- 
+    this.showSpinner('spinner2');
+   
     this.IPersonlist=[];
     this.patientList = [];
     this.dataSource = new MatTableDataSource<IPerson>(this.IPersonlist);
@@ -50,7 +55,7 @@ export class PatientGridComponent implements AfterViewInit {
 retrivePatients() {
     let  patientList$: Observable<PatientBE[]>;
     //this.spinner.show('spinner1');
-    this.showSpinner('spinner2');
+   
     //patientList$ = this.patientsService.retrivePatients$(this.txtQuery,this.paginator.pageIndex,this.paginator.pageSize);
     patientList$ = this.patientsService.retrivePatients$(this.txtQuery,null,null);
     patientList$.subscribe((res:PatientBE[]) =>
@@ -117,11 +122,4 @@ hideSpinner(name: string) {
 
 
 }
-export interface IPerson {
-  Id: number;
-  NroDocumento: string;
-  Nombre: string;
-  FechaAlta: Date;
-}
-
 

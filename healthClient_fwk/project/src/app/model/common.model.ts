@@ -337,7 +337,14 @@ export class User {
     }
     
 }
-
+export interface IPerson {
+    Id: number;
+    NroDocumento: string;
+    Nombre: string;
+    FechaAlta: Date;
+  }
+  
+  
 export class Rol{
 
     Rol(){

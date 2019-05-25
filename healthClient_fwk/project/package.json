@@ -32,6 +32,7 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "ngx-bootstrap": "^4.1.1",
+    "ngx-pagination": "^3.2.1",
     "ngx-socket-io": "^2.1.1",
     "ngx-spinner": "^7.1.4",
     "popper": "^1.0.1",

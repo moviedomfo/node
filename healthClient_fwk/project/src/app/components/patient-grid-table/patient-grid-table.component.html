@@ -1,0 +1,39 @@
+<div class="row mt-5">
+  <div class="col">
+    <button type="button" class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalBook" (click)="resetForm()">New Book</button>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">NroDocumento</th>
+          <th scope="col">FechaAlta</th>
+          <!-- <th scope="col">Sexo</th> -->
+          <th scope="col">&nbsp;</th>
+          <th scope="col">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of personlist | paginate: {itemsPerPage: 7, currentPage: pageActual}; index as i">
+
+          <th scope="row"> {{i+1}}</th>
+          <td>{{item.Id}}</td>
+          <td>{{item.Nombre}}</td>
+          <td>{{item.NroDocumento}}</td>
+          <td>{{item.FechaAlta}}</td>
+          <!-- <td>{{item.Sexo == 1 ? 'H' : 'M'}}</td> -->
+          <td>
+            <button class="btn btn-primary" (click)="onPreUpdatPerson(item)" data-toggle="modal" data-target="#modalPeron">Update</button>
+          </td>
+          <td>
+            <a href="/admin/list-person" class="btn btn-danger" (click)="onDeletePerson(item.Id)">Delete</a>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+  </div>
+</div>
+<app-patient-grid-table-modal [currentPatient]=selectedPerson></app-patient-grid-table-modal>

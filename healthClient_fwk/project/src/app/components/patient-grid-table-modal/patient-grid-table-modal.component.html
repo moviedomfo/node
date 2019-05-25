@@ -1,0 +1,55 @@
+<!-- Modal -->
+<div id="modalpatient" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{!this.currentPatient.Id ? 'New patient' : 'Update patient'}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-patient" #formpatient="ngForm" (ngSubmit)="onSavepatient(formpatient)">
+          <input type="hidden" id="Id" name="patientId" class="form-control" [(ngModel)]="this.currentPatient.Id">
+          <div class="form-group">
+            <label for="">Titulo</label>
+            <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Titulo" [(ngModel)]="this.currentPatient.titulo">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="NroDocumento">NroDocumento</label>
+              <select name="NroDocumento" id="NroDocumento" class="form-control" [(ngModel)]="this.currentPatient.NroDocumento">
+                <input type="text" id="NroDocumento" name="NroDocumento" class="form-control" placeholder="" [(ngModel)]="this.currentPatient.NroDocumento">
+              </select>
+
+            </div>
+            <div class="form-group col-md-6">
+              <label for="FechaAlta">FechaAlta</label>
+              <input type="text" id="FechaAlta" name="FechaAlta" class="form-control" [(ngModel)]="this.currentPatient.FechaAlta">
+            </div>
+
+          </div>
+          <!-- <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="autor">Autor</label>
+              <input type="text" id="autor" name="autor" class="form-control" placeholder="Autor" [(ngModel)]="this.currentPatient.autor">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="oferta">Oferta</label>
+              <select name="oferta" id="oferta" class="form-control" [(ngModel)]="this.currentPatient.oferta">
+                <option value="1">SI</option>
+                <option value="0">NO</option>
+              </select>
+            </div>
+          </div> -->
+         
+          <!-- <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea name="descripcion" id="descripcion" class="form-control" cols="50" rows="4" [(ngModel)]="this.currentPatient.descripcion"></textarea>
+          </div> -->
+          <button type="submit" class="btn btn-primary float-right">Save patient</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

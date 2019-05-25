@@ -24,10 +24,12 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import { AlertModule } from "ngx-bootstrap";
 import { JwtModule } from '@auth0/angular-jwt';
 import { JwtAuthInterceptor } from './service/jwtIntersept';
+import { PatientGridTableComponent } from './components/patient-grid-table/patient-grid-table.component';
+import { PatientGridTableModalComponent } from './components/patient-grid-table-modal/patient-grid-table-modal.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 
@@ -40,7 +42,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     LogingComponent,
     PatientInfoComponent,
     Page404NotFoundComponent,
-    MainNavComponent, AlertBlockComponent
+    MainNavComponent, AlertBlockComponent, PatientGridTableComponent, PatientGridTableModalComponent
 
 
   ],
@@ -65,6 +67,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     MatIconModule,
     MatListModule,
     NgxSpinnerModule,
+    NgxPaginationModule,
     AlertModule,
 
 
