@@ -68,3 +68,9 @@ Luego instalar:angular.json !!CUIDADO DE NO AGREGARLO SOLO A "test": {..}!!
             ],
 
    npm install --save popper.js
+
+
+   #Paginacion con tabla
+   ref
+    https://www.youtube.com/watch?v=NUmLaVcx1HI
+    https://github.com/bezael/loopback3_angular6_bootstrap4/blob/master/apiBooks/client/src/app/app.module.ts

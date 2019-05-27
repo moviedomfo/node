@@ -33,12 +33,6 @@ export class PatientsService {
   }
 
 
-  
- 
-    
-   
-
-  
 
   //Request header field Access-Control-Allow-Origin is not allowed by 
   //Access-Control-Allow-Headers in preflight response.
@@ -77,6 +71,7 @@ export class PatientsService {
   //retrivePatients
   retrivePatients$(txtQuery:string,pageIndex:number,pageSize:number): Observable<PatientBE[]> {
 
+
     var bussinesData = {
       nombre: txtQuery,
       apellido: txtQuery,
@@ -87,7 +82,7 @@ export class PatientsService {
       pageSize:pageSize,
     };
 
-   
+    //alert (JSON.stringify(bussinesData))
     let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
     let header_httpClient = this.commonService.get_AuthorizedHeader();
     

@@ -1,3 +1,7 @@
+<div class="row">
+    <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
+  <p><strong>Selected patient: </strong> {{selectedPerson.Nombre}}</p>
+</div>
 <div class="row mt-5">
   <div class="col">
     <button type="button" class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalBook" (click)="resetForm()">New Book</button>
@@ -15,7 +19,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of personlist | paginate: {itemsPerPage: 7, currentPage: pageActual}; index as i">
+        <tr *ngFor="let item of personlist | paginate: {itemsPerPage: 7, currentPage: pageActual}; index as i"
+        (click)="grid_singleClick(item)" (dblclick)="grid_doubleClick(item)">
 
           <th scope="row"> {{i+1}}</th>
           <td>{{item.Id}}</td>

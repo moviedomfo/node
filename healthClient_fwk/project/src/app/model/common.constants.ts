@@ -2,6 +2,8 @@
 
 import { Param, IParam, IContextInformation ,IRequest} from '../model/common.model';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
 
 let header_httpClient_contentTypeJson = new HttpHeaders({ 'Content-Type': 'application/json' });
      header_httpClient_contentTypeJson.append('Access-Control-Allow-Methods', '*');
@@ -27,19 +29,20 @@ export  const HealtConstants={
                 encrypt: true // Use this if you're on Windows Azure 
                 }
             },
-            HealthAPI_URL:"http://localhost:52000/api/",
-            HealthExecuteAPI_URL:"http://localhost:52000/api/fwk/execute",
-            HealthExecuteService_allowedAuthAPI_URL:"http://localhost:52000/api/fwk/execute",
-            HealthOAuth_URL:"http://localhost:51000/oauth/token",
-            ImagesSrc_Woman:'assets/images/User_Famele.bmp',
-            ImagesSrc_Man:'assets/images/User_Male.bmp',
+            HealthAPI_URL:environment.HealthAPI_URL,
+            HealthExecuteAPI_URL:environment.HealthExecuteAPI_URL,
+            HealthExecuteService_allowedAuthAPI_URL:environment.HealthExecuteService_allowedAuthAPI_URL,
+            HealthOAuth_URL:environment.HealthOAuth_URL,
             //httpOptions:options,
             httpClientOption_form_urlencoded:{headers:header_httpClient_form_urlencoded},
             httpClientOption_contenttype_json:{headers:header_httpClient_contentTypeJson},
-            DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A',
-            oaut_client_id:'nodeJSClient',
-            oaut_client_secret:'pletorico28',
-            oaut_securityProviderName:'healthTesting'
+            DefaultHealthInstitutionId: environment.DefaultHealthInstitutionId,
+            oaut_client_id: environment.oaut_client_id,
+            oaut_client_secret:environment.oaut_client_secret, 
+            oaut_securityProviderName:environment.oaut_securityProviderName,
+            ImagesSrc_Woman:'assets/images/User_Famele.bmp',
+            ImagesSrc_Man:'assets/images/User_Male.bmp',
+            
 }
 
 export const Sexo =

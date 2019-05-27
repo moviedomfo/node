@@ -95,4 +95,23 @@ export class PatientGridTableComponent implements AfterViewInit {
      //Mutuales : null,
   };
 }
+preventSingleClick = false;
+ timer: any;
+ delay: Number;
+
+ grid_singleClick(item) {
+
+  this.selectedPerson=item;
+  // this.preventSingleClick = false;
+  alert("grid_singleClick");
+  
+}
+grid_doubleClick (item) {
+ 
+  this.preventSingleClick = true;
+  alert('grid_doubleClick' )
+  
+  
+}
+
 }
