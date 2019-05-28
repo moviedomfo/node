@@ -1,4 +1,4 @@
-<h1>Filleng grid and pagination server side</h1>
+<h1> grid and pagination server side   </h1>
 
 <section class="">
   <div class="patientList">
@@ -6,17 +6,18 @@
     <app-error-box-container [globalError]="globalError"></app-error-box-container>
 
     <div class="search-div">
-      <!-- <mat-form-field class="search-form-field">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" autocomplete="off">
-        <button mat-button matSuffix mat-incon-button aria-label="Clear">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field> -->
+
       <mat-form-field>
           <input matInput placeholder="Search items" #input autocomplete="off">
           <button mat-button matSuffix mat-incon-button aria-label="Clear">
               <mat-icon>close</mat-icon>
             </button>
+          <span *ngIf="selectedItem.Persona.Nombre">
+            <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up"></mat-icon>
+            <p><strong>Selected patient: </strong> {{selectedItem.Persona.Nombre}} sexo {{selectedItem.Persona.Sexo}}  </p>
+          </span>
+            
+          
       </mat-form-field>
       <div class="spinner-container" *ngIf="dataSource.loading$ | async">
           <mat-spinner></mat-spinner>
@@ -45,9 +46,18 @@
           <mat-cell *matCellDef="let element"> {{element.Persona.FechaAlta}} </mat-cell>
         </ng-container>
 
+        <!-- <mat-cell *matCellDef="let element" class="rightalign">
+          <button mat-raised-button color="primary" (click)="openDialog(element, $event)"><mat-icon>edit</mat-icon> Breyta</button>
+        </mat-cell> -->
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+        class="element-row" [cdkDetailRow]="row" [cdkDetailRowTpl]="tpl"
+         [ngClass]="{'make-gold': row.Persona.Sexo == '1'}"
+          (click)="onRowClick(row)"></mat-row>
+          
+
+
       </mat-table>
       
       <mat-paginator 
@@ -61,6 +71,10 @@
     </div>
   </div>
 
-
+  <ng-template #tpl let-element>
+    <div class="mat-row detail-row" [@detailExpand] style="overflow: hidden">
+       Id:{{element.IdPersona}} Alta:{{element.FechaAlta}}  doc {{element.NroDocumento}} 
+    </div>
+  </ng-template>
 
   <section>

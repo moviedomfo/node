@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
-import { ServiceError, PatientBE, IPatient, IPerson } from 'src/app/model';
+import { ServiceError, PatientBE, IPatient, IPerson, ProfesionalesGridBE, PersonBE, GridElement } from 'src/app/model';
 import { Observable, fromEvent } from 'rxjs';
 import { CommonService } from 'src/app/service/common.service';
 import { PatientsService } from 'src/app/service/patients.service';
@@ -26,7 +26,7 @@ export class PatientGridFilterPAginationonServerSideComponent implements AfterVi
   private pageIndex= 0;
   private globalError: ServiceError;
   private patientList: PatientBE[];
-
+  private selectedItem: PatientBE;
   
   constructor(
     private patientsService: PatientsService,
@@ -34,8 +34,8 @@ export class PatientGridFilterPAginationonServerSideComponent implements AfterVi
     private spinner: NgxSpinnerService) {
 
        this.patientList = [];
-      
-  
+      this.selectedItem = new PatientBE();
+      this.selectedItem.Persona= new  PersonBE();
   }
 
 
@@ -115,8 +115,16 @@ export class PatientGridFilterPAginationonServerSideComponent implements AfterVi
     //this.retrivePatients();
   }
 
+  onRowClick(row){
+    //alert(JSON.stringify(row));
+    this.selectedItem = row;
+    row.highlighted = !row.highlighted
+    //alert(JSON.stringify(this.selectedItem));
+  }
 
-
+  // highlight(element: GridElement) {
+  //   element.highlighted = !element.highlighted;
+  // }
 }
 
 

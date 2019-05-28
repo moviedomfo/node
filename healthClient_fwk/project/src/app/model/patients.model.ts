@@ -1,4 +1,5 @@
 import {PersonBE} from '../model/persons.model';
+import { inherits } from 'util';
 
 
 export interface IPatient  {
@@ -10,9 +11,19 @@ export interface IPatient  {
      LastAccessUserId: string;
      LastHealthInstId: string;
 }
-
-export class PatientBE {//implements IPatient {
+export class GridElement {
     constructor(){}
+    checked: boolean;
+    name: string;
+    position: number;
+    weight: number;
+    symbol: string;
+    highlighted?: boolean;
+    hovered?: boolean;
+  }
+
+export class PatientBE extends  GridElement {
+    constructor() { super(); }
     public PatientId: number;
     public IdPersona: number;
     public FechaAlta: Date;
@@ -21,7 +32,10 @@ export class PatientBE {//implements IPatient {
     public LastHealthInstId: string;
     public Persona: PersonBE;
     public Mutuales : MutualPorPacienteBE[];
+ 
 }
+
+
 export class PlanVacunacion_FullViewBE {
     constructor(){}
     public Codigo: number;
