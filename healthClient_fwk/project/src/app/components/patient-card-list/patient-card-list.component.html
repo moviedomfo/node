@@ -1,0 +1,8 @@
+<div class="container">
+   <cdk-virtual-scroll-viewport itemSize="200" class="viewport">
+      <mat-card *cdkVirtualFor="let item of patientList">
+          <mat-card-tittle>{{item.Persona.Apellido}},  {{item.Persona.Nombre}} </mat-card-tittle>
+      </mat-card>
+   </cdk-virtual-scroll-viewport>
+
+</div>

@@ -103,6 +103,19 @@ export class PatientsService {
   }
 
 
+  retrivePatients_vistual_scrolling$(batch, lastKey?) {
+    let query =  {
+            orderByKey: true,
+            limitToFirst: batch,
+          }
+
+    if (lastKey) query['startAt'] = lastKey
+
+    return this.db.list('/movies', {
+      query
+    })
+  }
+
   createPatientsService$(patient: PatientBE,mutuales: MutualPorPacienteBE[]): Observable<PatientBE>  {
       
     var bussinesData = {
