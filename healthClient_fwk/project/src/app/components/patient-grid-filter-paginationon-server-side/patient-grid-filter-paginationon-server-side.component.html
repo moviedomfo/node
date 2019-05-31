@@ -52,7 +52,7 @@
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"
-        class="element-row" [cdkDetailRow]="row" [cdkDetailRowTpl]="tpl"
+        class="element-row"
          [ngClass]="{'make-gold': row.Persona.Sexo == '1'}"
           (click)="onRowClick(row)"></mat-row>
           

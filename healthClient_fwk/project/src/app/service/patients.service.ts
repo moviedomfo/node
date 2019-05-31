@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { PatientBE,MutualPorPacienteBE,PersonBE } from '../model/index';
+import { PatientBE, MutualPorPacienteBE, PersonBE } from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq, ApiResult, CurrentLogin } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
 
@@ -18,7 +18,7 @@ import { Alert } from 'selenium-webdriver';
 export class PatientsService {
 
   private static _token: any;
- 
+
   private patientList: PatientBE[] = [];
   private patientList$: Subject<PatientBE[]> = new Subject<PatientBE[]>();
 
@@ -26,7 +26,7 @@ export class PatientsService {
   private patient: PatientBE;
   private contextInfo: IContextInformation;
   private commonService: CommonService;
-  
+
   constructor(private http: HttpClient, @Inject(CommonService) commonService: CommonService) {
     this.contextInfo = contextInfo;
     this.commonService = commonService;
@@ -41,107 +41,115 @@ export class PatientsService {
   }
 
 
- 
+
   getPatientService$(id: number): Observable<PatientBE> {
     var bussinesData = {
       Id: id
     };
 
-    let ExecuteReq=  this.commonService.generete_post_Params("getPatientService", bussinesData);
+    let ExecuteReq = this.commonService.generete_post_Params("getPatientService", bussinesData);
     //HealtConstants.httpOptions.search = searchParams;
-    
-   
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,ExecuteReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+
+
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, ExecuteReq, HealtConstants.httpClientOption_contenttype_json).pipe(
       map(res => {
 
-        
-        let result: Result= JSON.parse(res.toString());
+
+        let result: Result = JSON.parse(res.toString());
 
         if (result.Error) {
-          throw  Observable.throw(result.Error);
+          throw Observable.throw(result.Error);
         }
 
         let patient: PatientBE = result.BusinessData as PatientBE;
 
         return patient;
-        })) .pipe( catchError(this.commonService.handleError));
+      })).pipe(catchError(this.commonService.handleError));
   }
 
 
   //retrivePatients
-  retrivePatients$(txtQuery:string,pageIndex:number,pageSize:number): Observable<PatientBE[]> {
+  retrivePatients$(txtQuery: string, pageIndex: number, pageSize: number): Observable<PatientBE[]> {
 
 
     var bussinesData = {
       nombre: txtQuery,
       apellido: txtQuery,
-      nroDocumento:null,
-      id:null,
-      ReturnGrid:false,
-      pageIndex:pageIndex,
-      pageSize:pageSize,
+      nroDocumento: null,
+      id: null,
+      ReturnGrid: false,
+      pageIndex: pageIndex,
+      pageSize: pageSize,
     };
 
     //alert (JSON.stringify(bussinesData))
-    let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
+    let executeReq = this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
     let header_httpClient = this.commonService.get_AuthorizedHeader();
-    
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,  {headers : header_httpClient}).pipe(
+
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, { headers: header_httpClient }).pipe(
       map(function (res: ApiResult) {
-
-
-        let result= JSON.parse(res.Result.toString());
+        let result = JSON.parse(res.Result.toString());
         if (result.Error) {
-          throw  Observable.throw(result.Result.Error);
+          throw Observable.throw(result.Result.Error);
         }
 
         let patientlist: PatientBE[] = result.BusinessData["PatientList"] as PatientBE[];
-     
 
         return patientlist;
-      })) .pipe( catchError(this.commonService.handleError));
+        
+      })).pipe(catchError(this.commonService.handleError));
   }
 
 
-  retrivePatients_vistual_scrolling$(batch, lastKey?) {
-    let query =  {
-            orderByKey: true,
-            limitToFirst: batch,
-          }
+  retrivePatients_vistual_scrolling$(pageSize, pageIndex) {
 
-    if (lastKey) query['startAt'] = lastKey
+    var bussinesData = {
+      ReturnGrid: false,
+      pageIndex: pageIndex,
+      pageSize: pageSize,
+    };
 
-    return this.db.list('/movies', {
-      query
-    })
+
+    let executeReq = this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
+
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, { headers: this.commonService.get_AuthorizedHeader() }).pipe(
+      map(function (res: ApiResult) {
+
+        let result = JSON.parse(res.Result.toString());
+        if (result.Error) {
+          throw Observable.throw(result.Result.Error);
+        }
+        let patientlist: PatientBE[] = result.BusinessData["PatientList"] as PatientBE[];
+        return patientlist;
+      })).pipe(catchError(this.commonService.handleError));
   }
 
-  createPatientsService$(patient: PatientBE,mutuales: MutualPorPacienteBE[]): Observable<PatientBE>  {
-      
+  createPatientsService$(patient: PatientBE, mutuales: MutualPorPacienteBE[]): Observable<PatientBE> {
+
     var bussinesData = {
       Patient: patient,
       Mutuales: mutuales
-    
+
     };
-    let executeReq=  this.commonService.generete_post_Params("CrearPatientService", bussinesData);
-    
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
-    map(function (res: ApiResult) {
+    let executeReq = this.commonService.generete_post_Params("CrearPatientService", bussinesData);
 
-      let result= JSON.parse(res.Result.toString());
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+      map(function (res: ApiResult) {
 
-      if (result.Error) {
-        throw  Observable.throw(result.Error);
-      }
-      patient.IdPersona =  result.BusinessData["IdPersona"] as number;
-      patient.PatientId =  result.BusinessData["PatientId"] as number;
+        let result = JSON.parse(res.Result.toString());
 
-      return patient;
-      })).pipe( catchError(this.commonService.handleError));
+        if (result.Error) {
+          throw Observable.throw(result.Error);
+        }
+        patient.IdPersona = result.BusinessData["IdPersona"] as number;
+        patient.PatientId = result.BusinessData["PatientId"] as number;
+
+        return patient;
+      })).pipe(catchError(this.commonService.handleError));
 
   }
 
-  
+
   updatePatientsService$(patient: PatientBE, mutuales: MutualPorPacienteBE[], AnteriorFechaNacimiento: Date): Observable<any> {
 
     var bussinesData = {
@@ -151,49 +159,49 @@ export class PatientsService {
 
     };
 
-    let executeReq=  this.commonService.generete_post_Params("UpdatePatientService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+    let executeReq = this.commonService.generete_post_Params("UpdatePatientService", bussinesData);
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
       map(function (res: ApiResult) {
-        let result= JSON.parse(res.Result.toString());
+        let result = JSON.parse(res.Result.toString());
 
         if (result.Error) {
-          throw  Observable.throw(result.Error);
+          throw Observable.throw(result.Error);
         }
 
         return "the patient was updated";
-      })) .pipe( catchError(this.commonService.handleError));
+      })).pipe(catchError(this.commonService.handleError));
 
   }
 
 
 
   getPatientById(patientId: number): Observable<PatientBE> {
-      
+
     var bussinesData = {
       Id: patientId
     };
 
 
-    let executeReq=  this.commonService.generete_post_Params("GetPatientService", bussinesData);
+    let executeReq = this.commonService.generete_post_Params("GetPatientService", bussinesData);
 
-    
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+
+    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
       map(function (res: ApiResult) {
 
-        let result= JSON.parse(res.Result.toString());
-      
+        let result = JSON.parse(res.Result.toString());
+
         if (result.Error) {
-          throw  Observable.throw(result.Error);
+          throw Observable.throw(result.Error);
         }
 
         let patient: PatientBE = result.BusinessData["Patient"] as PatientBE;
-        
-        if(result.BusinessData["Mutuales"]!=null)
+
+        if (result.BusinessData["Mutuales"] != null)
           patient.Mutuales = result.BusinessData["Mutuales"] as MutualPorPacienteBE[];
 
 
         return patient;
-      })).pipe( catchError(this.commonService.handleError));
-   }
+      })).pipe(catchError(this.commonService.handleError));
+  }
 }
 

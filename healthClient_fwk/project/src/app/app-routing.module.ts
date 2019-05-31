@@ -7,6 +7,7 @@ import { Page404NotFoundComponent } from './commonComponets/page404-not-found/pa
 import { PatientAlertsComponent } from './components/patient-alerts/patient-alerts.component';
 import { PatientGridTableComponent } from './components/patient-grid-table/patient-grid-table.component';
 import { PatientGridFilterPAginationonServerSideComponent } from './components/patient-grid-filter-paginationon-server-side/patient-grid-filter-paginationon-server-side.component';
+import { PatientCardListComponent } from './components/patient-card-list/patient-card-list.component';
 
 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'patientGrid:/id', component: PatientInfoComponent },
   { path: 'patientGridTable', component: PatientGridTableComponent },
   { path: 'PatientGridServerSide', component: PatientGridFilterPAginationonServerSideComponent },
+  { path: 'Patient_VirtualScrolling', component: PatientCardListComponent },
   
   { path: 'patient', component: PatientAlertsComponent },
   { path: '**', component: Page404NotFoundComponent },

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ServiceError, PatientBE, IPatient, IPerson } from 'src/app/model';
 import { Observable } from 'rxjs';
-import { CommonService } from 'src/app/service/common.service';
 import { PatientsService } from 'src/app/service/patients.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -31,7 +30,6 @@ export class PatientGridComponent implements AfterViewInit {
   pageActual: number = 1;
 
   constructor(
-    private commonService: CommonService,
     private patientsService: PatientsService,
     private spinner: NgxSpinnerService) {
 

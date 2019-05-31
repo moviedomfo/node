@@ -1,8 +1,20 @@
-<div class="container">
-   <cdk-virtual-scroll-viewport itemSize="200" class="viewport">
-      <mat-card *cdkVirtualFor="let item of patientList">
-          <mat-card-tittle>{{item.Persona.Apellido}},  {{item.Persona.Nombre}} </mat-card-tittle>
-      </mat-card>
-   </cdk-virtual-scroll-viewport>
 
+<div class="container">
+   <h2>Patient card list --> count {{patientList.length}}</h2>
+   <!-- <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+     <mat-card *cdkVirtualFor="let item of patientList">
+          <mat-card-title>{{item.Persona.Apellido}},  {{item.Persona.Nombre}} </mat-card-title>
+      </mat-card> 
+      <div *cdkVirtualFor="let item of ds" class="example-item">{{item.Persona.Nombre || 'Loading...'}}</div>
+   </cdk-virtual-scroll-viewport> -->
+
+   <div class="col-xs-12">
+      <input matInput placeholder="Search items" #input autocomplete="off">
+      <button #btn1 class="btn">
+              Clcick ME to test RxJS <span class="badge badge-primary"></span>
+      </button>
+      <div class="alert alert-primary" role="alert">
+         <strong>clien click mouse {{clickCount}}</strong>
+      </div>
+   </div>
 </div>
