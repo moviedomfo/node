@@ -1,4 +1,7 @@
-<app-person-card #personCard [currentPerson]="currentProfesional.Persona" [motivoConsulta]="motivoConsulta" (OnComponentError)="OnComponentError_personCard($event)">
+<app-person-card 
+#personCard [currentPerson]="currentProfesional.Persona" 
+[motivoConsulta]="motivoConsulta"
+(OnComponentError)="OnComponentError_personCard($event)">
 </app-person-card>
 
 <section class="content" ngModelGroup="profesionalCard" class="form-inline">

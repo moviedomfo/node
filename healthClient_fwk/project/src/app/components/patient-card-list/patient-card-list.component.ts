@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { PatientsService } from 'src/app/service/patients.service';
 import { PatientBE, ServiceError } from 'src/app/model';
-import { Observable, fromEvent, Subscription } from 'rxjs';
+import { Observable, fromEvent, Subscription, of, BehaviorSubject } from 'rxjs';
 import { PatientsCardDataSource } from './PatientsCardDatasource';
-import { throttleTime, map, scan, debounceTime, distinctUntilChanged, tap, startWith } from 'rxjs/operators';
+import { throttleTime, map, scan, debounceTime, distinctUntilChanged, tap,filter, startWith } from 'rxjs/operators';
 
 
 //https://www.youtube.com/watch?v=CRJxOA5FZZE
@@ -27,7 +27,54 @@ export class PatientCardListComponent implements AfterViewInit {
   private subscription: Subscription;
   constructor(private patientsService: PatientsService, ) { }
 
+  public strings:BehaviorSubject<string[]>;
+  private countries :string[]=['Afganistán','Argélia','Bahamas','Benin','Chile','China','Niue','Norway','Inglaterra' ];
+  private persons : any = [
+    {name: 'Joe', age: 31}, 
+    {name: 'Bob', age:25}
+  ];
+
+  public countriesObjects:Array<Object> = [
+      {id: 1, text: 'Afganistán'},
+      {id: 2, text: 'Argélia 2'},
+      {id: 3, text: 'Bahamas 3'},
+      {id: 4, text: 'China '},
+  ];
+
+
   ngAfterViewInit(): void {
+
+  
+  
+//---------------------------------------------------------------------------------------------------------------------
+    const squareOf2 = of(1, 2, 3, 4, 5,6)
+    .pipe(
+      filter(num => num % 2 === 0),
+      map(num => num * num)
+    );
+
+    squareOf2.subscribe(num=> console.log(num));
+//---------------------------------------------------------------------------------------------------------------------
+  var countryList$ = of('Afganistán','Argélia','Bahamas','Benin','Chile','China','Niue','Norway','Inglaterra' ).pipe(
+    filter(item=> item.startsWith('B')),
+    map(item=> item + ' : chk')
+  );
+  countryList$.subscribe( (item) => console.log(item));
+//---------------------------------------------------------------------------------------------------------------------
+let index = 0
+   var personObject$ = of(this.persons).pipe(
+      //filter(item=> item.age === 31), 
+      map(item=> item )
+    );
+    personObject$.subscribe( (item) =>{ 
+      var o=JSON.stringify(item);
+
+      console.log(index + ' ' + o)
+      index++;
+    });
+
+    
+//---------------------------------------------------------------------------------------------------------------------
 
     // var keyups = Observable.fromEvent(this.input.nativeElement as any, 'keyup')
     // .map( e  => {
@@ -67,16 +114,19 @@ export class PatientCardListComponent implements AfterViewInit {
     fromEvent(this.button.nativeElement, 'click')
       .pipe(
         throttleTime(1000),
-        map(event => console.log(event))
+        map(event => 
+          console.log(event)
+          )
+
         //scan((pos, clientX) =>      pos= "pepe", 0)
       )
       .subscribe(
-        
+
         (event) => {
-         var msg = 'X = ' +this.button.nativeElement.pageX + ' Y = ' + this.button.nativeElement.y;
-      //  console.log( event)
-      }
-        );
+          var msg = 'X = ' + this.button.nativeElement.pageX + ' Y = ' + this.button.nativeElement.y;
+          //  console.log( event)
+        }
+      );
 
 
   }
@@ -106,3 +156,4 @@ export class PatientCardListComponent implements AfterViewInit {
     this.subscription.unsubscribe();
   }
 }
+
