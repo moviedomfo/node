@@ -31,6 +31,8 @@ import { PatientGridComponent } from './components/patient-grid/patient-grid.com
  import { PatientGridTableModalComponent } from './components/patient-grid-table-modal/patient-grid-table-modal.component';
 import { PatientGridFilterPAginationonServerSideComponent } from './components/patient-grid-filter-paginationon-server-side/patient-grid-filter-paginationon-server-side.component';
 import { PatientCardListComponent } from './components/patient-card-list/patient-card-list.component';
+import { TestObservablesComponent } from './samples/test-observables/test-observables.component';
+import { SampleIndexComponent } from './samples/index/index.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 
@@ -46,7 +48,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     PatientAlertsComponent,
     PatientInfoComponent,
      PatientGridTableComponent, 
-     PatientGridTableModalComponent, PatientGridFilterPAginationonServerSideComponent, PatientCardListComponent
+     PatientGridTableModalComponent, PatientGridFilterPAginationonServerSideComponent, PatientCardListComponent, 
+     TestObservablesComponent, SampleIndexComponent
   ],
   imports: [
     FormsModule,

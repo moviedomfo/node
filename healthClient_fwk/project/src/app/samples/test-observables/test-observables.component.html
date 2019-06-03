@@ -1,0 +1,43 @@
+
+<div class="container">
+  
+  <!-- <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+    <mat-card *cdkVirtualFor="let item of patientList">
+         <mat-card-title>{{item.Persona.Apellido}},  {{item.Persona.Nombre}} </mat-card-title>
+     </mat-card> 
+     <div *cdkVirtualFor="let item of ds" class="example-item">{{item.Persona.Nombre || 'Loading...'}}</div>
+  </cdk-virtual-scroll-viewport> -->
+ <div class="row">
+  <div class="col-xs-6">
+    <div class="form-group">
+      <label for="" class="tittle">Test  input keyup event using observable fromEvent</label>
+      <input matInput type="text" #input autocomplete="off"
+        class="form-control" name="input"  aria-describedby="helpId" placeholder="Search items">
+      <small id="helpId" class="form-text text-muted">{{inputKeyList}}</small>
+    </div>
+
+ 
+    
+
+
+ </div>  
+
+ </div>
+ 
+
+ <div class="row">
+    <div class="col-xs-4">
+
+        <button #btn1 class="btn">
+            Click ME to test RxJS <span class="badge badge-primary"></span>
+    </button>
+    
+    </div>
+    <div class="col-xs-6">
+        Click counter 
+        <div class="alert alert-primary" role="alert">
+            <strong> {{clickCount}}</strong>
+        </div>
+    </div>
+  </div>
+</div>

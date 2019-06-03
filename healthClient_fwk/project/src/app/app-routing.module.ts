@@ -8,11 +8,13 @@ import { PatientAlertsComponent } from './components/patient-alerts/patient-aler
 import { PatientGridTableComponent } from './components/patient-grid-table/patient-grid-table.component';
 import { PatientGridFilterPAginationonServerSideComponent } from './components/patient-grid-filter-paginationon-server-side/patient-grid-filter-paginationon-server-side.component';
 import { PatientCardListComponent } from './components/patient-card-list/patient-card-list.component';
+import { TestObservablesComponent } from './samples/test-observables/test-observables.component';
+import { SampleIndexComponent } from './samples/index/index.component';
 
 
 
 const routes: Routes = [
-  
+
   { path: '', component: Page404NotFoundComponent },
   { path: 'login', component: LogingComponent },
   { path: 'patientGrid', component: PatientGridComponent },
@@ -20,8 +22,19 @@ const routes: Routes = [
   { path: 'patientGridTable', component: PatientGridTableComponent },
   { path: 'PatientGridServerSide', component: PatientGridFilterPAginationonServerSideComponent },
   { path: 'Patient_VirtualScrolling', component: PatientCardListComponent },
-  
   { path: 'patient', component: PatientAlertsComponent },
+  {
+    path: 'samples',//, component: SampleIndexComponent,Si ponemos esto siempre se cargara SampleIndexComponent
+    children: [
+      {path: 'testObservables',  component: TestObservablesComponent},
+      { path: '', component: SampleIndexComponent, pathMatch: 'full'}
+    ]
+  },
+  {
+    path: 'testObservables',
+    component: TestObservablesComponent
+  },
+
   { path: '**', component: Page404NotFoundComponent },
 ];
 
@@ -33,7 +46,7 @@ const routes: Routes = [
 
 export class AppRoutingModule {
 
-   constructor(){}
+  constructor() { }
 
-   ngOnInit(){  }
- }
+  ngOnInit() { }
+}
