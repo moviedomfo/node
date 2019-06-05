@@ -74,3 +74,27 @@ Luego instalar:angular.json !!CUIDADO DE NO AGREGARLO SOLO A "test": {..}!!
    ref
     https://www.youtube.com/watch?v=NUmLaVcx1HI
     https://github.com/bezael/loopback3_angular6_bootstrap4/blob/master/apiBooks/client/src/app/app.module.ts
+
+
+
+Problemas google maps
+
+Al pasar a angular 7  y reinstalar los modulos de google
+npm install @types/googlemaps --save-dev
+
+
+problema 1
+  npm WARN @agm/core@1.0.0-beta.5 requires a peer of @angular/common@^5.0.0 || ^6.0.0 but none is installed. You must install peer dependencies yourself.
+  npm WARN @agm/core@1.0.0-beta.5 requires a peer of @angular/core@^5.0.0 || ^6.0.0 but none is installed. You must install peer dependencies yourself
+
+Solucion 
+ en package.json  actualice a  "@agm/core": "^1.0.0-beta.6",
+  y corri nmp install
+
+problema 2 Typescript Error Cannot find name ‘google’
+ Solucion   agreagar al modulo que usa google esta declaracion -->app-autocomplete-google
+
+    declare var google;
+problem 3 en el cliente f12
+    Uncaught Error: Template parse errors: 'AutocompleteComponent' is not a known element:    
+

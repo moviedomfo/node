@@ -10,6 +10,7 @@ import { PatientGridFilterPAginationonServerSideComponent } from './components/p
 import { PatientCardListComponent } from './components/patient-card-list/patient-card-list.component';
 import { TestObservablesComponent } from './samples/test-observables/test-observables.component';
 import { SampleIndexComponent } from './samples/index/index.component';
+import { ComponetsIndexComponent } from './components/componets-index/componets-index.component';
 
 
 
@@ -17,12 +18,19 @@ const routes: Routes = [
 
   { path: '', component: Page404NotFoundComponent },
   { path: 'login', component: LogingComponent },
-  { path: 'patientGrid', component: PatientGridComponent },
-  { path: 'patientGrid:/id', component: PatientInfoComponent },
-  { path: 'patientGridTable', component: PatientGridTableComponent },
-  { path: 'PatientGridServerSide', component: PatientGridFilterPAginationonServerSideComponent },
-  { path: 'Patient_VirtualScrolling', component: PatientCardListComponent },
-  { path: 'patient', component: PatientAlertsComponent },
+  {
+    path: 'componetsIndex',
+    children: [
+      { path: 'patientGrid', component: PatientGridComponent },
+      { path: 'patientGrid:/id', component: PatientInfoComponent },
+      { path: 'patientGridTable', component: PatientGridTableComponent },
+      { path: 'PatientGridServerSide', component: PatientGridFilterPAginationonServerSideComponent },
+      { path: 'Patient_VirtualScrolling', component: PatientCardListComponent },
+      { path: 'patient', component: PatientAlertsComponent },
+      { path: '', component: ComponetsIndexComponent, pathMatch: 'full'}
+    ]
+  },
+ 
   {
     path: 'samples',//, component: SampleIndexComponent,Si ponemos esto siempre se cargara SampleIndexComponent
     children: [

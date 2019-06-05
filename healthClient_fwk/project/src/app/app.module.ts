@@ -33,6 +33,9 @@ import { PatientGridFilterPAginationonServerSideComponent } from './components/p
 import { PatientCardListComponent } from './components/patient-card-list/patient-card-list.component';
 import { TestObservablesComponent } from './samples/test-observables/test-observables.component';
 import { SampleIndexComponent } from './samples/index/index.component';
+import { ComponetsIndexComponent } from './components/componets-index/componets-index.component';
+import { AutocompleteGoogleComponent } from './commonComponets/autocomplete-google/autocomplete-google.component';
+import { AddressesgoogleComponent } from './samples/addressesgoogle/addressesgoogle.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
 
@@ -49,7 +52,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     PatientInfoComponent,
      PatientGridTableComponent, 
      PatientGridTableModalComponent, PatientGridFilterPAginationonServerSideComponent, PatientCardListComponent, 
-     TestObservablesComponent, SampleIndexComponent
+     TestObservablesComponent, SampleIndexComponent, ComponetsIndexComponent, AutocompleteGoogleComponent, AddressesgoogleComponent
   ],
   imports: [
     FormsModule,
