@@ -1,8 +1,8 @@
 
 
-declare var google;
-import { Component, ViewChild, EventEmitter, Output, OnInit, AfterViewInit, Input } from '@angular/core';
 
+import { Component, ViewChild, EventEmitter, Output, OnInit, AfterViewInit, Input } from '@angular/core';
+declare var google;
 //import {} from '@types/googlemaps';
 
 @Component({
@@ -28,9 +28,17 @@ export class AutocompleteGoogleComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    //this.initMap();
   }
-
+  // initMap() {
+  //   this.directionsService = new google.maps.DirectionsService();
+  //   this.directionsDisplay = new google.maps.DirectionsRenderer();
+  //   const map = new google.maps.Map(document.getElementById("map"), {
+  //     zoom: 4,
+  //     center: { lat: 41.85, lng: -87.65 }
+  //   });
+  //   this.directionsDisplay.setMap(map);
+  // }
   private getPlaceAutocomplete() {
     const autocomplete = new google.maps.places.Autocomplete(this.addresstext.nativeElement,
       {

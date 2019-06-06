@@ -63,10 +63,10 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     HttpClientModule,
     BrowserAnimationsModule,
     SocketIoModule.forRoot(config),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
-      libraries: ['places']
-    }),
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
+    //   libraries: ['places']
+    // }),
     LayoutModule,
     NgxSpinnerModule,
     NgxPaginationModule,

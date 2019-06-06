@@ -11,6 +11,7 @@ import { PatientCardListComponent } from './components/patient-card-list/patient
 import { TestObservablesComponent } from './samples/test-observables/test-observables.component';
 import { SampleIndexComponent } from './samples/index/index.component';
 import { ComponetsIndexComponent } from './components/componets-index/componets-index.component';
+import { AddressesgoogleComponent } from './samples/addressesgoogle/addressesgoogle.component';
 
 
 
@@ -27,6 +28,8 @@ const routes: Routes = [
       { path: 'PatientGridServerSide', component: PatientGridFilterPAginationonServerSideComponent },
       { path: 'Patient_VirtualScrolling', component: PatientCardListComponent },
       { path: 'patient', component: PatientAlertsComponent },
+
+      
       { path: '', component: ComponetsIndexComponent, pathMatch: 'full'}
     ]
   },
@@ -35,6 +38,8 @@ const routes: Routes = [
     path: 'samples',//, component: SampleIndexComponent,Si ponemos esto siempre se cargara SampleIndexComponent
     children: [
       {path: 'testObservables',  component: TestObservablesComponent},
+      {path: 'autocompleteGoogle',  component: AddressesgoogleComponent},
+      
       { path: '', component: SampleIndexComponent, pathMatch: 'full'}
     ]
   },
