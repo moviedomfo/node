@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+// permmite cambiar la variable obsevada
 import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import {  Response, RequestOptions, Headers } from '@angular/http';
 import {PersonBE} from '../../app/model/persons.model'
 import { HealtConstants, contextInfo } from "../model/common.constants";
@@ -31,10 +32,10 @@ export class PersonsService {
   console.log(bussinesData);
     let executeReq=  this.commonService.generete_post_Params("RetrivePersonasService", bussinesData);
     
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
+    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+       map(result => {
 
-        let result: Result = JSON.parse(res.toString());
+        
         
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -42,7 +43,7 @@ export class PersonsService {
         var profesionalesGridBEList: PersonBE[] = result.BusinessData as PersonBE[];
       
         return profesionalesGridBEList;
-      }).catch(this.commonService.handleError);
+      })).pipe(catchError(this.commonService.handleError));
   }
 
   getPersonaByParamService$(
@@ -60,10 +61,10 @@ export class PersonsService {
 
     let executeReq=  this.commonService.generete_post_Params("GetPersonaByParamService", bussinesData);
     
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
+    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,HealtConstants.httpClientOption_contenttype_json).pipe(
+       map(result => {
 
-        let result: Result = JSON.parse(res.toString());
+        
 
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -71,7 +72,7 @@ export class PersonsService {
 
         return result.BusinessData["Persona"] as PersonBE;
         
-      }).catch(this.commonService.handleError);
+      })).pipe(catchError(this.commonService.handleError));
   }
 }
 

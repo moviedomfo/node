@@ -5,9 +5,8 @@ import { HealtConstants, contextInfo } from "../model/common.constants";
 import {  Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
 // permmite cambiar la variable obsevada
-import { Subject } from 'rxjs/Subject';
-// permite observar
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { CommonService } from '../service/common.service';
 import 'rxjs/add/operator/map';
 import { Profesional_FullViewBE, ProfesionalesGridBE, AppointmentsBE } from "../model/profesional.model";
@@ -26,7 +25,7 @@ export class ShedulingServiceService {
 
   CreateAppointmentsService$(
     AppointmentsList: AppointmentsBE[]
-   ): Observable<boolean> {
+   ): Observable<any> {
 
     var bussinesData = {
       AppointmentsList: AppointmentsList
@@ -36,23 +35,23 @@ export class ShedulingServiceService {
 
     let executeReq=  this.commonService.generete_post_Params("CreateAppointmentsService", bussinesData);
     
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
+    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+       map(result => {
 
-        let result: Result = JSON.parse(res.json());
+      //  let result: Result = JSON.parse(res.json());
 
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
         
         return true;
-      }).catch(this.commonService.handleError);
+      })).pipe(catchError(this.commonService.handleError));
   }
 
 
   GetAppoinmentByParamsService$(
     AppointmentId?: number
-   ): Observable<AppointmentsBE> {
+   ): Observable<any> {
 
     var bussinesData = {
       AppointmentId: AppointmentId
@@ -62,17 +61,17 @@ export class ShedulingServiceService {
 
     let executeReq=  this.commonService.generete_post_Params("GetAppoinmentByParamsService", bussinesData);
 
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
+    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+       map(result => {
 
-        let result: Result = JSON.parse(res.json());
+      //  let result: Result = JSON.parse(res.json());
 
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
         let AppointmentsBE = result.BusinessData['AppointmentsBE'] as AppointmentsBE;
         return AppointmentsBE;
-      }).catch(this.commonService.handleError);
+      })).pipe(catchError(this.commonService.handleError));
   }
 
 }

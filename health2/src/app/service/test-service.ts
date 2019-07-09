@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Observable, pipe } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import {  Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 import {PersonBE} from '../../app/model/persons.model'
 import { HealtConstants, contextInfo } from "../model/common.constants";
@@ -31,10 +31,10 @@ export class TestService {
     console.log(currentLogin.oAuth.access_token);
 
     
-    return this.http.post(url,ExecuteReq,{headers:headders} )
-    .map(function (res: Response) {
+    return this.http.post<Result>(url,ExecuteReq,{headers:headders} ).pipe(
+     map(result => {
 
-      let result: Result = JSON.parse(res.toString());
+      
 
       if (result.Error) {
         console.log(result.Error);
@@ -43,7 +43,7 @@ export class TestService {
       console.log(result);
       return result;
       
-    }).catch(this.commonService.handleError);
+    })).pipe(catchError(this.commonService.handleError));
   }
 }
 

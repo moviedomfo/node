@@ -2,9 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import {  Response, RequestOptions } from '@angular/http';
 
 // permmite cambiar la variable obsevada
-import { Subject } from 'rxjs/Subject';
-// permite observar
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { CommonService } from '../service/common.service';
 import 'rxjs/add/operator/map';
 import { ProfesionalBE, PersonBE, ResourceSchedulingBE,
@@ -21,7 +20,7 @@ export class ProfesionalService {
   private contextInfo: IContextInformation;
   private commonService: CommonService;
 
-  constructor(private http: HttpClient, @Inject(CommonService) commonService: CommonService) {
+  constructor(private http: HttpClient, commonService: CommonService) {
     this.contextInfo = contextInfo;
     this.commonService = commonService;
   }
@@ -34,7 +33,7 @@ export class ProfesionalService {
     idProfesional?: number,
     userGuid?: String,
     healthInstitutionId?: String, includeAllInstitutions?: boolean,
-    personaId?: String): Observable<GetProfesionalRes> {
+    personaId?: String): Observable<any> {
 
     var bussinesData = {
       IdProfesional: idProfesional,
@@ -49,15 +48,12 @@ export class ProfesionalService {
 
   
     let executeReq=  this.commonService.generete_post_Params("GetProfesionalService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
 
-        let result: Result = JSON.parse(res.toString());
-
+    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+      map(result => {
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
-
         let profesionalBE: ProfesionalBE = result.BusinessData['profesional'] as ProfesionalBE;
      
         let resourceSchedulingList: ResourceSchedulingBE[] = result.BusinessData['ResourceSchedulerList'] as ResourceSchedulingBE[];
@@ -78,13 +74,13 @@ export class ProfesionalService {
         response.HealthInstitution_ProfesionalList = healthInstitution_ProfesionalList;
 
         return response;
-      }).catch(this.commonService.handleError);
+      })).pipe(catchError(this.commonService.handleError));
+
+
+ 
   }
 
-  DesvincularProfesionalService$(
-    profesionalId?: number,
-    healthInstitutionId?: String, 
-    ): Observable<Boolean> {
+  DesvincularProfesionalService$(profesionalId?: number,  healthInstitutionId?: String): Observable<any> {
 
     var bussinesData = {
       ProfesionalId: profesionalId,
@@ -92,16 +88,18 @@ export class ProfesionalService {
     };
 
     let executeReq=  this.commonService.generete_post_Params("DesvincularProfesionalService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
 
-        let result: Result = JSON.parse(res.toString());
+
+    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+      map(result => {
+
+        //let result: Result = JSON.parse(res.toString());
 
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
         return true;
-      }).catch(this.commonService.handleError);
+      })).pipe(catchError(this.commonService.handleError));
   }
 
 
@@ -120,10 +118,8 @@ export class ProfesionalService {
     };
 
     let executeReq=  this.commonService.generete_post_Params("CrearProfesionalService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
-
-        let result: Result = JSON.parse(res.toString());
+    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+      map(result => {
 
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -131,16 +127,11 @@ export class ProfesionalService {
         // let IdProfesional: number = result.BusinessData['IdProfesional'] as number;
         // let UserId: string = result.BusinessData['UserId'] as string;
         return result.BusinessData;
-      }).catch(this.commonService.handleError);
+       })).pipe(catchError(this.commonService.handleError));
   }
 
 
-  UpdateProfesionalService$(
-    profesionalBE: ProfesionalBE,
-    user: User, 
-    healthInstitutionId:string,
-    soloAsociarProfesionalAinst:Boolean
-    ): Observable<Boolean> {
+  UpdateProfesionalService$(profesionalBE: ProfesionalBE,user: User,healthInstitutionId:string,soloAsociarProfesionalAinst:boolean): Observable<any> {
 
     var bussinesData = {
       Profesional: profesionalBE,
@@ -151,24 +142,25 @@ export class ProfesionalService {
 
    
     let executeReq=  this.commonService.generete_post_Params("UpdateProfesionalService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
-
-        let result: Result = JSON.parse(res.toString());
+    return this.http.post<Result>(HealtConstants.HealthExecuteAPI_URL,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+      map(result => {
+        //let result: Result = JSON.parse(res.toString());
 
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
-
         return true;
-      }).catch(this.commonService.handleError);
+      })).pipe(catchError(this.commonService.handleError));
+
   }
+
+
   retriveProfesionalesGrid$(
     nombre: string,
     apellido: string,
     healthInstitutionId?: string
 
-  ): Observable<ProfesionalesGridBE[]> {
+  ): Observable<any> {
 
     var bussinesData = {
       Nombre: nombre,
@@ -178,10 +170,10 @@ export class ProfesionalService {
     };
 
     let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesGridService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
+    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+      map(result => {
 
-        let result: Result = JSON.parse(res.toString());
+        //let result: Result = JSON.parse(res.toString());
         
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -189,7 +181,9 @@ export class ProfesionalService {
         var profesionalesGridBEList: ProfesionalesGridBE[] = result.BusinessData as ProfesionalesGridBE[];
       
         return profesionalesGridBEList;
-      }).catch(this.commonService.handleError);
+      })).pipe(catchError(this.commonService.handleError));
+    
+
   }
 
 
@@ -197,9 +191,8 @@ export class ProfesionalService {
   retriveProfesionalesService$(
     nombre: string,
     apellido: string, 
-    healthInstitutionId?:string
-    
-    ): Observable<Profesional_FullViewBE []> {
+    healthInstitutionId?:string    
+    ): Observable<any> {
 
     var bussinesData = {
       Nombre: nombre,
@@ -210,10 +203,10 @@ export class ProfesionalService {
 
     let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesService", bussinesData);
 
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
+    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+      map(result => {
 
-        let result: Result = JSON.parse(res.toString());
+        //let result: Result = JSON.parse(res.toString());
 
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -221,7 +214,7 @@ export class ProfesionalService {
          var profesional_FullView : Profesional_FullViewBE[] = result.BusinessData as Profesional_FullViewBE[];
         
         return profesional_FullView;
-      }).catch(this.commonService.handleError);
+      })).pipe(catchError(this.commonService.handleError));
   }
 
 
@@ -230,7 +223,7 @@ export class ProfesionalService {
     apellido: string, 
     healthInstitutionId?:string
     
-    ): Observable<ProfesionalesGridBE []> {
+    ): Observable<any> {
 
     var bussinesData = {
       Nombre: nombre,
@@ -241,10 +234,10 @@ export class ProfesionalService {
 
 
     let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesGridService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
+    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+      map(result => {
 
-        let result: Result = JSON.parse(res.toString());
+        //let result: Result = JSON.parse(res.toString());
 
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -252,21 +245,19 @@ export class ProfesionalService {
          var ProfesionalesGridBELis : ProfesionalesGridBE[] = result.BusinessData as ProfesionalesGridBE[];
         
         return ProfesionalesGridBELis;
-      }).catch(this.commonService.handleError);
+      })).pipe(catchError(this.commonService.handleError));
   }
 
   //Si se pasa userName = string.empty se traen todos los roles existentes
-  getAllRoles$(username: string): Observable<Rol[]> {
+  getAllRoles$(username: string): Observable<any> {
     var bussinesData = {
       UserName: username
     };
-    
-
     let executeReq=  this.commonService.generete_post_Params("SearchAllRolesService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-    .map(function (res: Response) {
+    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+      map(result => {
      
-      let result: Result= JSON.parse(res.toString());
+      //let result: Result= JSON.parse(res.toString());
       
       if (result.Error) {
         throw  Observable.throw(result.Error);
@@ -275,7 +266,7 @@ export class ProfesionalService {
       let rolList: Rol[] = result.BusinessData['RolList'] as Rol[];
 
       return rolList;
-    }).catch(this.commonService.handleError);
+    })).pipe(catchError(this.commonService.handleError));
  
   }
 
@@ -286,11 +277,10 @@ export class ProfesionalService {
 
 
     let executeReq=  this.commonService.generete_post_Params("ValidateUserExistService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-    .map(function (res: Response) {
+    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    map(result => {
      
-      let result: Result= JSON.parse(res.toString());
-      
+
       if (result.Error) {
         throw  Observable.throw(result.Error);
       }
@@ -298,7 +288,7 @@ export class ProfesionalService {
       let exist: boolean = result.BusinessData['Exist'] as boolean;
 
       return exist;
-    }).catch(this.commonService.handleError);
+    })).pipe(catchError(this.commonService.handleError));
  
   }
 
@@ -310,16 +300,15 @@ export class ProfesionalService {
     };
 
     let executeReq=  this.commonService.generete_post_Params("ResetUserPasswordService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-    .map(function (res: Response) {
-     
-      let result: Result= JSON.parse(res.toString());
+    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    map(result=> {
       
       if (result.Error) {
         throw  Observable.throw(result.Error);
       }
       return true;
-    }).catch(this.commonService.handleError);
+  
+    })).pipe(catchError(this.commonService.handleError));
  
   }
 

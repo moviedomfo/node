@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HealtConstants, contextInfo, CommonParams } from "../model/common.constants";
 import { Param, IParam, IContextInformation, ContextInformation, ExecuteReq, Request, IRequest, IResponse, Result, ServiceError, CurrentLogin } from '../model/common.model';
 import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
-//permmite cambiar la variable obsevada
-import { Subject } from 'rxjs/Subject';
-//permite observar
-import { Observable } from 'rxjs/Observable';
+// permmite cambiar la variable obsevada
+import { Observable, Subject } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { element } from 'protractor';
 import { Router } from '@angular/router'
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -50,8 +49,8 @@ export class CommonService {
     api_url = api_url.replace('[input]', input);
     api_url = api_url.replace('[input]', input);
 
-    return this.http.get(`${api_url}`, HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
+    return this.http.get(`${api_url}`,HealtConstants.httpClientOption_contenttype_json).pipe(
+       map(result => {
         let places = JSON.parse(res.json());
         console.log(places);
       });
@@ -60,7 +59,7 @@ export class CommonService {
    * @idTipoParametro : Nombre de tabla
    * @idParametroRef : Subnombre , subcategoria
    */
-  searchParametroByParams$(idTipoParametro: number, idParametroRef: number): Observable<Param[]> {
+  searchParametroByParams$(idTipoParametro: number, idParametroRef: number): Observable<any> {
 
     var bussinesData = {
       IdParametroRef: idParametroRef,
@@ -70,21 +69,19 @@ export class CommonService {
 
    
     let executeReq=  this.generete_post_Params("SearchParametroByParamsService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq, HealtConstants.httpClientOption_contenttype_json)
-      .map(function (res: Response) {
+    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+       map(result => {
 
-        let resToObject: Result;
-        resToObject = JSON.parse(res.toString());
 
-        if (resToObject.Error) {
+        if (result.Error) {
 
-          throw Observable.throw(resToObject.Error);
+          throw Observable.throw(result.Error);
         }
 
-        let params: Param[] = resToObject.BusinessData as Param[];
+        let params: Param[] = result.BusinessData as Param[];
 
         return params;
-      }).catch(this.handleError);
+      })).pipe(catchError(this.handleError));
   }
   /**
   * @params : parametros 
