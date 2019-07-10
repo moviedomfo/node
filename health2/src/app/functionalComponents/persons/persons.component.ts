@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { PatientBE,PersonBE } from '../../model/index';
 import { PatientsService,CommonService } from '../../service/index';
 

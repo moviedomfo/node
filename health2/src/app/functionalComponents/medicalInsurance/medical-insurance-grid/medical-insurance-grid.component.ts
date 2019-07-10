@@ -1,8 +1,8 @@
 import { Component, OnInit,Output,EventEmitter, Input } from '@angular/core';
 //permmite cambiar la variable obsevada
-import { Subject } from 'rxjs/Subject';
+
 //permite observar
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { MutualBE ,MutualPlanGridView} from '../../../model/index';
 import { PatientsService, CommonService, MedicalInsuranceService } from '../../../service/index';
 // rich grid and rich grid declarative

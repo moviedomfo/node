@@ -4,6 +4,7 @@ import { PersonBE,PatientBE,IContextInformation, IParam, Param,TimespamView,Time
 import {TipoParametroEnum,DayNamesIndex_Value_ES} from '../../model/common.constants'
 import * as moment from 'moment';
 import { Duration } from "moment";
+import { element } from 'protractor';
 import { ResourceSchedulingBE } from "../../model/profesional.model";
 
 @Component({

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input ,Output,EventEmitter, AfterViewInit, ViewChild} from '@angular/core';
+import { Component,  ViewEncapsulation, Input ,Output,EventEmitter, AfterViewInit, ViewChild} from '@angular/core';
 import { ResourceSchedulingBE, TimespamView } from "../../../model/profesional.model";
 import { ServiceError, TimeSpan } from "../../../model/common.model";
 import { HealtConstants } from "../../../model/common.constants";
@@ -22,7 +22,7 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
   @Input() isEditMode:boolean;
   @Output() OnResourceShedulingCreated = new EventEmitter<ResourceSchedulingBE>();
   @Output() OnComponentError = new EventEmitter<ServiceError>();
-  @ViewChild('weekDaysCheckEdit') weekDaysCheckEdit: WeekDaysCheckEditComponent;
+  @ViewChild('weekDaysCheckEdit',{ static: false }) weekDaysCheckEdit: WeekDaysCheckEditComponent;
 
   private ArrayOfTimes : TimespamView[];
   currentResourceScheduling_TimeStart:string;

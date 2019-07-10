@@ -3,8 +3,8 @@ import { ModalDialogComponent } from './common-components/modal-dialog/modal-dia
 
 import { DialogService } from "ng2-bootstrap-modal";
 import { CommonService } from "./service/index";
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',

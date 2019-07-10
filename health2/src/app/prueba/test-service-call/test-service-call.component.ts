@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientsService, TestService, AuthenticationService } from '../../service';
 import { PatientBE, ServiceError, AuthenticationOAutResponse } from '../../model';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-test-service-call',

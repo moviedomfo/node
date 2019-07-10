@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PatientBE, ServiceError } from '../../../model/index';
 import { PatientsService,CommonService } from '../../../service/index';
 //permmite cambiar la variable obsevada
-import { Subject } from 'rxjs/Subject';
+
 //permite observar
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 // rich grid and rich grid declarative
 import {DateComponent} from "../../../common-components/ag-grid/date.component";
@@ -25,7 +25,7 @@ export class PatientGridComponent implements OnInit {
   private patientCount: number;
   private patientList$: Observable<PatientBE[]>;
   private patientList: PatientBE[];
-  currentPatient: PatientBE;
+  public currentPatient: PatientBE;
   private columnDefs:any[];
   private gridOptions:GridOptions;
   

@@ -5,9 +5,9 @@ import {TipoParametroEnum} from '../../model/common.constants'
 
 
 //permmite cambiar la variable obsevada
-import { Subject } from 'rxjs/Subject';
+
 //permite observar
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 
 

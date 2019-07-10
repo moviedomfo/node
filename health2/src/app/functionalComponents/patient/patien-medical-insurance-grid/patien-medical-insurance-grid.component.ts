@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
 // rich grid and rich grid declarative
 import { DateComponent } from "../../../common-components/ag-grid/date.component";
 import { HeaderComponent } from "../../../common-components/ag-grid/header.component";
@@ -9,7 +9,7 @@ import { HeaderGroupComponent } from "../../../common-components/ag-grid/header-
 
 
 import { MutualBE, MutualPorPacienteBE } from '../../../model/index';
-import { Subscription }   from 'rxjs/Subscription';
+import { Subscription }   from 'rxjs';
 import { GridOptions, ColumnApi } from 'ag-grid-community';
 @Component({
     selector: 'app-patien-medical-insurance-grid',

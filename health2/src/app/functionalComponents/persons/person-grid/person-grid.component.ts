@@ -3,9 +3,9 @@ import { PersonsService,CommonService } from '../../../service/index';
 import {   PersonBE,IContextInformation, HealtConstants,TipoParametroEnum, MotivoConsultaEnum, ServiceError } from '../../../model/index';
 
 //permmite cambiar la variable obsevada
-import { Subject } from 'rxjs/Subject';
+
 //permite observar
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 
 // rich grid and rich grid declarative

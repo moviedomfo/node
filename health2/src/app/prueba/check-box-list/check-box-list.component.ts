@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter, AfterViewInit, ViewChild } from '@angular/core';
 import { User, ServiceError, Rol } from "../../model/common.model";
 import { ProfesionalService }  from '../../service/index';
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 declare var jQuery:any;
 declare var $:any;
 

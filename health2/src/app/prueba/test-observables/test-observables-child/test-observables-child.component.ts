@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonBE } from 'app/model';
-import { BehaviorSubject, Observable ,Subject} from 'rxjs/Rx';
+
+import { BehaviorSubject, Observable ,Subject} from 'rxjs';
+import { PersonBE } from '../../../model';
  
 @Component({
   selector: 'app-test-observables-child',

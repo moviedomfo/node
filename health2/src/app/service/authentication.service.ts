@@ -1,18 +1,14 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject} from '@angular/core';
 import { HealtConstants, contextInfo } from "../model/common.constants";
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, AuthenticationOAutResponse, User, CurrentLogin } from '../model/common.model';
-import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { CommonService } from '../service/common.service';
 import 'rxjs/add/operator/map';
 import { HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
-
-
 //import 'rxjs/add/operator/map'
-
-
 
 @Injectable()
 export class AuthenticationService {
@@ -26,7 +22,7 @@ export class AuthenticationService {
   }
 
   //Este método de autenticacion usa jwk contra un rest asp api
-  public oauthToken(userName: string, password: string): Observable< AuthenticationOAutResponse> {
+  public oauthToken(userName: string, password: string): Observable< any> {
 
 
     const bodyParams = new HttpParams()
@@ -35,16 +31,14 @@ export class AuthenticationService {
       .set(`grant_type`, 'password')
       .set(`client_id`, HealtConstants.oaut_client_id)
       .set(`client_secret`, HealtConstants.oaut_client_secret);
-
-    return this.http.post<AuthenticationOAutResponse>(`${HealtConstants.HealthOAuth_URL}`,
-     bodyParams,HealtConstants.httpClientOption_form_urlencoded).map((res) => {
-
-      localStorage.setItem('currentLogin', JSON.stringify({ userName: userName, oAuth: res }));
-
-      return res;
-    }).catch(this.commonService.handleError);
-
     
+      return  this.http.post<Result>(`${HealtConstants.HealthOAuth_URL}`,
+      bodyParams,HealtConstants.httpClientOption_form_urlencoded ).pipe(
+        map(res => {
+          localStorage.setItem('currentLogin', JSON.stringify({ userName: userName, oAuth: res }));
+         return res;
+       })).pipe(catchError(this.commonService.handleError));
+
   }
 
   public refreshoauthToken(): Observable< AuthenticationOAutResponse> {
@@ -60,30 +54,30 @@ export class AuthenticationService {
 
 
     return this.http.post<AuthenticationOAutResponse>(`${HealtConstants.HealthOAuth_URL}`,
-     bodyParams,HealtConstants.httpClientOption_form_urlencoded).map((res) => {
+     bodyParams,HealtConstants.httpClientOption_form_urlencoded).pipe(
+     map(res => {
       
-      currentLogin.oAuth=res;
+      currentLogin.oAuth = res;
       localStorage.setItem('currentLogin', JSON.stringify({ userName: currentLogin.username, oAuth: res }));
       
       return res;
-           
-
-    }).catch(this.commonService.handleError);
+    })).pipe(catchError(this.commonService.handleError));
 
     
   }
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
-      .map((response: Response) => {
+    return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password })).pipe(
+      map(response => {
         // login successful if there's a jwt token in the response
-        let token = response.json() && response.json().token;
-        if (token) {
+        //let token = response.json() && response.json().token;
+
+        if (response) {
           // set token property
-          this.token = token;
+          this.token = response as string;
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
+          localStorage.setItem('currentUser', JSON.stringify({ username: username, token:  this.token }));
 
           // return true to indicate successful login
           return true;
@@ -91,7 +85,8 @@ export class AuthenticationService {
           // return false to indicate failed login
           return false;
         }
-      });
+      })).pipe(catchError(this.commonService.handleError));
+
 
 
 

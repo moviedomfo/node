@@ -5,9 +5,9 @@ import {TipoParametroEnum,DayNamesIndex_Value_ES} from '../model/common.constant
 
 
 //permmite cambiar la variable obsevada
-import { Subject } from 'rxjs/Subject';
+
 //permite observar
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { TimespamView } from "../model/profesional.model";
 import { TimeSpan } from "../model/common.model";
 /*import {Dropdown} from './dropdown.directive';

@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { PatientBE,MutualPorPacienteBE,PersonBE } from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
-import {  Response, RequestOptions, Headers, URLSearchParams, RequestOptionsArgs } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject, throwError, Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';

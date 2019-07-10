@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation,Input,ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
 import { PatientsService, CommonService, MedicalInsuranceService } from '../../../service/index';
 import { PatientBE, PersonBE, MutualPorPacienteBE, MutualPlanGridView,ServiceError, IContextInformation, IParam, Param, 
         CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants } from '../../../model/index';

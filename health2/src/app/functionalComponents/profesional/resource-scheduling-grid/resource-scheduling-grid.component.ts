@@ -1,8 +1,4 @@
 import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
-import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-
 import { ServiceError } from '../../../model/common.model';
 import { ResourceSchedulingBE } from "../../../model/profesional.model";
 

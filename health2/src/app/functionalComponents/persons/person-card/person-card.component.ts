@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
 import { PersonsService, CommonService } from '../../../service/index';
 import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, EventType, TipoParametroEnum, CommonParams, HealtConstants, MotivoConsultaEnum } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
@@ -39,10 +39,10 @@ export class PersonCardComponent implements AfterViewInit {
   private base64Image: string;
 
   currentNroDocumento: string;
-  @ViewChild('alertBlock1') alertBlock1: AlertBlockComponent;
-  @ViewChild('cmbEstadoCivil') cmbEstadoCivil: ElementRef;
-  @ViewChild('img2') img2: ElementRef;
-  @ViewChild('img1') img1: ElementRef;
+  @ViewChild('alertBlock1',{ static: false }) alertBlock1: AlertBlockComponent;
+  @ViewChild('cmbEstadoCivil',{ static: false }) cmbEstadoCivil: ElementRef;
+  @ViewChild('img2',{ static: false }) img2: ElementRef;
+  @ViewChild('img1',{ static: false }) img1: ElementRef;
 
 
   @Output() OnComponentError = new EventEmitter<ServiceError>();

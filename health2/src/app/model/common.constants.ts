@@ -1,5 +1,4 @@
 
-import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Param, IParam, IContextInformation ,IRequest} from '../model/common.model';
 import { HttpHeaders } from '@angular/common/http';
 

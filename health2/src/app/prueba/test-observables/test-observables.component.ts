@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild, AfterViewInit} from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
 import {PersonBE } from '../../model';
 
 import { TestObservablesChildComponent } from './test-observables-child/test-observables-child.component';
@@ -13,7 +13,7 @@ import { TestObservablesChildComponent } from './test-observables-child/test-obs
 export class TestObservablesComponent implements OnInit {
 
  
-  @ViewChild('child') child: TestObservablesChildComponent; 
+  @ViewChild('child',{ static: false }) child: TestObservablesChildComponent; 
    private patientList : PersonBE[];
 
    private patientList$:Observable<PersonBE[]>;

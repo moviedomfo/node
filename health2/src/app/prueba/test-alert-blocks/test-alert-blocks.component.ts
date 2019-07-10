@@ -8,7 +8,7 @@ import { EventType } from '../../model';
   
 })
 export class TestAlertBlocksComponent implements AfterViewInit {
-  @ViewChild('alertBlock1') alertBlock1: AlertBlockComponent;
+  @ViewChild('alertBlock1',{ static: false }) alertBlock1: AlertBlockComponent;
   constructor() { }
 
 

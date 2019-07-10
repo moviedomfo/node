@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation ,ViewChild, ElementRef,  AfterContentInit } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
 import { PatientsService, CommonService, MedicalInsuranceService } from '../../../service/index';
 import { PatientBE, PersonBE, MutualPorPacienteBE, MutualPlanGridView, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants, MotivoConsultaEnum } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
@@ -28,7 +28,7 @@ export class PatientMangerComponent implements OnInit {
   private medicalInsuranceByPatientList$: Observable<MutualPorPacienteBE[]>;
   motivoConsulta :number;
 
-  @ViewChild('patienMedicalInsuranceGridComponent') patienMedicalInsuranceGridComponent: PatienMedicalInsuranceGridComponent;
+  @ViewChild('patienMedicalInsuranceGridComponent',{ static: false }) patienMedicalInsuranceGridComponent: PatienMedicalInsuranceGridComponent;
   
 
   constructor(private route: ActivatedRoute,

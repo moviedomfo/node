@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@angular/core';
-import {  Response, RequestOptions } from '@angular/http';
 
 // permmite cambiar la variable obsevada
 import { Observable } from 'rxjs';

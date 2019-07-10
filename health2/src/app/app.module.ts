@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
- 
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { TestModule } from './test.module';
 
@@ -27,7 +24,10 @@ import {AuthGuard} from './common-components/routingGuard/AuthGuard';
 // // google 
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceComponent } from './common-components/google-place/google-place.component';
-import {HealthModule } from './health.module';
+
+
+
+
 // //Bussines components
 import { PersonsComponent } from './functionalComponents/persons/persons.component' ;
 import { PatientComponent } from './functionalComponents/patient/patient.component';
@@ -38,7 +38,6 @@ import { LoginComponent } from './common-components/login/login.component';
 import { MedicalInsuranceGridComponent } from './functionalComponents/medicalInsurance/medical-insurance-grid/medical-insurance-grid.component';
 import { PatienMedicalInsuranceGridComponent } from './functionalComponents/patient/patien-medical-insurance-grid/patien-medical-insurance-grid.component';
 
-import {IContextInformation, ContextInformation, IRequest, Request, IResponse, Result, ServiceError } from './model/common.model';
 import { PatientGridComponent } from './functionalComponents/patient/patient-grid/patient-grid.component';
 import {CommonService, PatientsService, PersonsService, MedicalInsuranceService,ProfesionalService} from './service/index';
 import { AlertBlockComponent } from './common-components/alert-block/alert-block.component';
@@ -109,8 +108,6 @@ import {AuthenticationService} from './service/authentication.service';
   //HealthModule,
   BootstrapModalModule,
   FormsModule,
-  
-  HttpModule,
   HttpClientModule,
   rutesModule,
   TestModule

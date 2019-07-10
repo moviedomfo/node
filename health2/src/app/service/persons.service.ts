@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 // permmite cambiar la variable obsevada
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import {  Response, RequestOptions, Headers } from '@angular/http';
 import {PersonBE} from '../../app/model/persons.model'
 import { HealtConstants, contextInfo } from "../model/common.constants";
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol } from '../model/common.model';
@@ -34,9 +33,6 @@ export class PersonsService {
     
     return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
        map(result => {
-
-        
-        
         if (result.Error) {
           throw Observable.throw(result.Error);
         }

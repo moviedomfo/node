@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { ProfesionalBE, PersonBE, ResourceSchedulingBE, HealthInstitution_ProfesionalBE, GetProfesionalRes } from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
-import {  Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
 
 // permmite cambiar la variable obsevada
 import { Observable } from 'rxjs';

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HealtConstants, contextInfo, CommonParams } from "../model/common.constants";
 import { Param, IParam, IContextInformation, ContextInformation, ExecuteReq, Request, IRequest, IResponse, Result, ServiceError, CurrentLogin } from '../model/common.model';
-import { Http, Response, RequestOptions, Headers, URLSearchParams } from '@angular/http';
+
 // permmite cambiar la variable obsevada
 import { Observable, Subject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { element } from 'protractor';
+//import { element } from 'protractor';
 import { Router } from '@angular/router'
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
@@ -42,19 +42,20 @@ export class CommonService {
     }
 
   }
-  serarPlaces_google_place_api(input: string) {
-    //console.log('Ejecutando serarPlaces_google_place_api()');
-    var api_url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=[input]&types=geocode&key=AIzaSyAEBn6XjDRlouhZP-nQHSU4equHUeR2wEc';
+  // serarPlaces_google_place_api(input: string) {
+  //   //console.log('Ejecutando serarPlaces_google_place_api()');
+  //   var api_url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=[input]&types=geocode&key=AIzaSyAEBn6XjDRlouhZP-nQHSU4equHUeR2wEc';
 
-    api_url = api_url.replace('[input]', input);
-    api_url = api_url.replace('[input]', input);
+  //   api_url = api_url.replace('[input]', input);
+  //   api_url = api_url.replace('[input]', input);
 
-    return this.http.get(`${api_url}`,HealtConstants.httpClientOption_contenttype_json).pipe(
-       map(result => {
-        let places = JSON.parse(res.json());
-        console.log(places);
-      });
-  }
+  //   return this.http.get(`${api_url}`,HealtConstants.httpClientOption_contenttype_json).pipe(
+  //      map(result => {
+  //       //console.log(JSON.stringify(places));
+  //       //let places = JSON.parse(result.json());
+  //       let places = result;
+  //     }));
+  // }
   /**
    * @idTipoParametro : Nombre de tabla
    * @idParametroRef : Subnombre , subcategoria

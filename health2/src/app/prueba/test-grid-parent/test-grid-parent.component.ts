@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit, EventEmitter, Input, Output, AfterViewInit, ViewChild } from '@angular/core';
+
+import { Observable } from 'rxjs';
 import { PatientBE, PersonBE, MutualPorPacienteBE, MutualPlanGridView } from '../../model/index';
 import { AggridTestComponent } from './aggrid-test/aggrid-test.component';
-import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-test-grid-parent',
@@ -19,7 +19,7 @@ export class TestGridParentComponent implements AfterViewInit {
   public patientList: MutualPorPacienteBE[];
   constructor() { }
 
-  @ViewChild('grillaMutuales') grilla: AggridTestComponent; 
+  @ViewChild('grillaMutuales',{ static: false }) grilla: AggridTestComponent; 
 
   ngAfterViewInit() {
     // Ahora puedes utilizar el componente hijo

@@ -2,11 +2,10 @@ import { Injectable, Inject } from '@angular/core';
 import { PatientBE,MutualPorPacienteBE,PersonBE ,MutualBE} from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result } from '../model/common.model';
 import { HealtConstants, contextInfo } from "../model/common.constants";
-import {  Response, RequestOptions, Headers } from '@angular/http';
-
 // permmite cambiar la variable obsevada
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+
 import { CommonService } from '../service/common.service';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
@@ -30,22 +29,18 @@ export class MedicalInsuranceService {
         var bussinesData = {
           Status: status,
           StartDate: new Date()
-          
         };
         let executeReq=  this.commonService.generete_post_Params("RetriveAllObraSocialService", bussinesData);
+
         return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
            map(result => {
-    
-            
-            
             if (result.Error) {
               Observable.throw(result.Error)
             }
     
             let MutualList: MutualBE[] = result.BusinessData["ObraSocialList"] as MutualBE[];
-  
-    
             return MutualList;
+
           })).pipe(catchError(this.commonService.handleError));
           
       }

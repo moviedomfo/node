@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
 import { ProfesionalService, CommonService } from '../../../service/index';
 import { ProfesionalBE, PersonBE, GetProfesionalRes, HealthInstitution_ProfesionalBE, ResourceSchedulingBE, User, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants, contextInfo, Rol } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
@@ -34,9 +34,9 @@ export class ProfesionalManageComponent implements AfterViewInit {
   isEditMode_resource_scheduling: boolean;
   currentResourceScheduling = new ResourceSchedulingBE();
   motivoConsulta: number;
-  @ViewChild('resourceSchedulingManageComponent1') resourceSchedulingManageComponent: ResourceSchedulingManageComponent;
-  @ViewChild('resourceSchedulingGrid1') resourceSchedulingGridComponent: ResourceSchedulingGridComponent;
-  @ViewChild('sessionSettingComponent') sessionSettingComponent: SessionSettingComponent;
+  @ViewChild('resourceSchedulingManageComponent1',{ static: false }) resourceSchedulingManageComponent: ResourceSchedulingManageComponent;
+  @ViewChild('resourceSchedulingGrid1',{ static: false }) resourceSchedulingGridComponent: ResourceSchedulingGridComponent;
+  @ViewChild('sessionSettingComponent',{ static: false }) sessionSettingComponent: SessionSettingComponent;
   
 
   constructor(private route: ActivatedRoute,
@@ -155,7 +155,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
   }
 
 
-  @ViewChild('closeBtn') closeBtn: ElementRef;
+  @ViewChild('closeBtn',{ static: false }) closeBtn: ElementRef;
   
   OnResourceShedulingCreated(newResourceSheduling){
    

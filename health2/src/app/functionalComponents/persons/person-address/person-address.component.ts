@@ -1,10 +1,10 @@
-import { Component, OnInit ,Input} from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Component, AfterContentInit ,Input} from '@angular/core';
+
+import { Observable } from 'rxjs';
 import { PatientsService, CommonService } from '../../../service/index';
 import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants } from '../../../model/index';
-import { FormGroup } from '@angular/forms';
-import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';
+
+
 @Component({
   selector: 'app-person-address',
   templateUrl: './person-address.component.html',

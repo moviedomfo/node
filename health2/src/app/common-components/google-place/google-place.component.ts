@@ -4,6 +4,8 @@ import { FormControl } from '@angular/forms';
 import {} from '@agm/core/services/google-maps-types';
 import { MapsAPILoader } from '@agm/core';
 import { PlaceBE } from "../../model/persons.model";
+declare var google: any
+import {} from "googlemaps";
 
 @Component({
   selector: 'app-google-place',
@@ -24,7 +26,7 @@ export class GooglePlaceComponent implements OnInit {
   ) {}
 
   @Output()  onPlaceChanged= new EventEmitter<PlaceBE>();
-  @ViewChild("search")  public searchElementRef: ElementRef;
+  @ViewChild("search",{ static: false })  public searchElementRef: ElementRef;
   ngOnInit() {
   
     //set google maps defaults
@@ -40,6 +42,7 @@ export class GooglePlaceComponent implements OnInit {
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
+      
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ["address"]
       });
@@ -47,6 +50,7 @@ export class GooglePlaceComponent implements OnInit {
         this.ngZone.run(() => {
           //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
 
           this.place= place;
           //verify result
