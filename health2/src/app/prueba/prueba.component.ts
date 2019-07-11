@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { Observable } from 'rxjs';
-import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants } from '../model/index';
+import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, AppConstants } from '../model/index';
 import { PatientsService, CommonService } from '../service/index';
 import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit } from '@angular/core';

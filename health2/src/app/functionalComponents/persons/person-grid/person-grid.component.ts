@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { PersonsService,CommonService } from '../../../service/index';
-import {   PersonBE,IContextInformation, HealtConstants,TipoParametroEnum, MotivoConsultaEnum, ServiceError } from '../../../model/index';
+import {   PersonBE,IContextInformation, AppConstants,TipoParametroEnum, MotivoConsultaEnum, ServiceError } from '../../../model/index';
 
 //permmite cambiar la variable obsevada
 

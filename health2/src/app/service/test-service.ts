@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import {PersonBE} from '../../app/model/persons.model'
-import { HealtConstants, contextInfo } from "../model/common.constants";
+import { AppConstants, contextInfo } from "../model/common.constants";
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol, ExecuteReq, CurrentLogin } from '../model/common.model';
 import { CommonService } from '../service/common.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';

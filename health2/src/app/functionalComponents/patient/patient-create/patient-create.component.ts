@@ -5,7 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
 import { PatientsService, CommonService, MedicalInsuranceService } from '../../../service/index';
 import { PatientBE, PersonBE, MutualPorPacienteBE, MutualPlanGridView,ServiceError, IContextInformation, IParam, Param, 
-        CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants } from '../../../model/index';
+        CommonValuesEnum, TipoParametroEnum, CommonParams, AppConstants } from '../../../model/index';
         
 @Component({
   selector: 'app-patient-create',

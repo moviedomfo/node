@@ -3,7 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import {PersonBE} from '../../app/model/persons.model'
-import { HealtConstants, contextInfo } from "../model/common.constants";
+import { AppConstants, contextInfo } from "../model/common.constants";
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol } from '../model/common.model';
 import { CommonService } from '../service/common.service';
 import { HttpClient } from '@angular/common/http';
@@ -31,7 +31,7 @@ export class PersonsService {
   console.log(bussinesData);
     let executeReq=  this.commonService.generete_post_Params("RetrivePersonasService", bussinesData);
     
-    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
        map(result => {
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -57,7 +57,7 @@ export class PersonsService {
 
     let executeReq=  this.commonService.generete_post_Params("GetPersonaByParamService", bussinesData);
     
-    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,AppConstants.httpClientOption_contenttype_json).pipe(
        map(result => {
 
         

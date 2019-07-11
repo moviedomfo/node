@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewEncapsulation , Input,Output,EventEmitter} from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProfesionalService, CommonService } from '../../../service/index';
-import { ProfesionalBE, PersonBE,  GetProfesionalRes, ResourceSchedulingBE,User,IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants ,contextInfo} from '../../../model/index';
+import { ProfesionalBE, PersonBE,  GetProfesionalRes, ResourceSchedulingBE,User,IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, AppConstants ,contextInfo} from '../../../model/index';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { ServiceError } from '../../../model/common.model';

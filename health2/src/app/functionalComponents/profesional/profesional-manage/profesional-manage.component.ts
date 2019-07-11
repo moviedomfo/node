@@ -3,7 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { ProfesionalService, CommonService } from '../../../service/index';
-import { ProfesionalBE, PersonBE, GetProfesionalRes, HealthInstitution_ProfesionalBE, ResourceSchedulingBE, User, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants, contextInfo, Rol } from '../../../model/index';
+import { ProfesionalBE, PersonBE, GetProfesionalRes, HealthInstitution_ProfesionalBE, ResourceSchedulingBE, User, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, AppConstants, contextInfo, Rol } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
 import { ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
@@ -86,7 +86,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
 //      this.motivoConsulta = MotivoConsultaEnum.ActualizarProfesional;
       
       //Busco el paciente
-      this.getProfesionalRes$ = this.profesionalService.getProfesionalService$(true, true, id.id, contextInfo.UserId, HealtConstants.DefaultHealthInstitutionId, true);
+      this.getProfesionalRes$ = this.profesionalService.getProfesionalService$(true, true, id.id, contextInfo.UserId, AppConstants.DefaultHealthInstitutionId, true);
 
       this.getProfesionalRes$.subscribe(
         res => {

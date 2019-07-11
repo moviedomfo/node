@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation ,ViewChild, ElementRef,  AfterCont
 
 import { Observable } from 'rxjs';
 import { PatientsService, CommonService, MedicalInsuranceService } from '../../../service/index';
-import { PatientBE, PersonBE, MutualPorPacienteBE, MutualPlanGridView, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants, MotivoConsultaEnum } from '../../../model/index';
+import { PatientBE, PersonBE, MutualPorPacienteBE, MutualPlanGridView, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, AppConstants, MotivoConsultaEnum } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { ServiceError } from '../../../model/common.model';

@@ -1,6 +1,6 @@
 
 import { Component, OnInit, ViewEncapsulation ,Input,Output,EventEmitter} from '@angular/core';
-import {  PersonBE,  User, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants, contextInfo, Rol } from '../../../model/index';
+import {  PersonBE,  User, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, AppConstants, contextInfo, Rol } from '../../../model/index';
 import { PlaceBE } from "../../../model/persons.model";
 @Component({
   selector: 'app-contact',

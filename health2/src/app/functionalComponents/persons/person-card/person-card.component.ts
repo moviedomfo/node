@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, AfterConten
 
 import { Observable } from 'rxjs';
 import { PersonsService, CommonService } from '../../../service/index';
-import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, EventType, TipoParametroEnum, CommonParams, HealtConstants, MotivoConsultaEnum } from '../../../model/index';
+import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, EventType, TipoParametroEnum, CommonParams, AppConstants, MotivoConsultaEnum } from '../../../model/index';
 import { FormGroup } from '@angular/forms';
 import { } from '@angular/core';
 // Base 64 IMage display issues with unsafe image
@@ -142,12 +142,12 @@ export class PersonCardComponent implements AfterViewInit {
     }
 
     if (sexo === 0) { //Hombre
-      this.fullImagePath = HealtConstants.ImagesSrc_Man;
+      this.fullImagePath = AppConstants.ImagesSrc_Man;
       this.currentPerson.Sexo = 0;
     }
     if (sexo === 1) {
       //Mujer
-      this.fullImagePath = HealtConstants.ImagesSrc_Woman;
+      this.fullImagePath = AppConstants.ImagesSrc_Woman;
       this.currentPerson.Sexo = 1;
     }
   }
@@ -157,12 +157,12 @@ export class PersonCardComponent implements AfterViewInit {
   }
   loadImage() {
     if (this.currentPerson.Sexo === 0) {
-      return (this.photoURL(HealtConstants.ImagesSrc_Man));
+      return (this.photoURL(AppConstants.ImagesSrc_Man));
 
     }
     else {
 
-      return this.photoURL(HealtConstants.ImagesSrc_Woman);
+      return this.photoURL(AppConstants.ImagesSrc_Woman);
 
     }
   }
@@ -173,7 +173,7 @@ export class PersonCardComponent implements AfterViewInit {
   private preInitializePerson() {
 
 
-    this.fullImagePath = HealtConstants.ImagesSrc_Man;
+    this.fullImagePath = AppConstants.ImagesSrc_Man;
     if (this.currentPerson == null) {
 
       this.currentPerson = new PersonBE(-1, "");

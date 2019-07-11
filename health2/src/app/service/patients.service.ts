@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { PatientBE,MutualPorPacienteBE,PersonBE } from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq } from '../model/common.model';
-import { HealtConstants, contextInfo } from "../model/common.constants";
+import { AppConstants, contextInfo } from "../model/common.constants";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject, throwError, Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -32,7 +32,7 @@ export class PatientsService {
 
 
     //map retorna el mapeo de un json que viene del servicio que tiene la misma estructura que  PatientBE
-    return this.http.get<Result>(`${HealtConstants.HealthAPI_URL}patients/RetrivePatientsSimple`,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.get<Result>(`${AppConstants.AppAPI_URL}patients/RetrivePatientsSimple`,AppConstants.httpClientOption_contenttype_json).pipe(
        map(result => {
         return result;
       })).pipe(catchError(this.commonService.handleError));
@@ -45,7 +45,7 @@ export class PatientsService {
     };
     let ExecuteReq: ExecuteReq = this.commonService.generete_post_Params("getPatientService", bussinesData);
 
-    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`, ExecuteReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, ExecuteReq,AppConstants.httpClientOption_contenttype_json).pipe(
       map(result => {
 
       
@@ -75,9 +75,9 @@ export class PatientsService {
     };
     
     let ExecuteReq=  this.commonService.generete_post_Params("getPatientService", bussinesData);
-    //HealtConstants.httpOptions.search = searchParams;
+    //AppConstants.httpOptions.search = searchParams;
 
-    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,ExecuteReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,ExecuteReq,AppConstants.httpClientOption_contenttype_json).pipe(
        map(result => {
 
        // let result: Result= JSON.parse(res.toString());
@@ -106,7 +106,7 @@ export class PatientsService {
 
     let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
   
-    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
        map(result => {
 
         if (result.Error) {
@@ -132,7 +132,7 @@ export class PatientsService {
     };
     let executeReq=  this.commonService.generete_post_Params("CrearPatientService", bussinesData);
     
-    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
      map(result => {
 
       if (result.Error) {
@@ -157,7 +157,7 @@ export class PatientsService {
     };
 
     let executeReq=  this.commonService.generete_post_Params("UpdatePatientService", bussinesData);
-    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
        map(result => {
 
     
@@ -189,7 +189,7 @@ export class PatientsService {
     let executeReq=  this.commonService.generete_post_Params("GetPatientService", bussinesData);
 
     
-    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
        map(result => {
 
               

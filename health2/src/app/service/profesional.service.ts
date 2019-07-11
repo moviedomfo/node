@@ -10,7 +10,7 @@ import { ProfesionalBE, PersonBE, ResourceSchedulingBE,
   GetProfesionalRes,ProfesionalesGridBE,Profesional_FullViewBE,
   Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol} from '../model/index';
 
-import { HealtConstants, contextInfo } from "../model/common.constants";
+import { AppConstants, contextInfo } from "../model/common.constants";
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
@@ -48,7 +48,7 @@ export class ProfesionalService {
   
     let executeReq=  this.commonService.generete_post_Params("GetProfesionalService", bussinesData);
 
-    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
       map(result => {
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -89,7 +89,7 @@ export class ProfesionalService {
     let executeReq=  this.commonService.generete_post_Params("DesvincularProfesionalService", bussinesData);
 
 
-    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
       map(result => {
 
         //let result: Result = JSON.parse(res.toString());
@@ -117,7 +117,7 @@ export class ProfesionalService {
     };
 
     let executeReq=  this.commonService.generete_post_Params("CrearProfesionalService", bussinesData);
-    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
       map(result => {
 
         if (result.Error) {
@@ -141,7 +141,7 @@ export class ProfesionalService {
 
    
     let executeReq=  this.commonService.generete_post_Params("UpdateProfesionalService", bussinesData);
-    return this.http.post<Result>(HealtConstants.HealthExecuteAPI_URL,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(AppConstants.AppExecuteAPI_URL,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
       map(result => {
         //let result: Result = JSON.parse(res.toString());
 
@@ -169,7 +169,7 @@ export class ProfesionalService {
     };
 
     let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesGridService", bussinesData);
-    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
       map(result => {
 
         //let result: Result = JSON.parse(res.toString());
@@ -202,7 +202,7 @@ export class ProfesionalService {
 
     let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesService", bussinesData);
 
-    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
       map(result => {
 
         //let result: Result = JSON.parse(res.toString());
@@ -233,7 +233,7 @@ export class ProfesionalService {
 
 
     let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesGridService", bussinesData);
-    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
       map(result => {
 
         //let result: Result = JSON.parse(res.toString());
@@ -253,7 +253,7 @@ export class ProfesionalService {
       UserName: username
     };
     let executeReq=  this.commonService.generete_post_Params("SearchAllRolesService", bussinesData);
-    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
       map(result => {
      
       //let result: Result= JSON.parse(res.toString());
@@ -276,7 +276,7 @@ export class ProfesionalService {
 
 
     let executeReq=  this.commonService.generete_post_Params("ValidateUserExistService", bussinesData);
-    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
     map(result => {
      
 
@@ -299,7 +299,7 @@ export class ProfesionalService {
     };
 
     let executeReq=  this.commonService.generete_post_Params("ResetUserPasswordService", bussinesData);
-    return this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
     map(result=> {
       
       if (result.Error) {

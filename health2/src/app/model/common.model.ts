@@ -199,6 +199,16 @@ export interface IRequest{
     CacheSettings?:object;
     ContextInformation:IContextInformation;
 }
+
+export class IpInfo
+{
+    public ip : string;
+     public loc: string;//"37.385999999999996,-122.0838",
+    public city:  string;//"Mountain View"
+    public region:  string;//"California"
+    public country :  string;//"US
+  }
+  
 export  class ExecuteReq
 {
       serviceProviderName?: string;

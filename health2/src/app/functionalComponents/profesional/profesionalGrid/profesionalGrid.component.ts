@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProfesionalService,CommonService } from '../../../service/index';
-import { ProfesionalBE, Profesional_FullViewBE, ProfesionalesGridBE,IContextInformation, IParam, Param,HealtConstants, ServiceError } from '../../../model/index';
+import { ProfesionalBE, Profesional_FullViewBE, ProfesionalesGridBE,IContextInformation, IParam, Param,AppConstants, ServiceError } from '../../../model/index';
 import {TipoParametroEnum} from '../../../model/common.constants'
 
 //permmite cambiar la variable obsevada
@@ -83,7 +83,7 @@ private createColumnDefs() {
   retrivePatients() {
     
 
-    this.profesionalBEList$ = this.profesionalService.retriveProfesionalesGrid$(this.txtQuery,this.txtQuery,HealtConstants.DefaultHealthInstitutionId);
+    this.profesionalBEList$ = this.profesionalService.retriveProfesionalesGrid$(this.txtQuery,this.txtQuery,AppConstants.DefaultHealthInstitutionId);
     this.profesionalBEList$.subscribe(
       res => {
         this.profesionalList = res;

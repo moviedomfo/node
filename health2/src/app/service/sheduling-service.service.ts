@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { ProfesionalBE, PersonBE, ResourceSchedulingBE, HealthInstitution_ProfesionalBE, GetProfesionalRes } from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User } from '../model/common.model';
-import { HealtConstants, contextInfo } from "../model/common.constants";
+import { AppConstants, contextInfo } from "../model/common.constants";
 
 // permmite cambiar la variable obsevada
 import { Observable } from 'rxjs';
@@ -34,7 +34,7 @@ export class ShedulingServiceService {
 
     let executeReq=  this.commonService.generete_post_Params("CreateAppointmentsService", bussinesData);
     
-    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
        map(result => {
 
       //  let result: Result = JSON.parse(res.json());
@@ -60,7 +60,7 @@ export class ShedulingServiceService {
 
     let executeReq=  this.commonService.generete_post_Params("GetAppoinmentByParamsService", bussinesData);
 
-    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
        map(result => {
 
       //  let result: Result = JSON.parse(res.json());

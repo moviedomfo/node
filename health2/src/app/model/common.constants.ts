@@ -1,6 +1,13 @@
 
 import { Param, IParam, IContextInformation ,IRequest} from '../model/common.model';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+
+
+const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    headers.append('Access-Control-Allow-Methods', '*');
+    headers.append('Access-Control-Allow-Origin', '*'); 
 
 let header_httpClient_contentTypeJson = new HttpHeaders({ 'Content-Type': 'application/json' });
      header_httpClient_contentTypeJson.append('Access-Control-Allow-Methods', '*');
@@ -15,7 +22,7 @@ let header_httpClient_form_urlencoded = new HttpHeaders({ 'Content-Type': 'appli
 
 //let options = new RequestOptions({ headers: headers });
 
-export  const HealtConstants={
+export  const AppConstants={
      CNN_STRING_HEALTH: {
             user: 'sa',
             password: 'as',
@@ -26,18 +33,18 @@ export  const HealtConstants={
                 encrypt: true // Use this if you're on Windows Azure 
                 }
             },
-     HealthAPI_URL:"http://localhost:63251/api/",
-     HealthExecuteAPI_URL:"http://localhost:63251/api/fwk/execute",
-     HealthExecuteService_allowedAuthAPI_URL:"http://localhost:63251/api/fwk/execute",
-     HealthOAuth_URL:"http://localhost:63251/oauth/token",
+     AppAPI_URL:environment.App_BaseURL + "api/",
+     AppExecuteAPI_URL: environment.App_BaseURL  + 'api/fwk/execute/',
+     AppOAuth_URL: environment.AppOAuth_BaseUrl +  "api/oauth/token", 
      ImagesSrc_Woman:'assets/images/User_Famele.bmp',
      ImagesSrc_Man:'assets/images/User_Male.bmp',
      //httpOptions:options,
      httpClientOption_form_urlencoded:{headers:header_httpClient_form_urlencoded},
      httpClientOption_contenttype_json:{headers:header_httpClient_contentTypeJson},
      DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A',
-     oaut_client_id:'nodeJSClient',
-     oaut_client_secret:'pletorico28'
+     oaut_client_id: environment.oaut_client_id,
+     oaut_client_secret:environment.oaut_client_secret, 
+     oaut_securityProviderName:environment.oaut_securityProviderName,
 }
 
 export const Sexo =
@@ -287,7 +294,7 @@ export const MotivoConsultaEnum =
         SunAllergy : 10107
 
     }
-//module.exports =  HealtConstants;
+//module.exports =  AppConstants;
 //module.exports =  contextInfo;
 // const  CNN_STRING_HEALTH  = {
 //     user: 'sa',

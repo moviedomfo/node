@@ -1,7 +1,7 @@
 import { Component,  ViewEncapsulation, Input ,Output,EventEmitter, AfterViewInit, ViewChild} from '@angular/core';
 import { ResourceSchedulingBE, TimespamView } from "../../../model/profesional.model";
 import { ServiceError, TimeSpan } from "../../../model/common.model";
-import { HealtConstants } from "../../../model/common.constants";
+import { AppConstants } from "../../../model/common.constants";
 import { WeekDaysCheckEditComponent } from "../../../common-components/week-days-check-edit/week-days-check-edit.component";
 import { ControlContainer, NgForm } from '@angular/forms';
 
@@ -70,7 +70,7 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
       this.currentResourceScheduling.TimeEnd = '18:30';
       this.currentResourceScheduling.TimeStart_timesp = TimeSpan.FromHHMM('08:30');
       this.currentResourceScheduling.TimeEnd_timesp = TimeSpan.FromHHMM('08:30');
-      this.currentResourceScheduling.HealthInstitutionId = HealtConstants.DefaultHealthInstitutionId;
+      this.currentResourceScheduling.HealthInstitutionId = AppConstants.DefaultHealthInstitutionId;
     }
 
     if (this.isEditMode === true) {

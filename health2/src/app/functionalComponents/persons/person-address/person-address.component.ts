@@ -2,7 +2,7 @@ import { Component, AfterContentInit ,Input} from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { PatientsService, CommonService } from '../../../service/index';
-import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, HealtConstants } from '../../../model/index';
+import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, TipoParametroEnum, CommonParams, AppConstants } from '../../../model/index';
 
 
 @Component({

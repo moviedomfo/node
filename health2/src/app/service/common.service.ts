@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HealtConstants, contextInfo, CommonParams } from "../model/common.constants";
-import { Param, IParam, IContextInformation, ContextInformation, ExecuteReq, Request, IRequest, IResponse, Result, ServiceError, CurrentLogin } from '../model/common.model';
+import { AppConstants, contextInfo, CommonParams } from "../model/common.constants";
+import { Param, IParam, IContextInformation, ContextInformation, ExecuteReq, Request, IRequest, IResponse, Result, ServiceError, CurrentLogin, IpInfo } from '../model/common.model';
 
 // permmite cambiar la variable obsevada
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 //import { element } from 'protractor';
 import { Router } from '@angular/router'
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 //var colors = require('colors/safe');
 @Injectable()
@@ -16,8 +16,12 @@ export class CommonService {
   public paramList$: Subject<Param[]> = new Subject<Param[]>();
 
   public mainComponentTitle_subject$: Subject<string> = new Subject<string>();
+  public ipinfo: IpInfo;
+  
+  constructor(private http: HttpClient, private router: Router) {
+    this.ipinfo = new IpInfo();
 
-  constructor(private http: HttpClient, private router: Router) { }
+   }
 
   //permite subscripcion añl Subject con el titulo
   get_mainComponentTitle$(): Observable<string> {
@@ -28,7 +32,17 @@ export class CommonService {
 
     this.mainComponentTitle_subject$.next(tittle);
   }
+  get_host(): string {
 
+    return  "Ip: " + this.ipinfo.ip + ", city: " +  this.ipinfo.city + ", region :" +  this.ipinfo.region + ", country :" + this.ipinfo.country;
+  }
+  get_host_ipInfo(): Observable<any> {
+
+    return this.http.get<IpInfo>('http://ipinfo.io?token=21ea63fe5267b3').pipe(
+      map(function (res) {
+        return res;
+      })).pipe(catchError(this.handleError));
+  }
 
   parseDate(dateString: string): Date {
 
@@ -49,7 +63,7 @@ export class CommonService {
   //   api_url = api_url.replace('[input]', input);
   //   api_url = api_url.replace('[input]', input);
 
-  //   return this.http.get(`${api_url}`,HealtConstants.httpClientOption_contenttype_json).pipe(
+  //   return this.http.get(`${api_url}`,AppConstants.httpClientOption_contenttype_json).pipe(
   //      map(result => {
   //       //console.log(JSON.stringify(places));
   //       //let places = JSON.parse(result.json());
@@ -68,10 +82,10 @@ export class CommonService {
       Vigente: true
     };
 
-   
-    let executeReq=  this.generete_post_Params("SearchParametroByParamsService", bussinesData);
-    return  this.http.post<Result>(`${HealtConstants.HealthExecuteAPI_URL}`,executeReq,HealtConstants.httpClientOption_contenttype_json).pipe(
-       map(result => {
+
+    let executeReq = this.generete_post_Params("SearchParametroByParamsService", bussinesData);
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
+      map(result => {
 
 
         if (result.Error) {
@@ -151,7 +165,7 @@ export class CommonService {
     return REQ;
   }
 
-  
+
   generete_get_searchParams(serviceName, bussinesData): URLSearchParams {
     let searchParams: URLSearchParams = new URLSearchParams();
     var req = this.createFwk_SOA_REQ(bussinesData);
@@ -160,9 +174,6 @@ export class CommonService {
     searchParams.set("serviceProviderName", "health");//defaul 
     searchParams.set("serviceName", serviceName);
     searchParams.set("jsonRequest", JSON.stringify(req));
-
-
-
 
     // console.log("-------------"+serviceName+"------------------");
     // console.log(JSON.stringify(JSON.stringify(req)));
@@ -182,25 +193,24 @@ export class CommonService {
 
     return executeReq;
   }
-  
+
 
 
   createFwk_SOA_REQ(bussinesData: any): Request {
     let contextInfo: ContextInformation = new ContextInformation();
     let req: Request = new Request();
-    let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
+    let currentLogin: CurrentLogin = JSON.parse(localStorage.getItem('currentLogin'));
     contextInfo.Culture = "ES-AR";
     contextInfo.ProviderNameWithCultureInfo = "";
     contextInfo.HostName = 'localhost';
-    contextInfo.HostIp = '10.10.200.168';
+    contextInfo.HostIp = this.get_host_ip();
     contextInfo.HostTime = new Date(),
-    contextInfo.ServerName = 'WebAPIDispatcherClienteWeb';
+      contextInfo.ServerName = 'WebAPIDispatcherClienteWeb';
     contextInfo.ServerTime = new Date();
 
-    if(currentLogin.username)
-      {contextInfo.UserName = currentLogin.username;}
-      else{contextInfo.UserName = 'moviedo';}
-      
+    if (currentLogin.username) { contextInfo.UserName = currentLogin.username; }
+    else { contextInfo.UserName = 'moviedo'; }
+
     contextInfo.UserId = '';
     contextInfo.AppId = 'Health';
     contextInfo.ProviderName = 'health';
@@ -214,13 +224,13 @@ export class CommonService {
   }
 
   //Retorna un HttpHeaders con CORS y 'Authorization': "Bearer + TOKEN"
-  public get_AuthorizedHeader():HttpHeaders{
-    let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );
+  public get_AuthorizedHeader(): HttpHeaders {
+    let currentLogin: CurrentLogin = JSON.parse(localStorage.getItem('currentLogin'));
     let headers = new HttpHeaders({ 'Authorization': "Bearer " + currentLogin.oAuth.access_token });
     headers.append('Access-Control-Allow-Methods', '*');
     headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
     headers.append('Access-Control-Allow-Origin', '*');
-     return headers;
+    return headers;
   }
 
   public handleErrorService(serviceError: ServiceError) {
@@ -228,33 +238,62 @@ export class CommonService {
       alert("Se encontraron errores " + serviceError.Message);
     }
   }
-  public handleError(error: Response | any) {
 
-    console.log('-------------------Error---------------------');
-    console.log(error);
-    console.log(error.status);
-    console.log(error.message);
-    console.log('----------------------------------------');
-
+  ///Error inspection, interpretation, and resolution is something you want to do in the service, not in the component.
+  public handleError(httpError: HttpErrorResponse | any) {
+    console.log(httpError);
     let ex: ServiceError = new ServiceError();
-    ex.Message = 'Despachador de servicio no responde .-';
-    ex.Status= error.status;
-    if(error.statusText){
-      ex.Message = ex.Message + "\r\n" + error.statusText;
-    }
-    if(error._body){
-      ex.Message = ex.Message + "\r\n" + error._body;
+    ex.Machine = 'PC-Desarrollo';
+    // A client-side or network error occurred. Handle it accordingly.
+    if (httpError.error instanceof ProgressEvent) {
+      ex.Message = 'Client-side error occurred : '
+
+
+      if (ex.Message.includes('api/oauth/authenticate')) {
+        ex.Message = ex.Message + ' Can not authenticate ';
+      }
+      if (httpError.status == 0) {
+        ex.Message = ex.Message + ' verify your lan or internet connection.';
+      }
+      ex.Message = ex.Message + "\r\n" + httpError.message;
+      ex.Status = httpError.status;
+      return throwError(ex);
     }
 
-    if(error.message){
-      ex.Message = ex.Message + "\r\n" + error.message;
+    // The backend returned an unsuccessful response code.
+    // The response body may contain clues as to what went wrong,
+    if (httpError instanceof HttpErrorResponse) {
+      //alert(error.error);
+      ex.Status = httpError.status;
+
+      if (httpError.error) {
+        ex.Type = httpError.error.ExceptionType;
+        if (httpError.error.ExceptionType) {
+          ex.Message = httpError.error.ExceptionMessage;
+          if (httpError.error.InnerException) {
+            ex.Message = ex.Message + "\r\n" + httpError.error.InnerException.ExceptionMessage;
+          }
+          //ex.message= httpError.error.mess
+        }
+        else {
+          ex.Message = httpError.error;
+        }
+        return throwError(ex);
+      }
+
+      if (httpError.message) {
+        ex.Message = ex.Message + "\r\n" + httpError.message;
+      }
+      return throwError(ex);
     }
-   
 
-    ex.Machine = 'PC-Desarrollo-Santana';
 
-    return Observable.throw(ex); // <= B
+    ex.Message = httpError.message;
+
+    return throwError(ex);
+
   }
+
   public handleErrorObservable(error: ServiceError) {
 
     console.error(error.Message || error);

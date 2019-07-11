@@ -1,5 +1,5 @@
 import { Injectable, Inject} from '@angular/core';
-import { HealtConstants, contextInfo } from "../model/common.constants";
+import { AppConstants, contextInfo } from "../model/common.constants";
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, AuthenticationOAutResponse, User, CurrentLogin } from '../model/common.model';
 
 import { Observable } from 'rxjs';
@@ -29,11 +29,11 @@ export class AuthenticationService {
       .set(`username`, userName)
       .set(`password`, password)
       .set(`grant_type`, 'password')
-      .set(`client_id`, HealtConstants.oaut_client_id)
-      .set(`client_secret`, HealtConstants.oaut_client_secret);
+      .set(`client_id`, AppConstants.oaut_client_id)
+      .set(`client_secret`, AppConstants.oaut_client_secret);
     
-      return  this.http.post<Result>(`${HealtConstants.HealthOAuth_URL}`,
-      bodyParams,HealtConstants.httpClientOption_form_urlencoded ).pipe(
+      return  this.http.post<Result>(`${AppConstants.HealthOAuth_URL}`,
+      bodyParams,AppConstants.httpClientOption_form_urlencoded ).pipe(
         map(res => {
           localStorage.setItem('currentLogin', JSON.stringify({ userName: userName, oAuth: res }));
          return res;
@@ -49,12 +49,12 @@ export class AuthenticationService {
     const bodyParams = new HttpParams()
       .set(`refresh_token`, currentLogin.oAuth.refresh_token)
       .set(`grant_type`, 'refresh_token')
-      .set(`client_id`, HealtConstants.oaut_client_id)
-      .set(`client_secret`, HealtConstants.oaut_client_secret);
+      .set(`client_id`, AppConstants.oaut_client_id)
+      .set(`client_secret`, AppConstants.oaut_client_secret);
 
 
-    return this.http.post<AuthenticationOAutResponse>(`${HealtConstants.HealthOAuth_URL}`,
-     bodyParams,HealtConstants.httpClientOption_form_urlencoded).pipe(
+    return this.http.post<AuthenticationOAutResponse>(`${AppConstants.HealthOAuth_URL}`,
+     bodyParams,AppConstants.httpClientOption_form_urlencoded).pipe(
      map(res => {
       
       currentLogin.oAuth = res;

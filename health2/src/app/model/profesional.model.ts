@@ -1,6 +1,6 @@
 import { PersonBE } from '../model/persons.model';
 import { HelperBE, HealthInstitutionBE, User, TimeSpan } from '../model/common.model';
-import { DayNamesIndex_Value_ES, AppoimantsStatus_SP, AppoimantsStatus_SP_type, WeekDays_EN, DayOfWeek, HealtConstants } from "./common.constants";
+import { DayNamesIndex_Value_ES, AppoimantsStatus_SP, AppoimantsStatus_SP_type, WeekDays_EN, DayOfWeek, AppConstants } from "./common.constants";
 
 
 //import {Enumerable} from 'typescript-dotnet-es6/System.Linq/Linq';
@@ -282,7 +282,7 @@ export class ResourceSchedulingBE {
       this.TimeEnd = '18:30';
       this.TimeStart_timesp = TimeSpan.FromHHMM('08:30');
       this.TimeEnd_timesp = TimeSpan.FromHHMM('08:30');
-      this.HealthInstitutionId = HealtConstants.DefaultHealthInstitutionId;
+      this.HealthInstitutionId = AppConstants.DefaultHealthInstitutionId;
       this.Generate_Attributes();
 
   }
