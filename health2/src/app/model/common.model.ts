@@ -297,38 +297,32 @@ export class AuthenticationOAutResponse {
 
 }
 export class CurrentLogin{
-    username:string;
     oAuth:AuthenticationOAutResponse;
+    public currentUser : User;
 }
 export class User {
     public UserName: string;
     public Password: string;
-    public confirmPassword: string;
-    
-    public FirstName: string;
-    public LastName: string;
+    public  UserId? :string;
     public Email:string;
 
-    public  AnswerPassword :string;
     public  AppName :string;
-    public  Comment :string;
-    
     public  CreationDate? : Date ;
-    public  DNI :string;
-
-    
     public  IsApproved :boolean ;
     public  IsLockedOut :boolean ;
     public  LastActivityDate? : Date ;
-    public  ModifiedDate? : Date ;
+    public ModifiedDate? : Date ;
     public ModifiedByUserId?:number;
-    public  MustChangePassword? : boolean  ;
+
     public  ProviderId: any;
-    public  QuestionPassword :string;
+
     public  Roles :string[];
-    public  UserId? :number;
+    
     
 
+    public FirstName: string;
+    public LastName: string;
+    public  DNI :string;
 
     public  GetRolList():Rol[]{
 

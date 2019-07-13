@@ -19,8 +19,12 @@ export class CommonService {
   public ipinfo: IpInfo;
   
   constructor(private http: HttpClient, private router: Router) {
+  
     this.ipinfo = new IpInfo();
-
+    this.get_host_ipInfo().subscribe(res => {
+      this.ipinfo = res;
+     
+    });
    }
 
   //permite subscripcion añl Subject con el titulo
@@ -36,14 +40,30 @@ export class CommonService {
 
     return  "Ip: " + this.ipinfo.ip + ", city: " +  this.ipinfo.city + ", region :" +  this.ipinfo.region + ", country :" + this.ipinfo.country;
   }
-  get_host_ipInfo(): Observable<any> {
+  string_IsNullOrEmpty(str:string):boolean{
+    if(!str || Object.keys(str.trim()).length === 0){
+      return true;
+    }
+    return false;
+  }
+      /**
+  * utiliza una api paara retornar informacion hacerca del host cliente
+  * @param 
+  * @returns json con ip,country de la clase ipinfo
+  */
+ 
+  get_host_ipInfo(): Observable<IpInfo> {
 
     return this.http.get<IpInfo>('http://ipinfo.io?token=21ea63fe5267b3').pipe(
       map(function (res) {
         return res;
       })).pipe(catchError(this.handleError));
   }
-
+   /**
+  * Gets Date from string
+  * @param dateString
+  * @returns the Date 
+  */
   parseDate(dateString: string): Date {
 
     let f: Date;
@@ -98,6 +118,7 @@ export class CommonService {
         return params;
       })).pipe(catchError(this.handleError));
   }
+  
   /**
   * @params : parametros 
   * @parameterToAppend : CommonParam.Id
@@ -135,8 +156,6 @@ export class CommonService {
         }
 
     }
-
-
     params.push(p);
 
     return params;
@@ -203,12 +222,12 @@ export class CommonService {
     contextInfo.Culture = "ES-AR";
     contextInfo.ProviderNameWithCultureInfo = "";
     contextInfo.HostName = 'localhost';
-    contextInfo.HostIp = this.get_host_ip();
+    contextInfo.HostIp = this.ipinfo.ip;
     contextInfo.HostTime = new Date(),
       contextInfo.ServerName = 'WebAPIDispatcherClienteWeb';
     contextInfo.ServerTime = new Date();
 
-    if (currentLogin.username) { contextInfo.UserName = currentLogin.username; }
+    if (currentLogin.currentUser.UserName) { contextInfo.UserName = currentLogin.currentUser.UserName; }
     else { contextInfo.UserName = 'moviedo'; }
 
     contextInfo.UserId = '';
