@@ -1,6 +1,6 @@
 import { HttpRequest, HttpInterceptor, HttpEvent, HttpHandler } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CurrentLogin, HealtConstants } from '../model';
+import { CurrentLogin, AppConstants } from '../model';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class JwtAuthInterceptor implements HttpInterceptor {
             //and add an extra Authorization header, which will contain the JWT
             const cloned = req.clone({
                 headers: req.headers.set("Authorization","Bearer " + idToken)
-                                     .set('securityProviderName' , HealtConstants.oaut_securityProviderName )
+                                     .set('securityProviderName' , AppConstants.oaut_securityProviderName )
             });
 
             return next.handle(cloned);

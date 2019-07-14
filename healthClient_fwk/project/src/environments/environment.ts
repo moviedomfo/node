@@ -4,14 +4,23 @@
 
 export const environment = {
   production: false,
-  HealthAPI_URL:"http://localhost:52000/api/",
-  HealthExecuteAPI_URL:"http://localhost:52000/api/fwk/execute",
-  HealthExecuteService_allowedAuthAPI_URL:"http://localhost:52000/api/fwk/execute",
-  HealthOAuth_URL:"http://localhost:51000/oauth/token", 
+  AppAPI_BaseURL:"http://localhost:52000",
+  
+  AppOAuth_Base:"http://localhost:51000", 
   oaut_client_id:'nodeJSClient',
   oaut_client_secret:'pletorico28',
   oaut_securityProviderName:'healthTesting',
-  DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A'
+  DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A',
+  CNN_STRING_HEALTH: {
+    user: 'sa',
+    password: 'as',
+    server: 'SANTANA\\SQLEXPRESS2014',
+    database: 'health3',
+
+    options: {
+        encrypt: true // Use this if you're on Windows Azure 
+        }
+    }
 };
 
 /*

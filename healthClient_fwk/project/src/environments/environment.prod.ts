@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
   HealthAPI_URL:"http://localhost:52000/api/",
-  HealthExecuteAPI_URL:"http://localhost:52000/api/fwk/execute",
-  HealthExecuteService_allowedAuthAPI_URL:"http://localhost:52000/api/fwk/execute",
-  HealthOAuth_URL:"http://localhost:51000/oauth/token", 
+  AppExecuteAPI_URL:"http://localhost:52000/api/fwk/execute",
+  AppExecuteService_allowedAuthAPI_URL:"http://localhost:52000/api/fwk/execute",
+  AppOAuth_URL:"http://localhost:51000/oauth/token", 
   oaut_client_id:'nodeJSClient',
   oaut_client_secret:'pletorico28',
   oaut_securityProviderName:'healthTesting',

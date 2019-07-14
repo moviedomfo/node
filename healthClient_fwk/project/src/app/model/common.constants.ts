@@ -18,21 +18,13 @@ let header_httpClient_form_urlencoded = new HttpHeaders({ 'Content-Type': 'appli
 
 //let options = new RequestOptions({ headers: headers });
 
-export  const HealtConstants={
-     CNN_STRING_HEALTH: {
-            user: 'sa',
-            password: 'as',
-            server: 'SANTANA\\SQLEXPRESS2014',
-            database: 'health3',
 
-            options: {
-                encrypt: true // Use this if you're on Windows Azure 
-                }
-            },
-            HealthAPI_URL:environment.HealthAPI_URL,
-            HealthExecuteAPI_URL:environment.HealthExecuteAPI_URL,
-            HealthExecuteService_allowedAuthAPI_URL:environment.HealthExecuteService_allowedAuthAPI_URL,
-            HealthOAuth_URL:environment.HealthOAuth_URL,
+export  const AppConstants={
+           
+            AppAPI_BaseURL :environment.AppAPI_BaseURL,
+            AppExecuteAPI_URL:environment.AppAPI_BaseURL + "/api/fwk/execute",
+            AppOAuth_URL:environment.AppOAuth_Base + "/oauth/token",
+            AppOAuth_Base:environment.AppOAuth_Base,
             //httpOptions:options,
             httpClientOption_form_urlencoded:{headers:header_httpClient_form_urlencoded},
             httpClientOption_contenttype_json:{headers:header_httpClient_contentTypeJson},
@@ -40,6 +32,7 @@ export  const HealtConstants={
             oaut_client_id: environment.oaut_client_id,
             oaut_client_secret:environment.oaut_client_secret, 
             oaut_securityProviderName:environment.oaut_securityProviderName,
+            CNN_STRING_HEALTH : environment.CNN_STRING_HEALTH,
             ImagesSrc_Woman:'assets/images/User_Famele.bmp',
             ImagesSrc_Man:'assets/images/User_Male.bmp',
             
@@ -292,7 +285,7 @@ export const MotivoConsultaEnum =
         SunAllergy : 10107
 
     }
-//module.exports =  HealtConstants;
+//module.exports =  AppConstants;
 //module.exports =  contextInfo;
 // const  CNN_STRING_HEALTH  = {
 //     user: 'sa',

@@ -36,7 +36,7 @@ export class LogingComponent implements OnInit {
 
   authenticate(){
 
-    var authRes$ :Observable<CurrentLogin>= this.Serurity.loging$(this.currentUser.UserName,this.currentUser.Password);
+    var authRes$ = this.Serurity.oauthToken_owin$(this.currentUser.UserName,this.currentUser.Password);
 
     authRes$.subscribe(
       res => {

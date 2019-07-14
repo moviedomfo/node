@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { PatientBE, MutualPorPacienteBE, PersonBE } from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq, ApiResult, CurrentLogin } from '../model/common.model';
-import { HealtConstants, contextInfo } from "../model/common.constants";
+import { AppConstants, contextInfo } from "../model/common.constants";
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // permmite cambiar la variable obsevada
@@ -48,10 +48,10 @@ export class PatientsService {
     };
 
     let ExecuteReq = this.commonService.generete_post_Params("getPatientService", bussinesData);
-    //HealtConstants.httpOptions.search = searchParams;
+    //AppConstants.httpOptions.search = searchParams;
 
 
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, ExecuteReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post(`${AppConstants.AppExecuteAPI_URL}`, ExecuteReq, AppConstants.httpClientOption_contenttype_json).pipe(
       map(res => {
 
 
@@ -86,7 +86,7 @@ export class PatientsService {
     let executeReq = this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
     let header_httpClient = this.commonService.get_AuthorizedHeader();
 
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, { headers: header_httpClient }).pipe(
+    return this.http.post(`${AppConstants.AppExecuteAPI_URL}`, executeReq, { headers: header_httpClient }).pipe(
       map(function (res: ApiResult) {
         let result = JSON.parse(res.Result.toString());
         if (result.Error) {
@@ -112,7 +112,7 @@ export class PatientsService {
 
     let executeReq = this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
 
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, { headers: this.commonService.get_AuthorizedHeader() }).pipe(
+    return this.http.post(`${AppConstants.AppExecuteAPI_URL}`, executeReq, { headers: this.commonService.get_AuthorizedHeader() }).pipe(
       map(function (res: ApiResult) {
 
         let result = JSON.parse(res.Result.toString());
@@ -133,7 +133,7 @@ export class PatientsService {
     };
     let executeReq = this.commonService.generete_post_Params("CrearPatientService", bussinesData);
 
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post(`${AppConstants.AppExecuteAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
       map(function (res: ApiResult) {
 
         let result = JSON.parse(res.Result.toString());
@@ -160,7 +160,7 @@ export class PatientsService {
     };
 
     let executeReq = this.commonService.generete_post_Params("UpdatePatientService", bussinesData);
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post(`${AppConstants.AppExecuteAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
       map(function (res: ApiResult) {
         let result = JSON.parse(res.Result.toString());
 
@@ -185,7 +185,7 @@ export class PatientsService {
     let executeReq = this.commonService.generete_post_Params("GetPatientService", bussinesData);
 
 
-    return this.http.post(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post(`${AppConstants.AppExecuteAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
       map(function (res: ApiResult) {
 
         let result = JSON.parse(res.Result.toString());

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HealtConstants, contextInfo, CommonParams } from "../model/common.constants";
+import { AppConstants, contextInfo, CommonParams } from "../model/common.constants";
 import { Param, IParam, IContextInformation, ContextInformation, ExecuteReq, Request, IRequest, IResponse, Result, ServiceError, CurrentLogin, IpInfo } from '../model/common.model';
 //import { Http, RequestOptions } from 'rxjs/header';
 //permmite cambiar la variable obsevada
@@ -21,12 +21,23 @@ export class CommonService {
   constructor(private http: HttpClient, private router: Router) {
 
     this.ipinfo = new IpInfo();
-    this.getIP().subscribe(res => {
+    this.get_host_ipInfo().subscribe(res => {
       this.ipinfo = res;
-
+     
     });
   }
+  get_host_ipInfo(): Observable<any> {
 
+    return this.http.get<IpInfo>('http://ipinfo.io?token=21ea63fe5267b3').pipe(
+      map(function (res) {
+        return res;
+      })).pipe(catchError(this.handleError));
+  }
+
+  get_host(): string {
+
+    return  "Ip: " + this.ipinfo.ip + ", city: " +  this.ipinfo.city + ", region :" +  this.ipinfo.region + ", country :" + this.ipinfo.country;
+  }
   //permite subscripcion añl Subject con el titulo
   get_mainComponentTitle$(): Observable<string> {
     return this.mainComponentTitle_subject$.asObservable();
@@ -60,11 +71,11 @@ export class CommonService {
     api_url = api_url.replace('[input]', input);
     api_url = api_url.replace('[input]', input);
 
-    return this.http.get(`${api_url}`, HealtConstants.httpClientOption_contenttype_json).pipe(
-      map(function (res: Response) {
-        //let places = JSON.parse(res.json());
-        console.log(res);
-      }));
+    // return this.http.get(`${api_url}`, AppConstants.httpClientOption_contenttype_json).pipe(
+    //   map(function (res: Response) {
+    //     //let places = JSON.parse(res.json());
+    //     console.log(res);
+    //   }));
   }
 
   /**
@@ -81,7 +92,7 @@ export class CommonService {
 
     let executeReq = this.generete_post_Params("SearchParametroByParamsService", bussinesData);
 
-    return this.http.post<Param[]>(`${HealtConstants.HealthExecuteAPI_URL}`, executeReq, HealtConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Param[]>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
       map(function (res) {
 
         let resToObject: Result;
