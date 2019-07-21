@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
     login() {
 
-        this.authenticationService.oauthToken(this.currentUser.UserName, this.currentUser.Password)
+        this.authenticationService.oauthToken_owin$(this.currentUser.UserName, this.currentUser.Password)
         .subscribe(res=>{
 
 

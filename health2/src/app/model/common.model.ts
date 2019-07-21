@@ -323,6 +323,7 @@ export class User {
     public FirstName: string;
     public LastName: string;
     public  DNI :string;
+  ProfesionalName: any;
 
     public  GetRolList():Rol[]{
 

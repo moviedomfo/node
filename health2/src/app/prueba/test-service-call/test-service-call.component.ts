@@ -58,7 +58,7 @@ result_message:string;
     );
   }
   btnOAuth(){
-    var authResult$:Observable<AuthenticationOAutResponse> = this.authenticationService.oauthToken('moviedo','Lince21+');
+    var authResult$:Observable<AuthenticationOAutResponse> = this.authenticationService.oauthToken_owin$('moviedo','Lince21+');
     authResult$.subscribe(
       res => {
         this.result_tittle = "llamada a authenticationService.oauthToke";
