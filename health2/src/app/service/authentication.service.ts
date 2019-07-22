@@ -13,11 +13,11 @@ import * as jwt_decode from "jwt-decode";
 export class AuthenticationService {
   public logingChange_subject$: Subject<boolean> = new Subject<boolean>();
 
-  public token: string;
+ 
   constructor(private commonService: CommonService, private http: HttpClient, private router: Router) {
     // set token if saved in local storage
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
+    
+    
 
   }
 
@@ -124,37 +124,13 @@ export class AuthenticationService {
 
   }
 
-  login(username: string, password: string): Observable<boolean> {
-    return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password })).pipe(
-      map(response => {
-        // login successful if there's a jwt token in the response
-        //let token = response.json() && response.json().token;
-
-        if (response) {
-          // set token property
-          this.token = response as string;
-
-          // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({ username: username, token: this.token }));
-
-          // return true to indicate successful login
-          return true;
-        } else {
-          // return false to indicate failed login
-          return false;
-        }
-      })).pipe(catchError(this.commonService.handleError));
-
-
-
-
-
-  }
+ 
 
   logout(): void {
     // clear token remove user from local storage to log user out
-    this.token = null;
+ 
     localStorage.removeItem('currentLogin');
+    this.router.navigate(['/home']);
   }
 
 
