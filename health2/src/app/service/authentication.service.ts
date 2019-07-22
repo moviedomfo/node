@@ -25,7 +25,7 @@ export class AuthenticationService {
     return this.logingChange_subject$.asObservable();
   }
   //Este método de autenticacion usa jwk contra un rest asp api
-  public oauthToken_owin$(userName: string, password: string): Observable<AuthenticationOAutResponse> {
+  public oauthToken_owin$(userName: string, password: string): Observable<CurrentLogin> {
 
     const bodyParams = new HttpParams()
       .set(`username`, userName)
@@ -36,14 +36,14 @@ export class AuthenticationService {
       .set(`client_secret`, AppConstants.oaut_client_secret);
 
 
-    return this.http.post<AuthenticationOAutResponse>(`${AppConstants.AppOAuth_URL}`,
+    return this.http.post<string>(`${AppConstants.AppOAuth_URL}`,
       bodyParams, AppConstants.httpClientOption_form_urlencoded).pipe(
         map(res => {
           alert(AppConstants.AppOAuth_URL);
 
           var currentLogin: CurrentLogin = new CurrentLogin();
           currentLogin.oAuth = new AuthenticationOAutResponse();
-          currentLogin.oAuth.access_token = res.access_token;
+          currentLogin.oAuth.access_token = res;
           let tokenInfo = jwt_decode(currentLogin.oAuth.access_token); // decode token
 
 
@@ -52,11 +52,11 @@ export class AuthenticationService {
           currentLogin.currentUser.UserName = tokenInfo.userName;
           currentLogin.currentUser.Email = tokenInfo.email;
           currentLogin.currentUser.Roles = tokenInfo.roles;
-          currentLogin.currentUser.ProfesionalName = tokenInfo.unique_name;
+          //currentLogin.currentUser.ProfesionalName = tokenInfo.unique_name;
           localStorage.setItem('currentLogin', JSON.stringify(currentLogin));
 
-          return res;
-        })).pipe(catchError(this.commonService.handleError));
+          return currentLogin;
+        })).pipe(catchError(this.commonService.handleError2));
 
   }
   ///Este método de autenticacion usa jwk contra un rest asp api
@@ -71,16 +71,13 @@ export class AuthenticationService {
       securityProviderName: AppConstants.oaut_securityProviderName,
       client_secret: AppConstants.oaut_client_secret
     }
-
-
-
     return this.http.post<any>(AppConstants.AppOAuth_URL,
       bussinesData, AppConstants.httpClientOption_contenttype_json).pipe(
         map(res => {
 
           let currentLogin: CurrentLogin = new CurrentLogin();
           currentLogin.oAuth = new AuthenticationOAutResponse();
-          currentLogin.oAuth.access_token = res.access_token;
+          currentLogin.oAuth.access_token = res;
           let tokenInfo = jwt_decode(currentLogin.oAuth.access_token); // decode token
 
 
@@ -89,7 +86,7 @@ export class AuthenticationService {
           currentLogin.currentUser.UserName = tokenInfo.userName;
           currentLogin.currentUser.Email = tokenInfo.email;
           currentLogin.currentUser.Roles = tokenInfo.roles;
-          currentLogin.currentUser.ProfesionalName = tokenInfo.unique_name;
+          //currentLogin.currentUser.ProfesionalName = tokenInfo.unique_name;
           localStorage.setItem('currentLogin', JSON.stringify(currentLogin));
           this.logingChange_subject$.next(true);
           return currentLogin;

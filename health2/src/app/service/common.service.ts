@@ -257,7 +257,20 @@ export class CommonService {
       alert("Se encontraron errores " + serviceError.Message);
     }
   }
+  public handleError2(httpError :any) {
+    let errorMessage = '';
+    if (httpError.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${httpError.error.message}`;
+    } 
+    
+    if (httpError.error instanceof ProgressEvent) {
+      
+      console.log(httpError.message);
+    }
 
+    return throwError(errorMessage);
+  }
   ///Error inspection, interpretation, and resolution is something you want to do in the service, not in the component.
   public handleError(httpError: HttpErrorResponse | any) {
     console.log(httpError);
@@ -265,7 +278,7 @@ export class CommonService {
     ex.Machine = 'PC-Desarrollo';
     // A client-side or network error occurred. Handle it accordingly.
     if (httpError.error instanceof ProgressEvent) {
-      ex.Message = 'Client-side error occurred : '
+      ex.Message = 'Client-side error occurred : ' + ex.Message  ; 
 
 
       if (ex.Message.includes('api/oauth/authenticate')) {

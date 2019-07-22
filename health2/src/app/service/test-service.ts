@@ -14,7 +14,18 @@ export class TestService {
   constructor(private http: HttpClient,private commonService: CommonService) { }
 
 
+  public check(){
 
+    
+    //console.log(JSON.stringify(params));
+    let url =AppConstants.AppOAuth_BaseUrl + 'api/oauth/check/';
+    return this.http.get<any>(url).pipe(
+     map(result => {
+      return result;
+    
+      
+    })).pipe(catchError(this.commonService.handleError));
+  }
   public execute(){
 
     let currentLogin:CurrentLogin = JSON.parse( localStorage.getItem('currentLogin') );

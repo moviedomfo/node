@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientsService, TestService, AuthenticationService } from '../../service';
-import { PatientBE, ServiceError, AuthenticationOAutResponse } from '../../model';
+import { PatientBE, ServiceError, AuthenticationOAutResponse, CurrentLogin } from '../../model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -58,13 +58,11 @@ result_message:string;
     );
   }
   btnOAuth(){
-    var authResult$:Observable<AuthenticationOAutResponse> = this.authenticationService.oauthToken_owin$('moviedo','Lince21+');
+    var authResult$:Observable<CurrentLogin> = this.authenticationService.oauthToken_owin$('moviedo','Lince21+');
     authResult$.subscribe(
       res => {
         this.result_tittle = "llamada a authenticationService.oauthToke";
         this.result_message = JSON.stringify(res);
-        
-
       },
       err => {
 
@@ -97,6 +95,24 @@ result_message:string;
       res => {
 
         this.currentPatient = res;
+
+      },
+      err => {
+
+        this.globalError = err;
+      }
+    );
+
+  }
+
+
+  btn_check_GET(){
+    
+    this.currentPatient$ = this.testService.check();
+    this.currentPatient$.subscribe(
+      res => {
+
+        alert(res);
 
       },
       err => {
