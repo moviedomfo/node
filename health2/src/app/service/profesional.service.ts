@@ -1,31 +1,45 @@
 import { Injectable, Inject } from '@angular/core';
 
 // permmite cambiar la variable obsevada
-import { Observable } from 'rxjs';
+import { Observable ,Subject} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { CommonService } from '../service/common.service';
 import 'rxjs/add/operator/map';
-import { ProfesionalBE, PersonBE, ResourceSchedulingBE,
-   HealthInstitution_ProfesionalBE, 
-  GetProfesionalRes,ProfesionalesGridBE,Profesional_FullViewBE,
-  Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol} from '../model/index';
+import { ProfesionalBE, ResourceSchedulingBE,   HealthInstitution_ProfesionalBE,  GetProfesionalRes,ProfesionalesGridBE,Profesional_FullViewBE,
+  Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol, ProfesionalFullData} from '../model/index';
 
 import { AppConstants, contextInfo } from "../model/common.constants";
 import { HttpClient } from '@angular/common/http';
+import { helperFunctions } from './helperFunctions';
 
 @Injectable()
 export class ProfesionalService {
 
   private contextInfo: IContextInformation;
   private commonService: CommonService;
+  public currentProfesionalChange_subject$: Subject<ProfesionalFullData> = new Subject<ProfesionalFullData>();
 
   constructor(private http: HttpClient, commonService: CommonService) {
     this.contextInfo = contextInfo;
     this.commonService = commonService;
   }
 
+  get_ProfesionalChange$(): Observable<ProfesionalFullData> {
 
+    return this.currentProfesionalChange_subject$.asObservable();
+  }
 
+  public set_currentProfesionalChenge(){
+    let prof = this.get_currentProfesionalData();
+    this.currentProfesionalChange_subject$.next(prof);
+  }
+ get_currentProfesionalData(): ProfesionalFullData {
+    var currentItem: ProfesionalFullData = new ProfesionalFullData();
+    let str = localStorage.getItem('currentProfesionalData');
+    currentItem = JSON.parse(str);
+
+    return currentItem;
+  }
   getProfesionalService$(
     includeScheduler: boolean,
     includeSecurityInfo: boolean,
@@ -72,8 +86,8 @@ export class ProfesionalService {
         response.ResourceSchedulingList = resourceSchedulingList;
         response.HealthInstitution_ProfesionalList = healthInstitution_ProfesionalList;
 
-        return response;
-      })).pipe(catchError(this.commonService.handleError));
+        return response ;
+      })).pipe(catchError(helperFunctions.handleError));
 
 
  

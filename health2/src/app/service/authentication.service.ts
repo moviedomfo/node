@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { AppConstants, contextInfo } from "../model/common.constants";
-import { Param, IParam, IContextInformation, IRequest, IResponse, Result, AuthenticationOAutResponse, User, CurrentLogin } from '../model/common.model';
+import { Param, IParam, IContextInformation, IRequest, IResponse, Result, AuthenticationOAutResponse, User, CurrentLogin, ApiServerInfo } from '../model/common.model';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, Subject, throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { CommonService } from '../service/common.service';
 import 'rxjs/add/operator/map';
 import { HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
 import * as jwt_decode from "jwt-decode";
+import { helperFunctions } from './helperFunctions';
 
 @Injectable()
 export class AuthenticationService {
@@ -16,14 +17,12 @@ export class AuthenticationService {
  
   constructor(private commonService: CommonService, private http: HttpClient, private router: Router) {
     // set token if saved in local storage
-    
-    
-
   }
 
   get_logingChange$(): Observable<boolean> {
     return this.logingChange_subject$.asObservable();
   }
+
   //Este método de autenticacion usa jwk contra un rest asp api
   public oauthToken_owin$(userName: string, password: string): Observable<CurrentLogin> {
 
@@ -60,10 +59,10 @@ export class AuthenticationService {
 
   }
   ///Este método de autenticacion usa jwk contra un rest asp api
-  oauthToken$(userName: string, password: string, domain: string): Observable<any> {
+  public oauthToken$(userName: string, password: string, domain: string): Observable<any> {
 
     var bussinesData = {
-      username: userName,
+      userName: userName,
       password: password,
       domain: domain,
       grant_type: 'password',
@@ -71,6 +70,7 @@ export class AuthenticationService {
       securityProviderName: AppConstants.oaut_securityProviderName,
       client_secret: AppConstants.oaut_client_secret
     }
+
     return this.http.post<any>(AppConstants.AppOAuth_URL,
       bussinesData, AppConstants.httpClientOption_contenttype_json).pipe(
         map(res => {
@@ -88,9 +88,11 @@ export class AuthenticationService {
           currentLogin.currentUser.Roles = tokenInfo.roles;
           //currentLogin.currentUser.ProfesionalName = tokenInfo.unique_name;
           localStorage.setItem('currentLogin', JSON.stringify(currentLogin));
+
           this.logingChange_subject$.next(true);
+
           return currentLogin;
-        })).pipe(catchError(this.commonService.handleError));
+        })).pipe(catchError(helperFunctions.handleError));
 
   }
 
@@ -133,6 +135,23 @@ export class AuthenticationService {
     this.router.navigate(['/home']);
   }
 
+  getCurrenLoging(): CurrentLogin {
+    var currentLogin: CurrentLogin = new CurrentLogin();
+    let str = localStorage.getItem('currentLogin');
+    currentLogin = JSON.parse(str);
+
+    return currentLogin;
+  }
+
+  getServerInfo$(): Observable<ApiServerInfo> {
+    var bussinesData = {    };
+    var apiURL = AppConstants.AppOAuth_BaseUrl + "getServerInfo";
+    let outhHeader = this.commonService.get_AuthorizedHeader();
+    return this.http.get<ApiServerInfo>(apiURL,   { headers: outhHeader }).pipe(
+      map(res => {
+        return res;
+      })).pipe(catchError(this.commonService.handleError));
+  }
 
 
 }

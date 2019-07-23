@@ -619,3 +619,12 @@ export class GetProfesionalRes {
     public HealthInstitution_ProfesionalList: HealthInstitution_ProfesionalBE[];
 
 }
+
+export class ProfesionalFullData {
+    public ProfesionalBE: ProfesionalBE;
+    public ResourceSchedulingList: ResourceSchedulingBE[];
+    public HealthInstitution_ProfesionalBE: HealthInstitution_ProfesionalBE;
+    public User: User;
+    public HealthInstitution_ProfesionalList: HealthInstitution_ProfesionalBE[];
+
+}

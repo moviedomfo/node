@@ -1,5 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { pipe } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthenticationService, ProfesionalService } from '../../../service';
+import { CurrentLogin, ProfesionalFullData, AppConstants } from '../../../model';
+import * as moment from 'moment';
+import { AppComponent } from '../../../app.component';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-appheader',
   templateUrl: './appheader.component.html',
@@ -7,10 +14,103 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class AppheaderComponent implements OnInit {
+  public isLogged: boolean = false;
+  public userName: string = '';
+  public apellidoNombre: string = '';
+  public nombreEspecialidad: string = '';
+  public desde: string = '';
+  public profesionalPhotoUrl: SafeUrl = '';
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService,
+    private profService: ProfesionalService,
+    private domSanitizer: DomSanitizer) {
+
+
+    this.authService.logingChange_subject$.subscribe(pipe(
+      res => {
+        //this.isLogged= res as boolean;
+        this.chk_logingFront();
+      }
+    ));
+
+    this.profService.currentProfesionalChange_subject$.subscribe(pipe(
+      res => {
+
+        this.chk_profDataFront(res as ProfesionalFullData);
+      }
+    ));
+  }
 
   ngOnInit() {
   }
 
+
+  chk_logingFront() {
+    var currentLoging: CurrentLogin = this.authService.getCurrenLoging();
+    if (currentLoging) {
+      //console.log('user logged');
+      //this.isLogged = true;
+      this.userName = currentLoging.currentUser.UserName;
+    } else {
+      //console.log('NOT user logged');
+      this.isLogged = false;
+    }
+
+
+  }
+
+
+  chk_profDataFront(prof: ProfesionalFullData) {
+    if (prof) {
+      //console.log('user logged');
+      this.isLogged = true;
+      this.apellidoNombre = prof.ProfesionalBE.Persona.ApellidoNombre();
+      this.nombreEspecialidad = prof.ProfesionalBE.NombreEspecialidad;
+      var sinceDate = moment(prof.ProfesionalBE.FechaAlta).format('MMMM Do YYYY, h:mm:ss a');
+      var since = moment(prof.ProfesionalBE.FechaAlta, "YYYYMMDD").fromNow();
+      this.desde = sinceDate;
+      if (prof.ProfesionalBE.Persona.Foto === null) {
+        //Convert the ArrayBuffer to a typed array 
+        const TYPED_ARRAY = new Uint8Array(prof.ProfesionalBE.Persona.Foto);
+        // converts the typed array to string of characters
+        const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
+        let base64String = btoa(STRING_CHAR);
+        this.profesionalPhotoUrl = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
+      }
+      else {
+        this.loadDefaultPhoto();
+      }
+
+
+    } else {
+      //console.log('NOT user logged');
+      this.isLogged = false;
+    }
+  }
+
+
+  loadDefaultPhoto() {
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", AppConstants.ImagesSrc_Man, true);
+    let self = this;
+    //Obtain the result as an ArrayBuffer.
+    xhr.responseType = "arraybuffer";
+    xhr.onload = function (s) {
+
+      // Converts arraybuffer to typed array object
+      const TYPED_ARRAY = new Uint8Array(this.response);
+
+      // converts the typed array to string of characters
+      const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
+
+      //converts string of characters to base64String
+      let base64String = btoa(STRING_CHAR);
+
+      //sanitize the url that is passed as a value to image src attrtibute
+      self.profesionalPhotoUrl = self.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
+    }
+    
+  }
 }

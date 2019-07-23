@@ -36,7 +36,7 @@ export  const AppConstants={
      AppAPI_URL:environment.App_BaseURL + "api/",
      AppExecuteAPI_URL: environment.App_BaseURL  + 'api/fwk/execute/',
      AppOAuth_BaseUrl: environment.AppOAuth_BaseUrl , 
-     AppOAuth_URL: environment.AppOAuth_BaseUrl +  "oauth/token", 
+     AppOAuth_URL: environment.AppOAuth_BaseUrl +  "api/oauth/authenticate", 
      ImagesSrc_Woman:'assets/images/User_Famele.bmp',
      ImagesSrc_Man:'assets/images/User_Male.bmp',
      //httpOptions:options,

@@ -8,6 +8,7 @@ import { map, catchError } from 'rxjs/operators';
 //import { element } from 'protractor';
 import { Router } from '@angular/router'
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { helperFunctions } from './helperFunctions';
 
 //var colors = require('colors/safe');
 @Injectable()
@@ -40,12 +41,7 @@ export class CommonService {
 
     return  "Ip: " + this.ipinfo.ip + ", city: " +  this.ipinfo.city + ", region :" +  this.ipinfo.region + ", country :" + this.ipinfo.country;
   }
-  string_IsNullOrEmpty(str:string):boolean{
-    if(!str || Object.keys(str.trim()).length === 0){
-      return true;
-    }
-    return false;
-  }
+
       /**
   * utiliza una api paara retornar informacion hacerca del host cliente
   * @param 
@@ -59,23 +55,7 @@ export class CommonService {
         return res;
       })).pipe(catchError(this.handleError));
   }
-   /**
-  * Gets Date from string
-  * @param dateString
-  * @returns the Date 
-  */
-  parseDate(dateString: string): Date {
 
-    let f: Date;
-    if (dateString) {
-      f = new Date(dateString);
-
-      return f;//new Date(dateString);
-    } else {
-      return null;
-    }
-
-  }
   // serarPlaces_google_place_api(input: string) {
   //   //console.log('Ejecutando serarPlaces_google_place_api()');
   //   var api_url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=[input]&types=geocode&key=AIzaSyAEBn6XjDRlouhZP-nQHSU4equHUeR2wEc';
@@ -90,6 +70,7 @@ export class CommonService {
   //       let places = result;
   //     }));
   // }
+  
   /**
    * @idTipoParametro : Nombre de tabla
    * @idParametroRef : Subnombre , subcategoria
@@ -274,6 +255,7 @@ export class CommonService {
   ///Error inspection, interpretation, and resolution is something you want to do in the service, not in the component.
   public handleError(httpError: HttpErrorResponse | any) {
     console.log(httpError);
+   
     let ex: ServiceError = new ServiceError();
     ex.Machine = 'PC-Desarrollo';
     // A client-side or network error occurred. Handle it accordingly.
@@ -299,18 +281,21 @@ export class CommonService {
       ex.Status = httpError.status;
 
       if (httpError.error) {
-        ex.Type = httpError.error.ExceptionType;
-        if (httpError.error.ExceptionType) {
-          ex.Message = httpError.error.ExceptionMessage;
+        ex.Type =  httpError.error.ExceptionType || httpError.error.exceptionType;
+        if(ex.Type){
+          ex.Message  = httpError.error.ExceptionMessage || httpError.error.exceptionMessage;
           if (httpError.error.InnerException) {
-            ex.Message = ex.Message + "\r\n" + httpError.error.InnerException.ExceptionMessage;
+            ex.Message = ex.Message + "\r\n" + httpError.error.ExceptionMessage || httpError.error.InnerException.exceptionMessage;
           }
-          //ex.message= httpError.error.mess
         }
-        else {
+        else{
           ex.Message = httpError.error;
         }
-        return throwError(ex);
+        
+        if(helperFunctions.string_IsNullOrEmpty(ex.Message)==false)
+            return throwError(ex);
+        //ex.Message  =  this.getMessageFrom_HttpErrorResponse(httpError);
+        
       }
 
       if (httpError.message) {
@@ -325,6 +310,8 @@ export class CommonService {
     return throwError(ex);
 
   }
+
+
 
   public handleErrorObservable(error: ServiceError) {
 
