@@ -28,10 +28,11 @@ export class PersonsService {
       MotivoConsulta: motivoConsulta
 
     };
-  console.log(bussinesData);
+  
+  let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("RetrivePersonasService", bussinesData);
     
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
        map(result => {
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -48,16 +49,11 @@ export class PersonsService {
 
       if(!personaId)
       personaId=-1;
-    var bussinesData = {
-      Id: personaId,
-      NroDocumento: nroDocumento,
-    
-
-    };
-
+    var bussinesData = { Id: personaId,NroDocumento: nroDocumento};
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("GetPersonaByParamService", bussinesData);
     
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,AppConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,{ headers: outhHeader }).pipe(
        map(result => {
 
         

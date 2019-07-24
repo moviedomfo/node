@@ -49,7 +49,7 @@ export  class helperFunctions {
           ex.Message = httpError.error;
         }
  
-        if(!ex.Message || ex.Message.length === 0)
+        if(ex.Message || ex.Message.length != 0)
             return throwError(ex);
         //ex.Message  =  this.getMessageFrom_HttpErrorResponse(httpError);
         

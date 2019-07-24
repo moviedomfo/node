@@ -9,6 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router'
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { helperFunctions } from './helperFunctions';
+import { headersToString } from 'selenium-webdriver/http';
 
 //var colors = require('colors/safe');
 @Injectable()
@@ -226,10 +227,11 @@ export class CommonService {
   //Retorna un HttpHeaders con CORS y 'Authorization': "Bearer + TOKEN"
   public get_AuthorizedHeader(): HttpHeaders {
     let currentLogin: CurrentLogin = JSON.parse(localStorage.getItem('currentLogin'));
-    let headers = new HttpHeaders({ 'Authorization': "Bearer " + currentLogin.oAuth.access_token });
+    let headers = new HttpHeaders({ 'Authorization': "Bearer " + currentLogin.oAuth.access_token }).set('securityProviderName',AppConstants.oaut_securityProviderName);
     headers.append('Access-Control-Allow-Methods', '*');
     headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
     headers.append('Access-Control-Allow-Origin', '*');
+    
     return headers;
   }
 

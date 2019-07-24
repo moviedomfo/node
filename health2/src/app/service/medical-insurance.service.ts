@@ -20,6 +20,7 @@ export class MedicalInsuranceService {
 
     this.contextInfo = contextInfo;
     this.commonService = commonService;
+
   }
 
 
@@ -31,8 +32,8 @@ export class MedicalInsuranceService {
       StartDate: new Date()
     };
     let executeReq = this.commonService.generete_post_Params("RetriveAllObraSocialService", bussinesData);
-
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
+    let outhHeader = this.commonService.get_AuthorizedHeader();
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, { headers: outhHeader }).pipe(
       map(result => {
         if (result.Error) {
           Observable.throw(result.Error)
@@ -51,9 +52,9 @@ export class MedicalInsuranceService {
       Status: status,
       StartDate: startDate
     };
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq = this.commonService.generete_post_Params("GetObraSocialPorPatientService", bussinesData);
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, { headers: outhHeader }).pipe(
       map(result => {
 
         if (result.Error) {
@@ -69,8 +70,9 @@ export class MedicalInsuranceService {
   updateObraSocialService$(mutualBE: MutualBE): Observable<any> {
 
     var bussinesData = mutualBE;
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq = this.commonService.generete_post_Params("UpdateObraSocialService", bussinesData);
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, { headers: outhHeader }).pipe(
       map(result => {
         if (result.Error) {
           this.commonService.handleErrorObservable(result.Error);
@@ -82,8 +84,9 @@ export class MedicalInsuranceService {
   createObraSocialService$(mutualBE: MutualBE): Observable<any> {
 
     var bussinesData = { Mutual: mutualBE };
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq = this.commonService.generete_post_Params("CreateObraSocialService", bussinesData);
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, { headers: outhHeader }).pipe(
       map(result => {
         if (result.Error) {
           this.commonService.handleErrorObservable(result.Error);

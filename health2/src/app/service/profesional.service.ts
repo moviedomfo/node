@@ -59,10 +59,10 @@ export class ProfesionalService {
 
     };
 
-  
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("GetProfesionalService", bussinesData);
 
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,{ headers: outhHeader }).pipe(
       map(result => {
         if (result.Error) {
           throw Observable.throw(result.Error);

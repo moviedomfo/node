@@ -30,11 +30,10 @@ export class ShedulingServiceService {
       AppointmentsList: AppointmentsList
     };
 
-    
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("CreateAppointmentsService", bussinesData);
     
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,{ headers: outhHeader }).pipe(
        map(result => {
 
       //  let result: Result = JSON.parse(res.json());
@@ -57,10 +56,10 @@ export class ShedulingServiceService {
     };
 
     
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("GetAppoinmentByParamsService", bussinesData);
 
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
        map(result => {
 
       //  let result: Result = JSON.parse(res.json());

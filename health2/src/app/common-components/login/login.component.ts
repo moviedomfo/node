@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { User, AppConstants, GetProfesionalRes, ProfesionalFullData } from '../../model/index'
 import { AuthenticationService, ProfesionalService } from './../../service/index';
 import { CurrentLogin, ServiceError, AuthenticationOAutResponse } from '../../model/common.model';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { AppComponent } from '../../app.component';
 
 @Component({
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   public currentUser: User;
   public jwt_decode: any;
   public selectedDomain: string;
-
+  
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
@@ -66,10 +66,8 @@ export class LoginComponent implements OnInit {
 
     authRes$.subscribe(
       res => {
-        //console.log(JSON.stringify(res));
-
         this.currentLogin = res;
-        this.retriveProfesionalData(this.currentLogin.currentUser.UserId);
+        forkJoin(this.retriveProfesionalData(this.currentLogin.currentUser.UserId));
         //this.router.navigate(['/userReset']);
       },
       err => {
@@ -83,13 +81,7 @@ export class LoginComponent implements OnInit {
   }
 
  retriveProfesionalData(userGuid : string) {
-
-
-    // if(!this.currentUser.Domain)
-    // {
-    //   alert("Debe seleccionar un un dominio");
-    //   return;
-    // }
+   
     this.loading = true;
     //this.currentUser.Domain = this.domains.find(p=> p.DomainId ==this.currentUser.DomainId).Domain;
     var svc$: Observable<any> = this.prefesionalService.getProfesionalService$(false ,false,null,userGuid, AppConstants.DefaultHealthInstitutionId,true,null);

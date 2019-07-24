@@ -30,9 +30,9 @@ export class PatientsService {
   /// GET to  "http://localhost:63251/api/",
   retrivePatientsSimple$(): Observable<any> {
 
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     //map retorna el mapeo de un json que viene del servicio que tiene la misma estructura que  PatientBE
-    return this.http.get<Result>(`${AppConstants.AppAPI_URL}patients/RetrivePatientsSimple`,AppConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.get<Result>(`${AppConstants.AppAPI_URL}patients/RetrivePatientsSimple`,{ headers: outhHeader }).pipe(
        map(result => {
         return result;
       })).pipe(catchError(this.commonService.handleError));
@@ -40,12 +40,11 @@ export class PatientsService {
   }
 
   retrivePatientsSimple_post$(): Observable<any> {
-    var bussinesData = {
-      Id: 123
-    };
+    var bussinesData = {      Id: 123   };
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let ExecuteReq: ExecuteReq = this.commonService.generete_post_Params("getPatientService", bussinesData);
 
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, ExecuteReq,AppConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, ExecuteReq,{ headers: outhHeader }).pipe(
       map(result => {
 
       
@@ -73,11 +72,11 @@ export class PatientsService {
     var bussinesData = {
       Id: id
     };
-    
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let ExecuteReq=  this.commonService.generete_post_Params("getPatientService", bussinesData);
     //AppConstants.httpOptions.search = searchParams;
 
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,ExecuteReq,AppConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,ExecuteReq,{ headers: outhHeader }).pipe(
        map(result => {
 
        // let result: Result= JSON.parse(res.toString());
@@ -103,10 +102,10 @@ export class PatientsService {
       id:null,
       ReturnGrid:false,
     };
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
   
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
        map(result => {
 
         if (result.Error) {
@@ -130,9 +129,10 @@ export class PatientsService {
       Mutuales: mutuales
     
     };
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("CrearPatientService", bussinesData);
     
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
+    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
      map(result => {
 
       if (result.Error) {
@@ -155,9 +155,9 @@ export class PatientsService {
       AnteriorFechaNacimiento: Date
 
     };
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("UpdatePatientService", bussinesData);
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
        map(result => {
 
     
@@ -185,11 +185,12 @@ export class PatientsService {
       Id: patientId
     };
 
+    let outhHeader = this.commonService.get_AuthorizedHeader();
 
     let executeReq=  this.commonService.generete_post_Params("GetPatientService", bussinesData);
 
     
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
+    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
        map(result => {
 
               
