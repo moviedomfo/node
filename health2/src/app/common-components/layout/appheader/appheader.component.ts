@@ -66,14 +66,14 @@ export class AppheaderComponent implements OnInit {
     if (prof) {
       //console.log('user logged');
       this.isLogged = true;
-      this.apellidoNombre = prof.ProfesionalBE.Persona.ApellidoNombre();
-      this.nombreEspecialidad = prof.ProfesionalBE.NombreEspecialidad;
-      var sinceDate = moment(prof.ProfesionalBE.FechaAlta).format('MMMM Do YYYY, h:mm:ss a');
-      var since = moment(prof.ProfesionalBE.FechaAlta, "YYYYMMDD").fromNow();
+      this.apellidoNombre = prof.Profesional.Persona.ApellidoNombre();
+      this.nombreEspecialidad = prof.Profesional.NombreEspecialidad;
+      var sinceDate = moment(prof.Profesional.FechaAlta).format('MMMM Do YYYY, h:mm:ss a');
+      var since = moment(prof.Profesional.FechaAlta, "YYYYMMDD").fromNow();
       this.desde = sinceDate;
-      if (prof.ProfesionalBE.Persona.Foto === null) {
+      if (prof.Profesional.Persona.Foto === null) {
         //Convert the ArrayBuffer to a typed array 
-        const TYPED_ARRAY = new Uint8Array(prof.ProfesionalBE.Persona.Foto);
+        const TYPED_ARRAY = new Uint8Array(prof.Profesional.Persona.Foto);
         // converts the typed array to string of characters
         const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
         let base64String = btoa(STRING_CHAR);

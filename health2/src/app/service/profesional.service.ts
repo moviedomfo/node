@@ -46,7 +46,7 @@ export class ProfesionalService {
     idProfesional?: number,
     userGuid?: String,
     healthInstitutionId?: String, includeAllInstitutions?: boolean,
-    personaId?: String): Observable<any> {
+    personaId?: String): Observable<GetProfesionalRes> {
 
     var bussinesData = {
       IdProfesional: idProfesional,
@@ -62,11 +62,14 @@ export class ProfesionalService {
     let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("GetProfesionalService", bussinesData);
 
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,{ headers: outhHeader }).pipe(
-      map(result => {
+    return this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,{ headers: outhHeader }).pipe(
+      map(res => {
+
+        let result :Result= JSON.parse(res.Result) as Result;
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
+        
         let profesionalBE: ProfesionalBE = result.BusinessData['profesional'] as ProfesionalBE;
      
         let resourceSchedulingList: ResourceSchedulingBE[] = result.BusinessData['ResourceSchedulerList'] as ResourceSchedulingBE[];
@@ -77,8 +80,8 @@ export class ProfesionalService {
 
         let response: GetProfesionalRes = new GetProfesionalRes();
 
-        response.ProfesionalBE = profesionalBE;
-
+        response.Profesional = profesionalBE;
+        alert(response.Profesional.Persona.Nombre);
         response.HealthInstitution_ProfesionalBE = healthInstitution_ProfesionalBE;
         response.User = user;
         //alert(response.User);

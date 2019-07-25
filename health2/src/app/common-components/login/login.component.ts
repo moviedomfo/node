@@ -84,16 +84,16 @@ export class LoginComponent implements OnInit {
    
     this.loading = true;
     //this.currentUser.Domain = this.domains.find(p=> p.DomainId ==this.currentUser.DomainId).Domain;
-    var svc$: Observable<any> = this.prefesionalService.getProfesionalService$(false ,false,null,userGuid, AppConstants.DefaultHealthInstitutionId,true,null);
+    var svc$: Observable<GetProfesionalRes> = this.prefesionalService.getProfesionalService$(false ,false,null,userGuid, AppConstants.DefaultHealthInstitutionId,true,null);
 
     svc$.subscribe(
       res => {
 
         let currentProfesionalData : ProfesionalFullData;
-        res.ProfesionalBE = currentProfesionalData.ProfesionalBE;
+         currentProfesionalData.Profesional = res.Profesional;
 
-        res.HealthInstitution_ProfesionalBE = currentProfesionalData.HealthInstitution_ProfesionalBE;
-        res.HealthInstitution_ProfesionalList = currentProfesionalData.HealthInstitution_ProfesionalList;
+        currentProfesionalData.HealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE ;
+         currentProfesionalData.HealthInstitution_ProfesionalList = res.HealthInstitution_ProfesionalList;
         //console.log(JSON.stringify(res));
         localStorage.setItem('currentProfesionalData', JSON.stringify(currentProfesionalData));
         

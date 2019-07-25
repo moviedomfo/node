@@ -91,7 +91,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
       this.getProfesionalRes$.subscribe(
         res => {
 
-          this.currentProfesional = res.ProfesionalBE;
+          this.currentProfesional = res.Profesional;
           
           if (this.currentProfesional != null) {
 

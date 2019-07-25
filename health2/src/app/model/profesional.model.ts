@@ -218,7 +218,7 @@ export class TimespamView {
         //El pasado u hoy
         if (date <= new Date())
             this.nowTicks = date.getMilliseconds();
-        //Futuro Siempre esta libre siempre y cuando no esta en otro estado
+        //Futuro Siempre esta libre siempre y cuando no está en otro estado
         if (date > new Date())
             this.nowTicks = -1;
     }
@@ -612,7 +612,7 @@ export class ResourceSchedulingBE {
 }
 
 export class GetProfesionalRes {
-    public ProfesionalBE: ProfesionalBE;
+    public Profesional: ProfesionalBE;
     public ResourceSchedulingList: ResourceSchedulingBE[];
     public HealthInstitution_ProfesionalBE: HealthInstitution_ProfesionalBE;
     public User: User;
@@ -621,7 +621,7 @@ export class GetProfesionalRes {
 }
 
 export class ProfesionalFullData {
-    public ProfesionalBE: ProfesionalBE;
+    public Profesional: ProfesionalBE;
     public ResourceSchedulingList: ResourceSchedulingBE[];
     public HealthInstitution_ProfesionalBE: HealthInstitution_ProfesionalBE;
     public User: User;

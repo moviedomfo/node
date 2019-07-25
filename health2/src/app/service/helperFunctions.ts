@@ -34,7 +34,7 @@ export  class helperFunctions {
       //alert(error.error);
       ex.Status = httpError.status;
       if(ex.Status === 401){
-        ex.Message = "No esta autorizado para realizar esta accion";
+        ex.Message = "No está autorizado para realizar esta acción";
         return throwError(ex);
       }
       if (httpError.error) {
