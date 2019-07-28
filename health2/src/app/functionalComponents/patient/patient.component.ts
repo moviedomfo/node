@@ -42,7 +42,17 @@ export class PatientComponent implements OnInit {
 
       }
     );
+    this.patientList$.subscribe(
+      res => {
+        this.patientList = res;
+      
 
+      },
+      err => {
+        alert(err.Message);
+        //this.globalError = err;
+      }
+    );
    
   }
 

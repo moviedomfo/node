@@ -89,7 +89,8 @@ export class LoginComponent implements OnInit {
     svc$.subscribe(
       res => {
 
-        let currentProfesionalData : ProfesionalFullData;
+        let currentProfesionalData : ProfesionalFullData = new ProfesionalFullData;
+        
          currentProfesionalData.Profesional = res.Profesional;
 
         currentProfesionalData.HealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE ;
@@ -98,7 +99,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentProfesionalData', JSON.stringify(currentProfesionalData));
         
         this.loading = false;
-        
+        this.prefesionalService.currentProfesionalChange_subject$.next(currentProfesionalData);
       },
       err => {
 

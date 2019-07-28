@@ -33,6 +33,16 @@ export class ProfesionalBE {
         }
         else { return ''; }
     }
+
+    public static  getFullNameStatic(prof:ProfesionalBE) {
+
+        if (prof.Persona) {
+            let h: HelperBE = new HelperBE();
+
+            return h.getFullName(prof.Persona.Nombre, prof.Persona.Apellido);
+        }
+        else { return ''; }
+    }
 }
 
 export class ProfesionalesGridBE {

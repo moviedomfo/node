@@ -84,19 +84,21 @@ export class CommonService {
       Vigente: true
     };
 
-
+    
     let executeReq = this.generete_post_Params("SearchParametroByParamsService", bussinesData);
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
-      map(result => {
+    AppConstants.httpClientOption_contenttype_json.headers.append('svc','SearchParametroByParamsService')
+    return this.http.post<any>(`${AppConstants.AppExecuteWhiteListAPI_URL}`, executeReq, AppConstants.httpClientOption_contenttype_json).pipe(
+      map(res => {
 
-
+       
+        let result :Result= JSON.parse(res.Result) as Result;
         if (result.Error) {
 
           throw Observable.throw(result.Error);
         }
 
         let params: Param[] = result.BusinessData as Param[];
-
+        alert(params.length);
         return params;
       })).pipe(catchError(this.handleError));
   }
@@ -203,10 +205,10 @@ export class CommonService {
     let currentLogin: CurrentLogin = JSON.parse(localStorage.getItem('currentLogin'));
     contextInfo.Culture = "ES-AR";
     contextInfo.ProviderNameWithCultureInfo = "";
-    contextInfo.HostName = 'localhost';
+    contextInfo.HostName =  this.ipinfo.ip;
     contextInfo.HostIp = this.ipinfo.ip;
     contextInfo.HostTime = new Date(),
-      contextInfo.ServerName = 'WebAPIDispatcherClienteWeb';
+    contextInfo.ServerName = 'WebAPIDispatcherClienteWeb';
     contextInfo.ServerTime = new Date();
 
     if (currentLogin.currentUser.UserName) { contextInfo.UserName = currentLogin.currentUser.UserName; }
@@ -257,7 +259,7 @@ export class CommonService {
   ///Error inspection, interpretation, and resolution is something you want to do in the service, not in the component.
   public handleError(httpError: HttpErrorResponse | any) {
     console.log(httpError);
-   
+    
     let ex: ServiceError = new ServiceError();
     ex.Machine = 'PC-Desarrollo';
     // A client-side or network error occurred. Handle it accordingly.
@@ -281,6 +283,10 @@ export class CommonService {
     if (httpError instanceof HttpErrorResponse) {
       //alert(error.error);
       ex.Status = httpError.status;
+      if(ex.Status === 401){
+        ex.Message = "No está autorizado para realizar esta acción";
+        return throwError(ex);
+      }
 
       if (httpError.error) {
         ex.Type =  httpError.error.ExceptionType || httpError.error.exceptionType;
@@ -291,7 +297,14 @@ export class CommonService {
           }
         }
         else{
-          ex.Message = httpError.error;
+          if(httpError.error.Message)
+          {
+            ex.Message = httpError.error.Message;
+          }
+          else{
+            ex.Message = httpError.error;
+          }
+          
         }
         
         if(helperFunctions.string_IsNullOrEmpty(ex.Message)==false)

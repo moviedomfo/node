@@ -33,6 +33,7 @@ export class ProfesionalService {
     let prof = this.get_currentProfesionalData();
     this.currentProfesionalChange_subject$.next(prof);
   }
+
  get_currentProfesionalData(): ProfesionalFullData {
     var currentItem: ProfesionalFullData = new ProfesionalFullData();
     let str = localStorage.getItem('currentProfesionalData');
@@ -79,9 +80,10 @@ export class ProfesionalService {
         let healthInstitution_ProfesionalList = result.BusinessData['HealthInstitution_ProfesionalList'] as HealthInstitution_ProfesionalBE[];
 
         let response: GetProfesionalRes = new GetProfesionalRes();
-
+    
         response.Profesional = profesionalBE;
-        alert(response.Profesional.Persona.Nombre);
+        
+        
         response.HealthInstitution_ProfesionalBE = healthInstitution_ProfesionalBE;
         response.User = user;
         //alert(response.User);

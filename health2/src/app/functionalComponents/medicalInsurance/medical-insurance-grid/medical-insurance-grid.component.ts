@@ -69,6 +69,7 @@ export class MedicalInsuranceGridComponent implements OnInit {
 
     retriveAllObraSocial() {
        
+      
         this.mutualList$ = this.medicalInsuranceService.retriveAllObraSocialService$("");
         this.mutualList$.subscribe(
             res => {

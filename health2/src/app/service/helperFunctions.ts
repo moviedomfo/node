@@ -6,6 +6,19 @@ import { ServiceError } from "../model";
 
 export  class helperFunctions {
 
+  public   static   getPersonFullName( firstName:string,  lastName:string):string
+     {
+              if((lastName || lastName!='' ) && (firstName || firstName!='' ))
+                 return lastName.trim(), ", ", firstName.trim();
+
+             if((!lastName || lastName=='' ) && (firstName || firstName!='' ))
+                 return firstName.trim();
+
+              if((lastName || lastName=='' ) && (!firstName || firstName=='' ))
+                 return lastName.trim();
+
+             return '';
+     }
 
   public static handleError(httpError: HttpErrorResponse | any) {
     console.log(httpError);

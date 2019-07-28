@@ -33,10 +33,10 @@ export class ShedulingServiceService {
     let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("CreateAppointmentsService", bussinesData);
     
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,{ headers: outhHeader }).pipe(
-       map(result => {
+    return  this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,{ headers: outhHeader }).pipe(
+       map(res =>{
 
-      //  let result: Result = JSON.parse(res.json());
+        let result :Result= JSON.parse(res.Result) as Result;
 
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -59,10 +59,10 @@ export class ShedulingServiceService {
     let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("GetAppoinmentByParamsService", bussinesData);
 
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
-       map(result => {
+    return  this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+       map(res =>{
 
-      //  let result: Result = JSON.parse(res.json());
+        let result :Result= JSON.parse(res.Result) as Result;
 
         if (result.Error) {
           throw Observable.throw(result.Error);

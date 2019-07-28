@@ -7,6 +7,7 @@ import { Subject, throwError, Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { CommonService } from '../service/common.service';
 import 'rxjs/add/operator/map';
+import { helperFunctions } from './helperFunctions';
 
 @Injectable()
 export class PatientsService {
@@ -41,13 +42,13 @@ export class PatientsService {
 
   retrivePatientsSimple_post$(): Observable<any> {
     var bussinesData = {      Id: 123   };
+
     let outhHeader = this.commonService.get_AuthorizedHeader();
     let ExecuteReq: ExecuteReq = this.commonService.generete_post_Params("getPatientService", bussinesData);
 
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, ExecuteReq,{ headers: outhHeader }).pipe(
-      map(result => {
-
-      
+    return  this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`, ExecuteReq,{ headers: outhHeader }).pipe(
+      map(res => {
+        let result :Result= JSON.parse(res.Result) as Result;
       
       if (result.Error) {
         throw Observable.throw(result.Error);
@@ -76,11 +77,11 @@ export class PatientsService {
     let ExecuteReq=  this.commonService.generete_post_Params("getPatientService", bussinesData);
     //AppConstants.httpOptions.search = searchParams;
 
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,ExecuteReq,{ headers: outhHeader }).pipe(
-       map(result => {
+    return  this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,ExecuteReq,{ headers: outhHeader }).pipe(
+       map(res => {
 
-       // let result: Result= JSON.parse(res.toString());
-
+       
+       let result :Result= JSON.parse(res.Result) as Result;
         if (result.Error) {
           throw  Observable.throw(result.Error);
         }
@@ -105,9 +106,10 @@ export class PatientsService {
     let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("RetrivePatientsService", bussinesData);
   
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
-       map(result => {
+    return  this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+       map(res => {
 
+        let result :Result= JSON.parse(res.Result) as Result;
         if (result.Error) {
           throw  Observable.throw(result.Error);
         }
@@ -132,9 +134,9 @@ export class PatientsService {
     let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("CrearPatientService", bussinesData);
     
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
-     map(result => {
-
+    return this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+     map(res => {
+      let result :Result= JSON.parse(res.Result) as Result;
       if (result.Error) {
         throw  Observable.throw(result.Error);
       }
@@ -157,17 +159,17 @@ export class PatientsService {
     };
     let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("UpdatePatientService", bussinesData);
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
-       map(result => {
+    return  this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+       map(res => {
 
-    
+        let result :Result= JSON.parse(res.Result) as Result;
 
         if (result.Error) {
           throw  Observable.throw(result.Error);
           
         }
         return "the patient was updated";
-     })).pipe(catchError(this.commonService.handleError));
+     })).pipe(catchError(helperFunctions.handleError));
 
   }
 
@@ -186,14 +188,11 @@ export class PatientsService {
     };
 
     let outhHeader = this.commonService.get_AuthorizedHeader();
-
     let executeReq=  this.commonService.generete_post_Params("GetPatientService", bussinesData);
+    return  this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+       map(res => {
 
-    
-    return  this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
-       map(result => {
-
-              
+        let result :Result= JSON.parse(res.Result) as Result;
         if (result.Error) {
           throw  Observable.throw(result.Error);
         }

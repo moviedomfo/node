@@ -78,6 +78,7 @@ export class PersonCardComponent implements AfterViewInit {
 
 
     this.currentNroDocumento = this.currentPerson.NroDocumento;
+    
     this.tipoDocumentoList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.TipoDocumento, null);
     this.tipoDocumentoList$.subscribe(
       res => {
@@ -208,7 +209,7 @@ export class PersonCardComponent implements AfterViewInit {
     this.currentPerson$.subscribe(
       res => {
         var person: PersonBE = res as PersonBE;
-
+        
         if (person == null) {
           return true;
         }

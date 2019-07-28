@@ -40,9 +40,7 @@ export class PatientMangerComponent implements OnInit {
   ngOnInit() {
     
     this.preInitializePatient();
-   
-   
-    
+  
  }
 
   medicalInsuranceByPatientList(item: any) {
