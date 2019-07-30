@@ -123,7 +123,7 @@ export class SessionSettingComponent implements AfterViewInit {
     //mostrar "Esta a punto de reestablacer la clave de inicio de sesión del usuario, esta seguro ?"
     if(!this.currentUser.UserName || this.currentUser.UserName=='')
     {
-      alert('falta nombre de usuario');
+      alert('Falta nombre de usuario');
     }
     if(!this.currentUser.Password || this.currentUser.Password=='')
     {

@@ -160,7 +160,7 @@ export class PatientMangerComponent implements OnInit {
     var res$ = this.patientService.createPatientsService$(this.currentPatient, null);
     res$.subscribe(
       res => {
-        alert('paciente creado ok');
+        alert('Paciente creado ok');
       },
       err => {
         this.globalError = err.error;
@@ -172,7 +172,7 @@ export class PatientMangerComponent implements OnInit {
   private updatePatient() {
     var res$ = this.patientService.updatePatientsService$(this.currentPatient, this.mutualPorPacienteAuxList, null);
     res$.subscribe(res => {
-      alert('Actualizado con exito');
+      alert('Actualizado con éxito');
     },
     err => {
       this.globalError = err.error;

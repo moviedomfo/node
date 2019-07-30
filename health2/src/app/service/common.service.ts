@@ -98,7 +98,7 @@ export class CommonService {
         }
 
         let params: Param[] = result.BusinessData as Param[];
-        alert(params.length);
+        
         return params;
       })).pipe(catchError(this.handleError));
   }
@@ -281,7 +281,7 @@ export class CommonService {
     // The backend returned an unsuccessful response code.
     // The response body may contain clues as to what went wrong,
     if (httpError instanceof HttpErrorResponse) {
-      //alert(error.error);
+         
       ex.Status = httpError.status;
       if(ex.Status === 401){
         ex.Message = "No está autorizado para realizar esta acción";
