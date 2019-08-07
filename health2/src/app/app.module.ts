@@ -93,6 +93,7 @@ import {AuthenticationService} from './service/authentication.service';
     AppsettingComponent, AppmenuComponent, AppfooterComponent, AppheaderComponent, FormControlsComponent, FormControlsAdminLteComponent, TestServiceCallComponent
   ],
   imports: [
+    //NgIdleKeepaliveModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
       libraries: ['places']  })

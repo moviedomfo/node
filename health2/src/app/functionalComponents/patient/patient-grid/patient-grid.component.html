@@ -39,7 +39,7 @@
         </div>
         <div class="panel-body">
           <div style="clear: both;"></div>
-          <ag-grid-angular style="width: 900px; height: 515px;" class="ag-fresh" [rowData]="patientList" [columnDefs]="columnDefs"
+          <ag-grid-angular style="width: 900px; height: 515px;" class="ag-theme-fresh" [rowData]="patientList" [columnDefs]="columnDefs"
             (modelUpdated)="onModelUpdated($event)" (cellClicked)="onCellClicked($event)" (cellDoubleClicked)="onGridCellDoubleClick($event)"
             (rowDoubleClicked)="onGridRowDoubleClick($event)">
           </ag-grid-angular>

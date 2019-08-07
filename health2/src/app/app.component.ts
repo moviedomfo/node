@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { ModalDialogComponent } from './common-components/modal-dialog/modal-dialog.component';
 
 import { DialogService } from "ng2-bootstrap-modal";
-import { CommonService } from "./service/index";
+import { CommonService, AuthenticationService } from "./service/index";
 
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -15,7 +16,12 @@ export class AppComponent {
     
     title = 'app works!';
 
-    constructor(private dialogService: DialogService,private commonService :CommonService) { 
+    constructor(private dialogService: DialogService,
+        private commonService :CommonService,
+        private router: Router, 
+        private authService: AuthenticationService
+        //private idle: Idle, private keepalive: Keepalive
+        ) { 
 
         //Escrive el titulo en e l header prinsipal del dasboard
         this.commonService.get_mainComponentTitle$().subscribe(d => {
