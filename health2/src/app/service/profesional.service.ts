@@ -4,7 +4,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable ,Subject} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { CommonService } from '../service/common.service';
-import 'rxjs/add/operator/map';
+
 import { ProfesionalBE, ResourceSchedulingBE,   HealthInstitution_ProfesionalBE,  GetProfesionalRes,ProfesionalesGridBE,Profesional_FullViewBE,
   Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol, ProfesionalFullData} from '../model/index';
 

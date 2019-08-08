@@ -1,11 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
+
 import { AppConstants, contextInfo } from "../model/common.constants";
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, AuthenticationOAutResponse, User, CurrentLogin, ApiServerInfo } from '../model/common.model';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, Subject, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { CommonService } from '../service/common.service';
-import 'rxjs/add/operator/map';
+
 import { HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
 import * as jwt_decode from "jwt-decode";
 import { helperFunctions } from './helperFunctions';

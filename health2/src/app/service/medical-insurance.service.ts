@@ -8,7 +8,6 @@ import { map, catchError } from 'rxjs/operators';
 
 import { CommonService } from '../service/common.service';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
 import { helperFunctions } from './helperFunctions';
 
 @Injectable()

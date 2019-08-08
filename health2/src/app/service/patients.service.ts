@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+
 import { PatientBE,MutualPorPacienteBE,PersonBE } from '../model/index';
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, ExecuteReq } from '../model/common.model';
 import { AppConstants, contextInfo } from "../model/common.constants";
@@ -6,8 +6,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject, throwError, Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { CommonService } from '../service/common.service';
-import 'rxjs/add/operator/map';
+
 import { helperFunctions } from './helperFunctions';
+import { Injectable, Inject } from '@angular/core';
 
 @Injectable()
 export class PatientsService {
