@@ -67,7 +67,7 @@ import { FormControlsAdminLteComponent } from './prueba/forms/form-controls-admi
 import { TestServiceCallComponent } from './prueba/test-service-call/test-service-call.component';
 import { TestService } from './service/test-service';
 import {AuthenticationService} from './service/authentication.service';
-
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +93,7 @@ import {AuthenticationService} from './service/authentication.service';
     AppsettingComponent, AppmenuComponent, AppfooterComponent, AppheaderComponent, FormControlsComponent, FormControlsAdminLteComponent, TestServiceCallComponent
   ],
   imports: [
-    //NgIdleKeepaliveModule.forRoot(),
+    NgIdleKeepaliveModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
       libraries: ['places']  })

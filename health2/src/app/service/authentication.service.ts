@@ -10,6 +10,7 @@ import { CommonService } from '../service/common.service';
 import { HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
 import * as jwt_decode from "jwt-decode";
 import { helperFunctions } from './helperFunctions';
+import { ProfesionalFullData } from '../model';
 
 @Injectable()
 export class AuthenticationService {
@@ -18,6 +19,16 @@ export class AuthenticationService {
  
   constructor(private commonService: CommonService, private http: HttpClient, private router: Router) {
     // set token if saved in local storage
+  }
+
+  isAuth() {
+    
+    var currentUser: CurrentLogin = this.getCurrenLoging();
+    if (currentUser)
+      return true;
+    else
+      return false;
+
   }
 
   get_logingChange$(): Observable<boolean> {
@@ -129,19 +140,40 @@ export class AuthenticationService {
 
  
 
-  logout(): void {
-    // clear token remove user from local storage to log user out
  
+  signOut(): void {
+    // clear token remove user from local storage to log user out
+
     localStorage.removeItem('currentLogin');
-    this.router.navigate(['/home']);
+    this.logingChange_subject$.next(false);
   }
 
   getCurrenLoging(): CurrentLogin {
     var currentLogin: CurrentLogin = new CurrentLogin();
     let str = localStorage.getItem('currentLogin');
-    currentLogin = JSON.parse(str);
+   
+    if (currentLogin){
+      currentLogin = JSON.parse(str);
+   
+      return currentLogin;
+    }
+   else{
+     return null;
+   }
+  }
+  
+  getCurrenProfesional(): ProfesionalFullData {
+    var currentProf: ProfesionalFullData = new ProfesionalFullData();
 
-    return currentLogin;
+    if (currentProf){
+      let str = localStorage.getItem('currentProfesionalData');
+      currentProf = JSON.parse(str);  
+      return currentProf;
+    }
+   else{
+     return null;
+   }
+    
   }
 
   getServerInfo$(): Observable<ApiServerInfo> {

@@ -44,11 +44,11 @@ export class AppheaderComponent implements OnInit {
       }
     ));}
 
-  
+    
   }
 
   ngOnInit() {
-  }
+    this.chk_logingFront();}
 
 
   chk_logingFront() {
