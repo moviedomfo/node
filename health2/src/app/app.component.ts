@@ -72,9 +72,14 @@ export class AppComponent {
         this.reset();
 
         if (this.authService.isAuth() === false) {
+            console.log('cheuqueando auttenticacion en app componet');
             this.authService.signOut();
             this.router.navigate(['/login']);
         }
+        //else{
+            //console.log('Esta autenticado ' , this.authService.getCurrenLoging().currentUser.UserName);
+            //console.log('foto ' , this.authService.get_currentProfesionalData().Profesional.Persona.Foto);
+        //}
     }
 
     reset() {

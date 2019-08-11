@@ -147,14 +147,20 @@ export class AuthenticationService {
     localStorage.removeItem('currentLogin');
     this.logingChange_subject$.next(false);
   }
+  get_currentProfesionalData(): ProfesionalFullData {
+    var currentItem: ProfesionalFullData = new ProfesionalFullData();
+    let str = localStorage.getItem('currentProfesionalData');
+    currentItem = JSON.parse(str);
 
+    return currentItem;
+  }
   getCurrenLoging(): CurrentLogin {
     var currentLogin: CurrentLogin = new CurrentLogin();
     let str = localStorage.getItem('currentLogin');
    
     if (currentLogin){
       currentLogin = JSON.parse(str);
-   
+    
       return currentLogin;
     }
    else{
