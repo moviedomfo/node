@@ -1,7 +1,7 @@
 
 /* You can add global styles to this file, and also import other style files */
 *{border-radius: 1 !important;}
-info p {
+/* info p {
     text-align:center;
     color: #999;
     text-transform:none;
@@ -12,8 +12,8 @@ info p {
   
   .info i {
     color:#F6AA93;
-  }
-  form h1 {
+  } */
+  /* form h1 {
     font-size: 18px;
     background: #F6AA93 none repeat scroll 0% 0%;
     color: rgb(255, 255, 255);
@@ -22,11 +22,11 @@ info p {
     margin: auto;
     text-shadow: none; 
     text-align:left
-  }
+  } */
   
 
 
-  label span  {
+  /* label span  {
     color: #F00;
   }
   
@@ -68,4 +68,4 @@ info p {
   .raio-ifnot-selected {
     color: rgb(15, 15, 15);
     font:bold;
-  }
+  } */

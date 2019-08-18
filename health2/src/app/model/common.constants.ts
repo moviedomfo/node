@@ -49,6 +49,8 @@ export  const AppConstants={
      oaut_client_id: environment.oaut_client_id,
      oaut_client_secret:environment.oaut_client_secret, 
      oaut_securityProviderName:environment.oaut_securityProviderName,
+     iddleTimeout_seconds:environment.iddleTimeout_seconds,
+     iddle_waite_Timeout_seconds:environment.iddle_waite_Timeout_seconds,
 }
 
 export const Sexo =

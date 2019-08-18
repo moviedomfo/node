@@ -5,11 +5,11 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            <img [src]="profesionalPhotoUrl" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
-            <p>Cuero Renaudo </p>
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            <p>{{apellidoNombre}} </p>
+            <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
           </div>
         </div>
         <!-- search form -->
@@ -29,7 +29,7 @@
           <li class="header">Gestion</li>
           <li class="active treeview menu-open">
             <a href="#" class="text-bold">
-              <i class="fa fa-dashboard"></i> <span class="text-orange ">Atención (agendas)</span>
+              <i class="fa fa-dashboard"></i> <span>Atención (agendas)</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -73,7 +73,7 @@
        
           <li class="treeview">
               <a href="#" class="text-bold">
-                <i class="fa fa-share "></i> <span class="text-orange ">Administracion</span>
+                <i class="fa fa-share "></i> <span>Administracion</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>

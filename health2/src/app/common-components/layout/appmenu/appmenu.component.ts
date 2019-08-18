@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { pipe } from 'rxjs';
-import { Router } from '@angular/router';
 import { AuthenticationService, ProfesionalService } from '../../../service';
 import { CurrentLogin, ProfesionalFullData, AppConstants } from '../../../model';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { helperFunctions } from '../../../service/helperFunctions';
+
 @Component({
   selector: 'app-appmenu',
   templateUrl: './appmenu.component.html',
@@ -11,11 +12,18 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   encapsulation: ViewEncapsulation.None
 })
 export class AppmenuComponent implements OnInit {
+  public messagesCount:number=11;
   public profesionalPhotoUrl: SafeUrl = '';
+  public isLogged: boolean = false;
+  public apellidoNombre: string = '';
   constructor(
     private authService: AuthenticationService,
     private profService: ProfesionalService,
-    private domSanitizer: DomSanitizer) { }
+    private domSanitizer: DomSanitizer) { 
+
+
+
+    }
 
   ngOnInit() {
     this.authService.logingChange_subject$.subscribe(pipe(
@@ -32,8 +40,11 @@ export class AppmenuComponent implements OnInit {
         this.chk_profDataFront(p);
       }
     ));
-
+  
+    this.chk_logingFront();
   }
+
+
   chk_logingFront() {
     var currentLoging: CurrentLogin = this.authService.getCurrenLoging();
     if (currentLoging) {
@@ -45,7 +56,8 @@ export class AppmenuComponent implements OnInit {
       this.chk_profDataFront(prof);
     } else {
       //console.log('NOT user logged');
-      
+        this.isLogged = false;
+        alert('NOT user logged')
     }
 
 
@@ -55,25 +67,26 @@ export class AppmenuComponent implements OnInit {
   chk_profDataFront(prof: ProfesionalFullData) {
     if (prof) {
 
+      //console.log('user logged');
+      this.isLogged = true;
+      this.apellidoNombre = helperFunctions.getPersonFullName(prof.Profesional.Persona.Nombre,prof.Profesional.Persona.Apellido )
 
       if (prof.Profesional.Persona.Foto !== null) {
 
-
+        //Convert the ArrayBuffer to a typed array 
+        // const TYPED_ARRAY = new Uint8Array(prof.Profesional.Persona.Foto);
+        // // converts the typed array to string of characters
+        // const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
+        // let base64String = btoa(STRING_CHAR);
+        // console.log("Base 64 de la foto:   " + prof.Profesional.Persona.Foto);
         this.profesionalPhotoUrl = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + prof.Profesional.Persona.Foto);
         
       }
       else {
         this.loadDefaultPhoto(prof.Profesional.Persona.Sexo);
       }
-      //si es hombre
-      if(prof.Profesional.Persona.Sexo===0){
-      
-      }
-
-    } else {
-            
-    }
   }
+}
   loadDefaultPhoto(sexo:number) {
 
     let imgUrl=AppConstants.ImagesSrc_Woman;
@@ -82,26 +95,5 @@ export class AppmenuComponent implements OnInit {
     }
     this.profesionalPhotoUrl = imgUrl;
 
-    return;
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", imgUrl, true);
-    let self = this;
-    //Obtain the result as an ArrayBuffer.
-    xhr.responseType = "arraybuffer";
-    xhr.onload = function (s) {
-
-      // Converts arraybuffer to typed array object
-      const TYPED_ARRAY = new Uint8Array(this.response);
-
-      // converts the typed array to string of characters
-      const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
-
-      //converts string of characters to base64String
-      let base64String = btoa(STRING_CHAR);
-
-      //sanitize the url that is passed as a value to image src attrtibute
-      self.profesionalPhotoUrl = self.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
-    }
-    
   }
 }

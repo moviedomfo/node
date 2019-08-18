@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { pipe } from 'rxjs';
-import { Router } from '@angular/router';
 import { AuthenticationService, ProfesionalService } from '../../../service';
 import { CurrentLogin, ProfesionalFullData, AppConstants } from '../../../model';
 import * as moment from 'moment';
@@ -24,7 +22,6 @@ export class AppheaderComponent implements OnInit {
   public profesionalPhotoUrl: SafeUrl = '';
 
   constructor(
-    private router: Router,
     private authService: AuthenticationService,
     private profService: ProfesionalService,
     private domSanitizer: DomSanitizer) {
@@ -49,7 +46,8 @@ export class AppheaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chk_logingFront();}
+    this.chk_logingFront();
+  }
 
 
   chk_logingFront() {

@@ -120,7 +120,7 @@ export class AuthenticationService {
       .set(`client_secret`, AppConstants.oaut_client_secret);
 
 
-    return this.http.post<AuthenticationOAutResponse>(`${AppConstants.AppOAuth_URL}`,
+    return this.http.post<any>(`${AppConstants.AppOAuth_URL}`,
       bodyParams, AppConstants.httpClientOption_form_urlencoded).pipe(
         map(res => {
           var currentLogin: CurrentLogin = new CurrentLogin();
@@ -130,7 +130,13 @@ export class AuthenticationService {
 
           let tokenInfo = jwt_decode(currentLogin.oAuth.access_token); // decode token
 
-          localStorage.setItem('currentLogin', JSON.stringify({ userName: currentLogin.currentUser.UserName, oAuth: res }));
+          currentLogin.currentUser.UserId = tokenInfo.userId;
+          currentLogin.currentUser.UserName = tokenInfo.userName;
+          currentLogin.currentUser.Email = tokenInfo.email;
+          currentLogin.currentUser.Roles = tokenInfo.roles;
+          
+          localStorage.setItem('currentLogin', JSON.stringify(currentLogin));
+          
           this.logingChange_subject$.next(true);
           return res;
         })).pipe(catchError(this.commonService.handleError));
@@ -143,7 +149,7 @@ export class AuthenticationService {
  
   signOut(): void {
     // clear token remove user from local storage to log user out
-
+    alert('signOut');
     localStorage.removeItem('currentLogin');
     this.logingChange_subject$.next(false);
   }

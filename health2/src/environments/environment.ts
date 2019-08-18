@@ -9,7 +9,10 @@ export const environment = {
   AppOAuth_BaseUrl:"http://localhost:51000/", 
   oaut_client_id: 'nodeJSClient',//'reteteosClient',
   oaut_client_secret:'pletorico28',
-  oaut_securityProviderName:'healthTesting'
+  oaut_securityProviderName:'healthTesting',
+  
+  iddleTimeout_seconds:600,//idle timeout of 5 
+  iddle_waite_Timeout_seconds : 5//period of time in seconds. after 10 seconds of inactivity, the user will be considered timed out.
   
   
 };
