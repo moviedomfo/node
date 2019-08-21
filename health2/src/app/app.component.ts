@@ -5,6 +5,7 @@ import { CommonService, AuthenticationService } from "./service/index";
 import { Router } from '@angular/router';
 import { Keepalive } from '@ng-idle/keepalive';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
+import { AppConstants } from './model';
 
 @Component({
     selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent {
     
     public timedOut = false;
     public lastPing?: Date = null;
-    AppConstants: any;
+
 
 
 
@@ -46,9 +47,9 @@ export class AppComponent {
             }
         });
         // sets an idle timeout of 5 seconds, for testing purposes.
-        idle.setIdle(this.AppConstants.iddleTimeout_seconds);
+        idle.setIdle(AppConstants.iddleTimeout_seconds);
         // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
-        idle.setTimeout(this.AppConstants.iddle_waite_Timeout_seconds);
+        idle.setTimeout(AppConstants.iddle_waite_Timeout_seconds);
         // sets the default interrupts, in this case, things like clicks, scrolls, touches to the document
         idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 

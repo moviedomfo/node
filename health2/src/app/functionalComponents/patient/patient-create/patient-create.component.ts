@@ -27,11 +27,6 @@ export class PatientCreateComponent implements OnInit {
     this.currentPatient.Persona = new PersonBE();
     this.currentPatient.Mutuales = [];
     
-    
-
-    
-    
-
     //if is create 
     if (this.isEdit == false) {
 

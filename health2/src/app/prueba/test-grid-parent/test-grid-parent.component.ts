@@ -1,6 +1,4 @@
 import { Component, OnInit, EventEmitter, Input, Output, AfterViewInit, ViewChild } from '@angular/core';
-
-import { Observable } from 'rxjs';
 import { PatientBE, PersonBE, MutualPorPacienteBE, MutualPlanGridView } from '../../model/index';
 import { AggridTestComponent } from './aggrid-test/aggrid-test.component';
 
@@ -15,40 +13,50 @@ export class TestGridParentComponent implements AfterViewInit {
 
   nombre: string;
   id: number;
-  // patientList_Source = new Subject<MutualPorPacienteBE[]>();
-  public patientList: MutualPorPacienteBE[];
-  constructor() { }
 
-  @ViewChild('grillaMutuales',{ static: false }) grilla: AggridTestComponent; 
+// rowData = [
+//     { make: 'Toyota', model: 'Celica', price: 35000 },
+//     { make: 'Ford', model: 'Mondeo', price: 32000 },
+//     { make: 'Porsche', model: 'Boxter', price: 72000 }
+// ];
+  // patientList_Source = new Subject<MutualPorPacienteBE[]>();
+  public rowData: PersonBE[];
+  constructor() { 
+
+
+    
+  }
+
+  @ViewChild('testGrid', { static: false }) grilla: AggridTestComponent;
 
   ngAfterViewInit() {
     // Ahora puedes utilizar el componente hijo
     this.grilla.Refresh();
   }
-  ngOnInit () {
+  ngOnInit() {
     this.fillData();
   }
 
   private fillData() {
 
-    this.patientList = [];
+    this.rowData = [];
 
     // tslint:disable-next-line:prefer-const
     // tslint:disable-next-line:typedef-whitespace
     // tslint:disable-next-line:typedef-whitespace
-    let item : MutualPorPacienteBE = new MutualPorPacienteBE();
-    item.NombreMutual = 'Mutial 1';
-    item.Id = 123211;
-    this.patientList.push(item);
+    let item: PersonBE = new PersonBE();
+    item.Nombre = 'MuMondeo ';
+    item.IdPersona = 123211;
+    this.rowData.push(item);
 
   }
 
   private appendNewItem() {
 
-    var item: MutualPorPacienteBE = new MutualPorPacienteBE();
-    item.NombreMutual = this.nombre;
-    item.Id = this.id;
-    this.patientList.push(item);
+    var item: PersonBE = new PersonBE();
+    item.Nombre = this.nombre;
+    item.IdPersona = this.id;
+    this.rowData.push(item);
 
     this.grilla.Refresh();
   }

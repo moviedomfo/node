@@ -68,6 +68,16 @@ import { TestServiceCallComponent } from './prueba/test-service-call/test-servic
 import { TestService } from './service/test-service';
 import {AuthenticationService} from './service/authentication.service';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { AutocompleteComponent } from './prueba/autocomplete/autocomplete.component';
+import { TestControlesComponent } from './prueba/testcontroles.component';
+import { TestTimesComponent } from './prueba/test-times/test-times.component';
+import { TestGridParentComponent } from './prueba/test-grid-parent/test-grid-parent.component';
+import {TestObservablesChildComponent} from './prueba/test-observables/test-observables-child/test-observables-child.component';
+import {TestObservablesComponent} from './prueba/test-observables/test-observables.component';
+
+
+import { GooglePlaceComponent2 } from './common-components/google-place/google-place.component2';
+import { AggridTestComponent } from './prueba/test-grid-parent/aggrid-test/aggrid-test.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,12 +100,17 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     ProfesionalGridComponent,
     ProfesionalCardComponent,ResourceSchedulingGridComponent, ResourceSchedulingManageComponent, WeekDaysCheckEditComponent, FormsComponent, ChildComponent
     , EmailValidator, IntersectionsComponent, SessionSettingComponent, ValidateEqualDirective, CheckBoxListComponent, ContactComponent,
-    AppsettingComponent, AppmenuComponent, AppfooterComponent, AppheaderComponent, FormControlsComponent, FormControlsAdminLteComponent, TestServiceCallComponent
+    AppsettingComponent, AppmenuComponent, AppfooterComponent, AppheaderComponent, FormControlsComponent, 
+    FormControlsAdminLteComponent, TestServiceCallComponent,
+    AutocompleteComponent ,TestControlesComponent,TestGridParentComponent,AggridTestComponent,
+    TestTimesComponent,GooglePlaceComponent2 
+
   ],
   imports: [
     NgIdleKeepaliveModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
+      //apiKey: 'AIzaSyCOJEnZGUizUc5fQ5BzRDPifKxJuYPRgJA',
+      apiKey: 'AIzaSyAEBn6XjDRlouhZP-nQHSU4equHUeR2wEc',
       libraries: ['places']  })
     ,
     BrowserModule,
@@ -105,13 +120,14 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
       HeaderComponent,
       HeaderGroupComponent
       
+            
   ]),
-  //HealthModule,
+  
   BootstrapModalModule,
   FormsModule,
   HttpClientModule,
-  rutesModule,
-  TestModule
+  rutesModule
+  
   
   ],
    providers: [PersonsService,PatientsService,CommonService,MedicalInsuranceService,ProfesionalService,AuthGuard, TestService,AuthenticationService],

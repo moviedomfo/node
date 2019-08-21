@@ -21,7 +21,8 @@ export class PersonAddressComponent implements AfterContentInit {
   city$: Observable<Param[]>;
   city: Param[];
   
-  constructor( private patientService: PatientsService,
+  constructor( 
+    private patientService: PatientsService,
     private commonService: CommonService) { }
 
   ngAfterContentInit() {}

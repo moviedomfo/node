@@ -10,8 +10,9 @@ import { PlaceBE } from "../../../model/persons.model";
 })
 export class ContactComponent implements OnInit {
 
-  @Input()    public currentPerson: PersonBE;
-  currentPlace:PlaceBE;
+  @Input()  
+  public currentPerson: PersonBE;
+  public currentPlace:PlaceBE;
   constructor() { }
 
 

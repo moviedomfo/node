@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { DateComponent } from "../../../common-components/ag-grid/date.component";
 import { HeaderComponent } from "../../../common-components/ag-grid/header.component";
 import { HeaderGroupComponent } from "../../../common-components/ag-grid/header-group.component";
-import {MutualPorPacienteBE } from '../../../model/index';
+import {PersonBE } from '../../../model/index';
 import { GridOptions } from 'ag-grid-community';
 
 @Component({
@@ -15,7 +15,7 @@ import { GridOptions } from 'ag-grid-community';
 export class AggridTestComponent implements OnInit {
 //  patientList$:Observable<MutualPorPacienteBE[]>;
   @Input()
-  public patientList:MutualPorPacienteBE[];
+  public patientList: PersonBE[];
   
   private columnDefs: any[];
   private gridOptions: GridOptions = <GridOptions>{};
@@ -42,9 +42,9 @@ export class AggridTestComponent implements OnInit {
  ///Permite agregar un elemento a la grilla desde el exterior
  private appendNewItem(nombre:string,id:number) {
 
-     var item: MutualPorPacienteBE = new MutualPorPacienteBE();
-     item.NombreMutual = nombre;
-     item.Id = id;
+     var item: PersonBE = new PersonBE();
+     item.Nombre = nombre;
+     item.IdPersona = id;
      this.patientList.push(item);
      
 
@@ -59,9 +59,9 @@ export class AggridTestComponent implements OnInit {
  
   private createColumnDefs() {
     this.columnDefs = [
-        { headerName: "Mutual", field: "NombreMutual", width: 150, pinned: true, filter: 'text' },
-        { headerName: "Id", field: "Id", width: 150, pinned: true, filter: 'text' },
-        { headerName: "Activa", field: "IsActive", width: 100, pinned: true }
+        { headerName: "Nombre", field: "Nombre", width: 150, pinned: true, filter: 'text' },
+        { headerName: "IdPersona", field: "IdPersona", width: 150, pinned: true, filter: 'text' },
+        { headerName: "NroDocumento", field: "NroDocumento", width: 100,  filter: 'text' }
     ];
 
 

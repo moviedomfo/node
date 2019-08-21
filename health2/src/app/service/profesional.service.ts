@@ -104,14 +104,14 @@ export class ProfesionalService {
       ProfesionalId: profesionalId,
       HealthInstitutionId: healthInstitutionId,
     };
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("DesvincularProfesionalService", bussinesData);
 
 
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
-      map(result => {
+    return this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+      map(res => {
 
-        //let result: Result = JSON.parse(res.toString());
+        let result :Result= JSON.parse(res.Result) as Result;
 
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -135,10 +135,11 @@ export class ProfesionalService {
       SoloAsociarProfesionalAinst:soloAsociarProfesionalAinst
     };
 
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("CrearProfesionalService", bussinesData);
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
-      map(result => {
-
+    return this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`, executeReq,{ headers: outhHeader }).pipe(
+      map(res => {
+        let result :Result= JSON.parse(res.Result) as Result;
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
@@ -158,11 +159,11 @@ export class ProfesionalService {
    
     };
 
-   
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("UpdateProfesionalService", bussinesData);
-    return this.http.post<Result>(AppConstants.AppExecuteAPI_URL,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
-      map(result => {
-        //let result: Result = JSON.parse(res.toString());
+    return this.http.post<any>(AppConstants.AppExecuteAPI_URL,executeReq,{ headers: outhHeader }).pipe(
+      map(res => {
+        let result :Result= JSON.parse(res.Result) as Result;
 
         if (result.Error) {
           throw Observable.throw(result.Error);
@@ -186,13 +187,12 @@ export class ProfesionalService {
       HealthInstId: healthInstitutionId
 
     };
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesGridService", bussinesData);
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
-      map(result => {
+    return this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+      map(res => {
 
-        //let result: Result = JSON.parse(res.toString());
-        
+        let result :Result= JSON.parse(res.Result) as Result;
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
@@ -218,14 +218,14 @@ export class ProfesionalService {
       HealthInstId: healthInstitutionId
       
     };
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesService", bussinesData);
 
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
-      map(result => {
+    return this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+      map(res => {
 
         //let result: Result = JSON.parse(res.toString());
-
+        let result :Result= JSON.parse(res.Result) as Result;
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
@@ -250,18 +250,19 @@ export class ProfesionalService {
       
     };
 
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("RetriveProfesionalesGridService", bussinesData);
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
-      map(result => {
-
+    return this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+      map(res => {
+      
+        let result :Result= JSON.parse(res.Result) as Result;
         //let result: Result = JSON.parse(res.toString());
-
+        console.log(result);
         if (result.Error) {
           throw Observable.throw(result.Error);
         }
          var ProfesionalesGridBELis : ProfesionalesGridBE[] = result.BusinessData as ProfesionalesGridBE[];
-        
+      
         return ProfesionalesGridBELis;
       })).pipe(catchError(this.commonService.handleError));
   }
@@ -271,12 +272,13 @@ export class ProfesionalService {
     var bussinesData = {
       UserName: username
     };
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("SearchAllRolesService", bussinesData);
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
-      map(result => {
+    return this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+      map(res => {
      
-      //let result: Result= JSON.parse(res.toString());
       
+      let result :Result= JSON.parse(res.Result) as Result;
       if (result.Error) {
         throw  Observable.throw(result.Error);
       }
@@ -293,12 +295,12 @@ export class ProfesionalService {
       UserName: username
     };
 
-
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("ValidateUserExistService", bussinesData);
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
-    map(result => {
+    return this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+    map(res => {
      
-
+      let result :Result= JSON.parse(res.Result) as Result;
       if (result.Error) {
         throw  Observable.throw(result.Error);
       }
@@ -317,10 +319,11 @@ export class ProfesionalService {
       NewPassword: password
     };
 
+    let outhHeader = this.commonService.get_AuthorizedHeader();
     let executeReq=  this.commonService.generete_post_Params("ResetUserPasswordService", bussinesData);
-    return this.http.post<Result>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,AppConstants.httpClientOption_contenttype_json).pipe(
-    map(result=> {
-      
+    return this.http.post<any>(`${AppConstants.AppExecuteAPI_URL}`,executeReq,{ headers: outhHeader }).pipe(
+    map(res=> {
+    let result :Result= JSON.parse(res.Result) as Result;  
       if (result.Error) {
         throw  Observable.throw(result.Error);
       }

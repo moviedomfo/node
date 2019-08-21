@@ -149,7 +149,7 @@ export class AuthenticationService {
  
   signOut(): void {
     // clear token remove user from local storage to log user out
-    alert('signOut');
+    
     localStorage.removeItem('currentLogin');
     this.logingChange_subject$.next(false);
   }

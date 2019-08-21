@@ -1,3 +1,22 @@
-<p>
-  autocomplete works!
-</p>
+<h1>
+  Google Places Autocomplete
+</h1>
+<div>
+  <h2>Home Address:</h2>
+
+  <p>
+    <GooglePlaceComponent2 (setAddress)="getAddress($event)" adressType="geocode"></GooglePlaceComponent2>
+  </p>
+
+  <b>Address: </b> {{formattedAddress}}
+  <br><br>
+  <h2>Office Address:</h2>
+
+  <p>
+    <GooglePlaceComponent2 (setAddress)="getEstablishmentAddress($event)" adressType="establishment"></GooglePlaceComponent2>
+  </p>
+  <b>Address:</b> {{formattedEstablishmentAddress}}
+  <br>
+  <b>Phone:</b> {{phone}}
+
+</div>

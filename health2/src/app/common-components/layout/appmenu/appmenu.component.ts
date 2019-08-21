@@ -57,7 +57,7 @@ export class AppmenuComponent implements OnInit {
     } else {
       //console.log('NOT user logged');
         this.isLogged = false;
-        alert('NOT user logged')
+     //   alert('NOT user logged')
     }
 
 

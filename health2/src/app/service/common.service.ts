@@ -57,20 +57,7 @@ export class CommonService {
       })).pipe(catchError(this.handleError));
   }
 
-  // serarPlaces_google_place_api(input: string) {
-  //   //console.log('Ejecutando serarPlaces_google_place_api()');
-  //   var api_url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=[input]&types=geocode&key=AIzaSyAEBn6XjDRlouhZP-nQHSU4equHUeR2wEc';
-
-  //   api_url = api_url.replace('[input]', input);
-  //   api_url = api_url.replace('[input]', input);
-
-  //   return this.http.get(`${api_url}`,AppConstants.httpClientOption_contenttype_json).pipe(
-  //      map(result => {
-  //       //console.log(JSON.stringify(places));
-  //       //let places = JSON.parse(result.json());
-  //       let places = result;
-  //     }));
-  // }
+  
   
   /**
    * @idTipoParametro : Nombre de tabla
@@ -229,14 +216,39 @@ export class CommonService {
   //Retorna un HttpHeaders con CORS y 'Authorization': "Bearer + TOKEN"
   public get_AuthorizedHeader(): HttpHeaders {
     let currentLogin: CurrentLogin = JSON.parse(localStorage.getItem('currentLogin'));
-    let headers = new HttpHeaders({ 'Authorization': "Bearer " + currentLogin.oAuth.access_token }).set('securityProviderName',AppConstants.oaut_securityProviderName);
-    headers.append('Access-Control-Allow-Methods', '*');
-    headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-    headers.append('Access-Control-Allow-Origin', '*');
-    
-    return headers;
-  }
+    if(currentLogin){
+        let headers = new HttpHeaders({ 'Authorization': "Bearer " + currentLogin.oAuth.access_token }).set('securityProviderName',AppConstants.oaut_securityProviderName);
+        headers.append('Access-Control-Allow-Methods', '*');
+        headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+        headers.append('Access-Control-Allow-Origin', '*');
+        return headers;
+    }
 
+  
+  }
+  public get_AuthorizedHeader$(): Observable<HttpHeaders> {
+
+    const obs = Observable.create(()=>{
+      let currentLogin: CurrentLogin = JSON.parse(localStorage.getItem('currentLogin'));
+      if(currentLogin){
+          let headers = new HttpHeaders({ 'Authorization': "Bearer " + currentLogin.oAuth.access_token }).set('securityProviderName',AppConstants.oaut_securityProviderName);
+          headers.append('Access-Control-Allow-Methods', '*');
+          headers.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+          headers.append('Access-Control-Allow-Origin', '*');
+          return headers;
+  
+         
+      }else{
+        let  er:ServiceError = new   ServiceError();
+        er.Message = "Not user authenticattion, the user needs to supply credentials";
+        er.Status = 401;
+        return throwError(er);
+      }
+    });
+   
+    return obs;
+  
+  }
   public handleErrorService(serviceError: ServiceError) {
     if (serviceError) {
       alert("Se encontraron errores " + serviceError.Message);

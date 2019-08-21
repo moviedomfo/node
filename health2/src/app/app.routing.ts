@@ -24,32 +24,34 @@ import { PatientGridComponent } from "./functionalComponents/patient/patient-gri
 import { FormControlsComponent } from "./prueba/forms/form-controls/form-controls.component";
 import { FormControlsAdminLteComponent } from "./prueba/forms/form-controls-admin-lte/form-controls-admin-lte.component";
 import { TestServiceCallComponent } from './prueba/test-service-call/test-service-call.component';
+import { AutocompleteComponent } from './prueba/autocomplete/autocomplete.component';
  
 
 
 const appRoutes: Routes = [
    { path: 'login', component: LoginComponent },
    //  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'personsGrid', component: PersonGridComponent },
-   
-
-   { path: 'patientEdit/:id', component: PatientMangerComponent },
-   { path: 'patientCreate', component: PatientMangerComponent },
-   { path: 'patientList', component: PatientGridComponent },
-   
-    { path: 'testControles', component: TestControlesComponent },
+    { path: 'personsGrid', component: PersonGridComponent ,canActivate: [AuthGuard]},
+   { path: 'patientEdit/:id', component: PatientMangerComponent,canActivate: [AuthGuard] },
+   { path: 'patientCreate', component: PatientMangerComponent ,canActivate: [AuthGuard]},
+   { path: 'patientList', component: PatientGridComponent,canActivate: [AuthGuard] },
     
-    { path: 'profesionalCreate', component: ProfesionalManageComponent },
-    { path: 'profesionalEdit/:id', component: ProfesionalManageComponent },
-    { path: 'profesionalGrid', component: ProfesionalGridComponent },
-
-    { path: 'testTimes', component: TestTimesComponent },
+    { path: 'profesionalCreate', component: ProfesionalManageComponent,canActivate: [AuthGuard] },
+    { path: 'profesionalEdit/:id', component: ProfesionalManageComponent ,canActivate: [AuthGuard]},
+    { path: 'profesionalGrid', component: ProfesionalGridComponent ,canActivate: [AuthGuard]},
+    
+    
+    { path: 'testControles', component: TestControlesComponent },
+   { path: 'testTimes', component: TestTimesComponent },
    { path: 'testFormsValidations', component: FormsComponent },
    { path: 'testFormsControls', component: FormControlsComponent },
     { path: 'TestIntersection', component: IntersectionsComponent },
     { path: 'testFormsControlsAdminLTE', component: FormControlsAdminLteComponent },
      { path: 'CheckBoxList', component: CheckBoxListComponent },
      { path: 'testServiceCalls', component: TestServiceCallComponent },
+     { path: 'testGoogleMaps', component: AutocompleteComponent },
+     { path: 'testGridParent', component: TestGridParentComponent },
+     
    { path: '**', component: PageNotFoundComponent }
 
 ];
