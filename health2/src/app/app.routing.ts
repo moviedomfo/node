@@ -25,6 +25,7 @@ import { FormControlsComponent } from "./prueba/forms/form-controls/form-control
 import { FormControlsAdminLteComponent } from "./prueba/forms/form-controls-admin-lte/form-controls-admin-lte.component";
 import { TestServiceCallComponent } from './prueba/test-service-call/test-service-call.component';
 import { AutocompleteComponent } from './prueba/autocomplete/autocomplete.component';
+import { AngGridTestBasicComponent } from './prueba/test-grid-parent/ang-grid-test-basic/ang-grid-test-basic.component';
  
 
 
@@ -50,8 +51,9 @@ const appRoutes: Routes = [
      { path: 'CheckBoxList', component: CheckBoxListComponent },
      { path: 'testServiceCalls', component: TestServiceCallComponent },
      { path: 'testGoogleMaps', component: AutocompleteComponent },
+     { path: 'AngGridTestBasic', component: AngGridTestBasicComponent },
      { path: 'testGridParent', component: TestGridParentComponent },
-     
+          
    { path: '**', component: PageNotFoundComponent }
 
 ];

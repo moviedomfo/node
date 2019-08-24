@@ -1,0 +1,17 @@
+
+<button class="btn btn-default"  type="button" (click)='addItem()'>add imtem</button>
+
+
+<ag-grid-angular #agGridTest
+    style="width: 500px; height: 500px;" 
+    class="ag-theme-balham"
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs"
+    
+    >
+</ag-grid-angular>
+
+
+<div>
+   {{rowData | json}}
+</div>

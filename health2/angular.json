@@ -7,8 +7,13 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
+      
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -26,7 +31,7 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "src/app/common-components/ag-styles/ag-grid.css",
               "src/app/common-components/ag-styles/theme-fresh.css",
-              "src/styles.css",
+              "src/styles.scss",
               "src/assets/bower_components/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/bower_components/font-awesome/css/font-awesome.min.css",
               "src/assets/bower_components/Ionicons/css/ionicons.min.css",
@@ -105,7 +110,7 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "src/app/common-components/ag-styles/ag-grid.css",
               "src/app/common-components/ag-styles/theme-fresh.css",
-              "src/styles.css",
+              "src/styles.scss",
               "src/assets/bower_components/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/bower_components/font-awesome/css/font-awesome.min.css",
               "src/assets/bower_components/Ionicons/css/ionicons.min.css",

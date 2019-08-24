@@ -78,6 +78,7 @@ import {TestObservablesComponent} from './prueba/test-observables/test-observabl
 
 import { GooglePlaceComponent2 } from './common-components/google-place/google-place.component2';
 import { AggridTestComponent } from './prueba/test-grid-parent/aggrid-test/aggrid-test.component';
+import { AngGridTestBasicComponent } from './prueba/test-grid-parent/ang-grid-test-basic/ang-grid-test-basic.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,7 +104,7 @@ import { AggridTestComponent } from './prueba/test-grid-parent/aggrid-test/aggri
     AppsettingComponent, AppmenuComponent, AppfooterComponent, AppheaderComponent, FormControlsComponent, 
     FormControlsAdminLteComponent, TestServiceCallComponent,
     AutocompleteComponent ,TestControlesComponent,TestGridParentComponent,AggridTestComponent,
-    TestTimesComponent,GooglePlaceComponent2 
+    TestTimesComponent,GooglePlaceComponent2, AngGridTestBasicComponent 
 
   ],
   imports: [

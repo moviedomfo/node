@@ -5,24 +5,20 @@ import { AggridTestComponent } from './aggrid-test/aggrid-test.component';
 
 @Component({
   selector: 'app-test-grid-parent',
-  templateUrl: './test-grid-parent.component.html',
-  styleUrls: ['./test-grid-parent.component.css']
+  templateUrl: './test-grid-parent.component.html'
+
 })
 
 export class TestGridParentComponent implements AfterViewInit {
 
-  nombre: string;
-  id: number;
+  nombre: string = "Mahatma Gandi";
+  id: number = 23423432;
 
-// rowData = [
-//     { make: 'Toyota', model: 'Celica', price: 35000 },
-//     { make: 'Ford', model: 'Mondeo', price: 32000 },
-//     { make: 'Porsche', model: 'Boxter', price: 72000 }
-// ];
+
   // patientList_Source = new Subject<MutualPorPacienteBE[]>();
-  public rowData: PersonBE[];
+  //public rowData: PersonBE[];
   constructor() { 
-
+//    this.rowData = [];
 
     
   }
@@ -34,20 +30,21 @@ export class TestGridParentComponent implements AfterViewInit {
     this.grilla.Refresh();
   }
   ngOnInit() {
-    this.fillData();
+    //this.fillData();
   }
 
   private fillData() {
 
-    this.rowData = [];
+    //this.rowData = [];
 
     // tslint:disable-next-line:prefer-const
     // tslint:disable-next-line:typedef-whitespace
     // tslint:disable-next-line:typedef-whitespace
     let item: PersonBE = new PersonBE();
-    item.Nombre = 'MuMondeo ';
+    item.Nombre = 'Mondeo ';
     item.IdPersona = 123211;
-    this.rowData.push(item);
+    
+    
 
   }
 
@@ -56,8 +53,8 @@ export class TestGridParentComponent implements AfterViewInit {
     var item: PersonBE = new PersonBE();
     item.Nombre = this.nombre;
     item.IdPersona = this.id;
-    this.rowData.push(item);
-
+    
+    this.grilla.appendNewItem(this.nombre,this.id);
     this.grilla.Refresh();
   }
 
