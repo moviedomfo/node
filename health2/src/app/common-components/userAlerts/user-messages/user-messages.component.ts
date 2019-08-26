@@ -34,4 +34,7 @@ export class UserMessagesComponent implements OnInit {
     this.taskCount = this.tasks.length;
  }
 
+ onSelect(item){
+   alert(item.Message);
+ }
 }
