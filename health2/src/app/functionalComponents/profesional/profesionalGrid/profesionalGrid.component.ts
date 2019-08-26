@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 
 
 // rich grid and rich grid declarative
-import { DateComponent } from "../../../common-components/ag-grid/date.component";
-import { HeaderComponent } from "../../../common-components/ag-grid/header.component";
-import { HeaderGroupComponent } from "../../../common-components/ag-grid/header-group.component";
+import { DateComponent } from "../../../common-components/controls/ag-grid/date.component";
+import { HeaderComponent } from "../../../common-components/controls/ag-grid/header.component";
+import { HeaderGroupComponent } from "../../../common-components/controls/ag-grid/header-group.component";
 import { Router, CanActivate, CanDeactivate } from '@angular/router';
 import { GridOptions } from 'ag-grid-community';
 

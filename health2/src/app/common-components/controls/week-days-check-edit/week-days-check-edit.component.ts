@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { ResourceSchedulingBE } from "../../model/profesional.model";
-import { chkDays } from "../../model/common.model";
+import { ResourceSchedulingBE } from "../../../model/profesional.model";
+import { chkDays } from "../../../model/common.model";
 
 @Component({
   selector: 'app-week-days-check-edit',

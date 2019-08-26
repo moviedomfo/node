@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
 import { MutualBE ,MutualPlanGridView} from '../../../model/index';
 import { PatientsService, CommonService, MedicalInsuranceService } from '../../../service/index';
 // rich grid and rich grid declarative
-import { DateComponent } from "../../../common-components/ag-grid/date.component";
-import { HeaderComponent } from "../../../common-components/ag-grid/header.component";
-import { HeaderGroupComponent } from "../../../common-components/ag-grid/header-group.component";
+import { DateComponent } from "../../../common-components/controls/ag-grid/date.component";
+import { HeaderComponent } from "../../../common-components/controls/ag-grid/header.component";
+import { HeaderGroupComponent } from "../../../common-components/controls/ag-grid/header-group.component";
 
 import { ServiceError } from '../../../model/common.model';
 import { GridOptions } from 'ag-grid-community';

@@ -5,12 +5,12 @@ import { CurrentLogin, ProfesionalFullData, AppConstants } from '../../../model'
 import * as moment from 'moment';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { helperFunctions } from '../../../service/helperFunctions';
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-appheader',
   templateUrl: './appheader.component.html',
-  styleUrls: ['./appheader.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class AppheaderComponent implements OnInit {
@@ -22,42 +22,47 @@ export class AppheaderComponent implements OnInit {
   public profesionalPhotoUrl: SafeUrl = '';
 
   constructor(
+    private router: Router,
     private authService: AuthenticationService,
     private profService: ProfesionalService,
     private domSanitizer: DomSanitizer) {
 
-
+    //subscriptions to loging changes
     this.authService.logingChange_subject$.subscribe(pipe(
       res => {
         //this.isLogged= res as boolean;
         this.chk_logingFront();
       }
     ));
-
-  this.profService.currentProfesionalChange_subject$.subscribe(pipe(
+    //subscriptions to profesional data chenges
+    this.profService.currentProfesionalChange_subject$.subscribe(pipe(
       res => {
-        let p: ProfesionalFullData= res as ProfesionalFullData;
-       
+        let p: ProfesionalFullData = res as ProfesionalFullData;
+
         this.chk_profDataFront(p);
       }
     ));
 
-    
+
   }
 
   ngOnInit() {
     this.chk_logingFront();
   }
 
-
+  onBtnLogin_click(){
+      
+      this.router.navigate(['/login']);
+    }
+  
   chk_logingFront() {
     var currentLoging: CurrentLogin = this.authService.getCurrenLoging();
     if (currentLoging) {
-      
+
       //console.log('user logged');
       //this.isLogged = true;
       this.userName = currentLoging.currentUser.UserName;
-      let prof : ProfesionalFullData = this.authService.get_currentProfesionalData();
+      let prof: ProfesionalFullData = this.authService.get_currentProfesionalData();
       this.chk_profDataFront(prof);
     } else {
       //console.log('NOT user logged');
@@ -74,8 +79,8 @@ export class AppheaderComponent implements OnInit {
       //console.log('user logged');
       this.isLogged = true;
       //this.apellidoNombre = prof.Profesional.Persona.ApellidoNombre();
-      
-      this.apellidoNombre = helperFunctions.getPersonFullName(prof.Profesional.Persona.Nombre,prof.Profesional.Persona.Apellido )
+
+      this.apellidoNombre = helperFunctions.getPersonFullName(prof.Profesional.Persona.Nombre, prof.Profesional.Persona.Apellido)
       this.nombreEspecialidad = prof.Profesional.NombreEspecialidad;
       var sinceDate = moment(prof.Profesional.FechaAlta).format('MMMM Do YYYY, h:mm:ss a');
       var since = moment(prof.Profesional.FechaAlta, "YYYYMMDD").fromNow();
@@ -90,14 +95,14 @@ export class AppheaderComponent implements OnInit {
         // let base64String = btoa(STRING_CHAR);
         // console.log("Base 64 de la foto:   " + prof.Profesional.Persona.Foto);
         this.profesionalPhotoUrl = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + prof.Profesional.Persona.Foto);
-        
+
       }
       else {
         this.loadDefaultPhoto(prof.Profesional.Persona.Sexo);
       }
       //si es hombre
-      if(prof.Profesional.Persona.Sexo===0){
-      
+      if (prof.Profesional.Persona.Sexo === 0) {
+
       }
 
     } else {
@@ -106,35 +111,12 @@ export class AppheaderComponent implements OnInit {
     }
   }
 
+  
+  loadDefaultPhoto(sexo: number) {
 
-  loadDefaultPhoto(sexo:number) {
-
-    let imgUrl=AppConstants.ImagesSrc_Woman;
-    if(sexo===0){
-      imgUrl = AppConstants.ImagesSrc_Man;
+    this.profesionalPhotoUrl = AppConstants.ImagesSrc_Woman;
+    if (sexo === 0) {
+      this.profesionalPhotoUrl = AppConstants.ImagesSrc_Man;
     }
-    this.profesionalPhotoUrl = imgUrl;
-
-    return;
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", imgUrl, true);
-    let self = this;
-    //Obtain the result as an ArrayBuffer.
-    xhr.responseType = "arraybuffer";
-    xhr.onload = function (s) {
-
-      // Converts arraybuffer to typed array object
-      const TYPED_ARRAY = new Uint8Array(this.response);
-
-      // converts the typed array to string of characters
-      const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
-
-      //converts string of characters to base64String
-      let base64String = btoa(STRING_CHAR);
-
-      //sanitize the url that is passed as a value to image src attrtibute
-      self.profesionalPhotoUrl = self.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + base64String);
-    }
-    
   }
 }

@@ -4,7 +4,7 @@ import { User, AppConstants, GetProfesionalRes, ProfesionalFullData } from '../.
 import { AuthenticationService, ProfesionalService } from './../../service/index';
 import { CurrentLogin, ServiceError, AuthenticationOAutResponse } from '../../model/common.model';
 import { Observable, forkJoin } from 'rxjs';
-import { AppComponent } from '../../app.component';
+
 
 @Component({
   templateUrl: 'login.component.html',

@@ -13,7 +13,7 @@ import { ModalDialogComponent } from '../../../common-components/modal-dialog/mo
 import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
 import { ResourceSchedulingManageComponent } from "../resource-scheduling-manage/resource-scheduling-manage.component";
 import { ResourceSchedulingGridComponent } from "../resource-scheduling-grid/resource-scheduling-grid.component";
-import { WeekDaysCheckEditComponent } from "../../../common-components/week-days-check-edit/week-days-check-edit.component";
+import { WeekDaysCheckEditComponent } from "../../../common-components/controls/week-days-check-edit/week-days-check-edit.component";
 import { SessionSettingComponent } from "../../security/sessionSetting.component";
 import { MotivoConsultaEnum } from "../../../model/common.constants";
 

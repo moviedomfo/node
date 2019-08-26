@@ -26,12 +26,13 @@ import { FormControlsAdminLteComponent } from "./prueba/forms/form-controls-admi
 import { TestServiceCallComponent } from './prueba/test-service-call/test-service-call.component';
 import { AutocompleteComponent } from './prueba/autocomplete/autocomplete.component';
 import { AngGridTestBasicComponent } from './prueba/test-grid-parent/ang-grid-test-basic/ang-grid-test-basic.component';
+import { HomeComponent } from './common-components/home/home.component';
  
 
 
 const appRoutes: Routes = [
    { path: 'login', component: LoginComponent },
-   //  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+     { path: '', component: HomeComponent },
     { path: 'personsGrid', component: PersonGridComponent ,canActivate: [AuthGuard]},
    { path: 'patientEdit/:id', component: PatientMangerComponent,canActivate: [AuthGuard] },
    { path: 'patientCreate', component: PatientMangerComponent ,canActivate: [AuthGuard]},

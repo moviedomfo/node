@@ -12,20 +12,17 @@ import { helperFunctions } from '../../../service/helperFunctions';
   encapsulation: ViewEncapsulation.None
 })
 export class AppmenuComponent implements OnInit {
-  public messagesCount:number=11;
+  public messagesCount: number = 11;
   public profesionalPhotoUrl: SafeUrl = '';
   public isLogged: boolean = false;
   public apellidoNombre: string = '';
   constructor(
     private authService: AuthenticationService,
     private profService: ProfesionalService,
-    private domSanitizer: DomSanitizer) { 
-
-
-
-    }
+    private domSanitizer: DomSanitizer) {  }
 
   ngOnInit() {
+
     this.authService.logingChange_subject$.subscribe(pipe(
       res => {
         //this.isLogged= res as boolean;
@@ -33,31 +30,32 @@ export class AppmenuComponent implements OnInit {
       }
     ));
 
-  this.profService.currentProfesionalChange_subject$.subscribe(pipe(
+    this.profService.currentProfesionalChange_subject$.subscribe(pipe(
       res => {
-        let p: ProfesionalFullData= res as ProfesionalFullData;
-       
+        let p: ProfesionalFullData = res as ProfesionalFullData;
+
         this.chk_profDataFront(p);
       }
     ));
-  
+
     this.chk_logingFront();
   }
 
 
   chk_logingFront() {
     var currentLoging: CurrentLogin = this.authService.getCurrenLoging();
+    
     if (currentLoging) {
-      
+
       //console.log('user logged');
       //this.isLogged = true;
-      
-      let prof : ProfesionalFullData = this.authService.get_currentProfesionalData();
+
+      let prof: ProfesionalFullData = this.authService.get_currentProfesionalData();
       this.chk_profDataFront(prof);
     } else {
       //console.log('NOT user logged');
-        this.isLogged = false;
-     //   alert('NOT user logged')
+      this.isLogged = false;
+      //   alert('NOT user logged')
     }
 
 
@@ -66,34 +64,25 @@ export class AppmenuComponent implements OnInit {
 
   chk_profDataFront(prof: ProfesionalFullData) {
     if (prof) {
-
       //console.log('user logged');
       this.isLogged = true;
-      this.apellidoNombre = helperFunctions.getPersonFullName(prof.Profesional.Persona.Nombre,prof.Profesional.Persona.Apellido )
+      this.apellidoNombre = helperFunctions.getPersonFullName(prof.Profesional.Persona.Nombre, prof.Profesional.Persona.Apellido)
 
       if (prof.Profesional.Persona.Foto !== null) {
-
-        //Convert the ArrayBuffer to a typed array 
-        // const TYPED_ARRAY = new Uint8Array(prof.Profesional.Persona.Foto);
-        // // converts the typed array to string of characters
-        // const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
-        // let base64String = btoa(STRING_CHAR);
-        // console.log("Base 64 de la foto:   " + prof.Profesional.Persona.Foto);
         this.profesionalPhotoUrl = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + prof.Profesional.Persona.Foto);
-        
       }
       else {
         this.loadDefaultPhoto(prof.Profesional.Persona.Sexo);
       }
-  }
-}
-  loadDefaultPhoto(sexo:number) {
-
-    let imgUrl=AppConstants.ImagesSrc_Woman;
-    if(sexo===0){
-      imgUrl = AppConstants.ImagesSrc_Man;
     }
-    this.profesionalPhotoUrl = imgUrl;
-
   }
+
+  loadDefaultPhoto(sexo: number) {
+
+    this.profesionalPhotoUrl = AppConstants.ImagesSrc_Woman;
+    if (sexo === 0) {
+      this.profesionalPhotoUrl = AppConstants.ImagesSrc_Man;
+    }
+  }
+
 }

@@ -321,6 +321,7 @@ export class User {
         return roles;
     }
 
+  
 }
 
 export class Rol {
@@ -357,6 +358,26 @@ export class HealthInstitutionBE {
     public HealthInstitutionIdParent?: string;
 }
 
+export class UserTask {
+    constructor (options?: {taskId:number; tittle: string; completedPercent: number;descripcion:string;createdDate:Date,priority:string}) {
+        if (options) {
+            this.taskId = options.taskId;
+            this.tittle = options.tittle;
+            this.descripcion = options.descripcion;
+            this.completedPercent = options.completedPercent;
+            this.createdDate = options.createdDate;
+            this.priority = options.priority;
+            
+            
+        }
+    }
+    taskId:number;
+    tittle: string;
+    descripcion: string;
+    completedPercent: number;
+    createdDate: Date;
+    priority: string;
+}
 
 export class HelperBE {
     public getFullName(name: string, lastName: string) {

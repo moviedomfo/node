@@ -2,7 +2,7 @@ import { Component,  ViewEncapsulation, Input ,Output,EventEmitter, AfterViewIni
 import { ResourceSchedulingBE, TimespamView } from "../../../model/profesional.model";
 import { ServiceError, TimeSpan } from "../../../model/common.model";
 import { AppConstants } from "../../../model/common.constants";
-import { WeekDaysCheckEditComponent } from "../../../common-components/week-days-check-edit/week-days-check-edit.component";
+import { WeekDaysCheckEditComponent } from "../../../common-components/controls/week-days-check-edit/week-days-check-edit.component";
 import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({
