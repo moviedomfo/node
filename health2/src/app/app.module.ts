@@ -80,7 +80,8 @@ import { GooglePlaceComponent2 } from './common-components/google-place/google-p
 import { AggridTestComponent } from './prueba/test-grid-parent/aggrid-test/aggrid-test.component';
 import { AngGridTestBasicComponent } from './prueba/test-grid-parent/ang-grid-test-basic/ang-grid-test-basic.component';
 import { HomeComponent } from './common-components/home/home.component';
-import { UserTasksComponent } from './common-components/user-tasks/user-tasks.component';
+import { UserTasksComponent } from './common-components/userAlerts/user-tasks/user-tasks.component';
+import { UserMessagesComponent } from './common-components/userAlerts/user-messages/user-messages.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -107,7 +108,7 @@ import { UserTasksComponent } from './common-components/user-tasks/user-tasks.co
     AppsettingComponent, AppmenuComponent, AppfooterComponent, AppheaderComponent, FormControlsComponent,
     FormControlsAdminLteComponent, TestServiceCallComponent,
     AutocompleteComponent, TestControlesComponent, TestGridParentComponent, AggridTestComponent,
-    TestTimesComponent, GooglePlaceComponent2, AngGridTestBasicComponent, HomeComponent, UserTasksComponent
+    TestTimesComponent, GooglePlaceComponent2, AngGridTestBasicComponent, HomeComponent, UserMessagesComponent,UserTasksComponent
 
   ],
   imports: [

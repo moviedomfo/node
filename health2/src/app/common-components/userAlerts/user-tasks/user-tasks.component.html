@@ -10,7 +10,7 @@
           <!-- inner menu: contains the actual data -->
           <ul class="menu">
             <!-- Task item -->
-            <li *ngFor="let item of tasks" (click)="onSelect(hero)">
+            <li *ngFor="let item of tasks" (click)="onSelect(item)">
             <!-- <li> -->
               <a href="#">
                 <h3>
@@ -24,11 +24,13 @@
                              progress-bar-green 
                              progress-bar-red
                             progress-bar-yellow
+                            [style.width.px]="{{item.completedPercent}}"
                    -->
-                  <div class="progress-bar progress-bar-aqua" [style.width.px]="{{item.completedPercent}}"  role="progressbar"
-                       aria-valuenow="{{item.completedPercent}}" aria-valuemin="0" aria-valuemax="100">
+                  
+               <div class="progress-bar progress-bar-aqua" [style.width.px]="item.completedPercent"  role="progressbar" 
+                      aria-valuemin="0" [attr.aria-valuemax] = "item.completedPercent" >
                     <span class="sr-only">{{item.completedPercent}}% completado</span>
-                  </div>
+                  </div> 
                 </div>
               </a>
             </li>

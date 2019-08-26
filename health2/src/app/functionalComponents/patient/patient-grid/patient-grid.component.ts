@@ -16,8 +16,7 @@ import { GridOptions } from 'ag-grid-community';
 
 @Component({
   selector: 'app-patient-grid',
-  templateUrl: './patient-grid.component.html',
-  styleUrls: ['../../../common-components/ag-grid/rich-grid.css', '../../../common-components/ag-grid/proficiency-renderer.css'],
+  templateUrl: './patient-grid.component.html'
 })
 export class PatientGridComponent implements OnInit {
   globalError: ServiceError;
@@ -41,12 +40,12 @@ export class PatientGridComponent implements OnInit {
     // we pass an empty gridOptions in, so we can grab the api out
      this.gridOptions = <GridOptions>{};
      this.gridOptions.dateComponentFramework = DateComponent;
-     this.gridOptions.defaultColDef = {
-         headerComponentFramework : <{new():HeaderComponent}>HeaderComponent,
-         headerComponentParams : {
-             menuIcon: 'fa-bars'
-         }
-     }
+    //  this.gridOptions.defaultColDef = {
+    //      headerComponentFramework : <{new():HeaderComponent}>HeaderComponent,
+    //      headerComponentParams : {
+    //          menuIcon: 'fa-bars'
+    //      }
+     //}
      this.gridOptions.getContextMenuItems = this.getContextMenuItems.bind(this);
      this.gridOptions.floatingFilter = true;
 
