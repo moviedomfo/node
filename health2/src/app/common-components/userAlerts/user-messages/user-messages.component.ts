@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserTask } from '../../../model';
+import { UserTask, UserMessage } from '../../../model';
 import * as moment from 'moment';
 import { Duration } from "moment";
 @Component({
@@ -10,13 +10,14 @@ import { Duration } from "moment";
 export class UserMessagesComponent implements OnInit {
   private  d=new Date();
   //public tasks:UserTask[];
-  public taskCount:number;
+  public messagesCount:number;
+
   
-  
-  tasks = [
-    new UserTask({taskId:0, tittle : "Realiza examen físico al paciente Moreno",  completedPercent : 50,descripcion:'', createdDate: this.d,priority : "low"}),
-    new UserTask({taskId:1, tittle : "Planifica el estudio del paciente y determina el tratamiento a seguir.",  completedPercent : 50,descripcion:'', createdDate: this.d,priority : "medium"}),
-    new UserTask({taskId:2, tittle : "Visitas domiciliarias hoy 13:30",  completedPercent : 50,descripcion:'Visita a Alan Mcdonalls', createdDate: this.d,priority : "hight"}),
+  //var travelTime = moment().add(2, 'hours').format('hh:mm A');
+  public messages = [
+    new UserMessage({messageId:0, tittle : "Realiza examen físico al paciente Moreno",  completedPercent : 50,body:'', createdDate:moment().subtract(33, 'minutes').toDate()}),
+    new UserMessage({messageId:1, tittle : "Planifica el estudio del paciente y determina el tratamiento a seguir.",  completedPercent : 50,body:'', createdDate: moment().subtract(6, 'hours').toDate()}),
+    new UserMessage({messageId:2, tittle : "Visitas domiciliarias hoy 13:30",  completedPercent : 50,body:'Visita a Alan Mcdonalls', createdDate: moment().subtract(30, 'seconds').toDate()}),
   ];
   constructor() { }
 
@@ -24,14 +25,15 @@ export class UserMessagesComponent implements OnInit {
 
    
     let d=new Date();
-
-    this.tasks = [
-      new UserTask({taskId:0, tittle : "Realiza examen físico al paciente Moreno",  completedPercent : 50,descripcion:'', createdDate: d,priority : "low"}),
-      new UserTask({taskId:1, tittle : "Planifica el estudio del paciente y determina el tratamiento a seguir.",  completedPercent : 50,descripcion:'', createdDate: d,priority : "medium"}),
-      new UserTask({taskId:2, tittle : "Visitas domiciliarias hoy 13:30",  completedPercent : 50,descripcion:'Visita a Alan Mcdonalls', createdDate: d,priority : "hight"}),
+    
+    
+    
+    this.messages = [
+      new UserMessage({messageId:0, tittle : "Realiza examen físico al paciente Moreno",  completedPercent : 50,body:'', createdDate:moment().subtract(33, 'minutes').toDate()}),
+      new UserMessage({messageId:1, tittle : "Planifica el estudio del paciente y determina el tratamiento a seguir.",  completedPercent : 50,body:'', createdDate: moment().subtract(6, 'hours').toDate()}),
+      new UserMessage({messageId:2, tittle : "Visitas domiciliarias hoy 13:30",  completedPercent : 50,body:'Visita a Alan Mcdonalls', createdDate: moment().subtract(30, 'seconds').toDate()}),
     ];
-
-    this.taskCount = this.tasks.length;
+    this.messagesCount = this.messages.length;
  }
 
  onSelect(item){

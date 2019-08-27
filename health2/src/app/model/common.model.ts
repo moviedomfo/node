@@ -378,6 +378,28 @@ export class UserTask {
     createdDate: Date;
     priority: string;
 }
+export class UserMessage {
+    constructor (options?: {messageId:number; tittle: string; completedPercent: number;body:string;createdDate:Date}) {
+        if (options) {
+            this.messageId = options.messageId;
+            this.tittle = options.tittle;
+            this.body = options.body;
+            this.completedPercent = options.completedPercent;
+            this.createdDate = options.createdDate;
+            
+            
+            var sinceDate = moment(this.createdDate).format('MMMM Do YYYY, h:mm:ss a');
+            this.timeAgo = sinceDate;
+            
+        }
+    }
+    messageId:number;
+    tittle: string;
+    body: string;
+    completedPercent: number;
+    createdDate: Date;
+    timeAgo: string;
+}
 
 export class HelperBE {
     public getFullName(name: string, lastName: string) {

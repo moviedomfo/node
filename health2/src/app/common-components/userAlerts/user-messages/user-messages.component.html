@@ -11,7 +11,7 @@
           <ul class="menu">
             <!-- Message item -->
             <li *ngFor="let item of tasks" (click)="onSelect(item)">
-                <li><!-- start message -->
+                
                   <a href="#">
                     <div class="pull-left">
                       <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
@@ -22,17 +22,11 @@
                     </h4>
                     <p>item.message</p>
                   </a>
-                </li>
-            <!-- <li> -->
-             
             </li>
-            <!-- end task item -->
-           
-      
-         
+            <!-- end message item -->
           </ul>
         </li>
         <li class="footer">
-            <li class="footer"><a href="#">See All Messages</a></li>
+            <a href="#">See All Messages</a>
         </li>
       </ul>
