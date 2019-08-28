@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
   authenticate() {
 
-
+    this.globalError = null;
     // if(!this.currentUser.Domain)
     // {
     //   alert("Debe seleccionar un un dominio");
@@ -100,6 +100,8 @@ export class LoginComponent implements OnInit {
         
         this.loading = false;
         this.prefesionalService.currentProfesionalChange_subject$.next(currentProfesionalData);
+
+        this.router.navigate(['']);
       },
       err => {
 
