@@ -137,12 +137,12 @@
           </ul>
         </li>
         <!-- Tasks: style can be found in dropdown.less -->
-        <li *ngIf="isLogged" class="dropdown tasks-menu">
-
-          <app-user-tasks></app-user-tasks>
-          
-         
-        </li>
+       
+           
+              
+           <app-user-tasks *ngIf="isLogged" class="dropdown tasks-menu"></app-user-tasks> 
+      
+       
         <!-- User Loging button-->
         <li *ngIf="isLogged === false" class="dropdown user user-menu">
           <div class="margin-bottom:10px">

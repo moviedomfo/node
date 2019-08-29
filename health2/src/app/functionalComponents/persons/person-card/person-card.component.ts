@@ -46,6 +46,7 @@ export class PersonCardComponent implements AfterViewInit {
 
 
   @Output() OnComponentError = new EventEmitter<ServiceError>();
+  domSanitizer: any;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -141,30 +142,28 @@ export class PersonCardComponent implements AfterViewInit {
       //this.fullImagePath = ''+this.currentPerson.Foto;
       return;
     }
-
-    if (sexo === 0) { //Hombre
-      this.fullImagePath = AppConstants.ImagesSrc_Man;
-      this.currentPerson.Sexo = 0;
-    }
-    if (sexo === 1) {
-      //Mujer
-      this.fullImagePath = AppConstants.ImagesSrc_Woman;
-      this.currentPerson.Sexo = 1;
-    }
+    this.currentPerson.Sexo = sexo;
+    this.loadDefaultPhoto(this.currentPerson.Sexo);
   }
   loadImg() {
 
-    this.fullImagePath = '' + this.currentPerson.Foto;
-  }
-  loadImage() {
-    if (this.currentPerson.Sexo === 0) {
-      return (this.photoURL(AppConstants.ImagesSrc_Man));
+    
+
+    if (this.currentPerson.Foto !== null) {
+
+      this.fullImagePath = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + this.currentPerson.Foto);
 
     }
     else {
+      this.loadDefaultPhoto(this.currentPerson.Sexo);
+    }
 
-      return this.photoURL(AppConstants.ImagesSrc_Woman);
+  }
+  loadDefaultPhoto(sexo: number) {
 
+    this.fullImagePath = AppConstants.ImagesSrc_Woman;
+    if (sexo === 0) {
+      this.fullImagePath = AppConstants.ImagesSrc_Man;
     }
   }
   photoURL(imgUrl) {

@@ -1,46 +1,48 @@
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-  <i class="fa fa-flag-o"></i>
-  <span class="label label-danger">9</span>
-</a>
 
-<!-- Tasks user list-->
-<ul class="dropdown-menu">
-  <li class="header">Tiene {{taskCount}} tareas</li>
-  <li>
-    <!-- inner menu: contains the actual data -->
-    <ul class="menu">
-      <!-- Task item -->
-      <li *ngFor="let item of tasks" (click)="onSelect(item)">
-        <!-- <li> -->
-        <a href="#">
-          <h3>
-            {{item.tittle}}
-            <small class="pull-right">{{item.completedPercent}}%</small>
-          </h3>
-          <div class="progress xs">
+ <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <i class="fa fa-flag-o"></i>
+      <span class="label label-danger">9</span>
+    </a>
+  <!-- Tasks user list-->
+  <ul class="dropdown-menu">
+    <li class="header">Tiene {{taskCount}} tareas</li>
+    <li >
+      <!-- inner menu: contains the actual data -->
+      <ul class="menu">
+        <!-- Task item -->
+        <li *ngFor="let item of tasks"> 
+          <!-- <li> -->
+          <a href="#">
+            <h3>
+              {{item.tittle}}
+              <small class="pull-right">{{item.completedPercent}}%</small>
+            </h3>
+            <div class="progress xs">
 
-            <!-- progress priority 
-                             progress-bar-aqua,
-                             progress-bar-green 
-                             progress-bar-red
-                            progress-bar-yellow
-                            [style.width.px]="{{item.completedPercent}}"
-                   -->
+              <!-- progress priority 
+                              progress-bar-aqua,
+                              progress-bar-green 
+                              progress-bar-red
+                              progress-bar-yellow
+                              [style.width.px]="{{item.completedPercent}}"
+                    -->
 
-            <div class="progress-bar progress-bar-aqua" [style.width.px]="item.completedPercent" role="progressbar"
-              aria-valuemin="0" [attr.aria-valuemax]="item.completedPercent">
-              <span class="sr-only">{{item.completedPercent}}% completado</span>
+              <div class="progress-bar progress-bar-aqua" [style.width.px]="item.completedPercent" role="progressbar"
+                aria-valuemin="0" [attr.aria-valuemax]="item.completedPercent">
+                <span class="sr-only">{{item.completedPercent}}% completado</span>
+              </div>
             </div>
-          </div>
-        </a>
-      </li>
-      <!-- end task item -->
+          </a>
+        </li>
+        <!-- end task item -->
 
 
 
-    </ul>
-  </li>
-  <li class="footer">
-    <a href="#">View all tasks</a>
-  </li>
-</ul>
+      </ul>
+    </li>
+    <li class="footer">
+      <a href="#">View all tasks</a>
+    </li>
+  </ul>
+</li>

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UserTask, UserMessage } from '../../../model';
 import * as moment from 'moment';
 import { Duration } from "moment";
 @Component({
   selector: 'app-user-messages',
-  templateUrl: './user-messages.component.html'
+  templateUrl: './user-messages.component.html',
+  
+  encapsulation: ViewEncapsulation.None
 
 })
 export class UserMessagesComponent implements OnInit {

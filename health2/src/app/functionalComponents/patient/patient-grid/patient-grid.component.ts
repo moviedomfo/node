@@ -27,7 +27,7 @@ export class PatientGridComponent implements OnInit {
   public currentPatient: PatientBE;
   private columnDefs:any[];
   private gridOptions:GridOptions;
-  
+  public loadingDataState = 'finalized';
   constructor(
     private commonService: CommonService,
     private patientsService: PatientsService,
@@ -78,7 +78,7 @@ private createColumnDefs() {
 
   retrivePatients() {
 
-
+    this.loadingDataState ='waiting';
     this.patientList$ = this.patientsService.retrivePatients$(this.txtQuery);
     this.patientList$.subscribe(
       res => {
@@ -91,10 +91,10 @@ private createColumnDefs() {
         {
           this.patientCount = 0;
         }
-
+       this.loadingDataState ='finalized';
       },
       err => {
-        
+        this.loadingDataState ='finalized';
         this.globalError = err;
       }
     );
@@ -106,6 +106,7 @@ private createColumnDefs() {
   }
 
   onCellClicked(event){}
+
   onGridCellDoubleClick(event){
     //alert(event);
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation ,ViewChild, ElementRef,  AfterContentInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation ,ViewChild, ElementRef,  AfterContentInit, Input } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { PatientsService, CommonService, MedicalInsuranceService } from '../../../service/index';
@@ -26,7 +26,8 @@ export class PatientMangerComponent implements OnInit {
   currentMedicalInsuranceByPatient: MutualPorPacienteBE;
   mutualPorPacienteAuxList: MutualPorPacienteBE[];
   private medicalInsuranceByPatientList$: Observable<MutualPorPacienteBE[]>;
-  motivoConsulta :number;
+  @Input()
+  public motivoConsulta :number;
 
   @ViewChild('patienMedicalInsuranceGridComponent',{ static: false }) patienMedicalInsuranceGridComponent: PatienMedicalInsuranceGridComponent;
   
@@ -60,7 +61,16 @@ export class PatientMangerComponent implements OnInit {
     this.route.params.subscribe(params => {
       id = params;
       if (id.id != null)
+      {
+        this.motivoConsulta = MotivoConsultaEnum.ActualizarPaciente;
         this.isEdit = true;
+      }
+      else
+      {
+        this.isEdit = false;
+        this.motivoConsulta = MotivoConsultaEnum.CrearPaciente;
+      }
+        
     });
 
     if (this.isEdit) {
@@ -99,6 +109,7 @@ export class PatientMangerComponent implements OnInit {
       this.commonService.Set_mainComponentTitle("Gestión de pacientes  [Alta]" );
     }
   }
+  
   OnComponentError_personCard(err: ServiceError) {
     
       

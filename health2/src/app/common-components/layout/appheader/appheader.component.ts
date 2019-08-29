@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   selector: 'app-appheader',
   templateUrl: './appheader.component.html',
   encapsulation: ViewEncapsulation.None
+  
 })
 export class AppheaderComponent implements OnInit {
   public isLogged: boolean = false;

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UserTask } from '../../../model';
 import * as moment from 'moment';
 import { Duration } from "moment";
 @Component({
   selector: 'app-user-tasks',
-  templateUrl: './user-tasks.component.html'
+  templateUrl: './user-tasks.component.html',
+  styleUrls: ['./user-tasks.component.css'],
+  encapsulation: ViewEncapsulation.None
 
 })
 export class UserTasksComponent implements OnInit {
