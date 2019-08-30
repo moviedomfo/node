@@ -1,120 +1,126 @@
 <div class="row">
-  <div class="box box-primary">
-    <div class="box-header">
-      <h3 class="box-title">Seleccione una ubicación </h3>
-    </div>
-    <div class="box-body">
-      <div class="form-group ">
+  <div class="col-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">Seleccione una ubicación </h3>
+      </div>
+      <div class="box-body">
+        <div class="form-group ">
 
-        <!-- <label for="palce" class="col-lg-2 control-label">Seleccione una ubicación </label> -->
-        <app-google-place (onPlaceChanged)="onPlaceChanged($event)">
+          <!-- <label for="palce" class="col-lg-2 control-label">Seleccione una ubicación </label> -->
+          <app-google-place (onPlaceChanged)="onPlaceChanged($event)">
 
-        </app-google-place>
+          </app-google-place>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="box box-primary ">
-    <div class="box-header">
-      <h3 class="box-title">Rellene estos campos referentes a la ubicaión seleccionada </h3>
-    </div>
-    <div class="box-body ">
-      
+    <div class="box box-primary ">
+      <div class="box-header">
+        <h3 class="box-title">Rellene estos campos referentes a la ubicaión seleccionada </h3>
+      </div>
+      <div class="box-body ">
+
         <form class="form-inline">
 
 
           <div class="form-group ">
-            <label for="Street" >Calle </label>
+            <label for="Street">Calle </label>
             <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa-address-book-o"></i>
-                </div>
-                <input type="text" class="form-control" name="txtStreet" placeholder="calle" [(ngModel)]="currentPlace.Street">
+              <div class="input-group-addon">
+                <i class="fa fa-address-book-o"></i>
               </div>
-          </div>
-
-          <div class="form-group ">
-            <label for="StreetNumber" >Nro </label>
-             <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa-address-book-o"></i>
-                </div>
-              <input type="number" class="form-control" name="txtStreetNumber" placeholder="nro" [(ngModel)]="currentPlace.StreetNumber">
+              <input type="text" class="form-control" name="txtStreet" placeholder="calle"
+                [(ngModel)]="currentPlace.Street">
             </div>
           </div>
 
           <div class="form-group ">
-            <label for="Floor" >Piso </label>
+            <label for="StreetNumber">Nro </label>
             <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa-address-book-o"></i>
-                </div>
-              <input type="text" class="form-control" name="txtFloor" placeholder="piso" [(ngModel)]="currentPlace.Floor">
+              <div class="input-group-addon">
+                <i class="fa fa-address-book-o"></i>
+              </div>
+              <input type="number" class="form-control" name="txtStreetNumber" placeholder="nro"
+                [(ngModel)]="currentPlace.StreetNumber">
+            </div>
+          </div>
+
+          <div class="form-group ">
+            <label for="Floor">Piso </label>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-address-book-o"></i>
+              </div>
+              <input type="text" class="form-control" name="txtFloor" placeholder="piso"
+                [(ngModel)]="currentPlace.Floor">
             </div>
           </div>
         </form>
-     
-        
-       
-            <div class="form-group ">
-              <label for="Telefono1">Telefono1 </label>
-              <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa fa-phone"></i>
-                </div>
-                <input type="text" class="form-control" name="txtTelefono1" placeholder="Telefono 1" [(ngModel)]="currentPlace.Telefono1">
-              </div>
+
+
+
+        <div class="form-group ">
+          <label for="Telefono1">Telefono1 </label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa fa-phone"></i>
             </div>
-            <div class="form-group ">
-              <label for="Telefono2">Telefono2 </label>
-              <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa fa-phone"></i>
-                </div>
-                <input type="text" class="form-control" name="txtTelefono2" placeholder="telefono 2" [(ngModel)]="currentPlace.Telefono2">
-              </div>
+            <input type="text" class="form-control" name="txtTelefono1" placeholder="Telefono 1"
+              [(ngModel)]="currentPlace.Telefono1">
+          </div>
+        </div>
+        <div class="form-group ">
+          <label for="Telefono2">Telefono2 </label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa fa-phone"></i>
             </div>
-       
-      
+            <input type="text" class="form-control" name="txtTelefono2" placeholder="telefono 2"
+              [(ngModel)]="currentPlace.Telefono2">
+          </div>
+        </div>
+
+
 
       </div>
       <button class="btn  btn-success" type="button" (click)="btnAddPlace_click()"> Agregar</button>
     </div>
-
-
+  </div>
 </div>
-<div class="clearfix"></div>
-<div class="row">
 
+<div class="row">
+  <div class="col-12">
     <form class="form-horizontal">
-       
-        </form>
 
+    </form>
+  </div>
 </div>
-<div class="clearfix"></div>
-<div class="row">
-  <div class="box box-primary">
-    <div class="box-header">
-      <h3 class="box-title">Listado de ubicaciones del contacto </h3>
-    </div>
-    <div class="box-body">
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-action flex-column align-items-start active">Ubicaciones </li>
-        <div *ngFor="let item of currentPerson.places" class="">
-          <li class="list-group-item list-group-item-action flex-column align-items-start">
 
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">{{item.formatted_address}}</h5>
-              <small>3 days ago</small>
-            </div>
-            <p class="mb-1">{{item.Street}} , {{item.StreetNumber}} </p>
-            <small class="text-muted">{{item.formatted_address}}</small>
-            <!-- ejemplos de bootstrap list group https://v4-alpha.getbootstrap.com/components/list-group/ -->
-          </li>
-        </div>
-      </ul>
+<div class="row">
+  <div class="col-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">Listado de ubicaciones del contacto </h3>
+      </div>
+      <div class="box-body">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-action flex-column align-items-start active">Ubicaciones </li>
+          <div *ngFor="let item of currentPerson.places" class="">
+            <li class="list-group-item list-group-item-action flex-column align-items-start">
+
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{item.formatted_address}}</h5>
+
+              </div>
+              <p class="mb-1">{{item.Street}} , {{item.StreetNumber}} </p>
+              <small class="text-muted">{{item.formatted_address}}</small>
+              <!-- ejemplos de bootstrap list group https://v4-alpha.getbootstrap.com/components/list-group/ -->
+            </li>
+          </div>
+        </ul>
+      </div>
     </div>
   </div>
-
 </div>
 
 

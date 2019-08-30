@@ -22,7 +22,7 @@ import { GridOptions } from 'ag-grid-community';
   
 })
 export class PersonGridComponent implements OnInit {
-
+  globalError: ServiceError;
   private personBEList$: Observable<PersonBE[]>;
   private personList: PersonBE[];
   private currentperson: PersonBE;
@@ -31,31 +31,30 @@ export class PersonGridComponent implements OnInit {
   private columnDefs:any[];
   private gridOptions:GridOptions;
  
-  @Input() motivoConsulta:number;
+  @Input() motivoConsulta:MotivoConsultaEnum;
   @Input()tittle:number;
   @Output() onPersonGridDoubleClick = new EventEmitter<PersonBE>();
 
   constructor(    private commonService: CommonService,private personsService: PersonsService,private router: Router) {
         this.personList = [];
-    }
+        this.motivoConsulta = MotivoConsultaEnum.ConsultarPersona_NoUpdate;
+      }
 
  
     ngOnInit() {
-
-      if(!this.motivoConsulta)
-      {
-        this.motivoConsulta = MotivoConsultaEnum.ConsultarPersona_NoUpdate;
-      }
+     
+      //alert( MotivoConsultaEnum[this.motivoConsulta]);
+     
       // we pass an empty gridOptions in, so we can grab the api out
       this.gridOptions = <GridOptions>{};
       this.gridOptions.dateComponentFramework = DateComponent;
-      this.gridOptions.defaultColDef = {
-          headerComponentFramework : <{new():HeaderComponent}>HeaderComponent,
-          headerComponentParams : {
-              menuIcon: 'fa-bars'
-          }
-      }
-      this.gridOptions.getContextMenuItems = this.getContextMenuItems.bind(this);
+      // this.gridOptions.defaultColDef = {
+      //     headerComponentFramework : <{new():HeaderComponent}>HeaderComponent,
+      //     headerComponentParams : {
+      //         menuIcon: 'fa-bars'
+      //     }
+      // }
+      //this.gridOptions.getContextMenuItems = this.getContextMenuItems.bind(this);
       this.gridOptions.floatingFilter = true;
  
       this.createColumnDefs();
@@ -88,10 +87,10 @@ private createColumnDefs() {
 
     this.retrivePatients();
   }
-  globalError: ServiceError;
+  
   retrivePatients() {
-    
-    this.personBEList$ = this.personsService.retrivePersonesGrid$(this.txtQuery,this.txtQuery,this.motivoConsulta.toString());
+ 
+    this.personBEList$ = this.personsService.retrivePersonesGrid$(this.txtQuery, this.txtQuery, this.motivoConsulta ,null);
     this.personBEList$.subscribe(
       res => {
         this.personList = res;

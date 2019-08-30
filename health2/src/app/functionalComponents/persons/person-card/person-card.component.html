@@ -11,7 +11,8 @@
         <div class="box-body">
           <div class="form-group">
             <div class="row" >
-                <div class="col-md-4" *ngIf="motivoConsulta === 'CrearPaciente' || motivoConsulta === 'CrearProfesional' || motivoConsulta === 'ConsultarPersona_NoUpdate'" 
+                <!-- si CrearPaciente CrearProfesional o ConsultarPersona_NoUpdate -->
+                <div class="col-md-4" *ngIf="motivoConsulta === 2 || motivoConsulta === 0 || motivoConsulta === 4" 
                 class="btn btn-default">
                         <button   data-toggle="modal" data-target="#findPersonModal">Buscar Existente</button>
                 </div>
@@ -168,7 +169,9 @@
 
       </div>
       <div class="modal-body">
-        <app-person-grid #appPersonGrid [motivoConsulta]="motivoConsulta" (onPersonGridDoubleClick)="onPersonGridDoubleClick($event)">
+        <app-person-grid #appPersonGrid 
+        [motivoConsulta]="motivoConsulta" 
+        (onPersonGridDoubleClick)="onPersonGridDoubleClick($event)">
         </app-person-grid>
       </div>
       <div class="modal-footer">

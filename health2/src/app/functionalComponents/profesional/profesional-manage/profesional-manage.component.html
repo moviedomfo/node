@@ -4,9 +4,9 @@
   <!-- <button class="btn btn-success" [ngClass]="{hidden: !isEdit}" type="submit" [disabled]='!f.valid'>Actualizar</button>
   <button class="btn btn-success" [ngClass]="{hidden: isEdit}" [disabled]='!f.valid' (click)="createPatient()">Crear profesional</button> -->
   <app-error-box-container [globalError]="globalError"></app-error-box-container>
-
+ 
   <ul class="nav nav-tabs " role="tablist">
-    <li class="nav-item ">
+    <li class="nav-item active">
       <a class="nav-link  active" href="#profile" role="tab" data-toggle="tab">Datos principales</a>
     </li>
     <li class="nav-item">
@@ -95,7 +95,9 @@
 
       </div>
       <div class="modal-body">
-        <app-resource-scheduling-manage #resourceSchedulingManageComponent1 [currentResourceScheduling]="currentResourceScheduling"
+
+        <app-resource-scheduling-manage #resourceSchedulingManageComponent1 
+          [currentResourceScheduling]="currentResourceScheduling"
           [currentResourceSchedulingList]="currentResourceSchedulingList" [isEditMode]="isEditMode_resource_scheduling" (OnResourceShedulingCreated)="OnResourceShedulingCreated($event)"
           (OnComponentError)="OnComponentError">
         </app-resource-scheduling-manage>
@@ -109,3 +111,4 @@
   </div>
 </div>
 </section>
+

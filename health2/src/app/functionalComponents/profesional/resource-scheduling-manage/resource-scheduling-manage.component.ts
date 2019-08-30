@@ -17,7 +17,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
 export class ResourceSchedulingManageComponent implements AfterViewInit {
   globalError: ServiceError;
   arrayOfTimes:TimespamView[];
-  @Input() currentResourceScheduling:ResourceSchedulingBE;
+  @Input() currentResourceScheduling:ResourceSchedulingBE= new ResourceSchedulingBE();
   @Input() currentResourceSchedulingList:ResourceSchedulingBE[];
   @Input() isEditMode:boolean;
   @Output() OnResourceShedulingCreated = new EventEmitter<ResourceSchedulingBE>();
@@ -31,7 +31,7 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
  }
 
   ngAfterViewInit() {
-   
+    this.weekDaysCheckEdit.Init();
   }
 
   ngOnInit() {
@@ -79,7 +79,7 @@ export class ResourceSchedulingManageComponent implements AfterViewInit {
         return;
       }
     }
-    this.weekDaysCheckEdit.Init();
+   
 
     this.currentResourceScheduling_TimeStart = this.currentResourceScheduling.TimeStart;
     this.currentResourceScheduling_TimeEnd = this.currentResourceScheduling.TimeEnd;

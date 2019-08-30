@@ -3,7 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import {PersonBE} from '../../app/model/persons.model'
-import { AppConstants, contextInfo } from "../model/common.constants";
+import { AppConstants, contextInfo, MotivoConsultaEnum } from "../model/common.constants";
 import { Param, IParam, IContextInformation, IRequest, IResponse, Result, User, Rol } from '../model/common.model';
 import { CommonService } from '../service/common.service';
 import { HttpClient } from '@angular/common/http';
@@ -18,17 +18,17 @@ export class PersonsService {
   }
 
 
-  retrivePersonesGrid$(
-    nombre: string,apellido: string,motivoConsulta:string,nroDocumento?: string): Observable<PersonBE[]> {
+  retrivePersonesGrid$ (nombre: string, apellido: string, motivoConsulta: MotivoConsultaEnum, nroDocumento: string): Observable<PersonBE[]> {
 
+      
     var bussinesData = {
       Nombre: nombre,
       Apellido: apellido,
       NroDocumento: nroDocumento,
-      MotivoConsulta: motivoConsulta
+      MotivoConsulta:  MotivoConsultaEnum[motivoConsulta].toString()
 
     };
-  
+ 
   let outhHeader = this.commonService.get_AuthorizedHeader();
 
 

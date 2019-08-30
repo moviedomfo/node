@@ -22,12 +22,13 @@ import { GridOptions } from 'ag-grid-community';
 
 })
 export class ProfesionalGridComponent implements OnInit {
-  profesionalBEList$: Observable<ProfesionalesGridBE[]>;
-  profesionalList: ProfesionalesGridBE[];
-  currentProfesional: ProfesionalesGridBE;
-  private txtQuery: string;
-  private profesionalCount: number;
-  private columnDefs: any[];
+  public profesionalBEList$: Observable<ProfesionalesGridBE[]>;
+  public profesionalList: ProfesionalesGridBE[];
+  public currentProfesional: ProfesionalesGridBE;
+  public txtQuery: string;
+  public profesionalCount: number;
+  public columnDefs: any[];
+  public loadingDataState = 'finalized';
   //private gridOptions: GridOptions;
   globalError: ServiceError;
   constructor(
@@ -71,13 +72,15 @@ export class ProfesionalGridComponent implements OnInit {
 
   private createColumnDefs() {
     this.columnDefs = [
-      { headerName: "Nombre", field: "Nombre", width: 150, pinned: true, filter: 'text' },
-      { headerName: "Apellido", field: "Apellido", width: 150, pinned: true, filter: 'text' },
-      { headerName: "Documento", field: "Nro Documento", width: 150, pinned: true, filter: 'text' },
+      
+      { headerName: "Nombre", field: "ApellidoNombre", width: 250, pinned: true, filter: 'text' },
+      { headerName: "Documento", field: "NroDocumento", width: 150, pinned: true, filter: 'text' },
       { headerName: "Matricula", field: "Matricula", width: 150, pinned: true, filter: 'text' },
-      { headerName: "Especialidad", field: "Especialidad", width: 150, pinned: true, filter: 'text' },
-      { headerName: "NombreProfecion", field: "profesión", width: 150, pinned: true, filter: 'text' },
-      { headerName: "Fecha alta", field: "FechaAlta", width: 200, pinned: true }
+      { headerName: "Especialidad", field: "NombreEspecialidad", width: 150, pinned: true, filter: 'text' },
+      { headerName: "Profecion", field: "NombreProfecion", width: 150, pinned: true, filter: 'text' },
+      { headerName: "Fecha alta", field: "FechaAlta", width: 200, pinned: true },
+      { headerName: "mail", field: "mail", width: 200, pinned: true }
+      
     ];
   }
 
@@ -88,7 +91,7 @@ export class ProfesionalGridComponent implements OnInit {
 
   retriveProfesionals() {
 
-
+    this.loadingDataState ='waiting';
     this.profesionalBEList$ = this.profesionalService.retriveProfesionalesGrid$(this.txtQuery, this.txtQuery, AppConstants.DefaultHealthInstitutionId);
     this.profesionalBEList$.subscribe(
       res => {
@@ -100,10 +103,10 @@ export class ProfesionalGridComponent implements OnInit {
         else {
           this.profesionalCount = 0;
         }
-   
+        this.loadingDataState ='finalized';
       },
       err => {
-
+        this.loadingDataState ='finalized';
         this.globalError = err;
       }
     );
@@ -115,7 +118,7 @@ export class ProfesionalGridComponent implements OnInit {
   }
   onCellClicked(event) { 
 
-    alert('onCellClicked');
+    //alert('onCellClicked');
   }
   onGridCellDoubleClick(event) {
     //alert(event);

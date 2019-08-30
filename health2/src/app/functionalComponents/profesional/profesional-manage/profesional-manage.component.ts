@@ -23,38 +23,41 @@ import { MotivoConsultaEnum } from "../../../model/common.constants";
   encapsulation: ViewEncapsulation.None
 })
 export class ProfesionalManageComponent implements AfterViewInit {
-  
+
   globalError: ServiceError;
   public currentProfesional: ProfesionalBE;
   currentResourceSchedulingList: ResourceSchedulingBE[];
   currentHealthInstitution_ProfesionalBE: HealthInstitution_ProfesionalBE;
-  currentUser: User;
+  private currentProfesionalUser: User;
   getProfesionalRes$: Observable<GetProfesionalRes>;
-  isEdit: boolean=false;
+  isEdit: boolean = false;
   isEditMode_resource_scheduling: boolean;
-  currentResourceScheduling = new ResourceSchedulingBE();
+  public currentResourceScheduling = new ResourceSchedulingBE();
   motivoConsulta: number;
-  @ViewChild('resourceSchedulingManageComponent1',{ static: false }) resourceSchedulingManageComponent: ResourceSchedulingManageComponent;
-  @ViewChild('resourceSchedulingGrid1',{ static: false }) resourceSchedulingGridComponent: ResourceSchedulingGridComponent;
-  @ViewChild('sessionSettingComponent',{ static: false }) sessionSettingComponent: SessionSettingComponent;
-  
+
+  @ViewChild('resourceSchedulingManageComponent1', { static: false }) resourceSchedulingManageComponent: ResourceSchedulingManageComponent;
+  @ViewChild('resourceSchedulingGrid1', { static: false }) resourceSchedulingGridComponent: ResourceSchedulingGridComponent;
+  @ViewChild('sessionSettingComponent', { static: false }) sessionSettingComponent: SessionSettingComponent;
+
 
   constructor(private route: ActivatedRoute,
     private profesionalService: ProfesionalService,
     private commonService: CommonService,
     private dialogService: DialogService
-  ) {  }
+  ) { }
 
 
   ngAfterViewInit(): void {
+  
     this.sessionSettingComponent.MachRolesGrid();
-
+    
   }
 
   ngOnInit() {
-    
-    
+
+
     this.preInitialize();
+
     if (this.isEdit) {
       this.commonService.Set_mainComponentTitle("Gestión de profesionales [Edición]");
       this.motivoConsulta = MotivoConsultaEnum.ActualizarProfesional;
@@ -67,8 +70,8 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
   private preInitialize() {
     this.isEditMode_resource_scheduling = false;
-
-    this.resourceSchedulingManageComponent.currentResourceScheduling = this.currentResourceScheduling;
+    
+    //this.resourceSchedulingManageComponent.currentResourceScheduling = this.currentResourceScheduling;
     //alert('ngOnInit preInitialize ProfesionalManageComponent');
     this.currentProfesional = new ProfesionalBE();
     this.currentProfesional.Persona = new PersonBE(-1, "");
@@ -83,8 +86,8 @@ export class ProfesionalManageComponent implements AfterViewInit {
     });
 
     if (this.isEdit) {
-//      this.motivoConsulta = MotivoConsultaEnum.ActualizarProfesional;
-      
+       this.motivoConsulta = MotivoConsultaEnum.ActualizarProfesional;
+
       //Busco el paciente
       this.getProfesionalRes$ = this.profesionalService.getProfesionalService$(true, true, id.id, contextInfo.UserId, AppConstants.DefaultHealthInstitutionId, true);
 
@@ -92,19 +95,19 @@ export class ProfesionalManageComponent implements AfterViewInit {
         res => {
 
           this.currentProfesional = res.Profesional;
-          
+
           if (this.currentProfesional != null) {
 
             this.currentResourceSchedulingList = res.ResourceSchedulingList;
             this.currentHealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE;
-            this.currentUser = res.User;
-           
+            this.currentProfesionalUser = res.User;
+
           }
           else {
             this.globalError = new ServiceError();
 
             this.globalError.message = "El profesional no existe en nuestra base de datos ";
-   
+
           }
         },
         err => {
@@ -116,19 +119,19 @@ export class ProfesionalManageComponent implements AfterViewInit {
 
     //if is create 
     if (this.isEdit == false) {
-      //this.motivoConsulta = MotivoConsultaEnum.CrearProfesional;
+      this.motivoConsulta = MotivoConsultaEnum.CrearProfesional;
       this.currentProfesional.IdEspecialidad = CommonParams.SeleccioneUnaOpcion.IdParametro;
       this.currentProfesional.IdProfesion = CommonParams.SeleccioneUnaOpcion.IdParametro;
       this.currentProfesional.FechaAlta = new Date();
       this.currentProfesional.Persona.FechaNacimiento = new Date();
       this.currentProfesional.Persona.NroDocumento = "0";
-      this.currentUser = new User();
+      this.currentProfesionalUser = new User();
     }
 
 
-   
+
   }
- 
+
   OnComponentError_profesionalCard(err: ServiceError) {
     this.globalError = err;
   }
@@ -155,10 +158,10 @@ export class ProfesionalManageComponent implements AfterViewInit {
   }
 
 
-  @ViewChild('closeBtn',{ static: false }) closeBtn: ElementRef;
-  
-  OnResourceShedulingCreated(newResourceSheduling){
-   
+  @ViewChild('closeBtn', { static: false }) closeBtn: ElementRef;
+
+  OnResourceShedulingCreated(newResourceSheduling) {
+
 
     //this.currentResourceSchedulingList.push(newResourceSheduling);
     this.resourceSchedulingGridComponent.showGrid();
@@ -167,7 +170,7 @@ export class ProfesionalManageComponent implements AfterViewInit {
   }
   onSubmit(isValid: boolean) {
 
-    
+
     if (!isValid) return;
 
     if (this.isEdit)
@@ -180,38 +183,36 @@ export class ProfesionalManageComponent implements AfterViewInit {
   createProfesional() {
     alert('Entro en onSubmit createProfesional');
 
-    var crearProfesional = this.profesionalService.crearProfesionalService$(
+    var crearProfesional$ = this.profesionalService.crearProfesionalService$(
       this.currentProfesional,
-      this.currentUser,
-      this.currentHealthInstitution_ProfesionalBE.HealthInstitutionId,true);
+      this.currentProfesionalUser,
+      this.currentHealthInstitution_ProfesionalBE.HealthInstitutionId, true);
 
 
-      crearProfesional.subscribe(
-        res => {
-          if(res)
-          {
-            // int IdProfesional { get; set; }
-            // Guid UserId { get; set; }
-            this.currentProfesional.IdProfesional= res['IdProfesional'];
-            this.currentUser.UserId = res['UserId'];
-            
-           alert('El profesional fue dado de alta correctamente !!');
-          }
-         
-        },
-        err => {
-          this.globalError = err;
-          
+    crearProfesional$.subscribe(
+      res => {
+        if (res) {
+          // int IdProfesional { get; set; }
+          // Guid UserId { get; set; }
+          this.currentProfesional.IdProfesional = res['IdProfesional'];
+          this.currentProfesionalUser.UserId = res['UserId'];
+
+          alert('El profesional fue dado de alta correctamente !!');
         }
-      );
+
+      },
+      err => {
+        this.globalError = err;
+
+      }
+    );
   }
 
   updateProfesional() {
 
   }
 
- btnTestClick()
- {
-  this.sessionSettingComponent.MachRolesGrid();
- }
+  btnTestClick() {
+    this.sessionSettingComponent.MachRolesGrid();
+  }
 }

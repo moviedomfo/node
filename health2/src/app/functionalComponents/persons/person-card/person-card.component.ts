@@ -6,7 +6,7 @@ import { PersonBE, IContextInformation, IParam, Param, CommonValuesEnum, EventTy
 import { FormGroup } from '@angular/forms';
 import { } from '@angular/core';
 // Base 64 IMage display issues with unsafe image
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 import { AlertBlockComponent } from '../../../common-components/alert-block/alert-block.component';
 import { ServiceError } from '../../../model/common.model';
@@ -35,23 +35,23 @@ export class PersonCardComponent implements AfterViewInit {
   tipoDocumentoList$: Observable<Param[]>;
   tipoDocumentoList: Param[];
 
-  fullImagePath: string;
-  private base64Image: string;
+  public fullImagePath: SafeUrl = '';
+  
 
   currentNroDocumento: string;
-  @ViewChild('alertBlock1',{ static: false }) alertBlock1: AlertBlockComponent;
-  @ViewChild('cmbEstadoCivil',{ static: false }) cmbEstadoCivil: ElementRef;
-  @ViewChild('img2',{ static: false }) img2: ElementRef;
-  @ViewChild('img1',{ static: false }) img1: ElementRef;
+  @ViewChild('alertBlock1', { static: false }) alertBlock1: AlertBlockComponent;
+  @ViewChild('cmbEstadoCivil', { static: false }) cmbEstadoCivil: ElementRef;
+  @ViewChild('img2', { static: false }) img2: ElementRef;
+  @ViewChild('img1', { static: false }) img1: ElementRef;
 
 
   @Output() OnComponentError = new EventEmitter<ServiceError>();
-  domSanitizer: any;
+  
 
   constructor(
     private sanitizer: DomSanitizer,
     private personService: PersonsService,
-    private commonService: CommonService,
+    private commonService: CommonService,private domSanitizer: DomSanitizer,
     private rd: Renderer2) {
 
   }
@@ -62,24 +62,34 @@ export class PersonCardComponent implements AfterViewInit {
 
     //alert('ngOnChanges person card');
     if (this.currentPerson) {
-      if (this.currentPerson.Foto === null) {
-        this.currentPerson.Sexo == 0 ? this.onSexChanged(0) : this.onSexChanged(1);
+     
+      if (this.currentPerson.Foto !== null) {
+
+        //Convert the ArrayBuffer to a typed array 
+        // const TYPED_ARRAY = new Uint8Array(prof.Profesional.Persona.Foto);
+        // // converts the typed array to string of characters
+        // const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
+        // let base64String = btoa(STRING_CHAR);
+        // console.log("Base 64 de la foto:   " + prof.Profesional.Persona.Foto);
+        this.fullImagePath = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + this.currentPerson.Foto);
+
       }
       else {
-        this.fullImagePath = '' + this.currentPerson.Foto;
+        this.loadDefaultPhoto(this.currentPerson.Sexo);
       }
     }
   }
 
   ngAfterViewInit() {
-  
+
+     
   }
 
   ngOnInit() {
 
 
     this.currentNroDocumento = this.currentPerson.NroDocumento;
-    
+
     this.tipoDocumentoList$ = this.commonService.searchParametroByParams$(TipoParametroEnum.TipoDocumento, null);
     this.tipoDocumentoList$.subscribe(
       res => {
@@ -147,13 +157,9 @@ export class PersonCardComponent implements AfterViewInit {
   }
   loadImg() {
 
-    
-
     if (this.currentPerson.Foto !== null) {
-
       this.fullImagePath = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + this.currentPerson.Foto);
-
-    }
+   }
     else {
       this.loadDefaultPhoto(this.currentPerson.Sexo);
     }
@@ -208,7 +214,7 @@ export class PersonCardComponent implements AfterViewInit {
     this.currentPerson$.subscribe(
       res => {
         var person: PersonBE = res as PersonBE;
-        
+
         if (person == null) {
           return true;
         }

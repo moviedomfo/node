@@ -35,6 +35,8 @@ export class UserTasksComponent implements OnInit {
 
     this.taskCount = this.tasks.length;
  }
+
+ 
  onSelect(item){
   alert(item.tittle);
 }

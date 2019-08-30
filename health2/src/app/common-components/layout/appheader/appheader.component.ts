@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { pipe } from 'rxjs';
 import { AuthenticationService, ProfesionalService } from '../../../service';
-import { CurrentLogin, ProfesionalFullData, AppConstants } from '../../../model';
+import { CurrentLogin, ProfesionalFullData, AppConstants, UserTask, UserMessage } from '../../../model';
 import * as moment from 'moment';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { helperFunctions } from '../../../service/helperFunctions';
@@ -21,6 +21,11 @@ export class AppheaderComponent implements OnInit {
   public nombreEspecialidad: string = '';
   public desde: string = '';
   public profesionalPhotoUrl: SafeUrl = '';
+  
+  public taskCount:number;
+  public tasks : UserTask[];
+  public messagesCount:number;
+  public messages:UserMessage[];
 
   constructor(
     private router: Router,
@@ -49,6 +54,23 @@ export class AppheaderComponent implements OnInit {
 
   ngOnInit() {
     this.chk_logingFront();
+
+    
+    let d=new Date();
+
+    this.tasks = [
+      new UserTask({taskId:0, tittle : "Realiza examen físico al paciente Moreno",  completedPercent : 50,descripcion:'', createdDate: d,priority : "low"}),
+      new UserTask({taskId:1, tittle : "Planifica el estudio del paciente y determina el tratamiento a seguir.",  completedPercent : 50,descripcion:'', createdDate: d,priority : "medium"}),
+      new UserTask({taskId:2, tittle : "Visitas domiciliarias hoy 13:30",  completedPercent : 50,descripcion:'Visita a Alan Mcdonalls', createdDate: d,priority : "hight"}),
+    ];
+    this.taskCount = this.tasks.length;
+      
+    this.messages = [
+      new UserMessage({messageId:0, tittle : "Realiza examen físico al paciente Moreno",  completedPercent : 50,body:'', createdDate:moment().subtract(33, 'minutes').toDate()}),
+      new UserMessage({messageId:1, tittle : "Planifica el estudio del paciente y determina el tratamiento a seguir.",  completedPercent : 50,body:'', createdDate: moment().subtract(6, 'hours').toDate()}),
+      new UserMessage({messageId:2, tittle : "Visitas domiciliarias hoy 13:30",  completedPercent : 50,body:'Visita a Alan Mcdonalls', createdDate: moment().subtract(30, 'seconds').toDate()}),
+    ];
+    this.messagesCount = this.messages.length;
   }
 
   onBtnLogin_click(){
@@ -120,4 +142,7 @@ export class AppheaderComponent implements OnInit {
       this.profesionalPhotoUrl = AppConstants.ImagesSrc_Man;
     }
   }
+
+
+  
 }

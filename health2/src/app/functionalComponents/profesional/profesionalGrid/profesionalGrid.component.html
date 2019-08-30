@@ -32,14 +32,24 @@
 
 
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Listado de profesionales</h3>
-
-        </div>
-        <div class="panel-body">
+      <div class="card">
+        
+        <div class="card-body">
+            <h3 class="card-title">Listado de profesionales</h3>
+            <div *ngIf="loadingDataState == 'waiting' " class="box box-danger">
+                <div class="box-header">
+                  <h3 class="box-title">Cargando </h3>
+                </div>
+             
+                <!-- /.box-body -->
+                <!-- Loading (remove the following to stop the loading)-->
+                <div class="overlay">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </div>
+                <!-- end loading -->
+              </div>
           <div style="clear: both;"></div>
-          <ag-grid-angular style="width: 900px; height: 515px;" 
+          <ag-grid-angular *ngIf="loadingDataState == 'finalized' "  style="width: 900px; height: 515px;" 
             class="ag-theme-balham" 
             [rowData]="profesionalList" 
             [columnDefs]="columnDefs"
