@@ -9,6 +9,7 @@
     [rowData]="profesionalResourceSchedulingList" 
     [columnDefs]="columnDefs"
     (cellClicked)="onResourceSheduler_cellClicked($event)"
+    (cellDoubleClicked)="onGridCellDoubleClick($event)"
     (gridReady)="onReady($event)">
     
     </ag-grid-angular>

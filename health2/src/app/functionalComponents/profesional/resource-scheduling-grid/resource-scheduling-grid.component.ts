@@ -40,14 +40,14 @@ export class ResourceSchedulingGridComponent implements OnInit {
   ngOnInit() {
     this.gridOptions = <GridOptions>{};
     this.gridOptions.dateComponentFramework = DateComponent;
-    this.gridOptions.defaultColDef = {
-      headerComponentFramework: <{ new(): HeaderComponent }>HeaderComponent,
-      headerComponentParams: {
-        menuIcon: 'fa-bars'
-      }
+    // this.gridOptions.defaultColDef = {
+    //   headerComponentFramework: <{ new(): HeaderComponent }>HeaderComponent,
+    //   headerComponentParams: {
+    //     menuIcon: 'fa-bars'
+    //   }
 
-    }
-    this.gridOptions.rowData = this.profesionalResourceSchedulingList;
+    // }
+    //this.gridOptions.rowData = this.profesionalResourceSchedulingList;
 
     this.gridOptions.floatingFilter = true;
 
@@ -82,4 +82,12 @@ export class ResourceSchedulingGridComponent implements OnInit {
     this.onResourceSchedulingChanged.emit(this.currentResourceScheduling);
 
   }
+  onGridCellDoubleClick($event) {
+    this.currentResourceScheduling = $event.node.data;
+
+    //document.querySelector('#selectedRows').innerHTML = this.currentMedicalInsuranceByPatient.Nombre;
+    this.onResourceSchedulingChanged.emit(this.currentResourceScheduling);
+
+  }
+  
 }
