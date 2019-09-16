@@ -19,13 +19,13 @@ export class LoginComponent implements OnInit {
   public currentUser: User;
   public jwt_decode: any;
   public selectedDomain: string;
-  
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private prefesionalService : ProfesionalService) {
+    private prefesionalService: ProfesionalService) {
 
-    // this.Serurity.storage_Domains$().subscribe((res: Domain[]) => {
+    // this.Serurity.storage_Institutions$().subscribe((res: Domain[]) => {
     //     this.domains = res;
     //     console.log('cargado domains');
     //   },
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       this.currentLogin.oAuth = new AuthenticationOAutResponse();
     }
 
-    //this.authenticationService.checkDomains();
+    //this.retriveInstitutions();
   }
 
   authenticate() {
@@ -80,24 +80,24 @@ export class LoginComponent implements OnInit {
 
   }
 
- retriveProfesionalData(userGuid : string) {
-   
+  retriveProfesionalData(userGuid: string) {
+
     this.loading = true;
     //this.currentUser.Domain = this.domains.find(p=> p.DomainId ==this.currentUser.DomainId).Domain;
-    var svc$: Observable<GetProfesionalRes> = this.prefesionalService.getProfesionalService$(false ,false,null,userGuid, AppConstants.DefaultHealthInstitutionId,true,null);
+    var svc$: Observable<GetProfesionalRes> = this.prefesionalService.getProfesionalService$(false, false, null, userGuid, AppConstants.DefaultHealthInstitutionId, true, null);
 
     svc$.subscribe(
       res => {
 
-        let currentProfesionalData : ProfesionalFullData = new ProfesionalFullData;
-        
-         currentProfesionalData.Profesional = res.Profesional;
+        let currentProfesionalData: ProfesionalFullData = new ProfesionalFullData;
 
-        currentProfesionalData.HealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE ;
-         currentProfesionalData.HealthInstitution_ProfesionalList = res.HealthInstitution_ProfesionalList;
+        currentProfesionalData.Profesional = res.Profesional;
+
+        currentProfesionalData.HealthInstitution_ProfesionalBE = res.HealthInstitution_ProfesionalBE;
+        currentProfesionalData.HealthInstitution_ProfesionalList = res.HealthInstitution_ProfesionalList;
         //console.log(JSON.stringify(res));
         localStorage.setItem('currentProfesionalData', JSON.stringify(currentProfesionalData));
-        
+
         this.loading = false;
         this.prefesionalService.currentProfesionalChange_subject$.next(currentProfesionalData);
 

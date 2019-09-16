@@ -33,23 +33,24 @@ export class CommonService {
   get_mainComponentTitle$(): Observable<string> {
     return this.mainComponentTitle_subject$.asObservable();
   }
+
   //permite q un componente cualquiera emita cambio de titulo y este altere el header del dasboard
   Set_mainComponentTitle(tittle: string) {
 
     this.mainComponentTitle_subject$.next(tittle);
   }
-  get_host(): string {
 
+
+  get_host(): string {
     return  "Ip: " + this.ipinfo.ip + ", city: " +  this.ipinfo.city + ", region :" +  this.ipinfo.region + ", country :" + this.ipinfo.country;
   }
 
-      /**
-  * utiliza una api paara retornar informacion hacerca del host cliente
+   /**
+  * utiliza una api para retornar informacion hacerca del host cliente
   * @param 
   * @returns json con ip,country de la clase ipinfo
   */
- 
-  get_host_ipInfo(): Observable<IpInfo> {
+   get_host_ipInfo(): Observable<IpInfo> {
 
     return this.http.get<IpInfo>('http://ipinfo.io?token=21ea63fe5267b3').pipe(
       map(function (res) {
@@ -254,6 +255,7 @@ export class CommonService {
       alert("Se encontraron errores " + serviceError.Message);
     }
   }
+
   public handleError2(httpError :any) {
     let errorMessage = '';
     if (httpError.error instanceof ErrorEvent) {
@@ -268,6 +270,7 @@ export class CommonService {
 
     return throwError(errorMessage);
   }
+
   ///Error inspection, interpretation, and resolution is something you want to do in the service, not in the component.
   public handleError(httpError: HttpErrorResponse | any) {
     console.log(httpError);
@@ -296,7 +299,9 @@ export class CommonService {
          
       ex.Status = httpError.status;
       if(ex.Status === 401){
+
         ex.Message = "No está autorizado para realizar esta acción";
+        //alert(ex.Message );
         return throwError(ex);
       }
 
@@ -354,9 +359,9 @@ export class CommonService {
     console.log(JSON.stringify(error));
     if (error.status == '401') {
       //Error de permisos
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
     } else {
-      console.log('Oto error status : ' + error.status);
+      console.log('Otro error status : ' + error.status);
     }
 
     return Observable.throw(error._body)

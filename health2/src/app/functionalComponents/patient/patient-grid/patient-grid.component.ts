@@ -50,6 +50,9 @@ export class PatientGridComponent implements OnInit {
      this.gridOptions.floatingFilter = true;
 
      this.createColumnDefs();
+
+     
+  
   }
   private getContextMenuItems(): any {
     let result: any = [

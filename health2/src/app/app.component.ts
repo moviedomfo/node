@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Keepalive } from '@ng-idle/keepalive';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { AppConstants } from './model';
+import { InstitutionService } from './service/Institution.service';
 
 @Component({
     selector: 'app-root',
@@ -29,6 +30,7 @@ export class AppComponent {
     constructor(private dialogService: DialogService,
         private commonService: CommonService,
         private router: Router,
+        private institutionService: InstitutionService,
         private authService: AuthenticationService,
         private idle: Idle, private keepalive: Keepalive
     ) {
@@ -71,6 +73,7 @@ export class AppComponent {
                //'You\'ve gone idle!
                 this.idleState = 'Inactivo'
             });
+
      //Estera estando inactivo 
     idle.onTimeoutWarning.subscribe((countdown) => 
             this.idleStateMessage = 'Su sessión expirará por inactividad  en ' + countdown + ' segundos!'
@@ -84,15 +87,29 @@ export class AppComponent {
 
         this.reset();
 
-        
+        this.institutionService.retriveHealthInstitution$().subscribe(
+            res => {
+              
+            },
+            err => {
+                if(err.Status = 401)
+                    this.authService.signOut();
+                    this.router.navigate(['/login']);
+            }
+          );
     }
 
+
     reset() {
-        this.idle.watch();
-        this.idleState = 'Started';
-        this.idleStateMessage = "Started";
-        this.timedOut = false;
-    }
+
+        //Iniciar el patronidle solo si esta autenticado
+        if(this.authService.isAuth())
+        {
+          this.idle.watch();
+          this.idleState = '';//'Started.';
+          this.timedOut = false;
+        }
+      }
 
     showConfirm() {
         let disposable = this.dialogService.addDialog(ModalDialogComponent, {

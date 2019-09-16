@@ -81,9 +81,8 @@ export class AppheaderComponent implements OnInit {
   chk_logingFront() {
     var currentLoging: CurrentLogin = this.authService.getCurrenLoging();
     if (currentLoging) {
-
       //console.log('user logged');
-      //this.isLogged = true;
+      this.isLogged = true;
       this.userName = currentLoging.currentUser.UserName;
       let prof: ProfesionalFullData = this.authService.get_currentProfesionalData();
       this.chk_profDataFront(prof);

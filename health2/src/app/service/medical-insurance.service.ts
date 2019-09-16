@@ -14,9 +14,9 @@ import { helperFunctions } from './helperFunctions';
 export class MedicalInsuranceService {
 
   private contextInfo: IContextInformation;
-  private commonService: CommonService;
 
-  constructor(private http: HttpClient, @Inject(CommonService) commonService: CommonService) {
+
+  constructor(private http: HttpClient, private commonService: CommonService) {
 
     this.contextInfo = contextInfo;
     this.commonService = commonService;

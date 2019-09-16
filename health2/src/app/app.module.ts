@@ -82,6 +82,7 @@ import { AngGridTestBasicComponent } from './prueba/test-grid-parent/ang-grid-te
 import { HomeComponent } from './common-components/home/home.component';
 import { UserTasksComponent } from './common-components/userAlerts/user-tasks/user-tasks.component';
 import { UserMessagesComponent } from './common-components/userAlerts/user-messages/user-messages.component';
+import { InstitutionService } from './service/Institution.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -134,7 +135,7 @@ import { UserMessagesComponent } from './common-components/userAlerts/user-messa
 
 
   ],
-  providers: [PersonsService, PatientsService, CommonService, MedicalInsuranceService, ProfesionalService, AuthGuard, TestService, AuthenticationService],
+  providers: [InstitutionService,PersonsService, PatientsService, CommonService, MedicalInsuranceService, ProfesionalService, AuthGuard, TestService, AuthenticationService],
 
   bootstrap: [AppComponent]
 })
