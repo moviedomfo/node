@@ -14,8 +14,8 @@ import { throttleTime, map, scan, debounceTime, distinctUntilChanged, tap,filter
   styleUrls: ['./patient-card-list.component.css']
 })
 export class PatientCardListComponent implements AfterViewInit {
-  @ViewChild('btn1') button: ElementRef;
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('btn1',{static:false}) button: ElementRef;
+  @ViewChild('input',{static:false}) input: ElementRef;
   private globalError: ServiceError;
   private patientList: PatientBE[];
   private dataSource: PatientsCardDataSource;

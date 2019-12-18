@@ -4,23 +4,16 @@
 
 export const environment = {
   production: false,
-  AppAPI_BaseURL:"http://localhost:52000",
+  AppOAuth_Base:"http://localhost/fwkAuthenticationWebApi",
+  AppAPI_BaseURL:"http://localhost/fwkDispatcherWebApi",
   
-  AppOAuth_Base:"http://localhost:51000", 
   oaut_client_id:'nodeJSClient',
   oaut_client_secret:'pletorico28',
   oaut_securityProviderName:'healthTesting',
   DefaultHealthInstitutionId:   'DBDC42D2-A8EB-469F-BF94-282BC7F57A4A',
-  CNN_STRING_HEALTH: {
-    user: 'sa',
-    password: 'as',
-    server: 'SANTANA\\SQLEXPRESS2014',
-    database: 'health3',
-
-    options: {
-        encrypt: true // Use this if you're on Windows Azure 
-        }
-    }
+  iddleTimeout_seconds:600,//idle timeout of 5 
+  iddle_waite_Timeout_seconds : 5 ,//period of time in seconds. after 10 seconds of inactivity, the user will be considered timed out.
+ 
 };
 
 /*

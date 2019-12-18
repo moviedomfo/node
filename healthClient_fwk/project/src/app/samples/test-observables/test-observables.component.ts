@@ -9,8 +9,8 @@ import { throttleTime, map, scan, debounceTime, distinctUntilChanged, tap, filte
   templateUrl: './test-observables.component.html'
 })
 export class TestObservablesComponent implements AfterViewInit {
-  @ViewChild('btn1') button: ElementRef;
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('btn1',{static:false}) button: ElementRef;
+  @ViewChild('input',{static:false}) input: ElementRef;
   private inputKeyList: string;
   private clickCount: string;
   

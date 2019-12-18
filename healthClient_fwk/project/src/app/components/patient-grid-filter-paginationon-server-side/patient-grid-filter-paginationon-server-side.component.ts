@@ -17,9 +17,9 @@ import { ActivatedRoute } from '@angular/router';
 export class PatientGridFilterPAginationonServerSideComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['Id', 'Nombre', 'NroDocumento', 'FechaAlta'];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('input') input: ElementRef;
+  @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static:false}) sort: MatSort;
+  @ViewChild('input',{static:false}) input: ElementRef;
   private dataSource: PatientsDataSource;
   //private lenght = 1000;
   private pageSize = 10;

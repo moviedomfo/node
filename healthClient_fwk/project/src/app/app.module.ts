@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AgmCoreModule } from '@agm/core';
+
 import { AlertBlockComponent } from './commonComponets/alert-block/alert-block.component';
 import { ErrorBoxContainerComponent } from './commonComponets/error-box-container/error-box-container.component';
 import { Page404NotFoundComponent } from './commonComponets/page404-not-found/page404-not-found.component';
@@ -16,12 +16,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { MainNavComponent } from './main-nav/main-nav.component';
+import { MainNavComponent } from './commonComponets/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { AlertModule } from "ngx-bootstrap";
-import { JwtModule } from '@auth0/angular-jwt';
 import { JwtAuthInterceptor } from './service/jwtIntersept';
 import { LogingComponent } from './components/loging/loging.component';
 import { PatientGridComponent } from './components/patient-grid/patient-grid.component';
@@ -69,9 +67,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
     // }),
     LayoutModule,
     NgxSpinnerModule,
-    NgxPaginationModule,
-    AlertModule
-
+    NgxPaginationModule
 
   ],
   providers: [

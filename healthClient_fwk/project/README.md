@@ -2,9 +2,11 @@
 #en express
         npm i express socket.io @types/socket.io --save
 
- #en angular
+## angular
     npm i ngx-socket-io --save 
-install material
+
+## material
+
 Alternative 1:
   npm install --save @angular/material @angular/cdk @angular/animations
 
@@ -66,11 +68,14 @@ Luego instalar:angular.json !!CUIDADO DE NO AGREGARLO SOLO A "test": {..}!!
               "./node_modules/popper.js/dist/umd/popper.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
-
+## popper
    npm install --save popper.js
 
+##  ngx-spinner
+npm install ngx-spinner --save
 
-   #Paginacion con tabla
+# Paginacion con tabla
+npm install ngx-pagination --save
    ref
     https://www.youtube.com/watch?v=NUmLaVcx1HI
     https://github.com/bezael/loopback3_angular6_bootstrap4/blob/master/apiBooks/client/src/app/app.module.ts
@@ -97,4 +102,8 @@ problema 2 Typescript Error Cannot find name ‘google’
     declare var google;
 problem 3 en el cliente f12
     Uncaught Error: Template parse errors: 'AutocompleteComponent' is not a known element:    
+
+
+
+    
 

@@ -10,8 +10,8 @@ import { FwkDataTableDataSource } from './fwk-data-table-datasource';
 //https://www.youtube.com/watch?v=ao-nY-9biWs&t=164s
 
 export class FwkDataTableComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static:false}) sort: MatSort;
   dataSource: FwkDataTableDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */

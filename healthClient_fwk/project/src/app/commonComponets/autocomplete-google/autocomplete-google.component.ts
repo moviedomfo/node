@@ -17,7 +17,7 @@ export class AutocompleteGoogleComponent implements OnInit, AfterViewInit {
 
   @Input() adressType: string;
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
-  @ViewChild('addresstext') addresstext: any;
+  @ViewChild('addresstext',{static:false}) addresstext: any;
 
   autocompleteInput: string;
   queryWait: boolean;

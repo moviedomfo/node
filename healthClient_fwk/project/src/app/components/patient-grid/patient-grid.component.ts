@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, AfterContentInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ServiceError, PatientBE, IPatient, IPerson } from 'src/app/model';
 import { Observable } from 'rxjs';
 import { PatientsService } from 'src/app/service/patients.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-patient-grid',
@@ -14,8 +14,8 @@ import { tap } from 'rxjs/operators';
 export class PatientGridComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['Id', 'Nombre', 'NroDocumento', 'FechaAlta'];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static:false}) sort: MatSort;
   private IPersonlist: IPerson[];
   private dataSource = new MatTableDataSource<IPerson>(this.IPersonlist);
   private lenght = 1000;

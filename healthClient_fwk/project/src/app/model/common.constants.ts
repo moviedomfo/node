@@ -1,5 +1,4 @@
 
-
 import { Param, IParam, IContextInformation ,IRequest} from '../model/common.model';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -20,11 +19,12 @@ let header_httpClient_form_urlencoded = new HttpHeaders({ 'Content-Type': 'appli
 
 
 export  const AppConstants={
-           
+            AppProducion:environment.production,
             AppAPI_BaseURL :environment.AppAPI_BaseURL,
             AppExecuteAPI_URL:environment.AppAPI_BaseURL + "/api/fwk/execute",
+            AppExecute_allowedAuthAPI_URL:environment.AppAPI_BaseURL + "/api/fwk/execute",
             AppOAuth_URL:environment.AppOAuth_Base + "/oauth/token",
-            AppOAuth_Base:environment.AppOAuth_Base,
+            AppOAuth_Base:environment.AppAPI_BaseURL,
             //httpOptions:options,
             httpClientOption_form_urlencoded:{headers:header_httpClient_form_urlencoded},
             httpClientOption_contenttype_json:{headers:header_httpClient_contentTypeJson},
@@ -32,9 +32,12 @@ export  const AppConstants={
             oaut_client_id: environment.oaut_client_id,
             oaut_client_secret:environment.oaut_client_secret, 
             oaut_securityProviderName:environment.oaut_securityProviderName,
-            CNN_STRING_HEALTH : environment.CNN_STRING_HEALTH,
+            
             ImagesSrc_Woman:'assets/images/User_Famele.bmp',
             ImagesSrc_Man:'assets/images/User_Male.bmp',
+            iddleTimeout_seconds:environment.iddleTimeout_seconds,
+            iddle_waite_Timeout_seconds:environment.iddle_waite_Timeout_seconds,
+            emptyGuid :'00000000-0000-0000-0000-000000000000'
             
 }
 
