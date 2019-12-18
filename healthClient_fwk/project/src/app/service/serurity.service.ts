@@ -46,8 +46,7 @@ export class SerurityService {
     var h = {headers:headers};
 
 
-    return this.http.post<AuthenticationOAutResponse>(`${AppConstants.AppOAuth_URL}`,
-    bodyParams,h).pipe(
+    return this.http.post<AuthenticationOAutResponse>(`${AppConstants.AppOAuth_URL}`,   bodyParams,h).pipe(
      map(res => {
       console.log(res);
        localStorage.setItem('currentLogin', JSON.stringify({ userName: userName, oAuth: res }));

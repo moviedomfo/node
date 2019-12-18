@@ -3,7 +3,7 @@ import { PatientsService } from 'src/app/service/patients.service';
 import { PatientBE, ServiceError } from 'src/app/model';
 import { Observable, fromEvent, Subscription, of, BehaviorSubject } from 'rxjs';
 import { PatientsCardDataSource } from './PatientsCardDatasource';
-import { throttleTime, map, scan, debounceTime, distinctUntilChanged, tap,filter, startWith } from 'rxjs/operators';
+
 
 
 //https://www.youtube.com/watch?v=CRJxOA5FZZE
@@ -14,8 +14,8 @@ import { throttleTime, map, scan, debounceTime, distinctUntilChanged, tap,filter
   styleUrls: ['./patient-card-list.component.css']
 })
 export class PatientCardListComponent implements AfterViewInit {
-  @ViewChild('btn1',{static:false}) button: ElementRef;
-  @ViewChild('input',{static:false}) input: ElementRef;
+  @ViewChild('btn1', { static: false }) button: ElementRef;
+  @ViewChild('input', { static: false }) input: ElementRef;
   private globalError: ServiceError;
   private patientList: PatientBE[];
   private dataSource: PatientsCardDataSource;
@@ -28,7 +28,7 @@ export class PatientCardListComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
 
-  
+
   }
 
   ngOnInit() {
@@ -39,12 +39,12 @@ export class PatientCardListComponent implements AfterViewInit {
   }
 
   retrivePatients() {
-    let patientList$: Observable<PatientBE[]>;
-    patientList$ = this.patientsService.retrivePatients$("", null, null);
-    patientList$.subscribe((res: PatientBE[]) => {
-      this.patientList = res;
 
-    },
+    this.patientsService.retrivePatients$("", null, null).subscribe(
+      res => {
+        this.patientList = res;
+
+      },
       err => {
 
         this.globalError = err;

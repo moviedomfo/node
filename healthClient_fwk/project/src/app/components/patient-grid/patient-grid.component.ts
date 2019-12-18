@@ -59,17 +59,16 @@ export class PatientGridComponent implements AfterViewInit {
 
 
   retrivePatients(pageIndex,pageSize) {
-    let patientList$: Observable<PatientBE[]>;
+    
     //this.spinner.show('spinner1');
     this.loading=true;
     //patientList$ = this.patientsService.retrivePatients$(this.txtQuery,this.paginator.pageIndex,this.paginator.pageSize);
-    patientList$ = this.patientsService.retrivePatients$(this.filter,pageIndex,pageSize);
-
-    patientList$.subscribe((res: PatientBE[]) => {
-      this.patientList = res;
-      this.parceToIPerson();
-      this.hideSpinner('spinner2');
-      this.loading=false;
+    this.patientsService.retrivePatients$(this.filter,pageIndex,pageSize).subscribe(
+      res => {
+        this.patientList = res;
+        this.parceToIPerson();
+        this.hideSpinner('spinner2');
+        this.loading=false;
     },
       err => {
         this.hideSpinner('spinner2');

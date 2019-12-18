@@ -80,7 +80,8 @@ npm install ngx-pagination --save
     https://www.youtube.com/watch?v=NUmLaVcx1HI
     https://github.com/bezael/loopback3_angular6_bootstrap4/blob/master/apiBooks/client/src/app/app.module.ts
 
-
+# hammerjs
+npm install --save hammerjs
 
 Problemas google maps
 
