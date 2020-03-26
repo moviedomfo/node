@@ -198,10 +198,11 @@ export class CommonService {
     contextInfo.HostTime = new Date(),
     contextInfo.ServerName = 'WebAPIDispatcherClienteWeb';
     contextInfo.ServerTime = new Date();
-
+    if(currentLogin)
+    {
     if (currentLogin.currentUser.UserName) { contextInfo.UserName = currentLogin.currentUser.UserName; }
     else { contextInfo.UserName = 'moviedo'; }
-
+    }
     contextInfo.UserId = '';
     contextInfo.AppId = 'Health';
     contextInfo.ProviderName = 'health';

@@ -26,6 +26,7 @@ export class CommonService {
      
     });
   }
+  
   get_host_ipInfo(): Observable<any> {
 
     return this.http.get<IpInfo>('http://ipinfo.io?token=21ea63fe5267b3').pipe(

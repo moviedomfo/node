@@ -12,8 +12,13 @@ export class JwtAuthInterceptor implements HttpInterceptor {
                 
         //const idToken = localStorage.getItem("id_token");
         let currentLogin: CurrentLogin = JSON.parse(localStorage.getItem('currentLogin'));
-        const idToken =  currentLogin.oAuth.access_token;
-        
+        let idToken ;
+
+        if(currentLogin  && currentLogin.oAuth)
+        {
+             idToken =  currentLogin.oAuth.access_token;
+        }
+
         if (idToken) {
             
             //if the JWT is present, then we will clone the HTTP headers, 

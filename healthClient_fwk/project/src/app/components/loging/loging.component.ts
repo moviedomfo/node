@@ -33,14 +33,32 @@ export class LogingComponent implements OnInit {
     }
     
   }
-
   authenticate(){
 
-    var authRes$ = this.Serurity.oauthToken_owin$(this.currentUser.UserName,this.currentUser.Password);
+    this.Serurity.oauthToken$(this.currentUser.UserName,this.currentUser.Password).subscribe(
+       res => {
+      
+      
+         this.currentLogin = JSON.parse(localStorage.getItem('currentLogin'));
+         
+         let tokenInfo = jwt_decode(this.currentLogin.oAuth.access_token); // decode token
+         //alert(tokenInfo.exp);
+         this.jwt_decode = tokenInfo;
+         // alert(JSON.stringify(this.currentLogin.username));
+         // alert(JSON.stringify(this.currentLogin.oAuth));
+        },
+       err => {
+         //this.OnComponentError.emit(err);
+       }
+     );
+     
+   }
+ 
+  authenticate_(){
 
-    authRes$.subscribe(
+   this.Serurity.oauthToken_owin$(this.currentUser.UserName,this.currentUser.Password).subscribe(
       res => {
-        //console.log(JSON.stringify(res));
+     
      
         this.currentLogin = JSON.parse(localStorage.getItem('currentLogin'));
         

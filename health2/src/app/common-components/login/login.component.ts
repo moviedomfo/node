@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
     authRes$.subscribe(
       res => {
         this.currentLogin = res;
+        
         forkJoin(this.retriveProfesionalData(this.currentLogin.currentUser.UserId));
         //this.router.navigate(['/userReset']);
       },

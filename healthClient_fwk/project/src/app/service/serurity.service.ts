@@ -27,7 +27,7 @@ export class SerurityService {
   get_logingChange$(): Observable<boolean> {
     return this.logingChange_subject$.asObservable();
   }
-  ///Este método de autenticacion usa jwk contra un rest asp api
+  ///Este método de autenticacion usa jwk contra un rest asp api owin
   oauthToken_owin$(userName: string,password:string): Observable<AuthenticationOAutResponse> {
 
     const bodyParams = new HttpParams()
@@ -38,15 +38,22 @@ export class SerurityService {
     .set(`securityProviderName`, AppConstants.oaut_securityProviderName)
     .set(`client_secret`, AppConstants.oaut_client_secret);
 
+
+     console.log(AppConstants.oaut_securityProviderName);
+     console.log(AppConstants.oaut_client_secret);
     //let header_httpClient_contentTypeJson = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    headers.append('Access-Control-Allow-Headers', 'Content-Type');
-    headers.append('Access-Control-Allow-Methods', 'POST');
-    headers.append('Access-Control-Allow-Origin', 'http://localhost:5100');
-    var h = {headers:headers};
+    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    // headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    // headers.append('Access-Control-Allow-Methods', 'POST');
+    // //headers.append('Access-Control-Allow-Origin', 'http://localhost/fwkAuthenticationWebApi');
+    // headers.append('Access-Control-Allow-Origin', '*');
+    
 
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+    let options = { headers: headers, crossDomain: true, withCredentials: true };
+    
 
-    return this.http.post<AuthenticationOAutResponse>(`${AppConstants.AppOAuth_URL}`,   bodyParams,h).pipe(
+    return this.http.post<AuthenticationOAutResponse>(`${AppConstants.AppOAuth_URL}`, bodyParams,options).pipe(
      map(res => {
       console.log(res);
        localStorage.setItem('currentLogin', JSON.stringify({ userName: userName, oAuth: res }));
@@ -68,9 +75,13 @@ oauthToken$(userName: string,password:string): Observable<CurrentLogin> {
     securityProviderName: AppConstants.oaut_securityProviderName,
     client_secret:AppConstants.oaut_client_secret
   }
-  
+  let header_httpClient_contentTypeJson = new HttpHeaders({ 'Content-Type': 'application/json' });
+     header_httpClient_contentTypeJson.append('Access-Control-Allow-Methods', '*');
+     header_httpClient_contentTypeJson.append('Access-Control-Allow-Headers', 'Content-Type');
+     header_httpClient_contentTypeJson.append('Access-Control-Allow-Origin', 'http://localhost:4200');
 
-  return this.http.post<any>(AppConstants.AppOAuth_URL,bussinesData,AppConstants.httpClientOption_contenttype_json).pipe(
+  return this.http.post<any>(`${AppConstants.AppAPI_BaseURL}` + 'api/oauth/authenticate' 
+    ,bussinesData,{headers:header_httpClient_contentTypeJson}).pipe(
    map(res => {
 
     //console.log(res);

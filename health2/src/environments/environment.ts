@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  App_BaseURL:"http://localhost:52000/",
-  AppOAuth_BaseUrl:"http://201.234.32.177:51000/", 
+  App_BaseURL:"http://192.168.2.100/fwkDispatcherWebApi/",
+  AppOAuth_BaseUrl:"http://192.168.2.100/fwkAuthenticationWebApi/", 
   oaut_client_id: 'nodeJSClient',//'reteteosClient',
   oaut_client_secret:'pletorico28',
   oaut_securityProviderName:'healthTesting',

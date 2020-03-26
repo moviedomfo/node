@@ -13,7 +13,7 @@ let header_httpClient_form_urlencoded = new HttpHeaders({ 'Content-Type': 'appli
     header_httpClient_form_urlencoded.append('Access-Control-Allow-Methods', '*');
     header_httpClient_form_urlencoded.append('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
     header_httpClient_form_urlencoded.append('Access-Control-Allow-Origin', '*');
-
+                                              
 
 //let options = new RequestOptions({ headers: headers });
 

@@ -9,9 +9,8 @@ import { ResourceSchedulingBE } from "../../model/profesional.model";
 
 @Component({
   selector: 'app-test-times',
-  templateUrl: './test-times.component.html',
-  styleUrls: ['./test-times.component.css'],
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './test-times.component.html'
+  // encapsulation: ViewEncapsulation.None
 })
 export class TestTimesComponent implements OnInit {
   TimespamView:TimespamView;
@@ -56,11 +55,12 @@ export class TestTimesComponent implements OnInit {
       var day = new Date();
       var Fecha = new Date( day.getFullYear(),day.getMonth(),day.getDate(),Number.parseInt(hhmmArray[0]),Number.parseInt(hhmmArray[1]),0,0) ;
 
-      var timespan = require('timespan');
-   
-      timespan.FromDates(Fecha);
+      //var timespan = require('timespan');
+     let timeSpan : TimeSpan = new TimeSpan();
 
-      this.time_start.TotalMilliseconds = timespan.totalMilliseconds()
+     timeSpan.setDate(Fecha);
+
+      this.time_start.TotalMilliseconds = timeSpan.TotalMilliseconds;
 
 
       
